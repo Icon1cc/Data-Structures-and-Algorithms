@@ -43,9 +43,9 @@ Do not use counts alone when positions or ordering are the answer.
 
 ### Common Mistakes
 
-- Forgetting to decrement counts or remove zero-count keys.
-- Ignoring the exclusion case for Frequency Counting: Do not use counts alone when positions or ordering are the answer.
-- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
+- Forgetting to decrement counts or remove zero-count keys when comparing two maps for equality.
+- Sizing a fixed-length array of 26 when the input includes Unicode or uppercase letters; switch to a hash map.
+- Treating "two strings are anagrams" as "sorted strings are equal" without noting that sorting is O(n log n) versus counting at O(n).
 
 ### Pseudocode Or Template
 
@@ -91,9 +91,9 @@ Do not use when sorted two pointers gives O(1) space and original order is irrel
 
 ### Common Mistakes
 
-- Checking after insertion when the value could match itself.
-- Ignoring the exclusion case for Hash Lookup: Do not use when sorted two pointers gives O(1) space and original order is irrelevant.
-- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
+- Inserting `nums[i]` into the map before checking the complement, which lets a value match itself when `2 * nums[i] == target`.
+- Storing values when later code needs the original index, or storing indices when the question asks for values.
+- Choosing a list scan over a hash set, which silently turns the algorithm from O(n) into O(n^2).
 
 ### Pseudocode Or Template
 
@@ -142,9 +142,9 @@ Do not use a simple sliding window when numbers can be negative and the sum is n
 
 ### Common Mistakes
 
-- Forgetting the initial prefix value 0.
-- Ignoring the exclusion case for Prefix Sum: Do not use a simple sliding window when numbers can be negative and the sum is not monotonic.
-- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
+- Forgetting to seed `count[0] = 1` so subarrays starting at index 0 are counted correctly.
+- Updating `count[prefix]` before the lookup, which double-counts the empty subarray.
+- Trying a sliding window over arrays with negative values; the window-sum invariant breaks because shrinking does not always reduce the sum.
 
 ### Pseudocode Or Template
 
@@ -192,9 +192,9 @@ Do not allocate buckets for a huge sparse domain.
 
 ### Common Mistakes
 
-- Creating buckets for values instead of frequencies when frequencies are what need ordering.
-- Ignoring the exclusion case for Bucket Counting: Do not allocate buckets for a huge sparse domain.
-- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
+- Indexing buckets by value when the question wants ordering by frequency, or vice versa.
+- Sizing the bucket array as `n` when frequencies can equal `n`; the highest valid bucket index is `n`, so use `n + 1`.
+- Walking buckets in ascending order when the question wants the top-k largest; iterate from the high end down.
 
 ### Pseudocode Or Template
 
@@ -239,9 +239,9 @@ Do not sort if original indices must be returned and cannot be preserved.
 
 ### Common Mistakes
 
-- Forgetting that sorting each long string adds L log L cost.
-- Ignoring the exclusion case for Sorting Plus Hashing: Do not sort if original indices must be returned and cannot be preserved.
-- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
+- Sorting a string of length L for every word costs O(L log L); a 26-length count tuple gives O(L) and is hashable.
+- Forgetting that sorting destroys input indices; return values rather than positions, or pair `(index, value)` before sorting.
+- Treating `sort()` as O(1) extra memory in languages that allocate, and missing the auxiliary cost in the analysis.
 
 ### Pseudocode Or Template
 
@@ -287,9 +287,9 @@ Do not use a lossy signature that maps different items together.
 
 ### Common Mistakes
 
-- Using a mutable list as a key.
-- Ignoring the exclusion case for Grouping by Canonical Key: Do not use a lossy signature that maps different items together.
-- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
+- Using a mutable list as a key (lists are unhashable in Python; convert to a tuple).
+- Picking a signature that collapses non-equivalent items; for example, summing characters loses position info that anagrams need.
+- Forgetting to normalize across both directions; isomorphic-string mappings must be enforced from both sides to avoid one-to-many or many-to-one collisions.
 
 ### Pseudocode Or Template
 
@@ -333,9 +333,9 @@ Do not mutate input if the caller needs it unchanged.
 
 ### Common Mistakes
 
-- Mixing value and index by forgetting the minus one conversion.
-- Ignoring the exclusion case for In-place Index Marking: Do not mutate input if the caller needs it unchanged.
-- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
+- Reading `nums[i]` after marking `nums[abs(nums[i]) - 1]` negative; once the sign flips, the value can lie outside the valid index range.
+- Skipping the `0 <= i < n` bounds check after the `value - 1` conversion; non-positive or oversized values must be ignored, not indexed.
+- Mutating the input without telling the caller; if the contract forbids mutation, fall back to O(n) extra space and a hash set.
 
 ### Pseudocode Or Template
 

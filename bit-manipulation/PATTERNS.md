@@ -40,9 +40,9 @@ Do not use when duplicates appear more than twice unless adjusted.
 
 ### Common Mistakes
 
-- Forgetting that XOR ignores order but not multiplicity.
-- Ignoring the exclusion case for XOR Cancellation: Do not use when duplicates appear more than twice unless adjusted.
-- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
+- Applying XOR to Single Number II (each value appears three times); pure XOR fails because three copies do not cancel. Use bit counts mod 3 instead.
+- For Single Number III (two unique values), failing to partition by a differing bit; the XOR of all values gives `a ^ b`, then split inputs by any set bit of that XOR.
+- Initializing the running XOR to a non-zero value; the identity is 0.
 
 ### Pseudocode Or Template
 
@@ -87,9 +87,9 @@ Do not loop forever on negative values in fixed-width languages.
 
 ### Common Mistakes
 
-- Using n >>= 1 on signed negative values without width control.
-- Ignoring the exclusion case for Bit Counting: Do not loop forever on negative values in fixed-width languages.
-- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
+- Using `n >>= 1` on a signed negative integer in C or Java; the sign bit shifts in and the loop never terminates. Use unsigned shift or mask first.
+- Iterating 32 times when Brian Kernighan's `n &= n - 1` runs in popcount steps.
+- For Counting Bits DP, choosing `count[i] = count[i / 2] + (i & 1)` but indexing as `count[i // 2]` outside Python; integer division semantics differ.
 
 ### Pseudocode Or Template
 
@@ -135,9 +135,9 @@ Do not use masks when n is too large for exponential states.
 
 ### Common Mistakes
 
-- Confusing mask value with item index.
-- Ignoring the exclusion case for Masks For Sets: Do not use masks when n is too large for exponential states.
-- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
+- Computing `1 << i` for `i >= 31` in Java or C without `1L`; the literal is `int` and overflows silently.
+- Iterating `for mask in range(1 << n)` when `n > 20` and expecting it to terminate in interview time.
+- Using `mask & i` to test bit `i` instead of `mask & (1 << i)`; the former tests against the value of `i`, not its bit position.
 
 ### Pseudocode Or Template
 
@@ -181,9 +181,9 @@ Do not use modulo when bit logic is clearer for powers of two.
 
 ### Common Mistakes
 
-- Not excluding zero for power-of-two tests.
-- Ignoring the exclusion case for Single Bit Checks: Do not use modulo when bit logic is clearer for powers of two.
-- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
+- Returning `True` for `x == 0` in `x & (x - 1) == 0`; zero is not a power of two, so guard with `x > 0`.
+- Confusing `x & -x` (lowest set bit value) with `x ^ (x - 1)` (mask of low bits up to the lowest set bit).
+- Using arithmetic `% 2` for parity in tight loops; the bitwise `& 1` is equivalent and often slightly faster.
 
 ### Pseudocode Or Template
 
@@ -226,9 +226,9 @@ Do not use when all 2^n masks are already too many.
 
 ### Common Mistakes
 
-- Forgetting that submask 0 needs separate handling if required.
-- Ignoring the exclusion case for Submask Enumeration: Do not use when all 2^n masks are already too many.
-- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
+- Forgetting that the empty submask `0` is excluded by the loop condition `while sub:`; if you need it, handle it before the loop.
+- Iterating submasks in lexicographic order without realizing the `(sub - 1) & mask` trick visits them in descending integer order.
+- Misanalyzing the total cost; summing `2^popcount(mask)` over all masks of `[0, 2^n)` gives `3^n`, not `4^n`.
 
 ### Pseudocode Or Template
 
@@ -275,9 +275,9 @@ Do not ignore overflow and sign limits in fixed-width languages.
 
 ### Common Mistakes
 
-- Forgetting language-specific integer width.
-- Ignoring the exclusion case for Arithmetic Bit Tricks: Do not ignore overflow and sign limits in fixed-width languages.
-- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
+- Implementing add-without-plus and forgetting to mask both operands to 32 bits in languages without arbitrary-precision integers.
+- For Divide Two Integers, ignoring the overflow case `INT_MIN / -1`; return `INT_MAX` per the spec.
+- Using `<<` on a Python int that is negative; the result keeps the sign and may differ from C semantics.
 
 ### Pseudocode Or Template
 

@@ -39,9 +39,9 @@ Do not use if valid window length changes based on content.
 
 ### Common Mistakes
 
-- Updating answer before the first full window exists.
-- Ignoring the exclusion case for Fixed Window: Do not use if valid window length changes based on content.
-- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
+- Updating the answer before the first full window of size `k` has been built; gate on `right >= k - 1`.
+- Forgetting to subtract `nums[right - k]` after the window fills, which makes the running sum unbounded.
+- Comparing average values directly with floats; multiply both sides by `k` instead and compare integer sums.
 
 ### Pseudocode Or Template
 
@@ -89,9 +89,9 @@ Do not use when removing left does not predictably improve validity.
 
 ### Common Mistakes
 
-- Shrinking only once when the window may still be invalid.
-- Ignoring the exclusion case for Variable Window: Do not use when removing left does not predictably improve validity.
-- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
+- Using `if invalid()` instead of `while invalid()`; one removal from the left may not be enough to restore the invariant.
+- Recording the answer inside the shrink loop instead of after; the post-shrink window is the valid one.
+- Applying a sliding window over arrays with negative values when the predicate is sum-based; growing the window may decrease the sum, breaking monotonicity.
 
 ### Pseudocode Or Template
 
@@ -141,9 +141,9 @@ Do not leave zero-count keys that make distinct counts wrong.
 
 ### Common Mistakes
 
-- Comparing full maps too often when a matched counter would be cleaner.
-- Ignoring the exclusion case for Frequency Window: Do not leave zero-count keys that make distinct counts wrong.
-- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
+- Comparing full counter maps every step (O(alphabet) per slide); maintain a single `matched` integer instead.
+- Leaving zero-count keys in the map, which inflates the distinct-key count.
+- Forgetting that decrementing through zero changes whether the key is "matched" against the target counter; update `matched` on the threshold cross only.
 
 ### Pseudocode Or Template
 
@@ -189,9 +189,9 @@ Do not use when at most k is not monotonic under shrinking.
 
 ### Common Mistakes
 
-- Forgetting exactly(k) = at_most(k) - at_most(k - 1).
-- Ignoring the exclusion case for At Most K Window: Do not use when at most k is not monotonic under shrinking.
-- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
+- Computing `at_most(k) - at_most(k)` instead of `at_most(k) - at_most(k - 1)`; the latter isolates exactly-k.
+- Counting windows by length only and missing that each `right` contributes `right - left + 1` valid sub-windows ending there.
+- Reusing global state across the two `at_most` calls; reset counters and pointers between calls.
 
 ### Pseudocode Or Template
 
@@ -240,9 +240,9 @@ Do not use a heap unless stale deletion is handled.
 
 ### Common Mistakes
 
-- Forgetting to evict indices that leave the window.
-- Ignoring the exclusion case for Monotonic Window: Do not use a heap unless stale deletion is handled.
-- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
+- Storing values in the deque instead of indices; without indices you cannot detect when the front leaves the window.
+- Popping from the wrong end; new candidates evict from the back, expired candidates leave from the front.
+- Choosing a heap over a deque without lazy-deletion handling; stale heap entries silently corrupt the answer.
 
 ### Pseudocode Or Template
 

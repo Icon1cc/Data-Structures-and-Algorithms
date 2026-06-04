@@ -74,6 +74,21 @@ flowchart LR
     E --> F
 ```
 
+## Pattern Walkthrough
+
+```mermaid
+flowchart TD
+    Root["At each step, sorted next-best is the candidate"]
+    Root --> Pick["Take the candidate"]
+    Root --> Skip["Skip the candidate"]
+    Pick --> Proof["Exchange argument: swapping any other choice in the optimum with this one preserves or improves the answer"]
+    Skip --> Counter["Counterexample: keeping a future-better candidate may break feasibility"]
+    Proof --> Keep["Greedy is safe"]
+    Counter --> Reject["Greedy is wrong; switch to DP"]
+```
+
+Greedy correctness depends on a proof that the locally best choice is globally safe; when no exchange argument exists, the problem usually needs DP instead.
+
 ## Foundations And Invariants
 
 Greedy correctness is not intuition. Be ready to explain the exchange: if an optimal solution picked another compatible candidate, swapping in the greedy candidate preserves or improves the result.

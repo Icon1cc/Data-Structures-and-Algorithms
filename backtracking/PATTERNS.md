@@ -40,9 +40,9 @@ Do not use permutations when order does not matter.
 
 ### Common Mistakes
 
-- Failing to skip duplicates after sorting.
-- Ignoring the exclusion case for Subsets: Do not use permutations when order does not matter.
-- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
+- Appending the live `path` list to the result; subsequent mutations corrupt every saved subset.
+- Including the empty subset twice (once at start, once when no items are chosen); record exactly once at each leaf.
+- For Subsets II, sorting and then using `if i > start and nums[i] == nums[i - 1]: continue` is the canonical duplicate skip; the `i > start` guard is essential.
 
 ### Pseudocode Or Template
 
@@ -88,9 +88,9 @@ Do not restart from zero after each choice.
 
 ### Common Mistakes
 
-- Allowing the same combination in different orders.
-- Ignoring the exclusion case for Combinations: Do not restart from zero after each choice.
-- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
+- Restarting the inner loop from `0` instead of `start`, which produces every order of the same combination.
+- For Combination Sum (LC 39), passing `i + 1` instead of `i` for the recurrence; the problem allows reuse, so stay at the same index.
+- Pruning by `target < 0` only at the top of the recursion instead of also short-circuiting before recursing on an oversized candidate.
 
 ### Pseudocode Or Template
 
@@ -137,9 +137,9 @@ Do not sort-and-skip incorrectly when duplicates exist.
 
 ### Common Mistakes
 
-- Not unmarking used after recursion.
-- Ignoring the exclusion case for Permutations: Do not sort-and-skip incorrectly when duplicates exist.
-- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
+- Forgetting `used[i] = False` after recursing; subsequent paths see stale "used" state.
+- For Permutations II, skipping equal values without checking that the previous equal sibling is unused; the correct guard is `if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]: continue`.
+- Mutating `nums` in place via swap-based permutations and then expecting the original order back; either swap back on undo or use the index-based template.
 
 ### Pseudocode Or Template
 
@@ -189,9 +189,9 @@ Do not use a global visited set when paths must be independent.
 
 ### Common Mistakes
 
-- Leaving a cell marked after backtracking.
-- Ignoring the exclusion case for Constraint Grid Search: Do not use a global visited set when paths must be independent.
-- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
+- Using a global `visited` set when paths from different starting cells must explore independently.
+- Forgetting to unmark a cell after the DFS subtree returns; later searches treat the cell as permanently used.
+- Trying every starting cell even when an early prune (first character mismatch) could skip whole subtrees.
 
 ### Pseudocode Or Template
 
@@ -237,9 +237,9 @@ Do not copy large substrings unnecessarily if indices are enough.
 
 ### Common Mistakes
 
-- Checking validity after recursing instead of before choosing.
-- Ignoring the exclusion case for Partition Backtracking: Do not copy large substrings unnecessarily if indices are enough.
-- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
+- Slicing the input string at every recursive call; pass `(start, end)` indices and slice only when recording.
+- Recomputing `is_palindrome` per cut without memoization on a 2-D table; precompute for O(1) lookups.
+- For Restore IP Addresses, accepting numbers with leading zeros (e.g., `"01"`) which are invalid octets.
 
 ### Pseudocode Or Template
 
@@ -284,9 +284,9 @@ Do not prune on a condition that future choices could fix.
 
 ### Common Mistakes
 
-- Using an unsound prune that removes valid answers.
-- Ignoring the exclusion case for Pruned Search: Do not prune on a condition that future choices could fix.
-- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
+- Pruning on a state that a future choice could legally repair (e.g., temporary partial sum exceeding target when negative numbers exist later).
+- Re-running the full validity check from scratch at each call; maintain incremental state for O(1) updates.
+- For N-Queens, encoding diagonals naively as sets of `(r, c)` instead of `r - c` and `r + c`, which costs more memory and lookups.
 
 ### Pseudocode Or Template
 

@@ -21,20 +21,20 @@ LeetCode: [Employee Free Time](https://leetcode.com/problems/employee-free-time/
 
 Difficulty: Hard
 
-Pattern: Merge Intervals
+Pattern: K-Way Merge Then Gaps
 
 Why It Matters: Finds gaps after merging busy intervals.
 
 Skills Tested:
-- Identify the Merge Intervals signal before choosing a template.
-- State the invariant for Employee Free Time: finds gaps after merging busy intervals.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that free time is the complement of the union of busy intervals; build the union via Merge Intervals applied across all employees.
+- State the invariant: after merging, free time consists of gaps `(merged[i].end, merged[i + 1].start)`.
+- A min-heap of `(start, employeeIdx, intervalIdx)` enables k-way merging in O(N log K).
+- Time O(N log K) where N is total intervals and K is employees, space O(N).
 
 Common Follow-Ups:
-- What changes if the constraints push Employee Free Time toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Merge Intervals invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Merge Intervals (LC 56) is the underlying primitive.
+- What if employees have different time zones.
+- Generalize to k-employee free-time intersection (everyone simultaneously free).
 
 ## 2. Data Stream as Disjoint Intervals
 
@@ -42,20 +42,20 @@ LeetCode: [Data Stream as Disjoint Intervals](https://leetcode.com/problems/data
 
 Difficulty: Hard
 
-Pattern: Dynamic Interval Merge
+Pattern: Online Disjoint Interval Maintenance
 
 Why It Matters: Maintains intervals under online insertions.
 
 Skills Tested:
-- Identify the Dynamic Interval Merge signal before choosing a template.
-- State the invariant for Data Stream as Disjoint Intervals: maintains intervals under online insertions.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that on each `addNum`, you must merge with the predecessor and successor intervals if they touch the new value.
+- State the invariant: a sorted-by-start ordered map; insert finds at most two neighboring intervals to potentially merge into.
+- Use `SortedList` (Python) or `TreeMap` (Java) for O(log n) per insert.
+- Per-add time O(log n), getIntervals O(n) to materialize.
 
 Common Follow-Ups:
-- What changes if the constraints push Data Stream as Disjoint Intervals toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Dynamic Interval Merge invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Range Module (LC 715) supports both add and remove.
+- Stream output as ranges become finalized.
+- What if duplicates can decrement counts.
 
 ## 3. Count Integers in Intervals
 
@@ -63,20 +63,20 @@ LeetCode: [Count Integers in Intervals](https://leetcode.com/problems/count-inte
 
 Difficulty: Hard
 
-Pattern: Dynamic Interval Counting
+Pattern: Online Merge With Total Count
 
 Why It Matters: Tracks covered counts after merges.
 
 Skills Tested:
-- Identify the Dynamic Interval Counting signal before choosing a template.
-- State the invariant for Count Integers in Intervals: tracks covered counts after merges.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that each `add(left, right)` may swallow several existing intervals; track a running total of integers covered.
+- State the invariant: a sorted-by-start ordered map of disjoint intervals; on an add, remove every overlapping interval, subtract its size from the total, then insert the merged super-interval and add its size.
+- Use `SortedList` for O(log n) lookup and removal.
+- Per-add amortized O(log n + k) where k is intervals removed; total operations bounded by total inserts.
 
 Common Follow-Ups:
-- What changes if the constraints push Count Integers in Intervals toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Dynamic Interval Counting invariant survive streaming input, in-place restrictions, or lower memory limits?
+- My Calendar III (LC 732) tracks max overlap rather than total covered.
+- Range Module (LC 715) adds remove operations.
+- Stream coverage queries online.
 
 ## 4. My Calendar III
 
@@ -84,20 +84,20 @@ LeetCode: [My Calendar III](https://leetcode.com/problems/my-calendar-iii/)
 
 Difficulty: Hard
 
-Pattern: Sweep Line
+Pattern: Sweep Line With Sorted Map
 
 Why It Matters: Returns maximum concurrent bookings online.
 
 Skills Tested:
-- Identify the Sweep Line signal before choosing a template.
-- State the invariant for My Calendar III: returns maximum concurrent bookings online.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the running max of overlap can be maintained via a sorted-map of `time -> delta`; the answer is the running maximum after each insert.
+- State the invariant: a `SortedDict` where each key holds the change in active bookings at that time; iterating in sorted order gives the running active count.
+- For online queries with many inserts, use a segment tree with lazy propagation for O(log T) per insert.
+- Per-call time O(n log n) with sorted dict, space O(n).
 
 Common Follow-Ups:
-- What changes if the constraints push My Calendar III toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Sweep Line invariant survive streaming input, in-place restrictions, or lower memory limits?
+- My Calendar I (LC 729) and II (LC 731) are simpler variants.
+- Range Add and Range Max queries with a segment tree.
+- What if inserts can be undone.
 
 ---
 

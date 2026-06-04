@@ -21,20 +21,20 @@ LeetCode: [Swim in Rising Water](https://leetcode.com/problems/swim-in-rising-wa
 
 Difficulty: Hard
 
-Pattern: Dijkstra Or MST
+Pattern: Dijkstra On Bottleneck Path
 
 Why It Matters: Minimizes maximum edge/cell cost along a path.
 
 Skills Tested:
-- Identify the Dijkstra Or MST signal before choosing a template.
-- State the invariant for Swim in Rising Water: minimizes maximum edge/cell cost along a path.
-- Handle negative weights, disconnected graphs, stale heap entries, and dense-graph constraints.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the time to reach `(n - 1, n - 1)` is the minimum over paths of `max(grid[r][c])` along the path, a bottleneck shortest path.
+- State the invariant: Dijkstra with a min-heap keyed on `max-so-far` finds the bottleneck minimum to every cell.
+- Use binary search on the answer as a clean alternative: feasibility checks via flood-fill.
+- Time O(N^2 log N), space O(N^2).
 
 Common Follow-Ups:
-- What changes if the constraints push Swim in Rising Water toward basic BFS, DAG DP, Bellman-Ford, Floyd-Warshall, Kruskal, Prim, or low-link DFS?
-- Which negative weights case would break the first implementation?
-- Can the Dijkstra Or MST invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Path With Minimum Effort (LC 1631) is the absolute-difference variant.
+- What if some cells block movement entirely.
+- Generalize to multi-source bottleneck problems.
 
 ## 2. Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree
 
@@ -42,20 +42,20 @@ LeetCode: [Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree](htt
 
 Difficulty: Hard
 
-Pattern: MST Edge Classification
+Pattern: Kruskal With Per-Edge Re-run
 
 Why It Matters: Advanced Kruskal reasoning.
 
 Skills Tested:
-- Identify the MST Edge Classification signal before choosing a template.
-- State the invariant for Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree: advanced Kruskal reasoning.
-- Handle negative weights, disconnected graphs, stale heap entries, and dense-graph constraints.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that an edge is critical if forcing its absence increases the MST weight, and pseudo-critical if including it does not change the MST weight (and excluding does not).
+- State the invariant: compute the baseline MST weight; for each edge, run Kruskal twice (skip the edge, then force the edge first).
+- Sort edges once and reuse the sorted order across Kruskal calls.
+- Time O(E^2 * alpha(V)), space O(E + V).
 
 Common Follow-Ups:
-- What changes if the constraints push Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree toward basic BFS, DAG DP, Bellman-Ford, Floyd-Warshall, Kruskal, Prim, or low-link DFS?
-- Which negative weights case would break the first implementation?
-- Can the MST Edge Classification invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Min Cost to Connect All Points (LC 1584) is the underlying MST.
+- What if edge weights tie heavily.
+- Generalize to second-best MST.
 
 ## 3. Critical Connections in a Network
 
@@ -63,20 +63,20 @@ LeetCode: [Critical Connections in a Network](https://leetcode.com/problems/crit
 
 Difficulty: Hard
 
-Pattern: Bridges And Low-link
+Pattern: Tarjan Bridges Via Low-Link
 
 Why It Matters: Classic bridge-finding problem.
 
 Skills Tested:
-- Identify the Bridges And Low-link signal before choosing a template.
-- State the invariant for Critical Connections in a Network: classic bridge-finding problem.
-- Handle negative weights, disconnected graphs, stale heap entries, and dense-graph constraints.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that an edge is a bridge iff its removal disconnects the graph, characterized by `low[v] > disc[u]` in Tarjan's DFS.
+- State the invariant: `disc[u]` is u's DFS discovery time; `low[u]` is the smallest `disc` reachable from u's subtree via a single back edge.
+- Skip the parent edge correctly when computing `low` to avoid false back-edge claims.
+- Time O(V + E), space O(V + E).
 
 Common Follow-Ups:
-- What changes if the constraints push Critical Connections in a Network toward basic BFS, DAG DP, Bellman-Ford, Floyd-Warshall, Kruskal, Prim, or low-link DFS?
-- Which negative weights case would break the first implementation?
-- Can the Bridges And Low-link invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Articulation Points (cut vertices) reuse the same DFS with a different predicate.
+- What if the graph is dynamic and edges arrive online (offline incremental algorithms).
+- Generalize to bridge-detection in directed graphs (strongly connected components).
 
 ## 4. Shortest Path Visiting All Nodes
 
@@ -84,20 +84,20 @@ LeetCode: [Shortest Path Visiting All Nodes](https://leetcode.com/problems/short
 
 Difficulty: Hard
 
-Pattern: BFS With Bitmask State
+Pattern: BFS Over (Node, Visited Bitmask)
 
 Why It Matters: Combines graph traversal with state compression.
 
 Skills Tested:
-- Identify the BFS With Bitmask State signal before choosing a template.
-- State the invariant for Shortest Path Visiting All Nodes: combines graph traversal with state compression.
-- Handle negative weights, disconnected graphs, stale heap entries, and dense-graph constraints.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the state `(node, visitedMask)` is finite (`N * 2^N`), so BFS finds the shortest sequence of moves visiting all nodes.
+- State the invariant: each enqueued state's distance is the shortest known sequence to reach that node with that visited set.
+- Initialize the queue with all `(i, 1 << i)` and stop when a state has `mask == (1 << N) - 1`.
+- Time O(N * 2^N), space O(N * 2^N).
 
 Common Follow-Ups:
-- What changes if the constraints push Shortest Path Visiting All Nodes toward basic BFS, DAG DP, Bellman-Ford, Floyd-Warshall, Kruskal, Prim, or low-link DFS?
-- Which negative weights case would break the first implementation?
-- Can the BFS With Bitmask State invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Travelling Salesperson DP (LC 943) uses the same state with cost minimization.
+- What if some nodes can be skipped at a cost.
+- Generalize to k-coverage with multiple agents.
 
 ---
 

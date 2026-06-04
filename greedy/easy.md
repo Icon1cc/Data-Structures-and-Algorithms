@@ -21,20 +21,20 @@ LeetCode: [Assign Cookies](https://leetcode.com/problems/assign-cookies/)
 
 Difficulty: Easy
 
-Pattern: Sort And Scan
+Pattern: Sort Both And Two Pointers
 
 Why It Matters: Baseline matching with smallest sufficient resource.
 
 Skills Tested:
-- Identify the Sort And Scan signal before choosing a template.
-- State the invariant for Assign Cookies: baseline matching with smallest sufficient resource.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the maximum content children is achieved by giving each child the smallest cookie that satisfies them, which is two sorted arrays advanced together.
+- State the invariant: pointer `i` over children and `j` over cookies; advance `j` until `cookie[j] >= child[i]`, satisfy that child, advance both.
+- Handle empty children (return 0) and empty cookies (return 0).
+- Time O(n log n), space O(1) extra, and explain why the matching is provably optimal (exchange argument).
 
 Common Follow-Ups:
-- What changes if the constraints push Assign Cookies toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Sort And Scan invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Boats to Save People (LC 881) extends two-pointer matching with weight constraints.
+- What if children have priorities (weighted matching).
+- Generalize to bipartite matching.
 
 ## 2. Lemonade Change
 
@@ -47,15 +47,15 @@ Pattern: Greedy Cash Handling
 Why It Matters: Tests local bill choices with limited denominations.
 
 Skills Tested:
-- Identify the Greedy Cash Handling signal before choosing a template.
-- State the invariant for Lemonade Change: tests local bill choices with limited denominations.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that to give change for a $20, you should hand back a $10 + $5 if available, else three $5s; for a $10, hand back a $5.
+- State the invariant: prefer larger bills first when giving change so smaller bills remain for future $10 customers.
+- Maintain only `fives` and `tens` counters; track $20s implicitly (they cannot be returned anyway).
+- Time O(n), space O(1), and explain why the greedy is optimal via an exchange argument.
 
 Common Follow-Ups:
-- What changes if the constraints push Lemonade Change toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Greedy Cash Handling invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Coin Change (LC 322) is the general DP version; greedy fails on non-canonical coin sets.
+- What if customers can give multiple bills.
+- Generalize to currencies where greedy is not optimal.
 
 ## 3. Best Time to Buy and Sell Stock II
 
@@ -63,20 +63,20 @@ LeetCode: [Best Time to Buy and Sell Stock II](https://leetcode.com/problems/bes
 
 Difficulty: Easy
 
-Pattern: Greedy Profit Accumulation
+Pattern: Sum Of Positive Differences
 
 Why It Matters: Adds every positive price difference.
 
 Skills Tested:
-- Identify the Greedy Profit Accumulation signal before choosing a template.
-- State the invariant for Best Time to Buy and Sell Stock II: adds every positive price difference.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that with unlimited transactions, the maximum profit is the sum of every positive day-over-day price difference.
+- State the invariant: each ascending segment contributes `prices[end] - prices[start]`, which equals the sum of positive deltas inside.
+- Avoid the trap of trying to find local minima and maxima; the sum-of-deltas form is equivalent and simpler.
+- Time O(n), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Best Time to Buy and Sell Stock II toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Greedy Profit Accumulation invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Best Time to Buy and Sell Stock (LC 121) restricts to one transaction.
+- Best Time to Buy and Sell Stock with Cooldown (LC 309) and With Fee (LC 714) require DP.
+- What if you must keep the trade count under K (LC 188).
 
 ## 4. Can Place Flowers
 
@@ -89,15 +89,15 @@ Pattern: Local Feasibility Greedy
 Why It Matters: Checks safe placements without backtracking.
 
 Skills Tested:
-- Identify the Local Feasibility Greedy signal before choosing a template.
-- State the invariant for Can Place Flowers: checks safe placements without backtracking.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that planting at position `i` is safe iff `flowerbed[i] == 0`, `flowerbed[i - 1] == 0` (or `i == 0`), and `flowerbed[i + 1] == 0` (or `i == n - 1`).
+- State the invariant: greedily plant whenever safe; this never blocks a future safe planting.
+- Pad the array conceptually with zeros at both ends to simplify boundary checks.
+- Time O(n), space O(1), and explain why local greedy is provably optimal.
 
 Common Follow-Ups:
-- What changes if the constraints push Can Place Flowers toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Local Feasibility Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Generalize to "no two flowers within distance `k`".
+- What if some cells must remain empty.
+- Streaming variant where positions arrive online.
 
 ## 5. Maximum Odd Binary Number
 
@@ -105,20 +105,20 @@ LeetCode: [Maximum Odd Binary Number](https://leetcode.com/problems/maximum-odd-
 
 Difficulty: Easy
 
-Pattern: Greedy Arrangement
+Pattern: Bit Placement Greedy
 
 Why It Matters: Places bits to maximize value under parity constraint.
 
 Skills Tested:
-- Identify the Greedy Arrangement signal before choosing a template.
-- State the invariant for Maximum Odd Binary Number: places bits to maximize value under parity constraint.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that an odd binary number has its last bit `1`, and the value is maximized by placing all other `1`s at the leftmost positions.
+- State the invariant: count `1`s as `k`; place `k - 1` ones at the front, then `n - k` zeros, then the final `1`.
+- Handle the edge case where `s` has only one `1` (the answer is `0...01`).
+- Time O(n), space O(n) for the output string.
 
 Common Follow-Ups:
-- What changes if the constraints push Maximum Odd Binary Number toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Greedy Arrangement invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Largest Number (LC 179) generalizes to a custom comparator over digits.
+- What if you may also flip bits within budget.
+- Maximize the value under a "no two 1s adjacent" constraint.
 
 ---
 

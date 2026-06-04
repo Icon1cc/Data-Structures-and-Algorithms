@@ -40,9 +40,9 @@ Do not forget negative values may need normalization.
 
 ### Common Mistakes
 
-- Assuming every language returns positive modulo for negatives.
-- Ignoring the exclusion case for Modulo Arithmetic: Do not forget negative values may need normalization.
-- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
+- Assuming `(-1) % m` equals `m - 1` in C, Java, or JavaScript; only Python returns the non-negative result. Use `((x % m) + m) % m` for portability.
+- Combining mod inside an arithmetic expression but skipping it on the running total; intermediate values can overflow.
+- Distributing mod across an unsafe operation like division; modular inverse is required for division under a prime modulus.
 
 ### Pseudocode Or Template
 
@@ -85,9 +85,9 @@ Do not compute lcm before reducing if overflow is possible.
 
 ### Common Mistakes
 
-- Not normalizing signs in reduced pairs.
-- Ignoring the exclusion case for GCD And LCM: Do not compute lcm before reducing if overflow is possible.
-- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
+- Computing `lcm(a, b) = a * b // gcd(a, b)` directly when `a * b` overflows; reduce first via `a // gcd(a, b) * b`.
+- Forgetting to normalize signs when keying slopes; `(2, 3)` and `(-2, -3)` are the same line and need a single canonical form.
+- Calling `gcd(0, 0)` and treating the result as 0 silently; some libraries return 0, which makes the "key" hashable but mathematically ambiguous.
 
 ### Pseudocode Or Template
 
@@ -130,9 +130,9 @@ Do not test divisibility from scratch for every number if n is large.
 
 ### Common Mistakes
 
-- Starting marking too early instead of at p * p.
-- Ignoring the exclusion case for Prime Sieve: Do not test divisibility from scratch for every number if n is large.
-- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
+- Marking from `2 * p` instead of `p * p`; smaller multiples were already marked by smaller primes.
+- Iterating `p` past `sqrt(n)`; once `p * p > n`, no new composites can be marked.
+- Sizing the sieve as `n` instead of `n + 1` when the problem asks "primes less than n"; off-by-one matters.
 
 ### Pseudocode Or Template
 
@@ -178,9 +178,9 @@ Do not mutate dimensions without checking crossing bounds.
 
 ### Common Mistakes
 
-- Processing a row or column twice after bounds cross.
-- Ignoring the exclusion case for Matrix Traversal: Do not mutate dimensions without checking crossing bounds.
-- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
+- For spiral, processing the inner row twice when `top == bottom` after the top-row pass; gate the bottom-row and left-column passes.
+- For rotation, transposing in place but reversing the wrong axis; clockwise rotation reverses each row, counter-clockwise reverses each column.
+- Mixing up `(r, c)` and `(c, r)` mid-function; settle on a convention and document it.
 
 ### Pseudocode Or Template
 
@@ -226,9 +226,9 @@ Do not compare floating point slopes for exact equality.
 
 ### Common Mistakes
 
-- Not handling duplicate points.
-- Ignoring the exclusion case for Coordinate Geometry: Do not compare floating point slopes for exact equality.
-- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
+- Storing slopes as floats and comparing with `==`; use reduced integer pairs `(dy / g, dx / g)` with sign normalization.
+- Not handling duplicate points; they share every line and must be counted once per anchor.
+- Treating vertical lines (`dx == 0`) as a divide-by-zero case; the reduced form `(1, 0)` handles them cleanly.
 
 ### Pseudocode Or Template
 
@@ -274,9 +274,9 @@ Do not use modulo bias when uniform weighted choice is required.
 
 ### Common Mistakes
 
-- Using floating ranges with off-by-one errors.
-- Ignoring the exclusion case for Randomized Prefix: Do not use modulo bias when uniform weighted choice is required.
-- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
+- Picking `random.randint(0, total - 1)` and looking up via `bisect_right` instead of `bisect_left`; the convention determines which weight bucket the value falls into.
+- Computing the prefix on every call; build it once in the constructor.
+- Using `random() * total` and rounding; floating-point bias and rounding errors break uniformity.
 
 ### Pseudocode Or Template
 

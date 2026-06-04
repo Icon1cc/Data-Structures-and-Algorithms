@@ -21,20 +21,20 @@ LeetCode: [Merge Intervals](https://leetcode.com/problems/merge-intervals/)
 
 Difficulty: Medium
 
-Pattern: Merge Intervals
+Pattern: Sort By Start, Sweep Merge
 
 Why It Matters: Core sorted merge pattern.
 
 Skills Tested:
-- Identify the Merge Intervals signal before choosing a template.
-- State the invariant for Merge Intervals: core sorted merge pattern.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that after sorting by start, two adjacent intervals merge iff `cur.start <= last.end`.
+- State the invariant: the result list is always disjoint and sorted; on a merge, extend `last.end = max(last.end, cur.end)`.
+- Decide whether touching intervals (`cur.start == last.end`) merge based on the problem statement.
+- Time O(n log n), space O(n) for output.
 
 Common Follow-Ups:
-- What changes if the constraints push Merge Intervals toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Merge Intervals invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Insert Interval (LC 57) reuses merge into a sorted list.
+- Employee Free Time (LC 759) inverts merged intervals to gaps.
+- What if intervals carry weights to be summed on merge.
 
 ## 2. Insert Interval
 
@@ -42,20 +42,20 @@ LeetCode: [Insert Interval](https://leetcode.com/problems/insert-interval/)
 
 Difficulty: Medium
 
-Pattern: Insert Interval
+Pattern: Three-Phase Sweep
 
 Why It Matters: Linear insertion into sorted disjoint intervals.
 
 Skills Tested:
-- Identify the Insert Interval signal before choosing a template.
-- State the invariant for Insert Interval: linear insertion into sorted disjoint intervals.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize three regions: intervals before the new one (no overlap), intervals overlapping the new one (merge), and intervals after.
+- State the invariant: the result is built by appending each region in turn; the merged interval expands to cover all overlapping originals.
+- Handle the empty-input case and the new interval lying entirely before or after all originals.
+- Time O(n), space O(n) for output.
 
 Common Follow-Ups:
-- What changes if the constraints push Insert Interval toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Insert Interval invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Merge Intervals (LC 56) is the from-scratch merge.
+- Stream interval inserts and maintain the disjoint set.
+- Generalize to weighted intervals with sum-on-merge.
 
 ## 3. Non-overlapping Intervals
 
@@ -63,20 +63,20 @@ LeetCode: [Non-overlapping Intervals](https://leetcode.com/problems/non-overlapp
 
 Difficulty: Medium
 
-Pattern: Greedy Erase Overlap
+Pattern: Earliest End Greedy (Activity Selection)
 
 Why It Matters: Classic removal by earliest end.
 
 Skills Tested:
-- Identify the Greedy Erase Overlap signal before choosing a template.
-- State the invariant for Non-overlapping Intervals: classic removal by earliest end.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that to keep the most non-overlapping intervals, sort by end and greedily keep each interval whose start is at least the last kept end.
+- State the invariant: the kept set is the maximum-cardinality non-overlapping subset (provable by exchange argument).
+- The answer is `n - kept`.
+- Time O(n log n), space O(1) extra.
 
 Common Follow-Ups:
-- What changes if the constraints push Non-overlapping Intervals toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Greedy Erase Overlap invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Minimum Number of Arrows to Burst Balloons (LC 452) flips the problem to interval intersection.
+- Activity Selection generalizes with weights.
+- Stream intervals and maintain the optimum online.
 
 ## 4. Meeting Rooms II
 
@@ -84,20 +84,20 @@ LeetCode: [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)
 
 Difficulty: Medium
 
-Pattern: Sweep Line Or Heap
+Pattern: Sweep Line Or Min-Heap
 
 Why It Matters: Computes minimum concurrent resources.
 
 Skills Tested:
-- Identify the Sweep Line Or Heap signal before choosing a template.
-- State the invariant for Meeting Rooms II: computes minimum concurrent resources.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the answer equals the maximum overlap, which is found by sweeping events `(time, +1 for start, -1 for end)` and tracking the running maximum.
+- State the invariant: at any sweep time `t`, the running counter equals the count of meetings active.
+- Handle ties: process end-events before start-events at the same timestamp so a meeting ending exactly when another begins does not require an extra room.
+- Time O(n log n), space O(n).
 
 Common Follow-Ups:
-- What changes if the constraints push Meeting Rooms II toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Sweep Line Or Heap invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Car Pooling (LC 1094) is a route-based variant.
+- Generalize to weighted resources per meeting.
+- My Calendar III (LC 732) is the streaming variant.
 
 ## 5. Minimum Number of Arrows to Burst Balloons
 
@@ -105,20 +105,20 @@ LeetCode: [Minimum Number of Arrows to Burst Balloons](https://leetcode.com/prob
 
 Difficulty: Medium
 
-Pattern: Interval Greedy
+Pattern: Earliest-End Interval Greedy
 
 Why It Matters: Uses overlap intersection to minimize shots.
 
 Skills Tested:
-- Identify the Interval Greedy signal before choosing a template.
-- State the invariant for Minimum Number of Arrows to Burst Balloons: uses overlap intersection to minimize shots.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that one arrow can burst all balloons sharing a common point; minimizing arrows is equivalent to picking points using the earliest-end-greedy.
+- State the invariant: sort by end; current arrow position is the smallest end seen; advance only when the next start exceeds that end.
+- Handle large coordinates by using 64-bit comparisons.
+- Time O(n log n), space O(1) extra.
 
 Common Follow-Ups:
-- What changes if the constraints push Minimum Number of Arrows to Burst Balloons toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Interval Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Non-overlapping Intervals (LC 435) is the inverse formulation.
+- What if arrows have a finite radius (cover a range).
+- Generalize to k arrows that may merge.
 
 ## 6. Car Pooling
 
@@ -126,20 +126,20 @@ LeetCode: [Car Pooling](https://leetcode.com/problems/car-pooling/)
 
 Difficulty: Medium
 
-Pattern: Difference Array Or Sweep
+Pattern: Difference Array
 
 Why It Matters: Models passenger changes over a route.
 
 Skills Tested:
-- Identify the Difference Array Or Sweep signal before choosing a template.
-- State the invariant for Car Pooling: models passenger changes over a route.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that `delta[from] += passengers, delta[to] -= passengers` plus a prefix sum yields the number of passengers at every timestamp.
+- State the invariant: after the prefix sum, the running total never exceeds capacity.
+- Handle large `to` values by using a hash map (or compressing coordinates) when the route is sparse.
+- Time O(n + maxTime), space O(maxTime).
 
 Common Follow-Ups:
-- What changes if the constraints push Car Pooling toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Difference Array Or Sweep invariant survive streaming input, in-place restrictions, or lower memory limits?
+- My Calendar III (LC 732) is the streaming sweep-line cousin.
+- Generalize to a route with reservations and refunds.
+- Multiple cars with different capacities.
 
 ## 7. My Calendar I
 
@@ -147,20 +147,20 @@ LeetCode: [My Calendar I](https://leetcode.com/problems/my-calendar-i/)
 
 Difficulty: Medium
 
-Pattern: Interval Conflict Search
+Pattern: Online Interval Conflict
 
 Why It Matters: Designs booking without overlap.
 
 Skills Tested:
-- Identify the Interval Conflict Search signal before choosing a template.
-- State the invariant for My Calendar I: designs booking without overlap.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that adding a new booking is rejected iff it overlaps any existing one; an ordered set or balanced BST gives O(log n) per insert.
+- State the invariant: stored intervals are disjoint; the floor predecessor and the ceiling successor are the only candidates for conflict.
+- Use `SortedList` (Python) or `TreeMap` (Java) to support O(log n) lookups.
+- Per-call time O(log n), space O(n).
 
 Common Follow-Ups:
-- What changes if the constraints push My Calendar I toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Interval Conflict Search invariant survive streaming input, in-place restrictions, or lower memory limits?
+- My Calendar II (LC 731) allows one overlap.
+- My Calendar III (LC 732) returns the maximum overlap so far.
+- Streaming variant with deletions.
 
 ## 8. Interval List Intersections
 
@@ -168,20 +168,20 @@ LeetCode: [Interval List Intersections](https://leetcode.com/problems/interval-l
 
 Difficulty: Medium
 
-Pattern: Two Sorted Interval Lists
+Pattern: Two-Pointer Merge On Two Sorted Lists
 
 Why It Matters: Practices advancing the interval whose endpoint expires first while recording overlaps.
 
 Skills Tested:
-- Identify the Two Sorted Interval Lists signal before choosing a template.
-- State the invariant for Interval List Intersections: practices advancing the interval whose endpoint expires first while recording overlaps.
-- Handle equal endpoints, open versus closed intervals, empty interval lists, and event tie order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that two sorted disjoint interval lists are walked in parallel; an intersection exists iff `max(a.start, b.start) <= min(a.end, b.end)`.
+- State the invariant: the pointer to the interval with the smaller end advances; the other waits for the next overlap.
+- Output the intersection only when it is valid; do not emit empty intersections.
+- Time O(m + n), space O(m + n) for output.
 
 Common Follow-Ups:
-- What changes if the constraints push Interval List Intersections toward greedy, heap, difference array, binary search tree, or line sweep?
-- Which equal endpoints case would break the first implementation?
-- Can the Two Sorted Interval Lists invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Merge Intervals (LC 56) is the union counterpart.
+- Interval intersection on three sorted lists.
+- What if intervals are weighted (sum weights of overlapping pairs).
 
 ---
 

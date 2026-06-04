@@ -21,20 +21,20 @@ LeetCode: [Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tr
 
 Difficulty: Hard
 
-Pattern: Tree DP
+Pattern: Tree DP With Global
 
 Why It Matters: Hard local/global path reasoning.
 
 Skills Tested:
-- Identify the Tree DP signal before choosing a template.
-- State the invariant for Binary Tree Maximum Path Sum: hard local/global path reasoning.
-- Handle null roots, skewed depth, duplicate BST values, and global-state reset.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the recursion must return the best downward gain `node.val + max(0, leftGain, rightGain)` while a global tracks the best through-node path `node.val + max(0, leftGain) + max(0, rightGain)`.
+- State the invariant: negative gains are clamped to zero, since any subtree contributes at most `max(0, gain)` to a parent.
+- Initialize the global to `-inf` to handle all-negative trees correctly.
+- Time O(n), space O(h), and contrast with O(n^2) where each node tries to root the path.
 
 Common Follow-Ups:
-- What changes if the constraints push Binary Tree Maximum Path Sum toward iterative stack, BFS queue, parent maps, or graph traversal?
-- Which null roots case would break the first implementation?
-- Can the Tree DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Diameter of Binary Tree (LC 543) is the unweighted version.
+- Longest Univalue Path (LC 687) restricts to equal values.
+- What if there is a budget on the number of edges in the path.
 
 ## 2. Serialize and Deserialize Binary Tree
 
@@ -47,15 +47,15 @@ Pattern: Traversal Encoding
 Why It Matters: Tests lossless tree representation.
 
 Skills Tested:
-- Identify the Traversal Encoding signal before choosing a template.
-- State the invariant for Serialize and Deserialize Binary Tree: tests lossless tree representation.
-- Handle null roots, skewed depth, duplicate BST values, and global-state reset.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a single traversal (preorder with null markers, or BFS with `#` sentinels) is enough to reconstruct any binary tree losslessly.
+- State the invariant: the encoder emits null markers at every missing child, and the decoder consumes the same stream in the same order.
+- Handle empty trees (encode as a single null marker) and trees with values that contain the chosen delimiter.
+- Time O(n), space O(n), and contrast with two-traversal encodings (preorder + inorder) which require unique values.
 
 Common Follow-Ups:
-- What changes if the constraints push Serialize and Deserialize Binary Tree toward iterative stack, BFS queue, parent maps, or graph traversal?
-- Which null roots case would break the first implementation?
-- Can the Traversal Encoding invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Serialize and Deserialize BST (LC 449) can use a more compact encoding.
+- Serialize and Deserialize N-ary Tree (LC 428) needs sibling counts or end markers.
+- Design a streaming serializer that emits as it walks.
 
 ## 3. Recover Binary Search Tree
 
@@ -68,15 +68,15 @@ Pattern: Inorder Anomaly Detection
 Why It Matters: Uses sorted inorder violations.
 
 Skills Tested:
-- Identify the Inorder Anomaly Detection signal before choosing a template.
-- State the invariant for Recover Binary Search Tree: uses sorted inorder violations.
-- Handle null roots, skewed depth, duplicate BST values, and global-state reset.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that in a valid BST, inorder yields a strictly increasing sequence; with two swapped nodes, exactly two adjacent-in-time pairs violate `prev.val < node.val`.
+- State the invariant: the first violation's `prev` is one of the swapped nodes; the second violation's `node` is the other (or, if only one violation, both are at that pair).
+- Implement Morris inorder for O(1) extra space (otherwise the recursion stack is O(h)).
+- Time O(n), space O(1) Morris or O(h) recursive.
 
 Common Follow-Ups:
-- What changes if the constraints push Recover Binary Search Tree toward iterative stack, BFS queue, parent maps, or graph traversal?
-- Which null roots case would break the first implementation?
-- Can the Inorder Anomaly Detection invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Validate Binary Search Tree (LC 98) is the closely related validation problem.
+- What if `k` swaps must be undone (k > 2 makes it harder).
+- Morris traversal in detail: how does the temporary thread maintain correctness.
 
 ## 4. Vertical Order Traversal of a Binary Tree
 
@@ -84,20 +84,20 @@ LeetCode: [Vertical Order Traversal of a Binary Tree](https://leetcode.com/probl
 
 Difficulty: Hard
 
-Pattern: Coordinate Traversal
+Pattern: Coordinate Bucketing
 
 Why It Matters: Combines BFS/DFS with ordered coordinates.
 
 Skills Tested:
-- Identify the Coordinate Traversal signal before choosing a template.
-- State the invariant for Vertical Order Traversal of a Binary Tree: combines BFS/DFS with ordered coordinates.
-- Handle null roots, skewed depth, duplicate BST values, and global-state reset.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "vertical order" assigns each node coordinates `(col, row)` and the output groups by `col` ascending, then by `row`, then by value.
+- State the invariant: each DFS step assigns `col -> col +/- 1` and `row -> row + 1`, accumulating into a dict keyed by column.
+- Sort each column's entries by `(row, value)` before joining.
+- Time O(n log n), space O(n), and contrast with naive BFS that fails to break ties by value at the same coordinate.
 
 Common Follow-Ups:
-- What changes if the constraints push Vertical Order Traversal of a Binary Tree toward iterative stack, BFS queue, parent maps, or graph traversal?
-- Which null roots case would break the first implementation?
-- Can the Coordinate Traversal invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Binary Tree Vertical Order Traversal (LC 314) is the simpler tie-broken-by-insertion-order variant.
+- Boundary of a Binary Tree (LC 545) needs left + leaves + right with no duplicates.
+- How would you stream output without sorting (priority queue per column).
 
 ---
 

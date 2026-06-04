@@ -40,9 +40,9 @@ Do not expose the dummy as part of the returned list.
 
 ### Common Mistakes
 
-- Returning dummy instead of dummy.next.
-- Ignoring the exclusion case for Dummy Head: Do not expose the dummy as part of the returned list.
-- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
+- Returning `dummy` instead of `dummy.next`; the caller receives the sentinel and prints garbage.
+- Forgetting to set `dummy.next = head` at construction; the dummy floats with no connection to the input.
+- Treating the dummy as immutable; sometimes you must rewire `dummy.next` directly when the new head changes.
 
 ### Pseudocode Or Template
 
@@ -87,9 +87,9 @@ Do not use when the list length can be shorter without guarding null.
 
 ### Common Mistakes
 
-- Advancing past null when n equals length.
-- Ignoring the exclusion case for Two Pointer Gap: Do not use when the list length can be shorter without guarding null.
-- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
+- Walking past null when `n` equals or exceeds the list length; guard the inner loop with `fast` non-null.
+- Stopping when `fast` is null instead of when `fast.next` is null; the latter leaves `slow` pointing one before the target.
+- Removing the head without a dummy node; the head case becomes a special branch you can avoid entirely.
 
 ### Pseudocode Or Template
 
@@ -136,9 +136,9 @@ Do not use when random access or length is already cheaper.
 
 ### Common Mistakes
 
-- Not checking fast and fast.next before moving two steps.
-- Ignoring the exclusion case for Fast And Slow Pointers: Do not use when random access or length is already cheaper.
-- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
+- Skipping the `fast.next` null guard before `fast.next.next`, crashing on odd-length lists.
+- Returning the meeting point as the cycle entrance; a second walk from `head` and `meet` lands at the entrance.
+- Confusing the two middle conventions: `while fast and fast.next` returns the second middle for even length; `while fast.next and fast.next.next` returns the first.
 
 ### Pseudocode Or Template
 
@@ -184,9 +184,9 @@ Do not use when node identity order must remain unchanged.
 
 ### Common Mistakes
 
-- Losing next before reassigning current.next.
-- Ignoring the exclusion case for In-place Reversal: Do not use when node identity order must remain unchanged.
-- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
+- Reassigning `cur.next = prev` before saving `cur.next`, which orphans the rest of the list.
+- Returning `cur` (now null) instead of `prev` (the new head) at loop end.
+- Forgetting to splice the reversed segment back into the original list when reversing only a sublist.
 
 ### Pseudocode Or Template
 
@@ -235,9 +235,9 @@ Do not allocate new nodes if the problem expects node reuse.
 
 ### Common Mistakes
 
-- Forgetting to attach the remaining tail after one list ends.
-- Ignoring the exclusion case for Merge Lists: Do not allocate new nodes if the problem expects node reuse.
-- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
+- Forgetting to attach the leftover tail of the longer list after the loop exits.
+- Comparing `a < b` on nodes when you meant `a.val < b.val`; nodes do not implement comparison by default.
+- Pushing a heap of nodes without a tiebreak in tuples; equal values force a node-comparison error in Python.
 
 ### Pseudocode Or Template
 

@@ -21,20 +21,20 @@ LeetCode: [Minimum Number of K Consecutive Bit Flips](https://leetcode.com/probl
 
 Difficulty: Hard
 
-Pattern: Difference Bit State
+Pattern: Difference Array Of Active Flips
 
 Why It Matters: Tracks active flips efficiently.
 
 Skills Tested:
-- Identify the Difference Bit State signal before choosing a template.
-- State the invariant for Minimum Number of K Consecutive Bit Flips: tracks active flips efficiently.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that flipping a length-K window is greedy: scan left to right, flip whenever `nums[i] xor active_flips == 0`.
+- State the invariant: `active_flips` is the parity of flips currently affecting position `i`; a difference array signals when each flip's effect ends.
+- Handle the failure case where a needed flip extends past the array (return `-1`).
+- Time O(n), space O(n).
 
 Common Follow-Ups:
-- What changes if the constraints push Minimum Number of K Consecutive Bit Flips toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Difference Bit State invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Generalize to flips of different sizes per position.
+- What if values are not binary.
+- Stream the input and answer feasibility online.
 
 ## 2. Maximum XOR With an Element From Array
 
@@ -42,20 +42,20 @@ LeetCode: [Maximum XOR With an Element From Array](https://leetcode.com/problems
 
 Difficulty: Hard
 
-Pattern: Bit Trie With Queries
+Pattern: Offline Bit Trie With Size Constraint
 
 Why It Matters: Adds offline constraints to bit-trie search.
 
 Skills Tested:
-- Identify the Bit Trie With Queries signal before choosing a template.
-- State the invariant for Maximum XOR With an Element From Array: adds offline constraints to bit-trie search.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "max XOR of `query` with any `nums[i] <= m_i`" is solved offline: sort numbers and queries, insert numbers into a bit trie up to each query's bound, then perform the standard greedy bit-trie XOR query.
+- State the invariant: the trie always contains exactly the numbers `<= m_i`; queries process in sorted-`m` order so insertions are append-only.
+- Handle empty trie at query time (return `-1`).
+- Time O((n + q) * 31), space O(n * 31).
 
 Common Follow-Ups:
-- What changes if the constraints push Maximum XOR With an Element From Array toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Bit Trie With Queries invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Maximum XOR of Two Numbers in Array (LC 421) is the no-constraint version.
+- Stream queries online with a persistent trie.
+- Generalize to k-th largest XOR.
 
 ## 3. Count Pairs With XOR in a Range
 
@@ -63,20 +63,20 @@ LeetCode: [Count Pairs With XOR in a Range](https://leetcode.com/problems/count-
 
 Difficulty: Hard
 
-Pattern: Bit Trie Counting
+Pattern: Bit Trie Counting With Range
 
 Why It Matters: Counts pairs by bounded XOR.
 
 Skills Tested:
-- Identify the Bit Trie Counting signal before choosing a template.
-- State the invariant for Count Pairs With XOR in a Range: counts pairs by bounded XOR.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "count pairs with XOR `< K`" is the building block; the answer to `[low, high]` is `f(high + 1) - f(low)`.
+- State the invariant: a bit trie stores past numbers with subtree counts; for each `nums[i]`, descend bit-by-bit deciding subtrees using the bits of `K - 1`.
+- Carefully handle equality cases at each bit.
+- Time O(n * 16), space O(n * 16) for trie nodes.
 
 Common Follow-Ups:
-- What changes if the constraints push Count Pairs With XOR in a Range toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Bit Trie Counting invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Maximum XOR of Two Numbers in Array (LC 421) is the maximum-only sibling.
+- Pairs with XOR in a range with size constraints.
+- Stream values and answer online.
 
 ## 4. Smallest Sufficient Team
 
@@ -84,20 +84,20 @@ LeetCode: [Smallest Sufficient Team](https://leetcode.com/problems/smallest-suff
 
 Difficulty: Hard
 
-Pattern: Bitmask DP
+Pattern: Bitmask DP On Skills
 
 Why It Matters: Uses skills as a set mask.
 
 Skills Tested:
-- Identify the Bitmask DP signal before choosing a template.
-- State the invariant for Smallest Sufficient Team: uses skills as a set mask.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that skills can be encoded as a bitmask (up to 16 skills); `dp[mask]` is the smallest team covering exactly the skills in `mask`.
+- State the invariant: for each person with skill set `pSkills`, transition `dp[mask | pSkills] = min(dp[mask | pSkills], dp[mask] + [person])`.
+- Reconstruct the actual team by storing the predecessor mask and chosen person at each state.
+- Time O(2^skills * people), space O(2^skills).
 
 Common Follow-Ups:
-- What changes if the constraints push Smallest Sufficient Team toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Bitmask DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Travelling Salesperson DP (LC 943) uses the same bitmask state.
+- What if skills have weights (weighted set cover).
+- Generalize to multi-set coverage with overlap costs.
 
 ---
 

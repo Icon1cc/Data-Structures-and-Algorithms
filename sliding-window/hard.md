@@ -21,20 +21,20 @@ LeetCode: [Minimum Window Substring](https://leetcode.com/problems/minimum-windo
 
 Difficulty: Hard
 
-Pattern: Frequency Window
+Pattern: Frequency Window With Match Counter
 
 Why It Matters: The most important hard sliding-window problem.
 
 Skills Tested:
-- Identify the Frequency Window signal before choosing a template.
-- State the invariant for Minimum Window Substring: the most important hard sliding-window problem.
-- Handle zero-count keys, negative values, recording order, and k larger than input.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "smallest window of `s` covering all characters of `t`" is a shrink-while-valid window with a need-counter `have == required`.
+- State the invariant: `have` equals the number of distinct characters whose count meets `t`'s requirement, and the window is valid only when `have == required`.
+- Update `have` by exactly one increment or decrement per slide step (when `count[c]` crosses the target threshold).
+- Time O(n + m), space O(alphabet), and explain why naive substring enumeration is O(n^3).
 
 Common Follow-Ups:
-- What changes if the constraints push Minimum Window Substring toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
-- Which zero-count keys case would break the first implementation?
-- Can the Frequency Window invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Smallest Window Containing All Characters of Another String II returns the substring rather than just length.
+- What if `t` allows repeated characters with different multiplicities (already handled by counters, walk through it).
+- How would you support online queries where `t` arrives one character at a time.
 
 ## 2. Sliding Window Maximum
 
@@ -42,20 +42,20 @@ LeetCode: [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-
 
 Difficulty: Hard
 
-Pattern: Monotonic Window
+Pattern: Monotonic Deque
 
 Why It Matters: Uses a deque to keep maximum candidates.
 
 Skills Tested:
-- Identify the Monotonic Window signal before choosing a template.
-- State the invariant for Sliding Window Maximum: uses a deque to keep maximum candidates.
-- Handle zero-count keys, negative values, recording order, and k larger than input.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the maximum of every length-`k` window is maintained by a deque of indices whose values are strictly decreasing.
+- State the invariant: the front of the deque is the index of the maximum in the current window, and any element that becomes obsolete (out of the window or smaller than a new entry) is popped.
+- Pop from the back while `nums[back] <= nums[i]` and from the front while `front <= i - k`.
+- Time O(n), space O(k), and contrast with a heap which is O(n log k) and harder to evict expired entries.
 
 Common Follow-Ups:
-- What changes if the constraints push Sliding Window Maximum toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
-- Which zero-count keys case would break the first implementation?
-- Can the Monotonic Window invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Constrained Subsequence Sum (LC 1425) layers DP on top of a monotonic-deque maximum.
+- What if you also need the minimum at the same time (two deques).
+- How does the answer change when `k` itself slides.
 
 ## 3. Substring with Concatenation of All Words
 
@@ -63,20 +63,20 @@ LeetCode: [Substring with Concatenation of All Words](https://leetcode.com/probl
 
 Difficulty: Hard
 
-Pattern: Fixed Block Window
+Pattern: Aligned Block Window
 
 Why It Matters: Maintains word counts over aligned chunks.
 
 Skills Tested:
-- Identify the Fixed Block Window signal before choosing a template.
-- State the invariant for Substring with Concatenation of All Words: maintains word counts over aligned chunks.
-- Handle zero-count keys, negative values, recording order, and k larger than input.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that words have equal length `L`, so the search space splits into `L` independent block-aligned windows starting at offsets `0..L-1`.
+- State the invariant: at each offset, a count map tracks the word frequency in the current `len(words) * L` block, and the block is valid when the map equals `Counter(words)`.
+- Slide block-by-block within an offset, evicting the leftmost word and admitting the rightmost word.
+- Time O(n * L), space O(unique words), and contrast with the brute O(n * len(words) * L) check.
 
 Common Follow-Ups:
-- What changes if the constraints push Substring with Concatenation of All Words toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
-- Which zero-count keys case would break the first implementation?
-- Can the Fixed Block Window invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Find All Anagrams in a String (LC 438) is the single-character version.
+- What if word lengths are not all equal (much harder, falls back to suffix automaton style).
+- How would you precompute hashes per block to compare in O(1) per slide.
 
 ## 4. Subarrays with K Different Integers
 
@@ -84,20 +84,20 @@ LeetCode: [Subarrays with K Different Integers](https://leetcode.com/problems/su
 
 Difficulty: Hard
 
-Pattern: Exactly K Via At Most K
+Pattern: Exactly K Via At Most K Minus At Most K Minus One
 
 Why It Matters: Turns an exactly-k requirement into two monotonic sliding-window counts.
 
 Skills Tested:
-- Identify the Exactly K Via At Most K signal before choosing a template.
-- State the invariant for Subarrays with K Different Integers: turns an exactly-k requirement into two monotonic sliding-window counts.
-- Handle zero-count keys, negative values, recording order, and k larger than input.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that `exactly K = atMostK - atMostKMinusOne` because exactly-K is not directly monotone but at-most-K is.
+- State the invariant: `atMost(K)` counts subarrays with at most K distinct using a window plus distinct counter; the difference yields the exact answer.
+- Implement `atMost(K)` cleanly so calling it twice with different K values stays O(n) each.
+- Time O(n), space O(K), and explain why a single-pass exactly-K is harder to maintain.
 
 Common Follow-Ups:
-- What changes if the constraints push Subarrays with K Different Integers toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
-- Which zero-count keys case would break the first implementation?
-- Can the Exactly K Via At Most K invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Count Number of Nice Subarrays (LC 1248) reuses the at-most-K trick on binary parity.
+- Replace the count of subarrays with the count of distinct subarrays.
+- What if the constraint is "exactly K" but order matters as a sequence rather than a contiguous subarray.
 
 ---
 

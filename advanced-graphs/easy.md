@@ -8,6 +8,7 @@ Curated LeetCode practice for this topic. Solutions are intentionally not includ
 - Priority goes to NeetCode 150, Blind 75, Grind 75, and classic high-frequency interview variants.
 - Each problem appears once in this repository; related topics should transfer the pattern instead of duplicating the entry.
 - Difficulty placement follows the listed LeetCode difficulty and the expected interview reasoning load.
+- Genuine Easy problems exercising advanced graph algorithms (Dijkstra, MST, topological sort, low-link DFS) are rare on LeetCode, so this file is intentionally smaller; depth lives in `medium.md` and `hard.md`.
 
 ## Practice Order
 
@@ -21,20 +22,20 @@ LeetCode: [Find the Town Judge](https://leetcode.com/problems/find-the-town-judg
 
 Difficulty: Easy
 
-Pattern: In-degree Out-degree
+Pattern: In-degree And Out-degree Balance
 
 Why It Matters: Degree accounting before heavier graph algorithms.
 
 Skills Tested:
-- Identify the In-degree Out-degree signal before choosing a template.
-- State the invariant for Find the Town Judge: degree accounting before heavier graph algorithms.
-- Handle negative weights, disconnected graphs, stale heap entries, and dense-graph constraints.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "the judge trusts no one and is trusted by everyone else" is captured by `outDegree[judge] == 0` and `inDegree[judge] == n - 1`.
+- State the invariant: a single pass over `trust` increments `outDegree[a]` and `inDegree[b]`; the judge is the unique node with `inDegree - outDegree == n - 1`.
+- Handle `n == 1` (the only person is the judge) and a missing trust edge (no judge exists).
+- Time O(N + E), space O(N), and contrast with full graph traversal which is unnecessary here.
 
 Common Follow-Ups:
-- What changes if the constraints push Find the Town Judge toward basic BFS, DAG DP, Bellman-Ford, Floyd-Warshall, Kruskal, Prim, or low-link DFS?
-- Which negative weights case would break the first implementation?
-- Can the In-degree Out-degree invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Find Center of Star Graph (LC 1791) reuses the pure-degree idea on undirected graphs.
+- What if multiple judges or no judge can exist (return all or `-1`).
+- Generalize to weighted-trust networks where degree is a sum of weights.
 
 ## 2. Destination City
 
@@ -47,15 +48,15 @@ Pattern: Directed Sink Detection
 Why It Matters: Builds intuition for sink nodes and missing outgoing edges in a directed graph.
 
 Skills Tested:
-- Identify the Directed Sink Detection signal before choosing a template.
-- State the invariant for Destination City: builds intuition for sink nodes and missing outgoing edges in a directed graph.
-- Handle negative weights, disconnected graphs, stale heap entries, and dense-graph constraints.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the destination city is the unique node that never appears as a source in any path edge.
+- State the invariant: build a set of source cities; the answer is the unique destination not in that set.
+- Handle the linear-path constraint: there is exactly one such node by problem guarantee.
+- Time O(N), space O(N), and explain why a full DAG traversal is overkill.
 
 Common Follow-Ups:
-- What changes if the constraints push Destination City toward basic BFS, DAG DP, Bellman-Ford, Floyd-Warshall, Kruskal, Prim, or low-link DFS?
-- Which negative weights case would break the first implementation?
-- Can the Directed Sink Detection invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Generalize to find all sinks in a DAG (out-degree zero).
+- What if the path can branch (now the answer is not unique).
+- How would you detect cycles before declaring a destination.
 
 ## 3. Find Champion I
 
@@ -63,20 +64,20 @@ LeetCode: [Find Champion I](https://leetcode.com/problems/find-champion-i/)
 
 Difficulty: Easy
 
-Pattern: Zero Indegree Champion
+Pattern: Zero In-degree Champion
 
 Why It Matters: Practices tournament-style graph reasoning with a unique candidate condition.
 
 Skills Tested:
-- Identify the Zero Indegree Champion signal before choosing a template.
-- State the invariant for Find Champion I: practices tournament-style graph reasoning with a unique candidate condition.
-- Handle negative weights, disconnected graphs, stale heap entries, and dense-graph constraints.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the champion is the unique team that loses to no one, which is the node with in-degree zero in the directed beats-graph.
+- State the invariant: the answer exists iff exactly one node has in-degree zero; otherwise the result is `-1`.
+- Compute in-degrees in a single pass over the adjacency matrix.
+- Time O(N^2), space O(N), and contrast with traversal-based approaches.
 
 Common Follow-Ups:
-- What changes if the constraints push Find Champion I toward basic BFS, DAG DP, Bellman-Ford, Floyd-Warshall, Kruskal, Prim, or low-link DFS?
-- Which negative weights case would break the first implementation?
-- Can the Zero Indegree Champion invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Find Champion II (LC 2924) lifts the constraint to a general graph and forces a uniqueness check.
+- What if cycles exist (no unique champion).
+- Generalize to ranking the top-k under a tournament.
 
 ---
 

@@ -42,9 +42,9 @@ Do not use if movement has cycles without a topological order.
 
 ### Common Mistakes
 
-- Not initializing first row and first column correctly.
-- Ignoring the exclusion case for Grid DP: Do not use if movement has cycles without a topological order.
-- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
+- Initializing the first row and first column to 1 unconditionally; an obstacle blocks every cell beyond it in that row/column.
+- Reading `dp[r - 1][c]` at `r == 0` without bounds checking; either pad with a sentinel row or special-case the boundary.
+- Mixing row-then-column with column-then-row iteration when the recurrence depends on both `top` and `left`; pick row-major and stick with it.
 
 ### Pseudocode Or Template
 
@@ -90,9 +90,9 @@ Do not use substring logic when order can skip characters.
 
 ### Common Mistakes
 
-- Off-by-one errors between string indices and dp dimensions.
-- Ignoring the exclusion case for Two String DP: Do not use substring logic when order can skip characters.
-- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
+- Confusing 1-indexed `dp[i][j]` with 0-indexed `text[i - 1]`; the off-by-one is the source of most bugs in these recurrences.
+- Forgetting to seed `dp[0][j] = j` and `dp[i][0] = i` for Edit Distance; without those, deleting or inserting prefixes is impossible.
+- Treating "longest common substring" like "longest common subsequence"; the former resets to 0 on mismatch, the latter takes the max of the two prefixes.
 
 ### Pseudocode Or Template
 
@@ -137,9 +137,9 @@ Do not reuse the same item unless the problem is unbounded.
 
 ### Common Mistakes
 
-- Using the wrong direction when compressing to one row.
-- Ignoring the exclusion case for Knapsack Table: Do not reuse the same item unless the problem is unbounded.
-- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
+- For 0/1 knapsack on a 1-D array, iterating capacity ascending; that lets the same item appear multiple times.
+- For unbounded knapsack on a 1-D array, iterating capacity descending; that misses reusing items in the same row.
+- Forgetting that `dp[i][cap]` always inherits `dp[i - 1][cap]` when the item does not fit; the no-take branch is mandatory.
 
 ### Pseudocode Or Template
 
@@ -183,9 +183,9 @@ Do not fill by start index alone if inner intervals are not ready.
 
 ### Common Mistakes
 
-- Filling longer intervals before shorter dependencies.
-- Ignoring the exclusion case for Interval DP: Do not fill by start index alone if inner intervals are not ready.
-- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
+- Iterating by `left` and then `right` instead of by length first; without length-first iteration, inner subproblems are not yet computed.
+- For Burst Balloons, picking which balloon to burst *first* in the interval; the correct framing is to pick which balloon bursts *last* so its neighbors are the interval boundaries.
+- Forgetting to pad the array with virtual `1`s on both sides for Burst Balloons; the boundary multipliers are essential.
 
 ### Pseudocode Or Template
 
@@ -230,9 +230,9 @@ Do not add paths through invalid cells.
 
 ### Common Mistakes
 
-- Initializing through an obstacle in the first row or column.
-- Ignoring the exclusion case for Path Counting With Obstacles: Do not add paths through invalid cells.
-- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
+- Initializing the first row or column with `1` unconditionally; once an obstacle appears, every cell beyond it must be 0.
+- Continuing to fill `dp[r][c] = dp[r - 1][c] + dp[r][c - 1]` even when `obstacle[r][c] == 1`; gate the assignment.
+- Treating the start or end cell being blocked as a valid input; both should return 0 paths.
 
 ### Pseudocode Or Template
 
@@ -276,9 +276,9 @@ Do not compress if reconstruction of the answer path is required.
 
 ### Common Mistakes
 
-- Overwriting dp[j-1] or diagonal values before saving them.
-- Ignoring the exclusion case for State Compression: Do not compress if reconstruction of the answer path is required.
-- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
+- For LCS-style recurrences, overwriting `dp[j - 1]` before reading the diagonal `dp[i - 1][j - 1]`; save it in a temporary first.
+- Compressing too aggressively to a single row when the recurrence reads two rows back; some problems need a two-row alternation.
+- Compressing first and validating later; always confirm correctness on the full 2-D table before reducing memory.
 
 ### Pseudocode Or Template
 
@@ -325,9 +325,9 @@ Do not greedily take the larger end without proof.
 
 ### Common Mistakes
 
-- Modeling only current player score and losing opponent effect.
-- Ignoring the exclusion case for Game DP: Do not greedily take the larger end without proof.
-- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
+- Tracking only the current player's score; the recurrence must capture the opponent's optimal counter-move via score difference.
+- Iterating `[left, right]` arbitrarily; this is a length-first interval DP.
+- Greedy "take the larger end" without proof; the recurrence shows greedy is wrong on adversarial inputs.
 
 ### Pseudocode Or Template
 

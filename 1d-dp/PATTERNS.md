@@ -42,9 +42,9 @@ Do not code transitions before the state has a precise English meaning.
 
 ### Common Mistakes
 
-- Changing state meaning midway through code.
-- Ignoring the exclusion case for State Definition: Do not code transitions before the state has a precise English meaning.
-- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
+- Writing "dp[i] is the answer" without clarifying "answer using items 0..i" versus "answer ending at i"; these are different DPs with different recurrences.
+- Conflating "best ending at i" with "best up to i"; for Maximum Subarray they differ critically.
+- Defining state in terms of the answer instead of a structural property; the latter generalizes to harder variants.
 
 ### Pseudocode Or Template
 
@@ -88,9 +88,9 @@ Do not use if recursion depth will exceed limits and bottom-up is simple.
 
 ### Common Mistakes
 
-- Caching by incomplete state keys.
-- Ignoring the exclusion case for Memoization: Do not use if recursion depth will exceed limits and bottom-up is simple.
-- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
+- Caching by an incomplete state key; if the recurrence depends on `(i, remaining)`, the cache must use both.
+- Mutating arguments stored in the cache key; mutable lists are unhashable and dicts of mutables silently fail.
+- Hitting Python's default recursion limit on long inputs; either iterate bottom-up or `sys.setrecursionlimit`.
 
 ### Pseudocode Or Template
 
@@ -137,9 +137,9 @@ Do not fill before dependencies are initialized.
 
 ### Common Mistakes
 
-- Using dp[i-1] before it is defined.
-- Ignoring the exclusion case for Tabulation: Do not fill before dependencies are initialized.
-- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
+- Looping `for i in range(n)` and reading `dp[i + 1]` before it is computed; choose the loop direction so dependencies are already filled.
+- Forgetting to seed the base cases (`dp[0] = 1`, etc.); the recurrence depends on a correct starting state.
+- Sizing the array as `n` when the recurrence reads `dp[n]`; off-by-one indices are the most common bug.
 
 ### Pseudocode Or Template
 
@@ -184,9 +184,9 @@ Do not include choices that violate problem constraints.
 
 ### Common Mistakes
 
-- Taking max when the problem asks for count, or sum when choices are exclusive.
-- Ignoring the exclusion case for Transition Choice: Do not include choices that violate problem constraints.
-- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
+- Taking `max` when the question counts ways (use sum), or summing when choices are mutually exclusive (use max).
+- Forgetting one legal transition; House Robber has skip-then-take and skip-then-skip; missing one breaks the recurrence.
+- Including a transition that violates a constraint (e.g., taking adjacent houses) without filtering.
 
 ### Pseudocode Or Template
 
@@ -229,9 +229,9 @@ Do not iterate capacity forward for 0/1 choices if it reuses the same item.
 
 ### Common Mistakes
 
-- Using unbounded update order for a 0/1 problem.
-- Ignoring the exclusion case for Knapsack: Do not iterate capacity forward for 0/1 choices if it reuses the same item.
-- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
+- For 0/1 knapsack, iterating capacity from low to high; that lets the same item appear multiple times.
+- Swapping the loop order between item and capacity in counting variants; outer item gives unordered counts (Coin Change II), outer capacity gives ordered counts (Combination Sum IV).
+- Allocating O(n * capacity) when O(capacity) suffices; the rolling 1-D array always works for 0/1 if you iterate capacity in reverse.
 
 ### Pseudocode Or Template
 
@@ -276,9 +276,9 @@ Do not require contiguity unless the problem says substring or subarray.
 
 ### Common Mistakes
 
-- Confusing subsequence with substring.
-- Ignoring the exclusion case for Subsequence DP: Do not require contiguity unless the problem says substring or subarray.
-- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
+- Reading the problem as "subarray" (contiguous) when it says "subsequence" (any order-preserving selection); the recurrences are different.
+- For LIS, using strict `<` versus non-strict `<=`; pick the one matching the problem.
+- Falling back to O(n^2) DP when O(n log n) patience-sort is available for LIS; mention the trade-off.
 
 ### Pseudocode Or Template
 
@@ -323,9 +323,9 @@ Do not compress when later transitions still need overwritten values.
 
 ### Common Mistakes
 
-- Updating variables in the wrong order.
-- Ignoring the exclusion case for State Compression: Do not compress when later transitions still need overwritten values.
-- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
+- Overwriting `prev` before reading it for the next iteration; assign in the right order or use a temporary.
+- Compressing when the recurrence reaches back further than your window assumes; verify the dependency span before reducing memory.
+- Believing the time complexity changes; compression only reduces space, never time.
 
 ### Pseudocode Or Template
 
@@ -369,9 +369,9 @@ Do not use for subsequences or non-contiguous choices.
 
 ### Common Mistakes
 
-- Initializing best to zero when all values may be negative.
-- Ignoring the exclusion case for Kadane: Do not use for subsequences or non-contiguous choices.
-- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
+- Initializing `best` to 0 instead of `nums[0]`; an all-negative array would otherwise return 0, which is not a valid subarray.
+- Updating `best` before extending `best_end`; the order matters when the new element is the entire subarray.
+- Trying to use Kadane on Maximum Product Subarray without tracking the running min; negatives flip sign on multiplication.
 
 ### Pseudocode Or Template
 

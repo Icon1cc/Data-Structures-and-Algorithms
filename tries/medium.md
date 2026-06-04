@@ -26,15 +26,15 @@ Pattern: Prefix Insert And Search
 Why It Matters: The required trie implementation baseline.
 
 Skills Tested:
-- Identify the Prefix Insert And Search signal before choosing a template.
-- State the invariant for Implement Trie (Prefix Tree): the required trie implementation baseline.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that insert, search, and startsWith all share the same downward walk; only the termination condition differs.
+- State the invariant: each trie node has up to 26 children plus an `isEnd` flag, and a path from the root represents the prefix accumulated so far.
+- Choose between a fixed-size 26-array (fast, memory-heavy) and a dict (sparse, slower per step) and explain when each fits.
+- Time O(len) per operation, space O(total characters across all words).
 
 Common Follow-Ups:
-- What changes if the constraints push Implement Trie (Prefix Tree) toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Prefix Insert And Search invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Implement Trie II - Prefix Tree (LC 1804) adds count and erase.
+- Replace fixed-size children with a hash map for arbitrary alphabets.
+- What if word frequencies must be stored alongside terminal markers.
 
 ## 2. Design Add and Search Words Data Structure
 
@@ -47,15 +47,15 @@ Pattern: Wildcard Trie DFS
 Why It Matters: Adds branching search to trie basics.
 
 Skills Tested:
-- Identify the Wildcard Trie DFS signal before choosing a template.
-- State the invariant for Design Add and Search Words Data Structure: adds branching search to trie basics.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a `.` wildcard means "try every child", which is depth-first search rather than a single descent.
+- State the invariant: at each call, the matcher walks the trie from a node and a string index; on a literal, descend by character; on `.`, descend into every child.
+- Prune as soon as no child path can match (returning false stops further branches).
+- Time O(26 ^ wildcard_count * len) worst case, space O(len) recursion.
 
 Common Follow-Ups:
-- What changes if the constraints push Design Add and Search Words Data Structure toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Wildcard Trie DFS invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Word Search II (LC 212) layers trie DFS over a 2-D grid.
+- What if the wildcard could match zero or more characters (regex-lite).
+- How would you support deletion of a word.
 
 ## 3. Replace Words
 
@@ -68,15 +68,15 @@ Pattern: Shortest Root Prefix
 Why It Matters: Uses trie prefixes to stop early.
 
 Skills Tested:
-- Identify the Shortest Root Prefix signal before choosing a template.
-- State the invariant for Replace Words: uses trie prefixes to stop early.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "replace each word with its shortest root prefix in a dictionary" is a trie walk that stops at the first `isEnd` node.
+- State the invariant: as you descend the trie following the input word, the first `isEnd` reached gives the shortest root.
+- Handle the no-root case (the word stays unchanged) and root exactly equal to word.
+- Time O(total characters), space O(trie nodes).
 
 Common Follow-Ups:
-- What changes if the constraints push Replace Words toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Shortest Root Prefix invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Longest Word With All Prefixes (LC 1858) is closely related but reverses the criterion.
+- What if multiple roots match and you must pick the lexicographically smallest.
+- Generalize to multiple dictionaries with priorities.
 
 ## 4. Map Sum Pairs
 
@@ -84,20 +84,20 @@ LeetCode: [Map Sum Pairs](https://leetcode.com/problems/map-sum-pairs/)
 
 Difficulty: Medium
 
-Pattern: Prefix Aggregation
+Pattern: Prefix Aggregated Trie
 
 Why It Matters: Stores values under prefix paths.
 
 Skills Tested:
-- Identify the Prefix Aggregation signal before choosing a template.
-- State the invariant for Map Sum Pairs: stores values under prefix paths.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that `sum(prefix)` over inserted keys is a trie where each node stores the running sum of values whose key passes through it.
+- State the invariant: insert updates `node.sum += delta` at every node on the path; sum is read at the prefix's terminal node.
+- Handle key updates correctly: `delta = newValue - oldValue` so re-insertion does not double-count.
+- Per-call time O(key length), space O(trie nodes).
 
 Common Follow-Ups:
-- What changes if the constraints push Map Sum Pairs toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Prefix Aggregation invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Range Sum on Strings - aggregate over a substring range using a different structure.
+- What if values are vectors of fixed dimension.
+- How would you support deletion (subtract delta).
 
 ## 5. Search Suggestions System
 
@@ -105,20 +105,20 @@ LeetCode: [Search Suggestions System](https://leetcode.com/problems/search-sugge
 
 Difficulty: Medium
 
-Pattern: Autocomplete Suggestions
+Pattern: Autocomplete Trie
 
 Why It Matters: Combines prefix lookup with ranked output.
 
 Skills Tested:
-- Identify the Autocomplete Suggestions signal before choosing a template.
-- State the invariant for Search Suggestions System: combines prefix lookup with ranked output.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that autocomplete requires sorting words at each trie node by lexicographic order, then capping the list at the requested limit (3 here).
+- State the invariant: at each prefix length, the cached top-3 lexicographically smallest words sharing that prefix are immediately available.
+- Build the trie from the sorted product list so the cached list is automatically in order.
+- Time O(N log N) for sort plus O(M) per query of length `m`, space O(trie nodes).
 
 Common Follow-Ups:
-- What changes if the constraints push Search Suggestions System toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Autocomplete Suggestions invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Implement Magic Dictionary (LC 676) supports near-prefix matches with edits.
+- What if the ranking is by query frequency rather than lexicographic.
+- How would you support online insertion that keeps the top-3 cache valid.
 
 ## 6. Maximum XOR of Two Numbers in an Array
 
@@ -131,15 +131,15 @@ Pattern: Bit Trie
 Why It Matters: Shows tries over bits rather than characters.
 
 Skills Tested:
-- Identify the Bit Trie signal before choosing a template.
-- State the invariant for Maximum XOR of Two Numbers in an Array: shows tries over bits rather than characters.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that XOR is maximized greedy bit-by-bit from the most significant bit, choosing the opposite-bit branch in the trie when possible.
+- State the invariant: after inserting all numbers in the bit trie, querying with greedy opposite-bit descent yields the best partner for each input.
+- Handle the case where no opposite-bit child exists (descend into the same-bit child instead).
+- Time O(N * 31), space O(N * 31), and contrast with O(N^2) brute force.
 
 Common Follow-Ups:
-- What changes if the constraints push Maximum XOR of Two Numbers in an Array toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Bit Trie invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Maximum XOR With an Element From Array (LC 1707) adds size constraints on partners.
+- What if the bit width is much larger (256-bit IDs) or arbitrary big-integer.
+- Online queries: maintain the trie as numbers stream in.
 
 ## 7. Implement Magic Dictionary
 
@@ -152,15 +152,15 @@ Pattern: One-Mismatch Trie Search
 Why It Matters: Adds controlled branching to trie search while tracking exactly one changed character.
 
 Skills Tested:
-- Identify the One-Mismatch Trie Search signal before choosing a template.
-- State the invariant for Implement Magic Dictionary: adds controlled branching to trie search while tracking exactly one changed character.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "exactly one character changed" is a trie DFS that allows one alternate-branch descent and otherwise must follow the literal path.
+- State the invariant: a parameter `changed` is 0 initially and becomes 1 on the alternate descent; the search must end at an `isEnd` with `changed == 1`.
+- Prune early when `changed` is already 1 and the literal child does not match.
+- Time O(26 * len) per query in the worst case, space O(trie nodes).
 
 Common Follow-Ups:
-- What changes if the constraints push Implement Magic Dictionary toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the One-Mismatch Trie Search invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Word Ladder (LC 127) extends to a sequence of one-edit transformations on a graph.
+- What if up to `k` mismatches are allowed (parameterize `changed`).
+- Generalize to insertions and deletions, not just substitutions.
 
 ---
 

@@ -26,15 +26,15 @@ Pattern: Monotonic Increasing Stack
 Why It Matters: The classic width computation stack problem.
 
 Skills Tested:
-- Identify the Monotonic Increasing Stack signal before choosing a template.
-- State the invariant for Largest Rectangle in Histogram: the classic width computation stack problem.
-- Handle empty stack, equal values, sentinel handling, and index versus value storage.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the largest rectangle ends at every bar with a height equal to that bar's value, and width is bounded by the previous-smaller and next-smaller indices.
+- State the invariant: the stack holds indices in strictly increasing height order; popping yields the rectangle whose height is the popped bar and whose width is `i - stack.top - 1`.
+- Append a sentinel `0` at the end (or use `len(heights)` as the right boundary at end-of-loop) to drain the stack cleanly.
+- Time O(n), space O(n), and contrast with O(n^2) brute force or divide-and-conquer (O(n log n) average).
 
 Common Follow-Ups:
-- What changes if the constraints push Largest Rectangle in Histogram toward deque, heap, recursion, counters, or direct simulation?
-- Which empty stack case would break the first implementation?
-- Can the Monotonic Increasing Stack invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Maximal Rectangle (LC 85) repeats this routine over each row's histogram of heights.
+- Sum of Subarray Minimums (LC 907) uses next-smaller-on-each-side bounds.
+- What if some bar heights are unknown until query time (offline sweep).
 
 ## 2. Basic Calculator
 
@@ -42,20 +42,20 @@ LeetCode: [Basic Calculator](https://leetcode.com/problems/basic-calculator/)
 
 Difficulty: Hard
 
-Pattern: Expression Stack
+Pattern: Sign Stack
 
 Why It Matters: Tests signs, parentheses, and streaming parse state.
 
 Skills Tested:
-- Identify the Expression Stack signal before choosing a template.
-- State the invariant for Basic Calculator: tests signs, parentheses, and streaming parse state.
-- Handle empty stack, equal values, sentinel handling, and index versus value storage.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that without `*` and `/`, you can compute the running result with a sign that toggles by parentheses and a stack that saves the outer (result, sign) on `(`.
+- State the invariant: at every moment, `result` is the value of the prefix already parsed, and the stack holds the outer state to restore on `)`.
+- Handle multi-digit numbers, unary minus, and whitespace robustly.
+- Time O(n), space O(stack depth), and contrast with the Shunting-yard algorithm which uses two stacks.
 
 Common Follow-Ups:
-- What changes if the constraints push Basic Calculator toward deque, heap, recursion, counters, or direct simulation?
-- Which empty stack case would break the first implementation?
-- Can the Expression Stack invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Basic Calculator II (LC 227) adds `*` and `/` and switches to operator precedence.
+- Basic Calculator III (LC 772) combines parentheses with full precedence.
+- What if the input is streamed and the parser must yield partial results.
 
 ## 3. Maximal Rectangle
 
@@ -63,20 +63,20 @@ LeetCode: [Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/)
 
 Difficulty: Hard
 
-Pattern: Histogram Stack Per Row
+Pattern: Per-Row Histogram Stack
 
 Why It Matters: Reduces a 2-D matrix to repeated histogram problems.
 
 Skills Tested:
-- Identify the Histogram Stack Per Row signal before choosing a template.
-- State the invariant for Maximal Rectangle: reduces a 2-D matrix to repeated histogram problems.
-- Handle empty stack, equal values, sentinel handling, and index versus value storage.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that for each row, you can compute a histogram of consecutive ones ending at that row, then call Largest Rectangle in Histogram.
+- State the invariant: `heights[c]` after processing row `r` equals the count of consecutive ones in column `c` ending at `r`, reset to 0 on a `0`.
+- Reuse the monotonic stack scaffolding row by row, returning the maximum rectangle across all rows.
+- Time O(rows * cols), space O(cols), and explain why a naive 2-D DP that tries every rectangle is O((rows * cols)^2).
 
 Common Follow-Ups:
-- What changes if the constraints push Maximal Rectangle toward deque, heap, recursion, counters, or direct simulation?
-- Which empty stack case would break the first implementation?
-- Can the Histogram Stack Per Row invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Maximal Square (LC 221) restricts shape to a square and switches to DP.
+- Number of Submatrices That Sum to Target (LC 1074) replaces zero/one with arbitrary integers.
+- How does the answer change with diagonal-allowed rectangles.
 
 ## 4. Parsing A Boolean Expression
 
@@ -84,20 +84,20 @@ LeetCode: [Parsing A Boolean Expression](https://leetcode.com/problems/parsing-a
 
 Difficulty: Hard
 
-Pattern: Nested Expression Stack
+Pattern: Nested Operator Stack
 
 Why It Matters: Practices parsing nested logical expressions.
 
 Skills Tested:
-- Identify the Nested Expression Stack signal before choosing a template.
-- State the invariant for Parsing A Boolean Expression: practices parsing nested logical expressions.
-- Handle empty stack, equal values, sentinel handling, and index versus value storage.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that `&(...)`, `|(...)`, `!(...)` are operators with a list of operands inside, which calls for a stack of operand lists per level.
+- State the invariant: the stack always holds the partially-constructed argument list of the most-recent unfinished operator.
+- Pop on `)`, evaluate the operator on the operand list, and push the result onto the parent's argument list.
+- Time O(n), space O(stack depth), and contrast with recursive descent which has the same complexity but a real call stack.
 
 Common Follow-Ups:
-- What changes if the constraints push Parsing A Boolean Expression toward deque, heap, recursion, counters, or direct simulation?
-- Which empty stack case would break the first implementation?
-- Can the Nested Expression Stack invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Mini Parser (LC 385) builds nested integer lists with a similar stack of partials.
+- What if the language adds short-circuit evaluation rules (`!()` returns early on the first `false` of `&`).
+- How would you compile the expression once and reuse it many times.
 
 ---
 

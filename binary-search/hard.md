@@ -26,15 +26,15 @@ Pattern: Binary Search Partition
 Why It Matters: High-value boundary partition problem.
 
 Skills Tested:
-- Identify the Binary Search Partition signal before choosing a template.
-- State the invariant for Median of Two Sorted Arrays: high-value boundary partition problem.
-- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that finding the median means partitioning both arrays into left and right halves of the right total size, with `max(leftA, leftB) <= min(rightA, rightB)`.
+- State the invariant: binary search the partition `i` in the shorter array; `j = (m + n + 1) // 2 - i` keeps the left side sized correctly.
+- Handle empty halves with `+inf` / `-inf` sentinels and ensure the binary search runs over the shorter array (`O(log min(m, n))`).
+- Time O(log min(m, n)), space O(1), and contrast with the merge-and-pick approach which is O(m + n).
 
 Common Follow-Ups:
-- What changes if the constraints push Median of Two Sorted Arrays toward linear scan, two pointers, heap selection, or direct math?
-- Which single-element ranges case would break the first implementation?
-- Can the Binary Search Partition invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Find K-th Smallest Element in Two Sorted Arrays.
+- Sliding-median problems use a multiset or two heaps.
+- How does the algorithm extend to three sorted arrays.
 
 ## 2. Split Array Largest Sum
 
@@ -47,15 +47,15 @@ Pattern: Binary Search On Answer
 Why It Matters: Minimizes the largest partition sum with monotonic feasibility.
 
 Skills Tested:
-- Identify the Binary Search On Answer signal before choosing a template.
-- State the invariant for Split Array Largest Sum: minimizes the largest partition sum with monotonic feasibility.
-- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "split into `k` contiguous parts and minimize the largest sum" has a monotone feasibility predicate `canSplit(maxSum) -> bool`, so binary search the answer over `[max(nums), sum(nums)]`.
+- State the invariant: `canSplit` greedily packs into the current partition until adding the next number would exceed `maxSum`, then opens a new partition.
+- Handle the bounds `lo = max(nums)` (one element must fit) and `hi = sum(nums)` (single partition).
+- Time O(n log sum(nums)), space O(1), and contrast with DP which is O(n^2 * k).
 
 Common Follow-Ups:
-- What changes if the constraints push Split Array Largest Sum toward linear scan, two pointers, heap selection, or direct math?
-- Which single-element ranges case would break the first implementation?
-- Can the Binary Search On Answer invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Capacity To Ship Packages Within D Days (LC 1011) is the same problem with a different name.
+- Painter's Partition is a classic variant.
+- What if numbers can be reordered before partitioning (no longer the same problem).
 
 ## 3. Find Minimum in Rotated Sorted Array II
 
@@ -68,15 +68,15 @@ Pattern: Rotated Search With Duplicates
 Why It Matters: Shows how duplicates weaken logarithmic guarantees.
 
 Skills Tested:
-- Identify the Rotated Search With Duplicates signal before choosing a template.
-- State the invariant for Find Minimum in Rotated Sorted Array II: shows how duplicates weaken logarithmic guarantees.
-- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that with duplicates, `nums[mid] == nums[hi]` makes neither side certain to contain the minimum, so the safe move is to decrement `hi` by one.
+- State the invariant: the minimum still lies in `[lo, hi]` after each step, but the worst case loses log-time when many duplicates collapse the search.
+- Handle the case where `nums` is fully constant (the loop degenerates to linear).
+- Time O(log n) average, O(n) worst case, and contrast with the no-duplicates LC 153.
 
 Common Follow-Ups:
-- What changes if the constraints push Find Minimum in Rotated Sorted Array II toward linear scan, two pointers, heap selection, or direct math?
-- Which single-element ranges case would break the first implementation?
-- Can the Rotated Search With Duplicates invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Search in Rotated Sorted Array II (LC 81) shares the duplicate-handling trick.
+- What is the deterministic worst-case cost over all permutations of duplicates.
+- How could randomization improve the expected cost in pathological inputs.
 
 ## 4. Kth Smallest Number in Multiplication Table
 
@@ -84,20 +84,20 @@ LeetCode: [Kth Smallest Number in Multiplication Table](https://leetcode.com/pro
 
 Difficulty: Hard
 
-Pattern: Binary Search Counting
+Pattern: Binary Search On Value With Counting
 
 Why It Matters: Searches answer value using a counting predicate.
 
 Skills Tested:
-- Identify the Binary Search Counting signal before choosing a template.
-- State the invariant for Kth Smallest Number in Multiplication Table: searches answer value using a counting predicate.
-- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the count of cells `<= v` in an `m x n` multiplication table equals `sum(min(v // i, n) for i in 1..m)`, which is monotone in `v`.
+- State the invariant: binary search `v` over `[1, m * n]` and find the smallest value whose count is `>= k`.
+- Handle the bound where `count(v - 1) < k <= count(v)` so the answer is exactly `v`.
+- Time O(m log(m * n)), space O(1), and contrast with the heap approach (O(k log k)) which is impractical for large `k`.
 
 Common Follow-Ups:
-- What changes if the constraints push Kth Smallest Number in Multiplication Table toward linear scan, two pointers, heap selection, or direct math?
-- Which single-element ranges case would break the first implementation?
-- Can the Binary Search Counting invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Find K-th Smallest Pair Distance (LC 719) reuses the binary-search-on-answer-with-counting pattern.
+- Kth Smallest Element in a Sorted Matrix (LC 378) extends to a sorted matrix.
+- What if entries are weighted with arbitrary scores.
 
 ---
 

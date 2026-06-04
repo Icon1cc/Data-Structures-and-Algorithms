@@ -21,20 +21,20 @@ LeetCode: [Flood Fill](https://leetcode.com/problems/flood-fill/)
 
 Difficulty: Easy
 
-Pattern: Grid Graph BFS/DFS
+Pattern: Grid DFS Or BFS
 
 Why It Matters: Baseline grid traversal with color constraints.
 
 Skills Tested:
-- Identify the Grid Graph BFS/DFS signal before choosing a template.
-- State the invariant for Flood Fill: baseline grid traversal with color constraints.
-- Handle disconnected components, cycles, duplicate enqueues, and directed versus undirected edges.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "fill the connected region of cells with the original color" is a DFS or BFS over 4-directional neighbors gated by the original color.
+- State the invariant: every visited cell originally had the source color and now has the new color; the frontier only adds cells matching the source color.
+- Save the original color before mutation; if `oldColor == newColor`, return immediately to avoid an infinite loop.
+- Time O(M * N), space O(M * N) recursion or queue.
 
 Common Follow-Ups:
-- What changes if the constraints push Flood Fill toward Union Find, topological sort, Dijkstra, dynamic programming, or backtracking?
-- Which disconnected components case would break the first implementation?
-- Can the Grid Graph BFS/DFS invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Number of Islands (LC 200) reuses the connected-region traversal with counting.
+- What if the grid uses 8-directional connectivity.
+- Generalize to weighted-region budgets.
 
 ## 2. Find if Path Exists in Graph
 
@@ -42,20 +42,20 @@ LeetCode: [Find if Path Exists in Graph](https://leetcode.com/problems/find-if-p
 
 Difficulty: Easy
 
-Pattern: Reachability
+Pattern: Reachability Search Or Union-Find
 
 Why It Matters: Simple graph connectivity check.
 
 Skills Tested:
-- Identify the Reachability signal before choosing a template.
-- State the invariant for Find if Path Exists in Graph: simple graph connectivity check.
-- Handle disconnected components, cycles, duplicate enqueues, and directed versus undirected edges.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "is there a path from `source` to `destination`" is reachability, solvable by BFS, DFS, or union-find on the edges.
+- State the invariant (search): a `visited` set always contains every node enqueued so far; the answer is true once `destination` is enqueued.
+- For union-find, after processing all edges, the answer is `find(source) == find(destination)`.
+- Time O(V + E), space O(V).
 
 Common Follow-Ups:
-- What changes if the constraints push Find if Path Exists in Graph toward Union Find, topological sort, Dijkstra, dynamic programming, or backtracking?
-- Which disconnected components case would break the first implementation?
-- Can the Reachability invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Number of Connected Components in an Undirected Graph (LC 323) returns the component count.
+- What if edges arrive online (incremental union-find).
+- Generalize to k-source/k-sink reachability.
 
 ## 3. Island Perimeter
 
@@ -68,15 +68,15 @@ Pattern: Grid Edge Counting
 Why It Matters: Introduces grid neighbor reasoning.
 
 Skills Tested:
-- Identify the Grid Edge Counting signal before choosing a template.
-- State the invariant for Island Perimeter: introduces grid neighbor reasoning.
-- Handle disconnected components, cycles, duplicate enqueues, and directed versus undirected edges.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that perimeter equals `4 * islandCells - 2 * sharedEdges`, so a single pass over land cells suffices.
+- State the invariant: each land cell contributes 4; each adjacent land neighbor (only need to check up and left) subtracts 2.
+- Avoid DFS; this is O(M * N) regardless of island shape.
+- Time O(M * N), space O(1) extra.
 
 Common Follow-Ups:
-- What changes if the constraints push Island Perimeter toward Union Find, topological sort, Dijkstra, dynamic programming, or backtracking?
-- Which disconnected components case would break the first implementation?
-- Can the Grid Edge Counting invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Number of Distinct Islands (LC 694) classifies islands by shape signature.
+- What if water cells have non-trivial weights.
+- Generalize to perimeter on hexagonal grids.
 
 ## 4. Employee Importance
 
@@ -84,20 +84,20 @@ LeetCode: [Employee Importance](https://leetcode.com/problems/employee-importanc
 
 Difficulty: Easy
 
-Pattern: Graph Traversal
+Pattern: DFS Sum Aggregation
 
 Why It Matters: Traverses implicit management relationships.
 
 Skills Tested:
-- Identify the Graph Traversal signal before choosing a template.
-- State the invariant for Employee Importance: traverses implicit management relationships.
-- Handle disconnected components, cycles, duplicate enqueues, and directed versus undirected edges.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the total importance under a manager is `self.importance + sum(importance(sub) for sub in directReports)`, solved by DFS.
+- State the invariant: each call returns the subtree-sum rooted at the given employee.
+- Build a hash map from id to employee for O(1) lookup before recursing.
+- Time O(N), space O(N) for the map and recursion.
 
 Common Follow-Ups:
-- What changes if the constraints push Employee Importance toward Union Find, topological sort, Dijkstra, dynamic programming, or backtracking?
-- Which disconnected components case would break the first implementation?
-- Can the Graph Traversal invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Sum of Distances in Tree (LC 834) does a similar aggregation with a re-rooting technique.
+- What if the hierarchy can be cyclic (need cycle detection).
+- Generalize to weighted importance with attenuation per level.
 
 ## 5. Find Center of Star Graph
 
@@ -110,15 +110,15 @@ Pattern: Degree Recognition
 Why It Matters: Uses graph structure instead of traversal.
 
 Skills Tested:
-- Identify the Degree Recognition signal before choosing a template.
-- State the invariant for Find Center of Star Graph: uses graph structure instead of traversal.
-- Handle disconnected components, cycles, duplicate enqueues, and directed versus undirected edges.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that in a star graph, the center is the only node that appears in every edge, so checking the first two edges is enough.
+- State the invariant: the node common to `edges[0]` and `edges[1]` is the unique center; no traversal is needed.
+- Handle the trivial case `n == 2` separately if the graph is degenerate.
+- Time O(1), space O(1), and contrast with degree-counting which is O(E).
 
 Common Follow-Ups:
-- What changes if the constraints push Find Center of Star Graph toward Union Find, topological sort, Dijkstra, dynamic programming, or backtracking?
-- Which disconnected components case would break the first implementation?
-- Can the Degree Recognition invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Find If Path Exists in Graph (LC 1971) is a more general reachability problem.
+- What if the graph is "almost" a star with one extra edge.
+- Generalize to detecting a wheel or complete bipartite structure.
 
 ---
 

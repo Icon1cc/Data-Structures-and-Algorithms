@@ -26,15 +26,15 @@ Pattern: Max Heap Simulation
 Why It Matters: Baseline repeated maximum extraction.
 
 Skills Tested:
-- Identify the Max Heap Simulation signal before choosing a template.
-- State the invariant for Last Stone Weight: baseline repeated maximum extraction.
-- Handle tie-breakers, stale entries, empty heaps, and heap size invariants.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "smash the two heaviest stones" repeats max-extract twice and may push the diff back, which is a max-heap simulation.
+- State the invariant: the heap always holds the unsmashed stones; popping the top twice yields the two heaviest.
+- Use Python's `heapq` (min-heap) by negating values, or the `max-heap` directly in languages that support it.
+- Time O(n log n), space O(n), and explain why repeatedly sorting is O(n^2 log n).
 
 Common Follow-Ups:
-- What changes if the constraints push Last Stone Weight toward sorting, quickselect, deque, balanced tree, or bucket counting?
-- Which tie-breakers case would break the first implementation?
-- Can the Max Heap Simulation invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Last Stone Weight II (LC 1049) becomes a subset-sum DP problem.
+- What if smashes can be batched in pairs.
+- How does the answer change with a heap that supports decrease-key.
 
 ## 2. Kth Largest Element in a Stream
 
@@ -42,20 +42,20 @@ LeetCode: [Kth Largest Element in a Stream](https://leetcode.com/problems/kth-la
 
 Difficulty: Easy
 
-Pattern: Top K Heap
+Pattern: Min-Heap Of Size K
 
 Why It Matters: Maintains kth largest under streaming updates.
 
 Skills Tested:
-- Identify the Top K Heap signal before choosing a template.
-- State the invariant for Kth Largest Element in a Stream: maintains kth largest under streaming updates.
-- Handle tie-breakers, stale entries, empty heaps, and heap size invariants.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the kth largest at any moment is the minimum of the top-k largest seen so far, which is a min-heap of size `k`.
+- State the invariant: the heap always contains the k largest elements seen, so the heap top is the answer to every query.
+- On each `add`, push and pop only when size exceeds `k`.
+- Per-call time O(log k), space O(k), and contrast with sorting on every add (O(n log n)).
 
 Common Follow-Ups:
-- What changes if the constraints push Kth Largest Element in a Stream toward sorting, quickselect, deque, balanced tree, or bucket counting?
-- Which tie-breakers case would break the first implementation?
-- Can the Top K Heap invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Kth Largest Element in an Array (LC 215) is the offline counterpart.
+- Sliding-Window K Largest reuses the heap idea with eviction.
+- What if `k` itself can change between calls.
 
 ## 3. Relative Ranks
 
@@ -63,20 +63,20 @@ LeetCode: [Relative Ranks](https://leetcode.com/problems/relative-ranks/)
 
 Difficulty: Easy
 
-Pattern: Heap Or Sort Ranking
+Pattern: Sort Or Heap Ranking
 
 Why It Matters: Connects priority ordering to ranked output.
 
 Skills Tested:
-- Identify the Heap Or Sort Ranking signal before choosing a template.
-- State the invariant for Relative Ranks: connects priority ordering to ranked output.
-- Handle tie-breakers, stale entries, empty heaps, and heap size invariants.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that ranks are determined by sorting the scores and walking from largest to smallest, but a heap can also stream ranks online.
+- State the invariant: pairs of `(score, original_index)` sorted descending by score yield rank assignments in order.
+- Handle ties (the problem guarantees unique scores; state the assumption).
+- Time O(n log n), space O(n), and discuss why a heap is overkill in the offline setting.
 
 Common Follow-Ups:
-- What changes if the constraints push Relative Ranks toward sorting, quickselect, deque, balanced tree, or bucket counting?
-- Which tie-breakers case would break the first implementation?
-- Can the Heap Or Sort Ranking invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Top K Frequent Elements (LC 347) extends the sort-by-key idea with frequencies.
+- What if scores can update online.
+- Generalize to fractional ranks under ties.
 
 ## 4. Take Gifts From the Richest Pile
 
@@ -89,15 +89,36 @@ Pattern: Max Heap Simulation
 Why It Matters: Practices repeated best-item updates.
 
 Skills Tested:
-- Identify the Max Heap Simulation signal before choosing a template.
-- State the invariant for Take Gifts From the Richest Pile: practices repeated best-item updates.
-- Handle tie-breakers, stale entries, empty heaps, and heap size invariants.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that each round operates only on the current maximum pile, which is exactly a max-heap pop and push.
+- State the invariant: after each round, the heap contains all piles, with the most recently floored value pushed back.
+- Apply `floor(sqrt(top))` correctly using integer math (`isqrt` or `int(top ** 0.5)`).
+- Time O((n + k) log n), space O(n), and contrast with iterating the array each round (O(k * n)).
 
 Common Follow-Ups:
-- What changes if the constraints push Take Gifts From the Richest Pile toward sorting, quickselect, deque, balanced tree, or bucket counting?
-- Which tie-breakers case would break the first implementation?
-- Can the Max Heap Simulation invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Maximum Subsequence Score (LC 2542) reuses max-heap simulation with a paired weight.
+- What if the operation depends on the second-largest as well.
+- How does the answer change for `k` very large compared to `n`.
+
+## 5. The K Weakest Rows in a Matrix
+
+LeetCode: [The K Weakest Rows in a Matrix](https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/)
+
+Difficulty: Easy
+
+Pattern: Min-Heap By Composite Key
+
+Why It Matters: Pairs sorted-row reasoning with a top-k heap and binary search per row.
+
+Skills Tested:
+- Recognize that each row's "strength" is the count of leading ones (binary search on `0`), and the answer is the k smallest by `(strength, index)`.
+- State the invariant: a heap of `(strength, index)` ordered ascending yields the k weakest with `nlargest`/`nsmallest` style extraction.
+- Use binary search (each row is sorted: ones then zeros) to compute the strength in O(log n) per row.
+- Time O(m log n + m log k), space O(m), and contrast with sorting all rows directly which is O(m log m).
+
+Common Follow-Ups:
+- K Closest Points to Origin (LC 973) reuses the same min-heap-of-tuples pattern.
+- What if rows are unsorted (each row's count requires O(n)).
+- How would you stream rows and maintain the top-k.
 
 ---
 

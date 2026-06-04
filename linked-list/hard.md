@@ -26,15 +26,15 @@ Pattern: Layered Linked Structure
 Why It Matters: Tests pointer-rich ordered structure design beyond single-list rewiring.
 
 Skills Tested:
-- Identify the Layered Linked Structure signal before choosing a template.
-- State the invariant for Design Skiplist: tests pointer-rich ordered structure design beyond single-list rewiring.
-- Handle empty lists, head replacement, tail links, cycles, and pointer save order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a skiplist supports search, insert, and erase in O(log n) expected by stacking probabilistic express lanes over a sorted linked list.
+- State the invariant: each level above the bottom is a sublist of the level below, and a node's level is chosen by repeated coin flips.
+- Implement search by walking down levels, inserting predecessors per level.
+- Expected time O(log n) per operation, space O(n) expected.
 
 Common Follow-Ups:
-- What changes if the constraints push Design Skiplist toward arrays, stacks, recursion, heaps, or hash maps for copied state?
-- Which empty lists case would break the first implementation?
-- Can the Layered Linked Structure invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Replace skiplist with a balanced BST (red-black tree) and compare implementation difficulty.
+- What if the level distribution must be deterministic.
+- How does concurrent access affect the implementation (lock-free skiplist).
 
 ## 2. Reverse Nodes in k-Group
 
@@ -42,20 +42,20 @@ LeetCode: [Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes
 
 Difficulty: Hard
 
-Pattern: Grouped Reversal
+Pattern: Group Reversal With Boundary Tracking
 
 Why It Matters: Tests reversal boundaries and incomplete groups.
 
 Skills Tested:
-- Identify the Grouped Reversal signal before choosing a template.
-- State the invariant for Reverse Nodes in k-Group: tests reversal boundaries and incomplete groups.
-- Handle empty lists, head replacement, tail links, cycles, and pointer save order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the algorithm reverses groups of size `k` and leaves the final partial group untouched.
+- State the invariant: after reversing the current group, `prevGroupTail` connects to the new head, and the old head becomes the next group's tail.
+- Use a dummy head to simplify the first group; pre-check that `k` nodes remain before reversing.
+- Time O(n), space O(1) iterative or O(n / k) recursive.
 
 Common Follow-Ups:
-- What changes if the constraints push Reverse Nodes in k-Group toward arrays, stacks, recursion, heaps, or hash maps for copied state?
-- Which empty lists case would break the first implementation?
-- Can the Grouped Reversal invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Swap Nodes in Pairs (LC 24) is the `k = 2` case.
+- What if the last partial group also reverses (variant).
+- How does the answer change with k as a function of position.
 
 ## 3. LFU Cache
 
@@ -63,20 +63,20 @@ LeetCode: [LFU Cache](https://leetcode.com/problems/lfu-cache/)
 
 Difficulty: Hard
 
-Pattern: Frequency Lists
+Pattern: Frequency-Bucketed Doubly Linked Lists
 
 Why It Matters: Advanced cache design with linked buckets.
 
 Skills Tested:
-- Identify the Frequency Lists signal before choosing a template.
-- State the invariant for LFU Cache: advanced cache design with linked buckets.
-- Handle empty lists, head replacement, tail links, cycles, and pointer save order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that O(1) LFU operations require a hash map of key to node, a hash map of frequency to doubly linked list of nodes, and a tracker of the minimum frequency for eviction.
+- State the invariant: every node belongs to exactly one frequency bucket; on access, the node moves to its `freq + 1` bucket.
+- Update `minFreq` correctly when the current min bucket empties after an access.
+- Time O(1) per operation, space O(capacity).
 
 Common Follow-Ups:
-- What changes if the constraints push LFU Cache toward arrays, stacks, recursion, heaps, or hash maps for copied state?
-- Which empty lists case would break the first implementation?
-- Can the Frequency Lists invariant survive streaming input, in-place restrictions, or lower memory limits?
+- LRU Cache (LC 146) is the eviction-by-recency simpler cousin.
+- What if frequencies must decay over time (sliding window LFU).
+- Implement an LFU with TTL where entries also expire by time.
 
 ## 4. All O(1) Data Structure
 
@@ -89,15 +89,15 @@ Pattern: Bucketed Doubly Linked List
 Why It Matters: Maintains counts with O(1) key moves.
 
 Skills Tested:
-- Identify the Bucketed Doubly Linked List signal before choosing a template.
-- State the invariant for All O(1) Data Structure: maintains counts with O(1) key moves.
-- Handle empty lists, head replacement, tail links, cycles, and pointer save order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that O(1) inc, dec, getMaxKey, getMinKey requires a doubly linked list of count buckets, each holding a set of keys, with a hash map from key to its bucket.
+- State the invariant: buckets are linked in strictly increasing count order, so getMin is the head's set and getMax is the tail's set.
+- Move a key by removing it from its bucket and inserting into the neighboring bucket (creating one if needed); delete empty buckets.
+- Time O(1) per operation, space O(unique keys).
 
 Common Follow-Ups:
-- What changes if the constraints push All O(1) Data Structure toward arrays, stacks, recursion, heaps, or hash maps for copied state?
-- Which empty lists case would break the first implementation?
-- Can the Bucketed Doubly Linked List invariant survive streaming input, in-place restrictions, or lower memory limits?
+- All O(1) with TTL where counts decay periodically.
+- What if multi-key updates arrive in a batch.
+- How would you persist the structure to disk while keeping operations O(1) amortized.
 
 ---
 

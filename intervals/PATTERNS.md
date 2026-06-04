@@ -39,9 +39,9 @@ Do not compare every pair after sorting.
 
 ### Common Mistakes
 
-- Forgetting to append the final active interval.
-- Ignoring the exclusion case for Merge Intervals: Do not compare every pair after sorting.
-- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
+- Updating `current.end = interval.end` on an overlap; this loses the larger end when intervals nest. Use `max(current.end, interval.end)`.
+- Forgetting to append the final `current` after the loop ends; the last merged interval gets lost.
+- Sorting by both start and end and assuming overlap detection is automatic; only sort by start, then check overlap explicitly.
 
 ### Pseudocode Or Template
 
@@ -87,9 +87,9 @@ Do not sort again if one linear pass is enough.
 
 ### Common Mistakes
 
-- Missing intervals after the merged block.
-- Ignoring the exclusion case for Insert Interval: Do not sort again if one linear pass is enough.
-- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
+- Sorting the input again; the input is already sorted, so re-sort wastes O(n log n) and may move equal-start intervals.
+- Stopping after the first overlap; multiple existing intervals may overlap with the new one.
+- Forgetting the after-tail; intervals strictly after the merged block must still be appended.
 
 ### Pseudocode Or Template
 
@@ -134,9 +134,9 @@ Do not use when simple merging is enough.
 
 ### Common Mistakes
 
-- Ordering start and end events incorrectly at the same time.
-- Ignoring the exclusion case for Sweep Line: Do not use when simple merging is enough.
-- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
+- Tie-breaking starts before ends at the same timestamp; for half-open intervals, ends should be processed before starts so a meeting ending at 10 frees a room for a meeting starting at 10.
+- Storing events as `(time, +1)` and `(time, -1)` without a deterministic tie-breaker; sorted output is non-deterministic on ties.
+- Mixing inclusive and exclusive endpoint conventions across events; pick one convention and apply it everywhere.
 
 ### Pseudocode Or Template
 
@@ -179,9 +179,9 @@ Do not allocate a new room before checking the earliest end.
 
 ### Common Mistakes
 
-- Comparing against the latest end instead of earliest end.
-- Ignoring the exclusion case for Meeting Rooms: Do not allocate a new room before checking the earliest end.
-- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
+- Allocating a new room without first checking if the earliest-ending meeting has ended; you over-count rooms.
+- Using a max-heap of end times; a min-heap is needed to expose the earliest free room.
+- Comparing the heap top against the new start with `<` versus `<=`; choose based on whether touching meetings share a room.
 
 ### Pseudocode Or Template
 
@@ -227,9 +227,9 @@ Do not allocate by huge raw coordinate ranges.
 
 ### Common Mistakes
 
-- Forgetting to subtract at the exclusive end.
-- Ignoring the exclusion case for Difference Array: Do not allocate by huge raw coordinate ranges.
-- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
+- Forgetting `diff[end] -= value` at the exclusive end; the active count never drops back down.
+- For inclusive ends, decrementing at `end + 1` instead of `end`; off-by-one is the most common bug.
+- Skipping coordinate compression for sparse domains; allocating a huge array wastes memory.
 
 ### Pseudocode Or Template
 
@@ -274,9 +274,9 @@ Do not keep the longer interval just because it starts earlier.
 
 ### Common Mistakes
 
-- Updating end to max instead of min on an overlap conflict.
-- Ignoring the exclusion case for Greedy Erase Overlap: Do not keep the longer interval just because it starts earlier.
-- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
+- Sorting by start and keeping the first overlap; activity selection is "earliest finish", not "earliest start".
+- For arrows, comparing `start > last_end` versus `start >= last_end`; whether touching balloons share an arrow is problem-specific.
+- Updating `last_end` to the new interval's end when keeping; once kept, `last_end` should not regress.
 
 ### Pseudocode Or Template
 

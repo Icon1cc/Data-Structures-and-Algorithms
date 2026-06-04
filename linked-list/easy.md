@@ -26,15 +26,15 @@ Pattern: In-place Reversal
 Why It Matters: Baseline pointer reversal.
 
 Skills Tested:
-- Identify the In-place Reversal signal before choosing a template.
-- State the invariant for Reverse Linked List: baseline pointer reversal.
-- Handle empty lists, head replacement, tail links, cycles, and pointer save order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that reversing requires three pointers `prev`, `curr`, `next` to flip each link without losing the next node.
+- State the invariant: every node already visited has its `next` pointing back, and `prev` is always the new head of the reversed prefix.
+- Handle empty lists (return null), single-node lists (return as is), and two-node lists.
+- Time O(n), space O(1) iterative or O(n) recursive due to the call stack.
 
 Common Follow-Ups:
-- What changes if the constraints push Reverse Linked List toward arrays, stacks, recursion, heaps, or hash maps for copied state?
-- Which empty lists case would break the first implementation?
-- Can the In-place Reversal invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Reverse Linked List II (LC 92) reverses only between positions `m` and `n`.
+- Reverse Nodes in k-Group (LC 25) generalizes to chunked reversal.
+- Implement the same algorithm recursively and analyze the call stack.
 
 ## 2. Merge Two Sorted Lists
 
@@ -47,15 +47,15 @@ Pattern: Dummy Head Merge
 Why It Matters: Tests sentinel use and sorted attachment.
 
 Skills Tested:
-- Identify the Dummy Head Merge signal before choosing a template.
-- State the invariant for Merge Two Sorted Lists: tests sentinel use and sorted attachment.
-- Handle empty lists, head replacement, tail links, cycles, and pointer save order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that splicing two sorted lists into one is greedy: at each step pick the smaller head.
+- State the invariant: the dummy head's `next` always points to the merged sorted prefix; `tail` points to the last appended node.
+- Use a sentinel `dummy` node to simplify head handling and avoid null checks at every step.
+- Time O(n + m), space O(1) iterative (or O(n + m) recursive).
 
 Common Follow-Ups:
-- What changes if the constraints push Merge Two Sorted Lists toward arrays, stacks, recursion, heaps, or hash maps for copied state?
-- Which empty lists case would break the first implementation?
-- Can the Dummy Head Merge invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Merge K Sorted Lists (LC 23) wraps this routine in a heap or pairwise merge.
+- Merge Sorted Array (LC 88) is the array version and writes from the back.
+- What if the lists must be merged into a circular doubly linked list.
 
 ## 3. Linked List Cycle
 
@@ -63,20 +63,20 @@ LeetCode: [Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
 
 Difficulty: Easy
 
-Pattern: Fast And Slow Pointers
+Pattern: Floyd Cycle Detection
 
 Why It Matters: Classic cycle detection.
 
 Skills Tested:
-- Identify the Fast And Slow Pointers signal before choosing a template.
-- State the invariant for Linked List Cycle: classic cycle detection.
-- Handle empty lists, head replacement, tail links, cycles, and pointer save order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the only O(1)-extra-space method is Floyd's tortoise-and-hare, where two pointers move at different speeds.
+- State the invariant: if a cycle exists, the fast pointer must eventually catch the slow pointer; if not, fast reaches null first.
+- Handle the empty list, the single-node list with a self-loop, and a long acyclic list (return false promptly).
+- Time O(n), space O(1), and contrast with the hash set approach which is O(n) extra space.
 
 Common Follow-Ups:
-- What changes if the constraints push Linked List Cycle toward arrays, stacks, recursion, heaps, or hash maps for copied state?
-- Which empty lists case would break the first implementation?
-- Can the Fast And Slow Pointers invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Linked List Cycle II (LC 142) returns the entry node of the cycle using a second-walk argument.
+- Find the Duplicate Number (LC 287) reuses cycle detection over array indices.
+- What changes if the list can have arbitrarily many components.
 
 ## 4. Palindrome Linked List
 
@@ -84,20 +84,20 @@ LeetCode: [Palindrome Linked List](https://leetcode.com/problems/palindrome-link
 
 Difficulty: Easy
 
-Pattern: Middle And Reverse
+Pattern: Middle Find Plus Reverse Second Half
 
 Why It Matters: Combines slow/fast split and reversal.
 
 Skills Tested:
-- Identify the Middle And Reverse signal before choosing a template.
-- State the invariant for Palindrome Linked List: combines slow/fast split and reversal.
-- Handle empty lists, head replacement, tail links, cycles, and pointer save order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that O(1)-extra-space palindrome check requires finding the middle, reversing the second half, and comparing both halves node by node.
+- State the invariant: after the slow/fast walk, `slow` is at the start of the second half (or just past the middle for odd length).
+- Restore the list (reverse the second half back) if the caller cares about preserving structure.
+- Time O(n), space O(1), and contrast with copying values into an array which is O(n) space.
 
 Common Follow-Ups:
-- What changes if the constraints push Palindrome Linked List toward arrays, stacks, recursion, heaps, or hash maps for copied state?
-- Which empty lists case would break the first implementation?
-- Can the Middle And Reverse invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Reverse Linked List (LC 206) is the helper used here.
+- What if the input is a doubly linked list (use both ends and converge).
+- How would you do this with concurrent updates to the list.
 
 ## 5. Middle of the Linked List
 
@@ -110,15 +110,15 @@ Pattern: Fast And Slow Pointers
 Why It Matters: Builds speed-based middle detection.
 
 Skills Tested:
-- Identify the Fast And Slow Pointers signal before choosing a template.
-- State the invariant for Middle of the Linked List: builds speed-based middle detection.
-- Handle empty lists, head replacement, tail links, cycles, and pointer save order.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "the middle of an unknown-length list" is solved by advancing two pointers at speeds 1 and 2.
+- State the invariant: when `fast` reaches the end, `slow` is at the middle (the second middle for even length per problem spec).
+- Handle a single node (the middle is itself) and a two-node list (the second is the middle).
+- Time O(n), space O(1), and contrast with two passes (count length, walk to `length // 2`).
 
 Common Follow-Ups:
-- What changes if the constraints push Middle of the Linked List toward arrays, stacks, recursion, heaps, or hash maps for copied state?
-- Which empty lists case would break the first implementation?
-- Can the Fast And Slow Pointers invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Reorder List (LC 143) uses middle-find as its first step.
+- Find Cycle Start (LC 142) reuses the same two-speed scheme with a second walk.
+- What if you must return the first middle on even-length lists.
 
 ---
 

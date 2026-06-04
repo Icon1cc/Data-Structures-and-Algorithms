@@ -21,20 +21,20 @@ LeetCode: [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
 
 Difficulty: Easy
 
-Pattern: Linear DP
+Pattern: Linear Recurrence
 
 Why It Matters: The baseline recurrence for ways to reach state i.
 
 Skills Tested:
-- Identify the Linear DP signal before choosing a template.
-- State the invariant for Climbing Stairs: the baseline recurrence for ways to reach state i.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that ways to reach step `i` equals ways to reach `i - 1` plus ways to reach `i - 2`, the Fibonacci recurrence.
+- State the invariant: `dp[i]` is the count of distinct paths to reach step `i`; `dp[0] = dp[1] = 1`.
+- Compress to two rolling variables for O(1) space.
+- Time O(n), space O(1), and contrast with naive recursion which is exponential.
 
 Common Follow-Ups:
-- What changes if the constraints push Climbing Stairs toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Linear DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Min Cost Climbing Stairs (LC 746) layers a cost on each step.
+- What if 1, 2, or `k` steps are allowed each move (Combination Sum IV with ordered counting).
+- Closed-form via Binet's formula and matrix exponentiation.
 
 ## 2. Min Cost Climbing Stairs
 
@@ -47,15 +47,15 @@ Pattern: Linear Min Cost DP
 Why It Matters: Adds costs and minimum transition choice.
 
 Skills Tested:
-- Identify the Linear Min Cost DP signal before choosing a template.
-- State the invariant for Min Cost Climbing Stairs: adds costs and minimum transition choice.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the cost to reach step `i` is `cost[i] + min(reach(i - 1), reach(i - 2))`, with both step 0 and step 1 as valid starts.
+- State the invariant: `dp[i]` is the minimum cost to *stand on* step `i`; the answer is `min(dp[n - 1], dp[n - 2])` (one beyond the top is free).
+- Compress to two rolling variables for O(1) space.
+- Time O(n), space O(1), and explain the choice of "cost on arrival" versus "cost on departure" framing.
 
 Common Follow-Ups:
-- What changes if the constraints push Min Cost Climbing Stairs toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Linear Min Cost DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Climbing Stairs (LC 70) is the count-only version.
+- What if some steps are forbidden.
+- Generalize to a graph with arbitrary node costs.
 
 ## 3. Fibonacci Number
 
@@ -68,15 +68,15 @@ Pattern: Memoization Or Tabulation
 Why It Matters: Simple overlapping-subproblem example.
 
 Skills Tested:
-- Identify the Memoization Or Tabulation signal before choosing a template.
-- State the invariant for Fibonacci Number: simple overlapping-subproblem example.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the recursive formula `F(n) = F(n - 1) + F(n - 2)` has overlapping subproblems, which DP eliminates.
+- State the invariant: `dp[i]` is the i-th Fibonacci number; tabulate from `dp[0] = 0, dp[1] = 1`.
+- Compress to two rolling variables for O(1) space.
+- Time O(n), space O(1), and contrast with O(2^n) naive recursion and O(log n) matrix exponentiation.
 
 Common Follow-Ups:
-- What changes if the constraints push Fibonacci Number toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Memoization Or Tabulation invariant survive streaming input, in-place restrictions, or lower memory limits?
+- N-th Tribonacci (LC 1137) extends the recurrence to three terms.
+- Implement matrix-power Fibonacci for O(log n) time.
+- What changes for very large `n` modulo a prime.
 
 ## 4. N-th Tribonacci Number
 
@@ -84,20 +84,20 @@ LeetCode: [N-th Tribonacci Number](https://leetcode.com/problems/n-th-tribonacci
 
 Difficulty: Easy
 
-Pattern: Rolling State
+Pattern: Rolling Three-State
 
 Why It Matters: Practices recurrence with three previous states.
 
 Skills Tested:
-- Identify the Rolling State signal before choosing a template.
-- State the invariant for N-th Tribonacci Number: practices recurrence with three previous states.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that `T(n) = T(n - 1) + T(n - 2) + T(n - 3)` requires three rolling variables, not two.
+- State the invariant: at every step, `(a, b, c)` represents `(T(i - 2), T(i - 1), T(i))`.
+- Initialize `T(0) = 0, T(1) = 1, T(2) = 1` carefully, especially for small `n`.
+- Time O(n), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push N-th Tribonacci Number toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Rolling State invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Generalize to k-bonacci with a window of `k` rolling variables.
+- What if some indices are missing and must be inferred.
+- How does the recurrence behave under modular arithmetic.
 
 ## 5. Pascal's Triangle
 
@@ -105,20 +105,20 @@ LeetCode: [Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
 
 Difficulty: Easy
 
-Pattern: Row DP
+Pattern: Row-Based Recurrence
 
 Why It Matters: Builds each row from previous row state.
 
 Skills Tested:
-- Identify the Row DP signal before choosing a template.
-- State the invariant for Pascal's Triangle: builds each row from previous row state.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that row `r` is built from row `r - 1` via `C(r, k) = C(r - 1, k - 1) + C(r - 1, k)` with `C(r, 0) = C(r, r) = 1`.
+- State the invariant: at iteration `r`, the previous row holds the binomial coefficients for `r - 1`.
+- Build each row left-to-right from the previous row to avoid in-place overwrites.
+- Time O(numRows^2), space O(numRows^2) for the full triangle.
 
 Common Follow-Ups:
-- What changes if the constraints push Pascal's Triangle toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Row DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Pascal's Triangle II (LC 119) returns only the k-th row in O(k) space.
+- Binomial coefficient computation modulo a large prime.
+- What if entries must be computed offline with memoization.
 
 ---
 

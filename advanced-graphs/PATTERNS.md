@@ -41,9 +41,9 @@ Do not use when any reachable edge can be negative.
 
 ### Common Mistakes
 
-- Not skipping stale heap entries.
-- Ignoring the exclusion case for Dijkstra: Do not use when any reachable edge can be negative.
-- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
+- Treating a popped distance as final without checking `if d != dist[u]: continue`; stale heap entries inflate the running answer.
+- Pushing on relaxation without updating `dist[v]`; the heap fills with redundant entries (correct but slow).
+- Running Dijkstra on a graph with negative edges; once a node is settled with a too-large distance, no later relaxation revisits it.
 
 ### Pseudocode Or Template
 
@@ -91,9 +91,9 @@ Do not choose it over Dijkstra when all weights are non-negative and constraints
 
 ### Common Mistakes
 
-- Updating distances in-place when a bounded-edge version needs previous round values.
-- Ignoring the exclusion case for Bellman-Ford: Do not choose it over Dijkstra when all weights are non-negative and constraints are large.
-- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
+- For bounded-edge variants, updating `dist` in place; use a snapshot of the previous round so a value updated this round does not leak into another update.
+- Running for fewer than `V - 1` rounds; the algorithm needs `V - 1` to settle the longest possible simple path.
+- Detecting negative cycles by running exactly `V - 1` rounds; the negative-cycle test requires one more round and checks for any further relaxation.
 
 ### Pseudocode Or Template
 
@@ -137,9 +137,9 @@ Do not use on large sparse graphs where n cubed is impossible.
 
 ### Common Mistakes
 
-- Wrong loop order: intermediate node must be outermost.
-- Ignoring the exclusion case for Floyd-Warshall: Do not use on large sparse graphs where n cubed is impossible.
-- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
+- Putting `k` as the inner loop; the intermediate index must be outermost so the recurrence sees only allowed intermediates.
+- Initializing `dist[i][i]` to a non-zero value; the diagonal must be 0 for the relaxation to work.
+- Using `int` infinity sentinels that overflow on addition; use a large but safely additive constant or guard the relaxation with `dist[i][k] + dist[k][j] < dist[i][j]`.
 
 ### Pseudocode Or Template
 
@@ -185,9 +185,9 @@ Do not use MST for shortest path between two nodes.
 
 ### Common Mistakes
 
-- Confusing total connection cost with distance from a source.
-- Ignoring the exclusion case for Minimum Spanning Tree: Do not use MST for shortest path between two nodes.
-- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
+- Confusing MST with shortest path; an MST minimizes total edge weight, not pairwise distance.
+- For Kruskal, forgetting union-find path compression on dense inputs; the algorithm degrades to near-quadratic without it.
+- For Prim with a complete graph (e.g., point-to-point Manhattan distances), building an explicit edge list is wasteful; iterate over neighbors implicitly.
 
 ### Pseudocode Or Template
 
@@ -232,9 +232,9 @@ Do not use undirected component logic on directed graphs.
 
 ### Common Mistakes
 
-- Mixing finish order and low-link meanings.
-- Ignoring the exclusion case for Strongly Connected Components: Do not use undirected component logic on directed graphs.
-- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
+- Computing connected components on the underlying undirected graph; the result is not SCC.
+- For Tarjan's algorithm, confusing `disc[u]` (DFS discovery time) with `low[u]` (smallest reachable discovery); they update on different events.
+- Forgetting the SCC stack; nodes leave the stack only when their subtree's `low == disc`.
 
 ### Pseudocode Or Template
 
@@ -277,9 +277,9 @@ Do not apply bridge logic to directed SCC problems unchanged.
 
 ### Common Mistakes
 
-- Treating the parent edge as a back edge.
-- Ignoring the exclusion case for Bridges And Articulation Points: Do not apply bridge logic to directed SCC problems unchanged.
-- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
+- Treating the parent edge as a back edge; the algorithm must skip the immediate parent during low-update.
+- Forgetting that for the root, articulation requires two or more independent subtrees, while non-root nodes use the `low[v] >= disc[u]` rule.
+- Running on a directed graph using the same low-link rule; SCC needs Tarjan's separate algorithm.
 
 ### Pseudocode Or Template
 
@@ -324,9 +324,9 @@ Do not use when cycles exist.
 
 ### Common Mistakes
 
-- Running Dijkstra when topological DP is simpler for a DAG.
-- Ignoring the exclusion case for DAG Shortest Or Longest Path: Do not use when cycles exist.
-- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
+- Running Dijkstra on a DAG instead of single-pass topological relaxation; the latter is O(V + E) without a heap.
+- Computing the topological order separately and then forgetting to use it; relax in topological order, not arbitrary order.
+- Treating "longest path on a DAG" as NP-hard (it is on a general graph); on a DAG you simply negate weights or maximize during relaxation.
 
 ### Pseudocode Or Template
 

@@ -76,6 +76,24 @@ flowchart LR
     E --> F[lowest set bit]
 ```
 
+## Pattern Walkthrough
+
+```mermaid
+flowchart LR
+    Bit3a["bit 3: 0"] --> XOR3["XOR result bit 3"]
+    Bit3b["bit 3: 0"] --> XOR3
+    Bit3c["bit 3: 1 (unique)"] --> XOR3
+    XOR3 --> R3["1"]
+    Bit0a["bit 0: 1"] --> XOR0["XOR result bit 0"]
+    Bit0b["bit 0: 1"] --> XOR0
+    Bit0c["bit 0: 0 (unique)"] --> XOR0
+    XOR0 --> R0["0"]
+    R3 --> Final["Unique bits across all positions form the unique number"]
+    R0 --> Final
+```
+
+XOR over `[2, 2, 8]` cancels the duplicate `2`s bit-by-bit and leaves `8`; this is the same per-bit cancellation that powers the entire Single Number family of problems.
+
 ## Foundations And Invariants
 
 XOR cancels equal values because a xor a is 0 and a xor 0 is a. Two's complement makes x & -x isolate the lowest set bit.

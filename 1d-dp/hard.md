@@ -21,20 +21,20 @@ LeetCode: [Word Break II](https://leetcode.com/problems/word-break-ii/)
 
 Difficulty: Hard
 
-Pattern: Memoized Sentence Generation
+Pattern: DP Plus Backtracking With Memoization
 
 Why It Matters: Combines DP feasibility with output generation.
 
 Skills Tested:
-- Identify the Memoized Sentence Generation signal before choosing a template.
-- State the invariant for Word Break II: combines DP feasibility with output generation.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that returning every decomposition is exponential in the worst case, but memoizing on suffix lets repeated suffix decompositions reuse cached lists.
+- State the invariant: `solve(i)` returns the list of all decompositions of `s[i:]`; cache it.
+- Prune with a feasibility pass (LC 139) before enumeration to skip unreachable suffixes.
+- Time O(2^n) worst case, space O(unique suffixes * average decomposition count).
 
 Common Follow-Ups:
-- What changes if the constraints push Word Break II toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Memoized Sentence Generation invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Word Break (LC 139) is the feasibility prerequisite.
+- Concatenated Words (LC 472) reuses the same skeleton with a self-built dictionary.
+- Stream output without buffering all decompositions.
 
 ## 2. Longest Valid Parentheses
 
@@ -42,20 +42,20 @@ LeetCode: [Longest Valid Parentheses](https://leetcode.com/problems/longest-vali
 
 Difficulty: Hard
 
-Pattern: DP Or Stack
+Pattern: DP Or Stack Of Indices
 
 Why It Matters: String DP with tricky base cases.
 
 Skills Tested:
-- Identify the DP Or Stack signal before choosing a template.
-- State the invariant for Longest Valid Parentheses: string DP with tricky base cases.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize the DP recurrence: `dp[i]` is the length of the longest valid string ending at `i`; `s[i] == ')'` triggers a case split on `s[i - 1]`.
+- State the invariant (stack): the stack holds indices of unmatched characters; the longest valid is bounded by the distance between the current index and the top of the stack after a pop.
+- Both approaches handle the empty-prefix case via a sentinel index `-1` (stack) or `dp[0] = 0` (DP).
+- Time O(n), space O(n) for either approach.
 
 Common Follow-Ups:
-- What changes if the constraints push Longest Valid Parentheses toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the DP Or Stack invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Generate Parentheses (LC 22) is the constructive cousin.
+- Maximum Length of Pair Chain (LC 646) reuses interval-end DP.
+- Two-pass O(1) space variant by left-to-right plus right-to-left counting.
 
 ## 3. Best Time to Buy and Sell Stock IV
 
@@ -63,20 +63,20 @@ LeetCode: [Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/bes
 
 Difficulty: Hard
 
-Pattern: State Machine DP
+Pattern: State Machine DP With K Transactions
 
 Why It Matters: Optimizes over transaction count.
 
 Skills Tested:
-- Identify the State Machine DP signal before choosing a template.
-- State the invariant for Best Time to Buy and Sell Stock IV: optimizes over transaction count.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the state is `(day, transactions used, holding stock)`, so the DP is `dp[i][k][0/1]` over up to `k` transactions.
+- State the invariant: `dp[i][k][1]` is the best profit with stock at end of day `i` having opened up to `k` transactions; transitions are `hold` or `buy/sell`.
+- Compress space to `O(k)` by iterating days as the outer loop.
+- Time O(n * k), space O(k); when `k >= n / 2`, the problem reduces to unlimited transactions (LC 122).
 
 Common Follow-Ups:
-- What changes if the constraints push Best Time to Buy and Sell Stock IV toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the State Machine DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Best Time to Buy and Sell Stock with Cooldown (LC 309) and With Fee (LC 714).
+- What if transactions have non-uniform fees.
+- Generalize to multiple stocks.
 
 ## 4. Frog Jump
 
@@ -89,15 +89,15 @@ Pattern: Memoized State Search
 Why It Matters: Uses position and jump size as state.
 
 Skills Tested:
-- Identify the Memoized State Search signal before choosing a template.
-- State the invariant for Frog Jump: uses position and jump size as state.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the state `(stoneIndex, lastJump)` determines future moves; with `jump - 1`, `jump`, `jump + 1` as options.
+- State the invariant: `reachable[stone]` is the set of jump sizes used to land there; the last stone is reachable iff its set is non-empty.
+- Skip negative jumps and zero jumps.
+- Time O(n^2), space O(n^2).
 
 Common Follow-Ups:
-- What changes if the constraints push Frog Jump toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Memoized State Search invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Jump Game (LC 55) is reachability with no jump-size constraint.
+- Jump Game II (LC 45) minimizes jump count.
+- What if stones move dynamically.
 
 ---
 

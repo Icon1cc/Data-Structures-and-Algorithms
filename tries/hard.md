@@ -21,20 +21,20 @@ LeetCode: [Word Search II](https://leetcode.com/problems/word-search-ii/)
 
 Difficulty: Hard
 
-Pattern: Board Search Trie Pruning
+Pattern: Grid DFS With Trie Pruning
 
 Why It Matters: The classic trie plus backtracking problem.
 
 Skills Tested:
-- Identify the Board Search Trie Pruning signal before choosing a template.
-- State the invariant for Word Search II: the classic trie plus backtracking problem.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that running a separate DFS per word is wasteful; insert all words into a trie once and DFS the grid while descending the trie in lockstep.
+- State the invariant: at each grid cell, the active trie node mirrors the path of letters chosen so far; the search prunes when no child matches.
+- Mark and unmark grid cells (with a sentinel like `#`) to enforce the no-revisit constraint of the original problem.
+- Time O(M * N * 4 ^ maxLen), space O(total trie nodes), and pop dead trie subtrees to keep the search tight.
 
 Common Follow-Ups:
-- What changes if the constraints push Word Search II toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Board Search Trie Pruning invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Word Search (LC 79) is the single-word version.
+- What if words can revisit cells but not adjacent cells.
+- Generalize to a sparse graph instead of a grid.
 
 ## 2. Concatenated Words
 
@@ -42,20 +42,20 @@ LeetCode: [Concatenated Words](https://leetcode.com/problems/concatenated-words/
 
 Difficulty: Hard
 
-Pattern: Trie Or DP Word Composition
+Pattern: Trie Plus DP On Splits
 
 Why It Matters: Tests reusable dictionary decomposition.
 
 Skills Tested:
-- Identify the Trie Or DP Word Composition signal before choosing a template.
-- State the invariant for Concatenated Words: tests reusable dictionary decomposition.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a word is concatenated if it can be split into two or more shorter dictionary words; this is a DP over split points using either a hash set or a trie for membership.
+- State the invariant: `canForm[i]` is true if the prefix of length `i` decomposes into two or more dictionary words; transitions consider every shorter dictionary word ending at `i`.
+- Sort by length to ensure each word's components were inserted before it is tested.
+- Time O(N * L^2), space O(dictionary size), and contrast with brute enumeration of splits which is exponential.
 
 Common Follow-Ups:
-- What changes if the constraints push Concatenated Words toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Trie Or DP Word Composition invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Word Break II (LC 140) returns all decompositions of a single word.
+- What if the dictionary is streamed and queries arrive online.
+- Generalize to weighted decompositions where each word has a cost.
 
 ## 3. Palindrome Pairs
 
@@ -63,20 +63,20 @@ LeetCode: [Palindrome Pairs](https://leetcode.com/problems/palindrome-pairs/)
 
 Difficulty: Hard
 
-Pattern: Trie With Reversed Words
+Pattern: Reversed-Word Trie With Palindrome Tail
 
 Why It Matters: Advanced string-pair matching.
 
 Skills Tested:
-- Identify the Trie With Reversed Words signal before choosing a template.
-- State the invariant for Palindrome Pairs: advanced string-pair matching.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that pairs `(i, j)` form a palindrome when one word's suffix matches the other's reversed prefix and the leftover side is itself a palindrome.
+- State the invariant: insert each word reversed into the trie, recording word indices and the indices of palindromic suffixes at intermediate nodes; query each word against the trie.
+- Handle the empty string carefully (every palindrome can pair with it on either side).
+- Time O(N * L^2), space O(N * L), and contrast with brute O(N^2 * L) pairwise checks.
 
 Common Follow-Ups:
-- What changes if the constraints push Palindrome Pairs toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Trie With Reversed Words invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Shortest Palindrome (LC 214) uses the same prefix/suffix palindrome reasoning.
+- What if words can be reused.
+- Online: support insertions while maintaining the pair set.
 
 ## 4. Stream of Characters
 
@@ -84,20 +84,20 @@ LeetCode: [Stream of Characters](https://leetcode.com/problems/stream-of-charact
 
 Difficulty: Hard
 
-Pattern: Reversed Trie Stream
+Pattern: Reversed Trie Streaming Query
 
 Why It Matters: Maintains suffix queries over a stream.
 
 Skills Tested:
-- Identify the Reversed Trie Stream signal before choosing a template.
-- State the invariant for Stream of Characters: maintains suffix queries over a stream.
-- Handle empty strings, duplicate words, terminal markers, and large alphabets.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "does the recent suffix match any dictionary word" is naturally a reversed-word trie indexed by trailing characters.
+- State the invariant: insert each word reversed into the trie; the stream buffer is walked from the most recent character backward through the trie until a dead end or a terminal.
+- Cap the trie depth (and the buffer) at the longest dictionary word to stay bounded.
+- Per-query time O(maxWordLen), space O(total characters across words).
 
 Common Follow-Ups:
-- What changes if the constraints push Stream of Characters toward hash sets, sorted arrays, binary search, suffix arrays, or backtracking only?
-- Which empty strings case would break the first implementation?
-- Can the Reversed Trie Stream invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Aho-Corasick automaton answers all-suffix matches in O(1) amortized per character.
+- What if the stream is bidirectional or segmented.
+- Generalize to wildcard matches on the suffix.
 
 ---
 

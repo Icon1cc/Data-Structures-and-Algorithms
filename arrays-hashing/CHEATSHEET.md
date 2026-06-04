@@ -52,7 +52,7 @@ Look for duplicates, pairs, anagrams, grouping, subarray sums, longest consecuti
 
 - Say the brute force baseline and the exact wasted work.
 - State the invariant before code, not after the solution works.
-- Dry run duplicates, empty input, negative values, missing keys, and key overwrite order before submitting.
+- Dry run duplicates, empty input, negative values, and missing keys before submitting.
 
 ## Templates
 

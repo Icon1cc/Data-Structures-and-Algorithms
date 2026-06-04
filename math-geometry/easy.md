@@ -21,20 +21,20 @@ LeetCode: [Palindrome Number](https://leetcode.com/problems/palindrome-number/)
 
 Difficulty: Easy
 
-Pattern: Numeric Reversal
+Pattern: Half-Reverse Numeric
 
 Why It Matters: Tests digit manipulation without string reliance.
 
 Skills Tested:
-- Identify the Numeric Reversal signal before choosing a template.
-- State the invariant for Palindrome Number: tests digit manipulation without string reliance.
-- Handle zero, negative values, overflow, precision, and normalized coordinate keys.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a number is a palindrome iff its reverse equals itself, but you can stop after reversing only half the digits and compare halves.
+- State the invariant: at every step, `reversed = reversed * 10 + x % 10`; stop when `reversed >= x`.
+- Handle negative numbers (always non-palindrome) and trailing zeros (only `0` is palindromic).
+- Time O(log10 n), space O(1), and contrast with string reversal which uses O(log10 n) memory.
 
 Common Follow-Ups:
-- What changes if the constraints push Palindrome Number toward hashing, binary search, graph traversal, simulation, or dynamic programming?
-- Which zero case would break the first implementation?
-- Can the Numeric Reversal invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Reverse Integer (LC 7) handles overflow at the boundary.
+- What if the base is not 10.
+- Generalize to palindromic check on a fixed bit-width integer.
 
 ## 2. Roman to Integer
 
@@ -42,20 +42,20 @@ LeetCode: [Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
 
 Difficulty: Easy
 
-Pattern: Symbol Arithmetic
+Pattern: Subtract-When-Smaller-Before-Larger
 
 Why It Matters: Practices rule-based numeric parsing.
 
 Skills Tested:
-- Identify the Symbol Arithmetic signal before choosing a template.
-- State the invariant for Roman to Integer: practices rule-based numeric parsing.
-- Handle zero, negative values, overflow, precision, and normalized coordinate keys.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a Roman digit subtracts when it precedes a strictly larger one (e.g., `IV = 4`); otherwise it adds.
+- State the invariant: scan left-to-right, accumulate `+value(c)` if `value(c) >= value(next)`, else `-value(c)`.
+- Use a hash map of `{ 'I': 1, 'V': 5, ... }` rather than a switch.
+- Time O(n), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Roman to Integer toward hashing, binary search, graph traversal, simulation, or dynamic programming?
-- Which zero case would break the first implementation?
-- Can the Symbol Arithmetic invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Integer to Roman (LC 12) is the inverse problem with greedy symbol construction.
+- What if invalid Roman strings are possible (validation pass).
+- Generalize to other numerical systems with subtractive notation.
 
 ## 3. Excel Sheet Column Number
 
@@ -63,20 +63,20 @@ LeetCode: [Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-
 
 Difficulty: Easy
 
-Pattern: Base Conversion
+Pattern: Base-26 Conversion (1-Indexed)
 
 Why It Matters: Converts alphabetic digits to base 26.
 
 Skills Tested:
-- Identify the Base Conversion signal before choosing a template.
-- State the invariant for Excel Sheet Column Number: converts alphabetic digits to base 26.
-- Handle zero, negative values, overflow, precision, and normalized coordinate keys.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the alphabet maps `A=1, B=2, ..., Z=26`, so the value of `XYZ` is `26^2 * X + 26 * Y + Z` with each letter 1-indexed.
+- State the invariant: at each char, `result = result * 26 + (ord(c) - ord('A') + 1)`.
+- Note that this is base-26 with no zero digit, hence the `+ 1` at every position.
+- Time O(n), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Excel Sheet Column Number toward hashing, binary search, graph traversal, simulation, or dynamic programming?
-- Which zero case would break the first implementation?
-- Can the Base Conversion invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Excel Sheet Column Title (LC 168) is the inverse problem.
+- Why does this base have no zero digit (bijective base).
+- Generalize to k-letter alphabets.
 
 ## 4. Add Digits
 
@@ -84,20 +84,20 @@ LeetCode: [Add Digits](https://leetcode.com/problems/add-digits/)
 
 Difficulty: Easy
 
-Pattern: Modulo Arithmetic
+Pattern: Digital Root Modulo 9
 
 Why It Matters: Introduces digital-root reasoning.
 
 Skills Tested:
-- Identify the Modulo Arithmetic signal before choosing a template.
-- State the invariant for Add Digits: introduces digital-root reasoning.
-- Handle zero, negative values, overflow, precision, and normalized coordinate keys.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the digital root of `n > 0` is `1 + (n - 1) % 9`, and `0` for `n == 0`.
+- State the invariant: digit-summing preserves residue mod 9, so the fixed point is the residue (with the special case for 0).
+- Compare the loop-based O(log n) approach to the constant-time formula.
+- Time O(1) closed form, space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Add Digits toward hashing, binary search, graph traversal, simulation, or dynamic programming?
-- Which zero case would break the first implementation?
-- Can the Modulo Arithmetic invariant survive streaming input, in-place restrictions, or lower memory limits?
+- What if the base is not 10 (digital root mod `base - 1`).
+- Generalize to digital roots of products or factorials.
+- Prove the modular property step by step.
 
 ## 5. Happy Number
 
@@ -105,20 +105,20 @@ LeetCode: [Happy Number](https://leetcode.com/problems/happy-number/)
 
 Difficulty: Easy
 
-Pattern: Cycle Detection In Digits
+Pattern: Cycle Detection On Digit-Square Map
 
 Why It Matters: Combines arithmetic transform with seen-state detection.
 
 Skills Tested:
-- Identify the Cycle Detection In Digits signal before choosing a template.
-- State the invariant for Happy Number: combines arithmetic transform with seen-state detection.
-- Handle zero, negative values, overflow, precision, and normalized coordinate keys.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the sum-of-squares transform always falls into a cycle (the values are bounded), so cycle detection (hash set or Floyd's tortoise-and-hare) decides happiness.
+- State the invariant: a value is happy iff the cycle it enters contains 1; otherwise it cycles among non-1 values.
+- Implement Floyd's cycle detection for O(1) extra space.
+- Time O(log n) per step bounded by digit count, space O(1) Floyd or O(log n) set.
 
 Common Follow-Ups:
-- What changes if the constraints push Happy Number toward hashing, binary search, graph traversal, simulation, or dynamic programming?
-- Which zero case would break the first implementation?
-- Can the Cycle Detection In Digits invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Linked List Cycle (LC 141) shares the cycle-detection algorithm.
+- What if the transform is sum of cubes (different cycle structure).
+- Generalize to "is the orbit eventually periodic with period 1".
 
 ---
 

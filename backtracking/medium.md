@@ -21,20 +21,20 @@ LeetCode: [Subsets](https://leetcode.com/problems/subsets/)
 
 Difficulty: Medium
 
-Pattern: Subsets
+Pattern: Choose-Or-Skip Backtracking
 
 Why It Matters: The baseline choose-or-skip decision tree.
 
 Skills Tested:
-- Identify the Subsets signal before choosing a template.
-- State the invariant for Subsets: the baseline choose-or-skip decision tree.
-- Handle duplicate choices, missing undo, invalid pruning, and output-size complexity.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the power set has two branches per index (include or exclude), so backtracking from `i = 0` to `n` enumerates every subset.
+- State the invariant: at index `i`, the path holds the chosen prefix; appending a copy to the result on every call captures all `2^n` subsets.
+- Compare backtracking with the iterative cascade (each new element doubles the result) and bitmask enumeration.
+- Time O(n * 2^n), space O(n) recursion plus output.
 
 Common Follow-Ups:
-- What changes if the constraints push Subsets toward dynamic programming, greedy, BFS, trie pruning, or bitmask enumeration?
-- Which duplicate choices case would break the first implementation?
-- Can the Subsets invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Subsets II (LC 90) handles duplicates by sorting and skipping equal siblings.
+- Generate all subsets of size exactly `k` (Combinations LC 77).
+- Stream subsets lazily without buffering.
 
 ## 2. Combination Sum
 
@@ -42,20 +42,20 @@ LeetCode: [Combination Sum](https://leetcode.com/problems/combination-sum/)
 
 Difficulty: Medium
 
-Pattern: Combinations
+Pattern: Combinations With Reuse
 
 Why It Matters: Tests reusable choices and target pruning.
 
 Skills Tested:
-- Identify the Combinations signal before choosing a template.
-- State the invariant for Combination Sum: tests reusable choices and target pruning.
-- Handle duplicate choices, missing undo, invalid pruning, and output-size complexity.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that an element can be chosen unlimited times, which means the recursion may stay at the same index after a pick.
+- State the invariant: the running `remaining` is non-negative; the recursion ends with success when `remaining == 0` and failure when `remaining < 0` or no candidates remain.
+- Sort candidates and break early when a candidate exceeds `remaining` to prune the search.
+- Time O(N^(target / min)), space O(target / min) for recursion, and contrast with DP O(N * target).
 
 Common Follow-Ups:
-- What changes if the constraints push Combination Sum toward dynamic programming, greedy, BFS, trie pruning, or bitmask enumeration?
-- Which duplicate choices case would break the first implementation?
-- Can the Combinations invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Combination Sum II (LC 40) forbids reuse and requires duplicate skipping at the same level.
+- Combination Sum IV (LC 377) counts ordered combinations and is a 1-D DP.
+- What if candidates can be negative.
 
 ## 3. Permutations
 
@@ -63,20 +63,20 @@ LeetCode: [Permutations](https://leetcode.com/problems/permutations/)
 
 Difficulty: Medium
 
-Pattern: Permutations
+Pattern: Used-Set Backtracking
 
 Why It Matters: Builds used-set recursion where order matters.
 
 Skills Tested:
-- Identify the Permutations signal before choosing a template.
-- State the invariant for Permutations: builds used-set recursion where order matters.
-- Handle duplicate choices, missing undo, invalid pruning, and output-size complexity.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that order-sensitive enumeration requires a `used` mask or a swap-based partition to avoid revisiting the same element.
+- State the invariant: at each call, `path` holds a prefix of the permutation; choices come from the unused elements.
+- Implement either the `used[]` boolean array variant or the in-place swap variant; explain memory differences.
+- Time O(n * n!), space O(n) for the path and used set.
 
 Common Follow-Ups:
-- What changes if the constraints push Permutations toward dynamic programming, greedy, BFS, trie pruning, or bitmask enumeration?
-- Which duplicate choices case would break the first implementation?
-- Can the Permutations invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Permutations II (LC 47) handles duplicates with sort-then-skip.
+- Next Permutation (LC 31) jumps to the next ordering directly.
+- Generate the k-th permutation without enumerating all (LC 60).
 
 ## 4. Word Search
 
@@ -84,20 +84,20 @@ LeetCode: [Word Search](https://leetcode.com/problems/word-search/)
 
 Difficulty: Medium
 
-Pattern: Constraint Grid Search
+Pattern: Grid DFS With Visit Mark
 
 Why It Matters: Core board DFS with visited state.
 
 Skills Tested:
-- Identify the Constraint Grid Search signal before choosing a template.
-- State the invariant for Word Search: core board DFS with visited state.
-- Handle duplicate choices, missing undo, invalid pruning, and output-size complexity.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that scanning every starting cell and recursing into 4-directional neighbors with a visit mark covers all paths.
+- State the invariant: the path so far matches `word[0..k]`; success at `k == len(word) - 1`, failure on bounds, mismatch, or revisit.
+- Use a sentinel (`#`) on the cell during recursion and restore it on backtrack to avoid an explicit visited set.
+- Time O(M * N * 4 ^ L), space O(L) recursion.
 
 Common Follow-Ups:
-- What changes if the constraints push Word Search toward dynamic programming, greedy, BFS, trie pruning, or bitmask enumeration?
-- Which duplicate choices case would break the first implementation?
-- Can the Constraint Grid Search invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Word Search II (LC 212) batches many words via a trie.
+- What if diagonal movement is also allowed.
+- Generalize to weighted grids where each step has a cost.
 
 ## 5. Generate Parentheses
 
@@ -105,20 +105,20 @@ LeetCode: [Generate Parentheses](https://leetcode.com/problems/generate-parenthe
 
 Difficulty: Medium
 
-Pattern: Constrained Backtracking
+Pattern: Counted Backtracking
 
 Why It Matters: Uses counts to prune invalid prefix strings.
 
 Skills Tested:
-- Identify the Constrained Backtracking signal before choosing a template.
-- State the invariant for Generate Parentheses: uses counts to prune invalid prefix strings.
-- Handle duplicate choices, missing undo, invalid pruning, and output-size complexity.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a valid prefix obeys `open <= n` and `close <= open`, so two counters drive the recursion.
+- State the invariant: at every recursion, `open >= close`; appending `(` is allowed when `open < n`, appending `)` when `close < open`.
+- Stop when `len(path) == 2 * n` and append a copy.
+- Time O(Catalan(n)) which is roughly O(4^n / sqrt(n)), space O(n).
 
 Common Follow-Ups:
-- What changes if the constraints push Generate Parentheses toward dynamic programming, greedy, BFS, trie pruning, or bitmask enumeration?
-- Which duplicate choices case would break the first implementation?
-- Can the Constrained Backtracking invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Remove Invalid Parentheses (LC 301) uses BFS for minimum-removal generation.
+- Different Ways to Add Parentheses (LC 241) enumerates expression-tree shapes.
+- Catalan number combinatorics in detail.
 
 ## 6. Letter Combinations of a Phone Number
 
@@ -131,15 +131,15 @@ Pattern: Cartesian Product Backtracking
 Why It Matters: Builds combinations across positions.
 
 Skills Tested:
-- Identify the Cartesian Product Backtracking signal before choosing a template.
-- State the invariant for Letter Combinations of a Phone Number: builds combinations across positions.
-- Handle duplicate choices, missing undo, invalid pruning, and output-size complexity.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that each digit maps to 3 or 4 letters, so the answer is the Cartesian product of those sets.
+- State the invariant: at index `i`, the path holds one letter chosen for each prior digit; recurse over all letters of `digits[i]`.
+- Handle the empty input (return empty list, not `[""]` unless that is the spec).
+- Time O(3^N * 4^M) where N and M count digits with 3 and 4 letters, space O(N + M).
 
 Common Follow-Ups:
-- What changes if the constraints push Letter Combinations of a Phone Number toward dynamic programming, greedy, BFS, trie pruning, or bitmask enumeration?
-- Which duplicate choices case would break the first implementation?
-- Can the Cartesian Product Backtracking invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Word Break II (LC 140) is a Cartesian product over dictionary segments.
+- What if the mapping changes online.
+- Generalize to keypad with weighted letter probabilities.
 
 ## 7. Palindrome Partitioning
 
@@ -147,20 +147,20 @@ LeetCode: [Palindrome Partitioning](https://leetcode.com/problems/palindrome-par
 
 Difficulty: Medium
 
-Pattern: Partition Backtracking
+Pattern: Cut Backtracking With Predicate
 
 Why It Matters: Chooses valid cuts over a string.
 
 Skills Tested:
-- Identify the Partition Backtracking signal before choosing a template.
-- State the invariant for Palindrome Partitioning: chooses valid cuts over a string.
-- Handle duplicate choices, missing undo, invalid pruning, and output-size complexity.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "all decompositions where each piece is a palindrome" is a recursion over cut positions, with a palindrome check on each piece.
+- State the invariant: the path holds the chosen palindrome pieces; at index `n`, append the path copy.
+- Memoize palindrome checks (or precompute a 2-D `isPal` table) to avoid O(L^2) checks per cut.
+- Time O(2^n * n) worst case, space O(n) recursion.
 
 Common Follow-Ups:
-- What changes if the constraints push Palindrome Partitioning toward dynamic programming, greedy, BFS, trie pruning, or bitmask enumeration?
-- Which duplicate choices case would break the first implementation?
-- Can the Partition Backtracking invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Palindrome Partitioning II (LC 132) minimizes cuts, which becomes a 1-D DP.
+- What if pieces must also be of bounded length.
+- Stream the generation of partitions.
 
 ## 8. Combination Sum II
 
@@ -168,20 +168,20 @@ LeetCode: [Combination Sum II](https://leetcode.com/problems/combination-sum-ii/
 
 Difficulty: Medium
 
-Pattern: Duplicate-Safe Combinations
+Pattern: Sort Plus Skip-Equal-Sibling Combinations
 
 Why It Matters: Adds duplicate skipping to sorted candidates.
 
 Skills Tested:
-- Identify the Duplicate-Safe Combinations signal before choosing a template.
-- State the invariant for Combination Sum II: adds duplicate skipping to sorted candidates.
-- Handle duplicate choices, missing undo, invalid pruning, and output-size complexity.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that each element is used at most once and duplicates must produce only unique combinations, which is sorted-input plus the skip-equal-sibling-at-the-same-recursion-level rule.
+- State the invariant: at level `i`, skip values equal to `candidates[i - 1]` only if `i > start` (the first occurrence at each level must be tried).
+- Sort the candidates first; break when the smallest remaining exceeds the remaining target.
+- Time O(2^n * n), space O(n).
 
 Common Follow-Ups:
-- What changes if the constraints push Combination Sum II toward dynamic programming, greedy, BFS, trie pruning, or bitmask enumeration?
-- Which duplicate choices case would break the first implementation?
-- Can the Duplicate-Safe Combinations invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Subsets II (LC 90) reuses the same skip-equal-sibling rule for power set with duplicates.
+- Permutations II (LC 47) reuses the rule for ordered enumeration.
+- Generalize to "each element with bounded multiplicity".
 
 ---
 

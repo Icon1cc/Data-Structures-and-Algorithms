@@ -21,20 +21,20 @@ LeetCode: [House Robber](https://leetcode.com/problems/house-robber/)
 
 Difficulty: Medium
 
-Pattern: Choose Or Skip DP
+Pattern: Choose Or Skip Linear DP
 
 Why It Matters: Core non-adjacent choice recurrence.
 
 Skills Tested:
-- Identify the Choose Or Skip DP signal before choosing a template.
-- State the invariant for House Robber: core non-adjacent choice recurrence.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the maximum non-adjacent sum at index `i` is `max(rob(i - 1), rob(i - 2) + nums[i])`.
+- State the invariant: `dp[i]` is the best loot using houses `0..i`; the recurrence captures the rob-or-skip decision.
+- Compress to two rolling variables for O(1) space.
+- Time O(n), space O(1), and contrast with brute O(2^n) subset enumeration.
 
 Common Follow-Ups:
-- What changes if the constraints push House Robber toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Choose Or Skip DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- House Robber II (LC 213) handles a circular street.
+- House Robber III (LC 337) is on a tree.
+- What if the constraint is "no three consecutive" instead.
 
 ## 2. House Robber II
 
@@ -42,20 +42,20 @@ LeetCode: [House Robber II](https://leetcode.com/problems/house-robber-ii/)
 
 Difficulty: Medium
 
-Pattern: Circular DP Split
+Pattern: Linear DP On Two Cases
 
 Why It Matters: Handles circular adjacency by splitting cases.
 
 Skills Tested:
-- Identify the Circular DP Split signal before choosing a template.
-- State the invariant for House Robber II: handles circular adjacency by splitting cases.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the circle constraint forbids picking both house 0 and the last house, so the answer is `max(rob(0..n-2), rob(1..n-1))`.
+- State the invariant: each linear subproblem reuses House Robber's recurrence on a half-open range.
+- Handle `n == 1` (return `nums[0]`) and `n == 2` (return `max(nums)`) before splitting.
+- Time O(n), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push House Robber II toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Circular DP Split invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Delete and Earn (LC 740) maps values to count-weighted house-rob.
+- What if the circle is bidirectional but with weights.
+- Generalize to k forbidden adjacencies.
 
 ## 3. Coin Change
 
@@ -63,20 +63,20 @@ LeetCode: [Coin Change](https://leetcode.com/problems/coin-change/)
 
 Difficulty: Medium
 
-Pattern: Min Coins DP
+Pattern: Unbounded Min DP
 
 Why It Matters: Classic unbounded minimization DP.
 
 Skills Tested:
-- Identify the Min Coins DP signal before choosing a template.
-- State the invariant for Coin Change: classic unbounded minimization DP.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the minimum coins to make amount `a` is `1 + min(dp[a - c] for c in coins if c <= a)` with `dp[0] = 0`.
+- State the invariant: `dp[a]` is the minimum coin count for amount `a`, or `inf` if not possible.
+- Iterate amounts in ascending order so smaller subproblems are solved first.
+- Time O(amount * coins.length), space O(amount), and contrast with greedy which fails on non-canonical coin sets.
 
 Common Follow-Ups:
-- What changes if the constraints push Coin Change toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Min Coins DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Coin Change II (LC 518) counts ways instead of minimum coins.
+- What if coins can be used at most `k` times (bounded knapsack).
+- BFS over states gives the same answer with explicit unweighted shortest paths.
 
 ## 4. Longest Increasing Subsequence
 
@@ -84,20 +84,20 @@ LeetCode: [Longest Increasing Subsequence](https://leetcode.com/problems/longest
 
 Difficulty: Medium
 
-Pattern: Subsequence DP
+Pattern: Subsequence DP Or Patience Sort
 
 Why It Matters: Core ordered subsequence optimization.
 
 Skills Tested:
-- Identify the Subsequence DP signal before choosing a template.
-- State the invariant for Longest Increasing Subsequence: core ordered subsequence optimization.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize the O(n^2) DP `dp[i] = 1 + max(dp[j] for j < i if nums[j] < nums[i])` and the O(n log n) patience-sort variant with `tails[k]` tracking the smallest possible tail of an LIS of length `k + 1`.
+- State the invariant (patience): `tails` is sorted; `bisect_left(tails, nums[i])` gives the position to update.
+- Reconstruct the actual LIS by storing predecessor indices in the O(n^2) version.
+- Time O(n log n) or O(n^2), space O(n).
 
 Common Follow-Ups:
-- What changes if the constraints push Longest Increasing Subsequence toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Subsequence DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Number of Longest Increasing Subsequence (LC 673) counts how many LIS exist.
+- Russian Doll Envelopes (LC 354) maps LIS onto sorted 2-D pairs.
+- What if non-strict increase is allowed (use `bisect_right`).
 
 ## 5. Word Break
 
@@ -105,20 +105,20 @@ LeetCode: [Word Break](https://leetcode.com/problems/word-break/)
 
 Difficulty: Medium
 
-Pattern: Boolean DP
+Pattern: Boolean Prefix DP
 
 Why It Matters: Tests prefix feasibility and dictionary lookup.
 
 Skills Tested:
-- Identify the Boolean DP signal before choosing a template.
-- State the invariant for Word Break: tests prefix feasibility and dictionary lookup.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that `s[0..i]` is breakable iff there exists `j` such that `s[0..j]` is breakable and `s[j..i]` is in the dictionary.
+- State the invariant: `dp[i]` is true iff the first `i` characters break into dictionary words; `dp[0] = true` as the empty prefix.
+- Use a hash set for O(1) word lookups; iterate `j` only up to the maximum word length to prune.
+- Time O(n^2) or O(n * maxWordLen), space O(n + dictionary).
 
 Common Follow-Ups:
-- What changes if the constraints push Word Break toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Boolean DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Word Break II (LC 140) returns all decompositions via backtracking with memoization.
+- Concatenated Words (LC 472) extends to a vocabulary built from itself.
+- Use a trie of words for the lookup step.
 
 ## 6. Decode Ways
 
@@ -126,20 +126,20 @@ LeetCode: [Decode Ways](https://leetcode.com/problems/decode-ways/)
 
 Difficulty: Medium
 
-Pattern: String DP
+Pattern: String DP With Two Step Transitions
 
 Why It Matters: Requires careful zero handling.
 
 Skills Tested:
-- Identify the String DP signal before choosing a template.
-- State the invariant for Decode Ways: requires careful zero handling.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that decoding `s[0..i]` either takes one digit (if `s[i - 1] != '0'`) or two digits (if `s[i - 2..i]` is in `[10, 26]`).
+- State the invariant: `dp[i]` is the number of ways to decode the first `i` characters; `dp[0] = 1` for the empty prefix.
+- Treat `'0'` carefully: it can never start a valid one-digit decode and must be paired with `'1'` or `'2'`.
+- Time O(n), space O(1) with rolling variables.
 
 Common Follow-Ups:
-- What changes if the constraints push Decode Ways toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the String DP invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Decode Ways II (LC 639) introduces wildcards.
+- What if the alphabet has more than 26 letters or supports multi-digit codes.
+- Generalize to weighted decoding with priorities.
 
 ## 7. Combination Sum IV
 
@@ -147,20 +147,20 @@ LeetCode: [Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/
 
 Difficulty: Medium
 
-Pattern: Counting Ordered Combinations
+Pattern: Order-Sensitive Counting DP
 
 Why It Matters: Highlights order-sensitive count DP.
 
 Skills Tested:
-- Identify the Counting Ordered Combinations signal before choosing a template.
-- State the invariant for Combination Sum IV: highlights order-sensitive count DP.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that ordered combinations require iterating amounts in the outer loop and candidates in the inner loop, the opposite of Coin Change II.
+- State the invariant: `dp[a] = sum(dp[a - c] for c in nums if c <= a)`; `dp[0] = 1` as the empty sequence.
+- Confirm whether the problem asks for ordered or unordered counts before choosing the loop order.
+- Time O(target * len(nums)), space O(target).
 
 Common Follow-Ups:
-- What changes if the constraints push Combination Sum IV toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the Counting Ordered Combinations invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Coin Change II (LC 518) is the unordered counting variant.
+- Climbing Stairs (LC 70) is the special case `nums = [1, 2]`.
+- Modular arithmetic when counts can be huge.
 
 ## 8. Partition Equal Subset Sum
 
@@ -168,20 +168,20 @@ LeetCode: [Partition Equal Subset Sum](https://leetcode.com/problems/partition-e
 
 Difficulty: Medium
 
-Pattern: 0/1 Knapsack
+Pattern: 0/1 Knapsack Boolean DP
 
 Why It Matters: Classic target-capacity DP.
 
 Skills Tested:
-- Identify the 0/1 Knapsack signal before choosing a template.
-- State the invariant for Partition Equal Subset Sum: classic target-capacity DP.
-- Handle base cases, invalid states, iteration order, and memory compression direction.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "can we split into two equal-sum subsets" reduces to "can we form `total // 2` from a subset", a 0/1 knapsack feasibility.
+- State the invariant: `dp[s]` is true iff some subset sums to `s`; iterate items and update from high `s` down to low `s` to enforce 0/1 (no reuse).
+- Quick reject when `total` is odd.
+- Time O(n * total), space O(total).
 
 Common Follow-Ups:
-- What changes if the constraints push Partition Equal Subset Sum toward greedy, graph shortest path, backtracking, BFS, or mathematical formula?
-- Which base cases case would break the first implementation?
-- Can the 0/1 Knapsack invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Subset Sum count problems generalize the boolean to integers.
+- Last Stone Weight II (LC 1049) is partition-into-two-with-min-difference.
+- Target Sum (LC 494) reframes signs as a partition.
 
 ---
 

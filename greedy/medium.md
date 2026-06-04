@@ -26,15 +26,15 @@ Pattern: Farthest Reach Greedy
 Why It Matters: Core reachability greedy.
 
 Skills Tested:
-- Identify the Farthest Reach Greedy signal before choosing a template.
-- State the invariant for Jump Game: core reachability greedy.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the farthest reachable index from any prefix is `max(i + nums[i])`; if that ever falls behind `i`, no jump can cross.
+- State the invariant: at every index `i`, `farthest >= i` means `i` is reachable.
+- Loop until `i > farthest` (failure) or `farthest >= n - 1` (success).
+- Time O(n), space O(1), and contrast with O(n^2) DP that tracks reachability per cell.
 
 Common Follow-Ups:
-- What changes if the constraints push Jump Game toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Farthest Reach Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Jump Game II (LC 45) returns the minimum number of jumps.
+- Jump Game III (LC 1306) uses BFS over reachable indices.
+- What if jumps can be made backward as well as forward.
 
 ## 2. Jump Game II
 
@@ -42,20 +42,20 @@ LeetCode: [Jump Game II](https://leetcode.com/problems/jump-game-ii/)
 
 Difficulty: Medium
 
-Pattern: Range Greedy
+Pattern: Range Frontier Greedy
 
 Why It Matters: Finds minimum jumps by current frontier.
 
 Skills Tested:
-- Identify the Range Greedy signal before choosing a template.
-- State the invariant for Jump Game II: finds minimum jumps by current frontier.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that BFS in disguise: each "level" of jumps covers indices in `[currentEnd, farthest]`; bumping `jumps` happens when `i` reaches `currentEnd`.
+- State the invariant: at every step, `farthest = max(farthest, i + nums[i])`; when `i == currentEnd`, advance `currentEnd = farthest` and increment `jumps`.
+- Stop early when `currentEnd >= n - 1`.
+- Time O(n), space O(1), and contrast with DP O(n^2).
 
 Common Follow-Ups:
-- What changes if the constraints push Jump Game II toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Range Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Jump Game (LC 55) is the boolean reachability variant.
+- What if some indices double the jump distance.
+- Generalize to weighted moves (Dijkstra).
 
 ## 3. Gas Station
 
@@ -63,20 +63,20 @@ LeetCode: [Gas Station](https://leetcode.com/problems/gas-station/)
 
 Difficulty: Medium
 
-Pattern: Greedy Reset
+Pattern: Total Sum Plus Reset On Deficit
 
 Why It Matters: Uses deficit reasoning to choose a start.
 
 Skills Tested:
-- Identify the Greedy Reset signal before choosing a template.
-- State the invariant for Gas Station: uses deficit reasoning to choose a start.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a circular tour exists iff `sum(gas) >= sum(cost)`; if it does, the start is the index right after the last point where the running tank dropped below zero.
+- State the invariant: scanning from any start, if the tank goes negative at index `i`, no start in `[start, i]` works; reset `start = i + 1` and `tank = 0`.
+- Track `total` separately to verify the existence condition.
+- Time O(n), space O(1), and contrast with O(n^2) brute force over every start.
 
 Common Follow-Ups:
-- What changes if the constraints push Gas Station toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Greedy Reset invariant survive streaming input, in-place restrictions, or lower memory limits?
+- What if the tour can be in either direction.
+- Generalize to multiple stops with capacity refilling.
+- Online variant where stations are added incrementally.
 
 ## 4. Partition Labels
 
@@ -89,15 +89,15 @@ Pattern: Last Occurrence Greedy
 Why It Matters: Cuts segments when all active characters close.
 
 Skills Tested:
-- Identify the Last Occurrence Greedy signal before choosing a template.
-- State the invariant for Partition Labels: cuts segments when all active characters close.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a label can close a partition only when every character within has its last occurrence inside the partition.
+- State the invariant: precompute `lastIndex[c]` for every character; while scanning, extend the partition's right boundary to `max(end, lastIndex[s[i]])`.
+- Cut when `i == end`; record the partition length.
+- Time O(n), space O(alphabet).
 
 Common Follow-Ups:
-- What changes if the constraints push Partition Labels toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Last Occurrence Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Generalize to k-color partitioning where each color must be contiguous.
+- What if partitions must have minimum length.
+- Stream the input and yield partitions online.
 
 ## 5. Queue Reconstruction by Height
 
@@ -105,20 +105,20 @@ LeetCode: [Queue Reconstruction by Height](https://leetcode.com/problems/queue-r
 
 Difficulty: Medium
 
-Pattern: Sort And Insert Greedy
+Pattern: Sort By Height Then Insert By K
 
 Why It Matters: Tests whether a sorted processing order can make a global placement constraint local.
 
 Skills Tested:
-- Identify the Sort And Insert Greedy signal before choosing a template.
-- State the invariant for Queue Reconstruction by Height: tests whether a sorted processing order can make a global placement constraint local.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that taller people are unaffected by shorter ones in the front, so processing tallest-first turns a global constraint (`k` taller-or-equal in front) into a local insert at index `k`.
+- State the invariant: at the time of inserting `(h, k)`, every person already in the result is taller-or-equal-than `h`, so `k` is exactly the desired insertion position.
+- Tie-break tallest-first by smaller `k` first to avoid violations.
+- Time O(n^2) using `list.insert`, space O(n).
 
 Common Follow-Ups:
-- What changes if the constraints push Queue Reconstruction by Height toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Sort And Insert Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Reconstruct under different constraints (e.g., k shorter in front).
+- Use a Fenwick tree for O(n log n) insertion if `n` is large.
+- What if `k` allows ties to count differently.
 
 ## 6. Hand of Straights
 
@@ -126,20 +126,20 @@ LeetCode: [Hand of Straights](https://leetcode.com/problems/hand-of-straights/)
 
 Difficulty: Medium
 
-Pattern: Greedy Counting
+Pattern: Counter Plus Smallest-First Greedy
 
 Why It Matters: Builds consecutive groups from smallest available card.
 
 Skills Tested:
-- Identify the Greedy Counting signal before choosing a template.
-- State the invariant for Hand of Straights: builds consecutive groups from smallest available card.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the smallest available card must start a group of `groupSize` consecutive cards; if any consecutive number is missing in count, the answer is false.
+- State the invariant: a sorted-key counter; pop the smallest, decrement counts of `[smallest, smallest + groupSize)`, repeat.
+- Use `OrderedDict` or sorted unique keys to avoid scanning.
+- Time O(n log n), space O(n).
 
 Common Follow-Ups:
-- What changes if the constraints push Hand of Straights toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Greedy Counting invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Divide Array in Sets of K Consecutive Numbers (LC 1296) is the same problem.
+- What if the group size must equal a divisor of `len(hand)`.
+- Generalize to multi-set-with-replacement greedy.
 
 ## 7. Boats to Save People
 
@@ -147,20 +147,20 @@ LeetCode: [Boats to Save People](https://leetcode.com/problems/boats-to-save-peo
 
 Difficulty: Medium
 
-Pattern: Sorted Pairing Greedy
+Pattern: Sorted Two-Pointer Pairing
 
 Why It Matters: Uses sorted extremes to prove each boat placement is locally safe.
 
 Skills Tested:
-- Identify the Sorted Pairing Greedy signal before choosing a template.
-- State the invariant for Boats to Save People: uses sorted extremes to prove each boat placement is locally safe.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that pairing the heaviest with the lightest (when feasible) is provably optimal because the heaviest must always sit alone or with the lightest.
+- State the invariant: two pointers, `light` and `heavy`; if `people[light] + people[heavy] <= limit`, both go on a boat and advance both; else only `heavy` goes alone.
+- Handle equal weights (the loop terminates when `light > heavy`).
+- Time O(n log n) for sort plus O(n) two-pointer, space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Boats to Save People toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Sorted Pairing Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Container With Most Water (LC 11) shares the converging-pointers skeleton.
+- What if a boat can fit three people (more complex DP).
+- Generalize to weighted-cost boats with budgets.
 
 ## 8. Wiggle Subsequence
 
@@ -168,20 +168,20 @@ LeetCode: [Wiggle Subsequence](https://leetcode.com/problems/wiggle-subsequence/
 
 Difficulty: Medium
 
-Pattern: Monotonic Greedy
+Pattern: Direction Change Counting
 
 Why It Matters: Compresses local direction changes into a global longest alternating subsequence.
 
 Skills Tested:
-- Identify the Monotonic Greedy signal before choosing a template.
-- State the invariant for Wiggle Subsequence: compresses local direction changes into a global longest alternating subsequence.
-- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that a wiggle subsequence's length equals `1 + count of direction changes`, where flat segments do not count.
+- State the invariant: keep `up` and `down` counts, where `up` is the wiggle length ending in an upward move, `down` is the same for downward.
+- On each `nums[i] > nums[i - 1]`, set `up = down + 1`; symmetric on the downward direction.
+- Time O(n), space O(1), and contrast with the O(n^2) DP that tracks longest wiggle ending at each index.
 
 Common Follow-Ups:
-- What changes if the constraints push Wiggle Subsequence toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
-- Which counterexamples case would break the first implementation?
-- Can the Monotonic Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Longest Increasing Subsequence (LC 300) drops the alternating constraint.
+- What if you must allow `k` non-wiggle moves.
+- Generalize to wiggle by a threshold delta.
 
 ---
 

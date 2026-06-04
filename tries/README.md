@@ -78,6 +78,20 @@ flowchart TD
     O --> G[g*]
 ```
 
+## Pattern Walkthrough
+
+```mermaid
+graph TD
+    Root[root]
+    Root --> T[t]
+    T --> O[o*]
+    T --> E[e]
+    E --> A[a*]
+    E --> N[n*]
+```
+
+A trie storing `to`, `tea`, `ten` shares a single `t` node, branches at `o` versus `e`, and marks each terminal with an end-of-word flag (shown as `*`); a prefix query walks down characters until a missing child or a terminal node.
+
 ## Foundations And Invariants
 
 A terminal marker is separate from the existence of a prefix. `app` and `apple` share nodes, but only marked nodes are complete words.

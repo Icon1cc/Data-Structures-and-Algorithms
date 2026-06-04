@@ -40,9 +40,9 @@ Do not sort by a key that does not match the proof.
 
 ### Common Mistakes
 
-- Sorting by start when the proof needs end.
-- Ignoring the exclusion case for Sort And Scan: Do not sort by a key that does not match the proof.
-- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
+- Sorting by start instead of end for activity-selection-style problems; the proof relies on earliest finish.
+- Picking by greedy intuition without writing down the invariant; sorting by the wrong key gives wrong answers on adversarial inputs.
+- Forgetting that ties can change the answer; specify a deterministic tie-break rule before coding.
 
 ### Pseudocode Or Template
 
@@ -87,9 +87,9 @@ Do not rely on intuition alone.
 
 ### Common Mistakes
 
-- Skipping the correctness argument.
-- Ignoring the exclusion case for Greedy With Proof: Do not rely on intuition alone.
-- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
+- Skipping the correctness argument and submitting; greedy is the algorithm class most likely to silently fail on edge cases.
+- Confusing "intuitive" with "provable"; intuitive choices can be exchanged into a worse solution on adversarial inputs.
+- Conflating greedy with DP; if no exchange argument works, fall back to DP rather than fix the greedy.
 
 ### Pseudocode Or Template
 
@@ -133,9 +133,9 @@ Do not pick longest interval unless that is specifically proven.
 
 ### Common Mistakes
 
-- Treating touching endpoints incorrectly.
-- Ignoring the exclusion case for Interval Greedy: Do not pick longest interval unless that is specifically proven.
-- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
+- Sorting by start when the proof needs end; activity selection is "earliest finish", not "earliest start".
+- Mishandling touching endpoints; whether `[1,2]` and `[2,3]` overlap depends on the problem's open/closed convention.
+- Counting overlapping intervals using a sort-by-start sweep without a heap of active end times; that gives the wrong count.
 
 ### Pseudocode Or Template
 
@@ -181,9 +181,9 @@ Do not BFS all indices when range tracking is enough.
 
 ### Common Mistakes
 
-- Updating jump count before finishing the current range.
-- Ignoring the exclusion case for Jump Greedy: Do not BFS all indices when range tracking is enough.
-- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
+- Incrementing the jump count when `i` first exceeds `end`, instead of when `i == end`; off-by-one breaks the count.
+- Iterating to `n` instead of `n - 1`; the loop must stop one before the final index.
+- Returning `farthest >= n - 1` mid-loop without proving you can actually jump there with the current count.
 
 ### Pseudocode Or Template
 
@@ -229,9 +229,9 @@ Do not sort once if availability and priority are separate dimensions.
 
 ### Common Mistakes
 
-- Pushing candidates too late after they become reachable.
-- Ignoring the exclusion case for Heap-Assisted Greedy: Do not sort once if availability and priority are separate dimensions.
-- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
+- Sorting candidates by priority and ignoring availability; available-set changes over time and a single sort cannot capture it.
+- Pushing items into the heap too early; for refueling, only stations passed so far should be candidates.
+- Forgetting that lazy delete is needed when items become unavailable mid-process.
 
 ### Pseudocode Or Template
 
@@ -277,9 +277,9 @@ Do not pop a value if it cannot appear again and is required.
 
 ### Common Mistakes
 
-- Popping required characters without checking future availability.
-- Ignoring the exclusion case for Monotonic Greedy: Do not pop a value if it cannot appear again and is required.
-- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
+- Popping a required character without verifying it appears later in the input; required uniques cannot be sacrificed.
+- Forgetting to bound the total pops by `k`; without that, you remove too many digits.
+- Ignoring the leading-zero case for Remove K Digits; strip leading zeros from the final answer.
 
 ### Pseudocode Or Template
 

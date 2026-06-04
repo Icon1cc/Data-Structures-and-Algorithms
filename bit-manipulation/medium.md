@@ -21,20 +21,20 @@ LeetCode: [Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integer
 
 Difficulty: Medium
 
-Pattern: Arithmetic Bit Tricks
+Pattern: XOR Sum Plus AND Carry
 
 Why It Matters: Adds without plus using carry logic.
 
 Skills Tested:
-- Identify the Arithmetic Bit Tricks signal before choosing a template.
-- State the invariant for Sum of Two Integers: adds without plus using carry logic.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that addition without `+` decomposes into `xor` (sum without carry) and `and shifted left by 1` (the carry); repeat until the carry is zero.
+- State the invariant: at every iteration, the pair `(a, b)` represents a partial sum and remaining carry; after enough iterations, `b == 0`.
+- Mask to 32 bits in languages without unsigned ints; convert back to signed at the end.
+- Time O(32), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Sum of Two Integers toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Arithmetic Bit Tricks invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Implement subtraction without `-`.
+- Implement multiplication using shifts and adds.
+- What if the integer width is unbounded (Python big-integers).
 
 ## 2. Bitwise AND of Numbers Range
 
@@ -42,20 +42,20 @@ LeetCode: [Bitwise AND of Numbers Range](https://leetcode.com/problems/bitwise-a
 
 Difficulty: Medium
 
-Pattern: Common Prefix Bits
+Pattern: Common High-Bit Prefix
 
 Why It Matters: Finds unchanged high-bit prefix.
 
 Skills Tested:
-- Identify the Common Prefix Bits signal before choosing a template.
-- State the invariant for Bitwise AND of Numbers Range: finds unchanged high-bit prefix.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that AND across a range zeros out any bit that flips somewhere in `[left, right]`; only the common high-bit prefix of `left` and `right` remains.
+- State the invariant: shifting both `left` and `right` right by 1 until they are equal counts the bits to drop; the answer is `left << count`.
+- Equivalent trick: `right & (right - 1)` clears low bits until `right < left`.
+- Time O(log range), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Bitwise AND of Numbers Range toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Common Prefix Bits invariant survive streaming input, in-place restrictions, or lower memory limits?
+- AND-bound subarray problems via the same prefix observation.
+- Generalize to OR or XOR over a range (different structure).
+- What if the range is very large (still log time).
 
 ## 3. Single Number II
 
@@ -63,20 +63,20 @@ LeetCode: [Single Number II](https://leetcode.com/problems/single-number-ii/)
 
 Difficulty: Medium
 
-Pattern: Bit Counts Mod 3
+Pattern: Bit Counts Modulo 3
 
 Why It Matters: Extends cancellation to triplicates.
 
 Skills Tested:
-- Identify the Bit Counts Mod 3 signal before choosing a template.
-- State the invariant for Single Number II: extends cancellation to triplicates.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that for each bit position, the count of 1s mod 3 is the bit of the unique number; this generalizes XOR's mod-2 cancellation.
+- State the invariant: 32-bit bucket counts; for each bit, take `count % 3`; assemble the result bit-by-bit.
+- Constant-space variant uses two 32-bit registers `ones, twos` updated bitwise.
+- Time O(n), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Single Number II toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Bit Counts Mod 3 invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Single Number (LC 136) is the mod-2 case.
+- Single Number III (LC 260) finds two unique using XOR plus a partition bit.
+- What if some elements appear `k` times.
 
 ## 4. Bitwise ORs of Subarrays
 
@@ -84,20 +84,20 @@ LeetCode: [Bitwise ORs of Subarrays](https://leetcode.com/problems/bitwise-ors-o
 
 Difficulty: Medium
 
-Pattern: Rolling Bitwise State Set
+Pattern: Rolling OR Frontier Set
 
 Why It Matters: Shows how the set of possible OR values stays bounded by bit width during a scan.
 
 Skills Tested:
-- Identify the Rolling Bitwise State Set signal before choosing a template.
-- State the invariant for Bitwise ORs of Subarrays: shows how the set of possible OR values stays bounded by bit width during a scan.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that ORs ending at index `i` form a set of size at most 32 because each new element can only set new bits (never clear).
+- State the invariant: `current = {prev | nums[i] for prev in last_set} | {nums[i]}`; accumulate into a global result set.
+- Use Python `set` operations; the running set is bounded by the bit width.
+- Time O(n * 32), space O(n * 32).
 
 Common Follow-Ups:
-- What changes if the constraints push Bitwise ORs of Subarrays toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Rolling Bitwise State Set invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Maximum AND of Subarrays uses similar bounded-state thinking.
+- What if you need bitwise XORs (no monotonicity, set can grow without bound).
+- Generalize to subarray bitwise queries with a sparse table.
 
 ## 5. Minimum Flips to Make a OR b Equal to c
 
@@ -110,15 +110,15 @@ Pattern: Per-Bit Constraint Counting
 Why It Matters: Forces bit-by-bit reasoning about OR constraints instead of treating numbers as opaque integers.
 
 Skills Tested:
-- Identify the Per-Bit Constraint Counting signal before choosing a template.
-- State the invariant for Minimum Flips to Make a OR b Equal to c: forces bit-by-bit reasoning about OR constraints instead of treating numbers as opaque integers.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that each bit is independent: for bit `k`, if `c_k == 0` then both `a_k` and `b_k` must be 0 (count their set bits as flips); if `c_k == 1` then at least one of `a_k` and `b_k` must be 1.
+- State the invariant: total flips is the sum over bits of the per-bit flip count.
+- Walk all 32 (or 64) bits explicitly using `(x >> k) & 1` extractions.
+- Time O(32), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Minimum Flips to Make a OR b Equal to c toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Per-Bit Constraint Counting invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Adapt for AND or XOR target equality.
+- What if some bits cannot be flipped (constraint mask).
+- Generalize to multi-operand bit equations.
 
 ## 6. UTF-8 Validation
 
@@ -126,20 +126,20 @@ LeetCode: [UTF-8 Validation](https://leetcode.com/problems/utf-8-validation/)
 
 Difficulty: Medium
 
-Pattern: Bit Prefix Checks
+Pattern: Bit Prefix State Machine
 
 Why It Matters: Parses byte masks carefully.
 
 Skills Tested:
-- Identify the Bit Prefix Checks signal before choosing a template.
-- State the invariant for UTF-8 Validation: parses byte masks carefully.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that UTF-8 bytes have prefix patterns: `0xxxxxxx` (1 byte), `110xxxxx` (start of 2), `1110xxxx` (start of 3), `11110xxx` (start of 4), `10xxxxxx` (continuation).
+- State the invariant: a counter `expected_continuation` tracks how many continuation bytes must follow; each byte is checked against the expected prefix.
+- Decrement on a valid continuation, set on a valid leader, fail on a mismatch.
+- Time O(n), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push UTF-8 Validation toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Bit Prefix Checks invariant survive streaming input, in-place restrictions, or lower memory limits?
+- UTF-16 validation has a different surrogate-pair structure.
+- Stream-validate UTF-8 across chunks.
+- Generalize to arbitrary prefix-coded byte streams.
 
 ## 7. Gray Code
 
@@ -147,20 +147,20 @@ LeetCode: [Gray Code](https://leetcode.com/problems/gray-code/)
 
 Difficulty: Medium
 
-Pattern: Bit Pattern Generation
+Pattern: Reflected-Binary Code Formula
 
 Why It Matters: Uses reflected binary code structure.
 
 Skills Tested:
-- Identify the Bit Pattern Generation signal before choosing a template.
-- State the invariant for Gray Code: uses reflected binary code structure.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize the formula `gray(i) = i ^ (i >> 1)` produces the i-th Gray code where consecutive codes differ by exactly one bit.
+- State the invariant: iterating `i` from 0 to `2^n - 1` and emitting `gray(i)` yields a valid sequence covering every n-bit value once.
+- Alternative: build by reflection (append reversed list with the high bit set).
+- Time O(2^n), space O(1) extra.
 
 Common Follow-Ups:
-- What changes if the constraints push Gray Code toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Bit Pattern Generation invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Decode a Gray code back to its index.
+- Circular Gray-code sequences over arbitrary alphabets.
+- What if you need a Gray-like code with k-bit transitions instead of 1-bit.
 
 ## 8. Divide Two Integers
 
@@ -168,20 +168,20 @@ LeetCode: [Divide Two Integers](https://leetcode.com/problems/divide-two-integer
 
 Difficulty: Medium
 
-Pattern: Shift Subtraction
+Pattern: Shift-And-Subtract Long Division
 
 Why It Matters: Performs division under overflow constraints.
 
 Skills Tested:
-- Identify the Shift Subtraction signal before choosing a template.
-- State the invariant for Divide Two Integers: performs division under overflow constraints.
-- Handle zero, negative numbers, fixed bit width, overflow, and 2^n mask limits.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that integer division can be done by repeatedly subtracting the largest power-of-two multiple of the divisor that fits in the remaining dividend.
+- State the invariant: after each subtraction, `remainder >= 0` and the quotient is incremented by `2^k` for the chosen `k`.
+- Handle the overflow case `dividend == INT_MIN, divisor == -1` (return `INT_MAX`); take signs separately and operate on absolute values.
+- Time O(log n), space O(1).
 
 Common Follow-Ups:
-- What changes if the constraints push Divide Two Integers toward hash maps, arithmetic, dynamic programming, trie, or sorting?
-- Which zero case would break the first implementation?
-- Can the Shift Subtraction invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Implement modulo without `%`.
+- Big-integer division.
+- What if the result must be a fraction (no truncation).
 
 ---
 

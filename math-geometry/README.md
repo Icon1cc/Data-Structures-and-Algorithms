@@ -79,6 +79,18 @@ flowchart TD
     E --> F
 ```
 
+## Pattern Walkthrough
+
+```mermaid
+flowchart LR
+    Original["Original (r, c)"] --> T["Transpose (c, r)"]
+    T --> RR["Reverse each row"]
+    RR --> Rotated["Final (c, n-1-r)"]
+    Rotated --> Verify["This is exactly a 90-degree clockwise rotation in place"]
+```
+
+A 90-degree clockwise rotation decomposes into transpose followed by per-row reversal; both passes mutate the matrix in place, leaving the algorithm O(1) extra space.
+
 ## Foundations And Invariants
 
 Avoid floating point when equality matters. Normalize signs and divide by GCD for slopes, use squared distances for comparisons, and reason about modulo with negative values.

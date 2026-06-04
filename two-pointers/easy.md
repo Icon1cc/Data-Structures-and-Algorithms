@@ -26,15 +26,15 @@ Pattern: Opposite Direction Pointers
 Why It Matters: Builds pointer movement and character skipping without extra memory.
 
 Skills Tested:
-- Identify the Opposite Direction Pointers signal before choosing a template.
-- State the invariant for Valid Palindrome: builds pointer movement and character skipping without extra memory.
-- Handle off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "is the cleaned string the same backwards" only needs one left pointer and one right pointer converging, never extra memory.
+- State the invariant: at every step, every character outside `[left, right]` already matched its mirror, and any mismatch between `s[left]` and `s[right]` proves false.
+- Skip non-alphanumeric characters carefully so neither pointer moves past the other inside the loop.
+- Handle empty strings, single characters, and case-insensitive comparison without rebuilding the string.
 
 Common Follow-Ups:
-- What changes if the constraints push Valid Palindrome toward hash lookup, binary search, sliding window, sorting, or prefix state?
-- Which off-by-one bounds case would break the first implementation?
-- Can the Opposite Direction Pointers invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Valid Palindrome II (LC 680) allows one deletion and forks into two checks at the first mismatch.
+- Valid Palindrome IV (LC 2330) and Palindromic Substrings (LC 647) extend the same converging-pointer idea.
+- What changes when the input is a singly linked list rather than a string?
 
 ## 2. Merge Sorted Array
 
@@ -47,15 +47,15 @@ Pattern: Merge From End
 Why It Matters: Tests in-place merging while protecting unread values.
 
 Skills Tested:
-- Identify the Merge From End signal before choosing a template.
-- State the invariant for Merge Sorted Array: tests in-place merging while protecting unread values.
-- Handle off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that merging into `nums1` from the front would overwrite unread values, so the safe direction is from the back where space is free.
+- State the invariant: the suffix of `nums1` from `write` onward is sorted and final, while the prefixes still hold unprocessed values.
+- Handle `m == 0` (copy `nums2`), `n == 0` (no-op), and trailing leftover from `nums2` after `nums1` is exhausted.
+- Achieve O(m + n) time, O(1) extra space, and explain why a naive copy-and-sort costs O((m + n) log (m + n)).
 
 Common Follow-Ups:
-- What changes if the constraints push Merge Sorted Array toward hash lookup, binary search, sliding window, sorting, or prefix state?
-- Which off-by-one bounds case would break the first implementation?
-- Can the Merge From End invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Merge K Sorted Lists (LC 23) generalizes to a heap of head pointers.
+- Merge Intervals (LC 56) reuses the merge-from-front idea with overlap reasoning.
+- How would you parallelize a merge of very large external sorted runs?
 
 ## 3. Remove Duplicates from Sorted Array
 
@@ -68,15 +68,15 @@ Pattern: Same Direction Pointers
 Why It Matters: Introduces read/write invariants on sorted data.
 
 Skills Tested:
-- Identify the Same Direction Pointers signal before choosing a template.
-- State the invariant for Remove Duplicates from Sorted Array: introduces read/write invariants on sorted data.
-- Handle off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "remove duplicates in place from sorted input" is a write pointer trailing a read pointer that copies only when the value changes.
+- State the invariant: the prefix `nums[0..write]` is the deduplicated result, while `read` scans the rest in order.
+- Handle empty arrays (return 0), single elements (return 1), and arrays where every value is identical.
+- Achieve O(n) time, O(1) extra space, and explain why this pattern fails on unsorted input.
 
 Common Follow-Ups:
-- What changes if the constraints push Remove Duplicates from Sorted Array toward hash lookup, binary search, sliding window, sorting, or prefix state?
-- Which off-by-one bounds case would break the first implementation?
-- Can the Same Direction Pointers invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Remove Duplicates from Sorted Array II (LC 80) keeps at most two copies, requiring a comparison against `nums[write - 2]`.
+- Remove Element (LC 27) replaces the equality check with a value filter.
+- How would you adapt the pattern to a singly linked list (Remove Duplicates from Sorted List, LC 83).
 
 ## 4. Move Zeroes
 
@@ -89,15 +89,15 @@ Pattern: Stable Compaction
 Why It Matters: Practices separating kept values from filler values.
 
 Skills Tested:
-- Identify the Stable Compaction signal before choosing a template.
-- State the invariant for Move Zeroes: practices separating kept values from filler values.
-- Handle off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "shift all non-zero values forward, preserve order" is a stable partition with a write pointer that lags the read pointer.
+- State the invariant: `nums[0..write]` holds every non-zero value seen so far in original order, and `nums[write..read]` is filler that becomes zero at the end.
+- Decide between a two-pass (compact then zero-fill) and a single-pass (swap when read is non-zero) variant, naming the trade-off.
+- Handle all-zero arrays, all-non-zero arrays, and arrays of length one without special cases.
 
 Common Follow-Ups:
-- What changes if the constraints push Move Zeroes toward hash lookup, binary search, sliding window, sorting, or prefix state?
-- Which off-by-one bounds case would break the first implementation?
-- Can the Stable Compaction invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Remove Element (LC 27) uses the same stable compaction with an arbitrary value filter.
+- Sort Colors (LC 75) generalizes to three regions instead of two.
+- What changes if the relative order of zero values must also be preserved (no longer a partition).
 
 ## 5. Squares of a Sorted Array
 
@@ -110,15 +110,15 @@ Pattern: Opposite Ends Merge
 Why It Matters: Uses sorted absolute values to fill output from the back.
 
 Skills Tested:
-- Identify the Opposite Ends Merge signal before choosing a template.
-- State the invariant for Squares of a Sorted Array: uses sorted absolute values to fill output from the back.
-- Handle off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that the largest square lies at one end of a sorted array, so two pointers from both ends pick the bigger square each step.
+- State the invariant: at each step, the larger of `nums[left] ** 2` and `nums[right] ** 2` is placed at the next available rightmost slot of the output.
+- Handle all-negative arrays, all-non-negative arrays, and arrays containing zero.
+- Achieve O(n) time and O(n) output space, and explain why a naive square-then-sort is O(n log n).
 
 Common Follow-Ups:
-- What changes if the constraints push Squares of a Sorted Array toward hash lookup, binary search, sliding window, sorting, or prefix state?
-- Which off-by-one bounds case would break the first implementation?
-- Can the Opposite Ends Merge invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Sort Transformed Array (LC 360) extends to `a*x*x + b*x + c` and forks based on the sign of `a`.
+- What if the output had to be in place and the input could be modified.
+- How would you handle very large numbers where squaring overflows 64-bit (use big integers or shift to floats with care).
 
 ---
 

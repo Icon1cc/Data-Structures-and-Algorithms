@@ -75,6 +75,20 @@ flowchart LR
     F --> G[start new merged interval]
 ```
 
+## Pattern Walkthrough
+
+```mermaid
+flowchart LR
+    Sort["Sort by start: [1,3] [2,4] [5,7]"] --> P1["Push [1,3]"]
+    P1 --> Check2{"[2,4] overlaps [1,3]?"}
+    Check2 -->|yes, 2 <= 3| Merge2["Extend last to [1,4]"]
+    Merge2 --> Check3{"[5,7] overlaps [1,4]?"}
+    Check3 -->|no, 5 > 4| Push3["Push [5,7]"]
+    Push3 --> Result["Result: [1,4] [5,7]"]
+```
+
+The merge-intervals sweep keeps a sorted, disjoint result list; on each new interval, it either extends the last entry's right endpoint or starts a fresh entry.
+
 ## Foundations And Invariants
 
 Boundary convention matters. If intervals are half-open, [1,3) and [3,5) do not overlap. If closed, touching endpoints may overlap.

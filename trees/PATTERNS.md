@@ -41,9 +41,9 @@ Do not use recursion blindly if depth can exceed stack limits.
 
 ### Common Mistakes
 
-- Returning global answer instead of the local value the parent needs.
-- Ignoring the exclusion case for Recursive DFS: Do not use recursion blindly if depth can exceed stack limits.
-- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
+- Returning the global answer (e.g., diameter) when the parent needs the local height to combine.
+- Updating the global answer before recursing into both children, which loses the through-node candidate.
+- Returning before the null base case; missing `if not node: return base` is the most common bug source.
 
 ### Pseudocode Or Template
 
@@ -90,9 +90,9 @@ Do not use if recursive code is clearer and depth is safe.
 
 ### Common Mistakes
 
-- Pushing children in the wrong order for the desired traversal.
-- Ignoring the exclusion case for Iterative DFS: Do not use if recursive code is clearer and depth is safe.
-- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
+- Pushing children left-then-right when you wanted preorder; the LIFO stack reverses the order.
+- For iterative inorder, walking left forever without pushing each visited node onto the stack.
+- Mutating the tree while iterating; if the structure changes mid-traversal, your stack invariant breaks.
 
 ### Pseudocode Or Template
 
@@ -140,9 +140,9 @@ Do not use DFS when shortest edge count by level is required.
 
 ### Common Mistakes
 
-- Mixing nodes from different levels by not capturing level size.
-- Ignoring the exclusion case for BFS Level Order: Do not use DFS when shortest edge count by level is required.
-- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
+- Reading `len(queue)` inside the inner loop, which sees the changing size and mixes levels.
+- Forgetting to skip null children before enqueueing; the queue fills with nulls and corrupts level counts.
+- Using a list instead of a deque; `pop(0)` on a list is O(n) per call and turns the BFS into O(n^2).
 
 ### Pseudocode Or Template
 
@@ -188,9 +188,9 @@ Do not keep one mutable path without undoing after recursion.
 
 ### Common Mistakes
 
-- Appending live path objects instead of copies.
-- Ignoring the exclusion case for Path Problems: Do not keep one mutable path without undoing after recursion.
-- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
+- Appending the live `path` list to results instead of `path[:]`; later mutations corrupt the saved answer.
+- Forgetting to `path.pop()` after recursing; the path bleeds into siblings of the recursion subtree.
+- Treating "path" as "any sequence" when the problem requires root-to-leaf; check the leaf condition explicitly.
 
 ### Pseudocode Or Template
 
@@ -235,9 +235,9 @@ Do not collapse state if parent needs to know different choices.
 
 ### Common Mistakes
 
-- Returning only the best value when parent needs selected and unselected cases.
-- Ignoring the exclusion case for Tree DP: Do not collapse state if parent needs to know different choices.
-- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
+- Caching by node value instead of node identity; same-value subtrees can mislead the cache.
+- Returning only the optimum when the parent must combine "this node included" with "this node excluded".
+- Forgetting that null returns must contribute neutral values (0 for sums, `(0, 0)` for tuple states).
 
 ### Pseudocode Or Template
 
@@ -282,9 +282,9 @@ Do not use BST ordering on a non-BST.
 
 ### Common Mistakes
 
-- Continuing past the split point in a BST.
-- Ignoring the exclusion case for Lowest Common Ancestor: Do not use BST ordering on a non-BST.
-- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
+- Returning the first match without checking both subtrees; without that, an ancestor of `p` is wrongly returned when `q` lives elsewhere.
+- For BST LCA, descending past the split point where one target is left and the other is right; the current node is the answer.
+- Failing the case where one node is an ancestor of the other; the recursion still works because the ancestor returns first and propagates upward.
 
 ### Pseudocode Or Template
 
@@ -331,9 +331,9 @@ Do not validate a BST by comparing only parent and child.
 
 ### Common Mistakes
 
-- Allowing equality on the wrong side when duplicates are not allowed.
-- Ignoring the exclusion case for BST Bounds: Do not validate a BST by comparing only parent and child.
-- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
+- Validating with parent-child comparisons only; a left grandchild may exceed the right grandparent and still pass.
+- Using `int(-inf)` or sentinels that fall inside the value range; use Python `-inf, +inf` floats or pass `None` and treat null as no-bound.
+- Allowing equality on the wrong side when duplicates are forbidden; usually `low < val < high` (strict).
 
 ### Pseudocode Or Template
 

@@ -40,9 +40,9 @@ Do not heap all n items if k is small and only k results are needed.
 
 ### Common Mistakes
 
-- Using a min-heap when the eviction logic requires a max-heap or vice versa.
-- Ignoring the exclusion case for Top K Heap: Do not heap all n items if k is small and only k results are needed.
-- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
+- Using a max-heap of size k for "k largest"; the correct structure is a min-heap, where the top is the worst kept item to evict.
+- Comparing tuples in Python without a stable secondary key; equal first values force a node-comparison error in some payloads.
+- Pushing all n items first, then popping k; this works but costs O(n log n) instead of O(n log k).
 
 ### Pseudocode Or Template
 
@@ -88,9 +88,9 @@ Do not push every item upfront if sources can be advanced lazily.
 
 ### Common Mistakes
 
-- Forgetting tie-breakers when heap elements compare equal.
-- Ignoring the exclusion case for K-way Merge: Do not push every item upfront if sources can be advanced lazily.
-- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
+- Pushing all n items into the heap upfront; the heap should hold at most one head per source at a time.
+- Forgetting to push the next element from the source after popping; the merge stalls.
+- Heaping `(value, node)` without a tiebreak index; equal values cause node comparisons that crash on linked-list nodes.
 
 ### Pseudocode Or Template
 
@@ -137,9 +137,9 @@ Do not let heap sizes drift beyond one.
 
 ### Common Mistakes
 
-- Not rebalancing after every insertion or deletion.
-- Ignoring the exclusion case for Two Heaps: Do not let heap sizes drift beyond one.
-- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
+- Pushing directly to the side you want without normalizing through the other; always push to one heap, then transfer the top to the other before checking sizes.
+- Allowing the lower heap to become smaller than the upper, which changes how the median is computed for odd lengths.
+- For median over an even count, returning `lower.top()` instead of `(lower.top() + upper.top()) / 2`.
 
 ### Pseudocode Or Template
 
@@ -184,9 +184,9 @@ Do not trust heap top until stale entries are pruned.
 
 ### Common Mistakes
 
-- Forgetting to decrement delayed counts while pruning.
-- Ignoring the exclusion case for Lazy Deletion Heap: Do not trust heap top until stale entries are pruned.
-- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
+- Reading `heap.top()` without first cleaning stale entries; the answer reflects evicted items.
+- Forgetting to decrement the `delayed` map after popping a stale entry, leaving phantom counts forever.
+- Tracking staleness by index when the same value appears multiple times; key by `(value, expiry)` instead.
 
 ### Pseudocode Or Template
 
@@ -232,9 +232,9 @@ Do not use when negative edges are present.
 
 ### Common Mistakes
 
-- Processing stale distance entries as final.
-- Ignoring the exclusion case for Dijkstra Frontier: Do not use when negative edges are present.
-- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
+- Treating a popped distance as final without comparing to `best[node]`; stale entries must be skipped.
+- Pushing on the relax step but never marking the node as settled; the heap fills with redundant entries (still correct but slow).
+- Using Dijkstra with negative edges; the algorithm can lock in a non-optimal distance once a node is settled.
 
 ### Pseudocode Or Template
 

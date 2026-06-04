@@ -75,6 +75,30 @@ flowchart LR
     B -->|valid| E[Record and move safely]
 ```
 
+## Pattern Walkthrough
+
+```mermaid
+flowchart LR
+    subgraph Step1["Step 1"]
+        S1A["[2, 4, 6, 8, 10]"]
+        S1L1["L=0"]
+        S1R1["R=4"]
+    end
+    subgraph Step2["Step 2 (sum 12 too small)"]
+        S2A["[2, 4, 6, 8, 10]"]
+        S2L2["L=1"]
+        S2R2["R=4"]
+    end
+    subgraph Step3["Step 3 (sum 14 = target)"]
+        S3A["[2, 4, 6, 8, 10]"]
+        S3L3["L=1"]
+        S3R3["R=4"]
+    end
+    Step1 --> Step2 --> Step3
+```
+
+Two pointers from opposite ends converge on a sorted array; advancing `left` when the pair sum is too small never skips a valid answer because every pair using `nums[left]` with a smaller right value would be even smaller.
+
 ## Foundations And Invariants
 
 Correctness comes from monotonic elimination. When a sorted pair sum is too small, every pair using the smaller left value with an even smaller right side is also too small.

@@ -74,6 +74,21 @@ flowchart LR
     C --> E[rest of list]
 ```
 
+## Pattern Walkthrough
+
+```mermaid
+flowchart TD
+    Start["Initial: prev=null, curr=A"] --> S1["Step 1: save next=B"]
+    S1 --> S2["Set curr.next = prev (null)"]
+    S2 --> S3["Move prev=A, curr=B"]
+    S3 --> Step2["Step 2: save next=C"]
+    Step2 --> S4["Set curr.next = prev (A)"]
+    S4 --> S5["Move prev=B, curr=C"]
+    S5 --> Done["...repeat until curr is null; return prev as new head"]
+```
+
+Reversing a linked list rewires three pointers per node: save `next`, point `curr.next` at `prev`, then advance both pointers; at the end, `prev` is the new head.
+
 ## Foundations And Invariants
 
 A dummy head removes special cases at the real head. Fast and slow pointers encode distance without computing length first.

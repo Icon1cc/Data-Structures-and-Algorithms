@@ -80,6 +80,21 @@ flowchart LR
     F --> G[Update state before next value]
 ```
 
+## Pattern Walkthrough
+
+```mermaid
+flowchart LR
+    N0["nums[0]=2"] --> H0["seen= empty"]
+    H0 --> Check0{"target - 2 in seen?"}
+    Check0 -->|no| Add0["seen now has 2 to 0"]
+    Add0 --> N1["nums[1]=7"]
+    N1 --> H1["seen has 2 to 0"]
+    H1 --> Check1{"target - 7 = 2 in seen?"}
+    Check1 -->|yes| Done["return [0, 1]"]
+```
+
+Two Sum streams the array through a hash map keyed by value; at every index, the lookup of `target - nums[i]` either finds a stored complement or adds the current value for a future hit.
+
 ## Foundations And Invariants
 
 The key invariant is that the stored summary is sufficient for the next decision. Counting, set membership, modular arithmetic, and prefix differences are the most common tools.

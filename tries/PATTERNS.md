@@ -39,9 +39,9 @@ Do not build a trie for one-off exact membership checks.
 
 ### Common Mistakes
 
-- Forgetting the terminal marker.
-- Ignoring the exclusion case for Prefix Insert And Search: Do not build a trie for one-off exact membership checks.
-- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
+- Forgetting `is_word` so `search("app")` returns true even when only "apple" was inserted.
+- Confusing `search` with `startsWith`; the former requires `is_word` at the end, the latter does not.
+- Building 26-array nodes for sparse alphabets; the memory dwarfs a hash-map child table.
 
 ### Pseudocode Or Template
 
@@ -87,9 +87,9 @@ Do not branch for normal characters.
 
 ### Common Mistakes
 
-- Returning true for a prefix that is not terminal.
-- Ignoring the exclusion case for Wildcard Trie DFS: Do not branch for normal characters.
-- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
+- Returning `True` at the end of the query without checking `is_word`; that accepts any prefix as a hit.
+- Branching on every character instead of only on `'.'`; the search degenerates to a full-trie DFS.
+- Failing to short-circuit; once any branch returns `True`, the recursion can stop exploring siblings.
 
 ### Pseudocode Or Template
 
@@ -134,9 +134,9 @@ Do not restart a full word search for every word when the board is shared.
 
 ### Common Mistakes
 
-- Not marking board cells visited during the current path.
-- Ignoring the exclusion case for Board Search Trie Pruning: Do not restart a full word search for every word when the board is shared.
-- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
+- Failing to mark and unmark board cells during DFS, which causes the same letter to be reused along the path.
+- Adding the same word to the result twice; clear `is_word` after the first match or use a set.
+- Skipping trie pruning of dead branches; popping leaf nodes whose subtree is exhausted keeps later searches fast.
 
 ### Pseudocode Or Template
 
@@ -182,9 +182,9 @@ Do not DFS entire subtrees repeatedly if top results can be stored per node.
 
 ### Common Mistakes
 
-- Returning unsorted suggestions when lexicographic order is required.
-- Ignoring the exclusion case for Autocomplete Suggestions: Do not DFS entire subtrees repeatedly if top results can be stored per node.
-- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
+- Re-walking the trie from the root on every keystroke; advance from the previous node instead.
+- Building lists in arrival order when the spec wants lexicographic order; insert from a sorted product list to keep order automatically.
+- Storing the full word at every node when only the top-3 prefix matches are needed; trim the per-node cache to the answer size.
 
 ### Pseudocode Or Template
 
@@ -229,9 +229,9 @@ Do not use a character trie for numeric bit choices.
 
 ### Common Mistakes
 
-- Processing bits from low to high, which loses greedy significance.
-- Ignoring the exclusion case for Bit Trie: Do not use a character trie for numeric bit choices.
-- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
+- Inserting bits from least-significant to most-significant; greedy search needs the high bits at the root.
+- Forgetting to fall back to the same-bit child when the opposite-bit child does not exist.
+- Using a fixed bit width that cannot hold the largest input; size the depth to `ceil(log2(max_value)) + 1`.
 
 ### Pseudocode Or Template
 

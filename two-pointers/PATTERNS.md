@@ -41,9 +41,9 @@ Do not use if moving one side cannot be justified by an ordering rule.
 
 ### Common Mistakes
 
-- Moving the pointer with the larger value in container problems.
-- Ignoring the exclusion case for Opposite Direction Pointers: Do not use if moving one side cannot be justified by an ordering rule.
-- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
+- Moving the taller wall in Container With Most Water; the height ceiling cannot rise, so the area can only shrink.
+- Forgetting to skip duplicates in 3Sum-style problems after each successful match, causing duplicate triples in the result.
+- Using `<` versus `<=` carelessly in the loop guard; for converging pair search, `left < right` is correct, while equality would compare a value with itself.
 
 ### Pseudocode Or Template
 
@@ -88,9 +88,9 @@ Do not use when relative order does not matter and partitioning is simpler.
 
 ### Common Mistakes
 
-- Incrementing write before the assignment is complete.
-- Ignoring the exclusion case for Same Direction Pointers: Do not use when relative order does not matter and partitioning is simpler.
-- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
+- Incrementing `write` before assigning, which leaves a stale value at the new write index.
+- Comparing against `nums[read]` instead of `nums[write - 1]` for sorted-deduplication; the kept boundary lives behind `write`, not at `read`.
+- Returning the array length instead of the count of kept elements; problem statements often want the new logical length.
 
 ### Pseudocode Or Template
 
@@ -138,9 +138,9 @@ Do not use if the structure has no linked movement or next relation.
 
 ### Common Mistakes
 
-- Failing to separate cycle detection from locating the cycle entrance.
-- Ignoring the exclusion case for Fast And Slow Pointers: Do not use if the structure has no linked movement or next relation.
-- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
+- Stopping cycle detection at `fast.next` without also guarding `fast.next.next`, which crashes on null in odd-length lists.
+- Returning the meeting point as the cycle entrance; the meeting point lies somewhere inside the cycle, and a second walk from head plus meeting locates the entrance.
+- Using fast/slow on Find the Duplicate Number when the array contains value 0; the algorithm requires values in `[1, n]` for the index-mapping trick.
 
 ### Pseudocode Or Template
 
@@ -187,9 +187,9 @@ Do not use if stable ordering is required and the swaps would break it.
 
 ### Common Mistakes
 
-- Advancing the current pointer after swapping with an unknown region.
-- Ignoring the exclusion case for Partitioning: Do not use if stable ordering is required and the swaps would break it.
-- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
+- Advancing `mid` after swapping with the high region; the value pulled from high has not been inspected yet and may belong to the low region.
+- Confusing the four region invariants (less, equal, unprocessed, greater); write each boundary's meaning down before coding.
+- Picking partitioning when stable order matters; partitioning swaps freely and breaks the relative order within regions.
 
 ### Pseudocode Or Template
 
@@ -235,9 +235,9 @@ Do not use when output order or memory layout does not protect unread values.
 
 ### Common Mistakes
 
-- Writing from the front and destroying needed values.
-- Ignoring the exclusion case for Merge From End: Do not use when output order or memory layout does not protect unread values.
-- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
+- Stopping the loop on `i >= 0` only; if `j` outlasts `i`, the remaining `nums2` values must still be copied.
+- Writing from the front, which destroys `nums1[i]` before it has been compared.
+- Squaring values in place before merging; the negative-then-positive ordering disappears, breaking the sorted-merge assumption.
 
 ### Pseudocode Or Template
 

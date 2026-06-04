@@ -41,9 +41,9 @@ Do not use when the input is unsorted or the predicate is not monotonic.
 
 ### Common Mistakes
 
-- Changing the wrong boundary after equality.
-- Ignoring the exclusion case for Classic Target Search: Do not use when the input is unsorted or the predicate is not monotonic.
-- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
+- Computing `mid = (lo + hi) // 2` in languages where `lo + hi` can overflow; use `lo + (hi - lo) // 2` instead.
+- Mixing inclusive `[lo, hi]` and exclusive `[lo, hi)` templates in the same function; pick one and stick to it.
+- Returning `mid` immediately on equality but never updating bounds, causing an infinite loop on a missing target.
 
 ### Pseudocode Or Template
 
@@ -90,9 +90,9 @@ Do not use without defining what true means at each index.
 
 ### Common Mistakes
 
-- Returning hi in one template and lo in another without knowing why.
-- Ignoring the exclusion case for Lower Bound: Do not use without defining what true means at each index.
-- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
+- Using `lo <= hi` with `[lo, n]` exclusive; the half-open template needs `lo < hi` to terminate.
+- Forgetting that the answer can be `n` (no valid index) when every position is false; return `lo` and let the caller interpret it.
+- Updating `lo = mid` instead of `lo = mid + 1` when the predicate is false, which produces an infinite loop.
 
 ### Pseudocode Or Template
 
@@ -139,9 +139,9 @@ Do not mix greater-than with greater-or-equal semantics.
 
 ### Common Mistakes
 
-- Returning the first invalid index when the caller expects the last valid index.
-- Ignoring the exclusion case for Upper Bound: Do not mix greater-than with greater-or-equal semantics.
-- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
+- Returning `lo` when the caller wanted the last index where the value matches; subtract 1 to convert upper-bound to last-equal.
+- Using `<=` versus `<` carelessly in the predicate; `<=` makes upper-bound, `<` makes lower-bound.
+- Counting `upper_bound(x) - lower_bound(x)` and forgetting that it equals the multiplicity of `x` only on a sorted array.
 
 ### Pseudocode Or Template
 
@@ -188,9 +188,9 @@ Do not use unchanged when duplicates make both halves ambiguous.
 
 ### Common Mistakes
 
-- Testing the target against the unsorted half.
-- Ignoring the exclusion case for Rotated Sorted Search: Do not use unchanged when duplicates make both halves ambiguous.
-- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
+- Comparing `nums[mid]` against `nums[lo]` instead of `nums[hi]`; the latter is more robust for pivot detection because the right end keeps the rotation invariant clean.
+- Failing to handle the no-rotation case (`nums[0] < nums[-1]`) before entering the loop; the algorithm still works but a fast path is cleaner.
+- Ignoring duplicates: with duplicates, `nums[mid] == nums[hi]` is ambiguous; shrinking `hi` by 1 is the standard fallback.
 
 ### Pseudocode Or Template
 
@@ -203,7 +203,7 @@ else:
 
 ### Complexity Notes
 
-O(log n) without duplicate ambiguity.
+O(log n) without duplicate ambiguity, O(n) worst case with duplicates.
 
 ### Interview Explanation
 
@@ -237,9 +237,9 @@ Do not use if feasibility can switch back and forth.
 
 ### Common Mistakes
 
-- Picking low and high bounds that exclude the answer.
-- Ignoring the exclusion case for Binary Search On Answer: Do not use if feasibility can switch back and forth.
-- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
+- Setting `lo = 1` when the lower bound should be `max(weights)` (the largest single item must fit); the search returns infeasible candidates.
+- Using `lo = mid` instead of `lo = mid + 1` after a false `feasible` check, looping forever on plateaus.
+- Confirming feasibility direction by guessing; explicitly write down "feasible(mid) implies feasible(mid + 1)" before coding.
 
 ### Pseudocode Or Template
 
@@ -286,9 +286,9 @@ Do not flatten when rows and columns are sorted independently but not globally.
 
 ### Common Mistakes
 
-- Using the wrong row and column conversion.
-- Ignoring the exclusion case for Matrix Binary Search: Do not flatten when rows and columns are sorted independently but not globally.
-- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
+- Treating LC 240 (row and column sorted but not globally) like LC 74 (globally sorted); flat binary search fails on LC 240.
+- Computing `(r, c) = divmod(mid, rows)` instead of `divmod(mid, cols)`; the column count is the divisor.
+- Falling back to nested binary search per row when stair-step search from the top-right corner is O(m + n).
 
 ### Pseudocode Or Template
 
@@ -333,9 +333,9 @@ Do not use for arbitrary unsorted target lookup.
 
 ### Common Mistakes
 
-- Comparing to both neighbors when one slope comparison is sufficient.
-- Ignoring the exclusion case for Peak Search: Do not use for arbitrary unsorted target lookup.
-- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
+- Reaching for `nums[mid - 1]` and `nums[mid + 1]` without bounds; comparing `nums[mid]` and `nums[mid + 1]` is enough and avoids the left edge.
+- Forgetting that `nums[-1] = nums[n] = -inf` is the existence guarantee; without it, no peak need exist.
+- Using equal-value tie-breaking; the algorithm assumes strict inequality between adjacent values.
 
 ### Pseudocode Or Template
 

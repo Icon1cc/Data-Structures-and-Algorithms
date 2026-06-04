@@ -26,15 +26,15 @@ Pattern: Balanced Delimiters
 Why It Matters: The baseline stack problem for nested order.
 
 Skills Tested:
-- Identify the Balanced Delimiters signal before choosing a template.
-- State the invariant for Valid Parentheses: the baseline stack problem for nested order.
-- Handle empty stack, equal values, sentinel handling, and index versus value storage.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that nested-bracket matching is LIFO: the most recent open bracket must match the next close bracket.
+- State the invariant: at every step, the stack holds the still-open brackets in the order they appeared.
+- Handle a leading close bracket (empty stack rejection), mismatched types on pop, and a non-empty stack at end.
+- Time O(n), space O(n), and contrast with counter approaches which fail when bracket types differ.
 
 Common Follow-Ups:
-- What changes if the constraints push Valid Parentheses toward deque, heap, recursion, counters, or direct simulation?
-- Which empty stack case would break the first implementation?
-- Can the Balanced Delimiters invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Generate Parentheses (LC 22) inverts the predicate to enumeration.
+- Minimum Add to Make Parentheses Valid (LC 921) counts edits instead of validating.
+- What changes when there are three bracket types plus quoted strings that contain brackets.
 
 ## 2. Baseball Game
 
@@ -47,15 +47,15 @@ Pattern: LIFO Simulation
 Why It Matters: Practices undo-like operations with recent scores.
 
 Skills Tested:
-- Identify the LIFO Simulation signal before choosing a template.
-- State the invariant for Baseball Game: practices undo-like operations with recent scores.
-- Handle empty stack, equal values, sentinel handling, and index versus value storage.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "C undoes the last", "D doubles the last", "+ adds the last two" all reference recent state, which is exactly a stack.
+- State the invariant: the stack always holds the valid scores in the order they were recorded.
+- Handle malformed inputs that ask for `+` with fewer than two scores or `D`/`C` with an empty stack (problem guarantees do, but state the assumption).
+- Time O(n), space O(n), and explain why an array with index pointers is equivalent.
 
 Common Follow-Ups:
-- What changes if the constraints push Baseball Game toward deque, heap, recursion, counters, or direct simulation?
-- Which empty stack case would break the first implementation?
-- Can the LIFO Simulation invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Design a streaming evaluator where commands arrive one at a time.
+- What if commands include "average of all so far" - can the stack still answer in O(1).
+- How would you support an undo of an undo (replay log).
 
 ## 3. Backspace String Compare
 
@@ -63,20 +63,20 @@ LeetCode: [Backspace String Compare](https://leetcode.com/problems/backspace-str
 
 Difficulty: Easy
 
-Pattern: Stack Or Reverse Pointers
+Pattern: Reverse Two Pointers Or Stack
 
 Why It Matters: Shows how editing behavior can be simulated or optimized.
 
 Skills Tested:
-- Identify the Stack Or Reverse Pointers signal before choosing a template.
-- State the invariant for Backspace String Compare: shows how editing behavior can be simulated or optimized.
-- Handle empty stack, equal values, sentinel handling, and index versus value storage.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that `#` is a "delete previous", which is a stack-pop operation.
+- State the invariant: after processing each character, the stack equals the visible string so far.
+- Optimize to O(1) extra space by walking both strings from the right and skipping characters owed to backspaces.
+- Time O(n + m), space O(1) for the two-pointer variant or O(n + m) for the stack variant.
 
 Common Follow-Ups:
-- What changes if the constraints push Backspace String Compare toward deque, heap, recursion, counters, or direct simulation?
-- Which empty stack case would break the first implementation?
-- Can the Stack Or Reverse Pointers invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Build an editor that supports backspace plus insert at cursor.
+- What if `#` deletes a character at a stored index, not the most recent.
+- How does the answer change when input is streamed and you must answer equality after every step.
 
 ## 4. Next Greater Element I
 
@@ -84,20 +84,20 @@ LeetCode: [Next Greater Element I](https://leetcode.com/problems/next-greater-el
 
 Difficulty: Easy
 
-Pattern: Monotonic Stack
+Pattern: Monotonic Decreasing Stack
 
 Why It Matters: Introduces nearest greater mapping.
 
 Skills Tested:
-- Identify the Monotonic Stack signal before choosing a template.
-- State the invariant for Next Greater Element I: introduces nearest greater mapping.
-- Handle empty stack, equal values, sentinel handling, and index versus value storage.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that "for each value in `nums2`, find the first larger value to its right" is the canonical monotonic-decreasing stack scan.
+- State the invariant: the stack holds indices (or values) whose next greater has not yet been found, in strictly decreasing order of value.
+- Build the next-greater map for `nums2` first, then look up each `nums1[i]` directly.
+- Time O(n + m), space O(n), and contrast with O(n * m) brute force.
 
 Common Follow-Ups:
-- What changes if the constraints push Next Greater Element I toward deque, heap, recursion, counters, or direct simulation?
-- Which empty stack case would break the first implementation?
-- Can the Monotonic Stack invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Next Greater Element II (LC 503) handles a circular array via two passes.
+- Next Greater Element III (LC 556) uses a digit-permutation argument.
+- Daily Temperatures (LC 739) replaces value with distance.
 
 ## 5. Remove All Adjacent Duplicates In String
 
@@ -110,15 +110,15 @@ Pattern: Stack Cancellation
 Why It Matters: Builds cancellation logic with the top element.
 
 Skills Tested:
-- Identify the Stack Cancellation signal before choosing a template.
-- State the invariant for Remove All Adjacent Duplicates In String: builds cancellation logic with the top element.
-- Handle empty stack, equal values, sentinel handling, and index versus value storage.
-- Explain time, auxiliary space, and any output-size cost separately.
+- Recognize that adjacent duplicates can be folded by checking the top of the stack against each incoming character.
+- State the invariant: at every step, the stack contains the prefix after every possible cancellation.
+- Handle the case where a cancellation creates a new adjacent duplicate (the loop on the top-of-stack handles it implicitly).
+- Time O(n), space O(n), and contrast with repeated string scans that are O(n^2).
 
 Common Follow-Ups:
-- What changes if the constraints push Remove All Adjacent Duplicates In String toward deque, heap, recursion, counters, or direct simulation?
-- Which empty stack case would break the first implementation?
-- Can the Stack Cancellation invariant survive streaming input, in-place restrictions, or lower memory limits?
+- Remove All Adjacent Duplicates II (LC 1209) generalizes the duplicate count from 2 to `k`.
+- 1209 follow-up: store `(char, count)` pairs to avoid per-character pushes.
+- What if the cancellation rule is "any matching pair regardless of distance" (graph matching, much harder).
 
 ---
 

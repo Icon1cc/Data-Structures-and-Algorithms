@@ -41,9 +41,9 @@ Do not use recursive DFS blindly on very deep graphs.
 
 ### Common Mistakes
 
-- Marking visited after recursive calls, allowing cycles to recurse forever.
-- Ignoring the exclusion case for DFS Traversal: Do not use recursive DFS blindly on very deep graphs.
-- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
+- Marking `visited` after the recursive call instead of before, which lets the same node enter the recursion multiple times.
+- Recursing on every neighbor without checking `visited`, causing infinite loops on cycles.
+- Hitting Python's recursion limit on deep graphs (10,000+ nodes); switch to iterative DFS or increase the limit explicitly.
 
 ### Pseudocode Or Template
 
@@ -89,9 +89,9 @@ Do not use DFS when minimum edge count is required.
 
 ### Common Mistakes
 
-- Marking visited on pop instead of enqueue, causing duplicates.
-- Ignoring the exclusion case for BFS Traversal: Do not use DFS when minimum edge count is required.
-- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
+- Marking `visited` on pop instead of enqueue; the same node enters the queue from multiple neighbors.
+- Using `list.pop(0)` instead of `deque.popleft()`; lists make BFS O(V^2).
+- Tracking distance per node by enqueueing `(node, dist)` instead of using level-by-level processing; both work, but mixing them causes off-by-one bugs.
 
 ### Pseudocode Or Template
 
@@ -138,9 +138,9 @@ Do not assume a graph is connected unless stated.
 
 ### Common Mistakes
 
-- Forgetting to scan every node after one traversal.
-- Ignoring the exclusion case for Connected Components: Do not assume a graph is connected unless stated.
-- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
+- Running the inner traversal once and reporting that as the answer; you must restart from every unvisited node.
+- Counting components inside the inner traversal; increment the counter only at the outer scan when you launch a new DFS/BFS.
+- Confusing strongly connected components with connected components in a directed graph; the latter ignores edge direction.
 
 ### Pseudocode Or Template
 
@@ -187,9 +187,9 @@ Do not use the same rule for directed and undirected cycles.
 
 ### Common Mistakes
 
-- Treating an undirected edge back to parent as a cycle.
-- Ignoring the exclusion case for Cycle Detection: Do not use the same rule for directed and undirected cycles.
-- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
+- For undirected graphs, treating the back-edge to parent as a cycle; ignore the parent edge explicitly.
+- For directed graphs, using a single boolean `visited` instead of three states (white/gray/black); two-color cannot tell back-edges from forward-edges.
+- Resetting state between connected components when you should keep it; cycle detection runs once per node, not per restart.
 
 ### Pseudocode Or Template
 
@@ -233,9 +233,9 @@ Do not use topological sort if cycles are allowed in a valid answer.
 
 ### Common Mistakes
 
-- Not detecting that fewer output nodes than total means a cycle.
-- Ignoring the exclusion case for Topological Sort: Do not use topological sort if cycles are allowed in a valid answer.
-- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
+- Reversing the edge direction; a prerequisite edge `a -> b` means "do `a` before `b`", and Kahn's algorithm processes zero-indegree nodes.
+- Failing to detect a cycle by length; if the output has fewer than `n` nodes, a cycle blocked some indegrees from reaching zero.
+- Tie-breaking inconsistently; use a min-heap when the problem wants lexicographic order.
 
 ### Pseudocode Or Template
 
@@ -282,9 +282,9 @@ Do not use when you need actual path order or shortest distance.
 
 ### Common Mistakes
 
-- Forgetting path compression or union by rank on large inputs.
-- Ignoring the exclusion case for Union Find: Do not use when you need actual path order or shortest distance.
-- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
+- Skipping path compression; without it, `find` is O(n) worst case and union-find is no faster than DFS.
+- Using values as parent pointers without first mapping to integer IDs; non-integer keys can be slower or break the array implementation.
+- Calling `union` without checking if both endpoints are already in the same component; for cycle-finding problems, the same-root check is the cycle signal.
 
 ### Pseudocode Or Template
 
@@ -331,9 +331,9 @@ Do not build an explicit graph when neighbor generation is simple.
 
 ### Common Mistakes
 
-- Mixing row and column bounds.
-- Ignoring the exclusion case for Grid Graph BFS: Do not build an explicit graph when neighbor generation is simple.
-- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
+- Confusing row and column indices when computing neighbors; settle on `(r, c)` with `r` as the outer index and stick to it.
+- Forgetting to bound-check before accessing `grid[nr][nc]`; out-of-bounds access raises errors or wraps.
+- Using DFS for shortest-path-on-grid; only BFS gives the minimum edge count.
 
 ### Pseudocode Or Template
 

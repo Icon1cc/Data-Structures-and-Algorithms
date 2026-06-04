@@ -40,9 +40,9 @@ Do not use when the oldest item must leave first.
 
 ### Common Mistakes
 
-- Forgetting that multiple stack items may be resolved by one new item.
-- Ignoring the exclusion case for LIFO Simulation: Do not use when the oldest item must leave first.
-- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
+- Stopping after one resolution per new item; one asteroid may annihilate many stack entries before settling.
+- Forgetting to push the survivor when the new item wins a collision; the survivor must continue interacting with future items.
+- Using a queue instead of a stack when the problem says "most recent"; FIFO breaks the LIFO invariant silently.
 
 ### Pseudocode Or Template
 
@@ -89,9 +89,9 @@ Do not use counts alone when delimiter type and order matter.
 
 ### Common Mistakes
 
-- Accepting the string when the stack still has opens.
-- Ignoring the exclusion case for Balanced Delimiters: Do not use counts alone when delimiter type and order matter.
-- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
+- Returning true when the loop ends with a non-empty stack; unmatched opens must fail validation.
+- Popping from an empty stack on an unexpected closer; check `stack` before `stack.pop()`.
+- Replacing the type-aware stack with a single counter when there are multiple bracket kinds; counters cannot detect `(]`.
 
 ### Pseudocode Or Template
 
@@ -136,9 +136,9 @@ Do not use if the nearest unresolved relationship is not ordered.
 
 ### Common Mistakes
 
-- Storing values when indices are needed for widths.
-- Ignoring the exclusion case for Monotonic Increasing Stack: Do not use if the nearest unresolved relationship is not ordered.
-- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
+- Storing values when indices are needed for widths; switch to indices and look up `nums[stack[-1]]` for the value.
+- Forgetting the sentinel pass; without a final flush, indices left on the stack never compute their right boundary.
+- Using `>` instead of `>=` (or vice versa) at the pop comparison; equal-value tie-breaking changes whether the algorithm finds the leftmost or rightmost occurrence.
 
 ### Pseudocode Or Template
 
@@ -184,9 +184,9 @@ Do not use if every item can be resolved independently without order.
 
 ### Common Mistakes
 
-- Forgetting to compute distance before popping the index.
-- Ignoring the exclusion case for Monotonic Decreasing Stack: Do not use if every item can be resolved independently without order.
-- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
+- Computing `i - j` after popping but using the wrong popped variable, returning the distance from the wrong index.
+- Treating ties as "not greater"; choose strict `<` or `<=` based on whether equal values count as warmer.
+- Leaving unresolved indices in the stack with no default answer; for next-greater problems, default to 0 or `-1`.
 
 ### Pseudocode Or Template
 
@@ -234,9 +234,9 @@ Do not use ad hoc string parsing without a precedence model.
 
 ### Common Mistakes
 
-- Dropping the sign before entering a parenthesized expression.
-- Ignoring the exclusion case for Expression Stack: Do not use ad hoc string parsing without a precedence model.
-- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
+- Reversing operand order on subtraction or division; pop the right operand first, then the left.
+- Forgetting to push the running result onto the operator stack on `(`, then restore it on `)`.
+- Treating Python's `//` as truncating toward zero; for negatives, use `int(a / b)` to match RPN semantics.
 
 ### Pseudocode Or Template
 
