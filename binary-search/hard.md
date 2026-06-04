@@ -194,10 +194,10 @@ Common Follow-Ups:
 - Handle duplicates, empty input, and boundary cases.
 - Discuss whether the solution can be made iterative, in-place, or more memory efficient.
 
-## 9. Aggressive Cows
+## 9. Maximum Number of Tasks You Can Assign
 
 LeetCode:
-https://leetcode.com/problems/aggressive-cows/
+https://leetcode.com/problems/maximum-number-of-tasks-you-can-assign/
 
 Difficulty:
 Hard

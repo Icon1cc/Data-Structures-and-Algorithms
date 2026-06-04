@@ -554,7 +554,7 @@ Common Follow-Ups:
 - Handle duplicates, empty input, and boundary cases.
 - Discuss whether the solution can be made iterative, in-place, or more memory efficient.
 
-## 24. Decode the String
+## 24. Remove All Adjacent Duplicates in String II
 
 LeetCode:
 https://leetcode.com/problems/decode-string/

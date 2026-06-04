@@ -47,7 +47,6 @@ Generated overview of the Data Structures and Algorithms repository.
 - [tools/check_links.py](tools/check_links.py)
 - [tools/check_markdown_quality.py](tools/check_markdown_quality.py)
 
-
 ---
 
 ## Navigation

@@ -81,8 +81,8 @@ flowchart TD
     Backtracking["Backtracking"]
     Graphs["Graphs"]
     AdvancedGraphs["Advanced Graphs"]
-    1DDynamicProgramming["1-D Dynamic Programming"]
-    2DDynamicProgramming["2-D Dynamic Programming"]
+    OneDDynamicProgramming["1-D Dynamic Programming"]
+    TwoDDynamicProgramming["2-D Dynamic Programming"]
     Greedy["Greedy"]
     Intervals["Intervals"]
     BitManipulation["Bit Manipulation"]
@@ -98,9 +98,9 @@ flowchart TD
     HeapandPriorityQueue --> Backtracking
     Backtracking --> Graphs
     Graphs --> AdvancedGraphs
-    AdvancedGraphs --> 1DDynamicProgramming
-    1DDynamicProgramming --> 2DDynamicProgramming
-    2DDynamicProgramming --> Greedy
+    AdvancedGraphs --> OneDDynamicProgramming
+    OneDDynamicProgramming --> TwoDDynamicProgramming
+    TwoDDynamicProgramming --> Greedy
     Greedy --> Intervals
     Intervals --> BitManipulation
     BitManipulation --> MathandGeometry
