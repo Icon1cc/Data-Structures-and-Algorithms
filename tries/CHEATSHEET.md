@@ -37,6 +37,19 @@ A trie is a rooted tree where each edge represents a character or token and term
 
 Look for prefix, dictionary, wildcard, autocomplete, word board, starts with, maximum XOR bit trie, or repeated string membership queries.
 
+## Pattern Choice Checklist
+
+- Exact search needs terminal markers.
+- Prefix search can return before terminal markers.
+- Wildcard search branches only on wildcard positions.
+- Bit trie chooses opposite bits for maximum XOR when possible.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run empty strings, duplicate words, terminal markers, and large alphabets before submitting.
+
 ## Templates
 
 ### Prefix Insert And Search

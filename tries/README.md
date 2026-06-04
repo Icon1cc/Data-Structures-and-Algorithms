@@ -12,6 +12,13 @@ Tries matter when repeated prefix checks dominate runtime, especially word searc
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: prove pruning is safe from missing child edges or terminal markers.
+- Meta: implement insert and search cleanly before adding wildcard or board DFS.
+- Amazon: discuss memory growth and whether the alphabet is bounded.
+- Beginner: separate node traversal from terminal-word checks.
+
 ## Real-World Use
 
 Used in autocomplete, spell check, routing tables, IP prefixes, dictionaries, search suggestions, and token matching.
@@ -83,10 +90,10 @@ Look for prefix, dictionary, wildcard, autocomplete, word board, starts with, ma
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Does shared prefix structure avoid repeated scanning of many strings?
+- Does the query need exact word, prefix, wildcard, autocomplete, or bitwise branch choice?
+- Can search stop early because a trie branch is missing?
+- Is trie memory acceptable compared with sorting or hashing strings?
 
 ## Common Interview Patterns
 
@@ -105,11 +112,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Define what each trie node stores: children, terminal marker, count, or payload.
+- Distinguish prefix existence from complete word existence.
+- For wildcard DFS, bound branching by alphabet and pattern length.
+- For board search, mark visited cells and prune words only when safe.
+- Mention memory cost when the dictionary is large.
 
 ## Mini Exercises
 

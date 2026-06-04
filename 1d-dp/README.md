@@ -12,6 +12,13 @@ This topic is a reusable mental model, not a bag of isolated tricks. You should 
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: define state and transition before discussing code.
+- Meta: recognize classic coin, house, LIS, word, and Kadane forms quickly.
+- Amazon: state base cases and invalid states explicitly.
+- Beginner: write dp[i] in a full sentence before writing a recurrence.
+
 ## Real-World Use
 
 Used in pricing, sequence scoring, scheduling, inventory planning, retries, resource allocation, and optimization over linear histories.
@@ -69,6 +76,27 @@ flowchart LR
     G[Transition choice] --> C
 ```
 
+## Additional Visuals
+
+### Recurrence To Table
+
+```mermaid
+flowchart LR
+    A[Define state] --> B[Define base cases]
+    B --> C[Define transition]
+    C --> D[Choose fill order]
+    D --> E[Return requested state]
+```
+
+### State Compression
+
+```mermaid
+flowchart TD
+    A[dp[i] depends on dp[i - 1] and dp[i - 2]] --> B[Keep two variables]
+    C[dp[c] depends on previous item row] --> D[Iterate capacity backward]
+    E[dp[c] depends on current row reuse] --> F[Iterate capacity forward]
+```
+
 ## Foundations And Invariants
 
 State meaning drives everything. If dp[i] means best answer ending at i, the transition is different from best answer using first i items.
@@ -81,10 +109,10 @@ Look for count ways, min cost, max profit, can reach, choose or skip, subsequenc
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- What state answers the prefix, suffix, position, amount, or previous-choice subproblem?
+- What smaller states does it depend on, and in what order are they available?
+- Is this counting, optimizing, deciding feasibility, or reconstructing choices?
+- Can memory be compressed without losing a needed previous value?
 
 ## Common Interview Patterns
 
@@ -106,11 +134,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Define state in one sentence, including what index or amount means.
+- Write base cases before the loop or recursion.
+- Separate decision, count, and optimization transitions.
+- State fill order and why every dependency is available.
+- Discuss memory compression only after the uncompressed recurrence is clear.
 
 ## Mini Exercises
 

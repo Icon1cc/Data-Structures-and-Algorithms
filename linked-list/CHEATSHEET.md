@@ -37,6 +37,19 @@ A linked list is a sequence of nodes where each node stores data and one or more
 
 Look for head deletion, nth from end, reverse in place, cycle, merge sorted lists, split list, random pointer, or cache eviction.
 
+## Pattern Choice Checklist
+
+- Dummy head removes head-case branches.
+- Two-pointer gap finds nth from end and middle-like positions.
+- Fast and slow detects cycles or midpoint relationships.
+- In-place reversal needs prev, curr, and next in that order.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run empty lists, head replacement, tail links, cycles, and pointer save order before submitting.
+
 ## Templates
 
 ### Dummy Head

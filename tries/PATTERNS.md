@@ -2,6 +2,16 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Prefix Insert And Search | prefix | Do not build a trie for one-off exact membership checks |
+| Wildcard Trie DFS | wildcard | Do not branch for normal characters |
+| Board Search Trie Pruning | board | Do not restart a full word search for every word when the board is shared |
+| Autocomplete Suggestions | autocomplete | Do not DFS entire subtrees repeatedly if top results can be stored per node |
+| Bit Trie | xor | Do not use a character trie for numeric bit choices |
+
 ## Pattern: Prefix Insert And Search
 
 ### Beginner Intuition
@@ -30,8 +40,8 @@ Do not build a trie for one-off exact membership checks.
 ### Common Mistakes
 
 - Forgetting the terminal marker.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Prefix Insert And Search: Do not build a trie for one-off exact membership checks.
+- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -78,8 +88,8 @@ Do not branch for normal characters.
 ### Common Mistakes
 
 - Returning true for a prefix that is not terminal.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Wildcard Trie DFS: Do not branch for normal characters.
+- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -125,8 +135,8 @@ Do not restart a full word search for every word when the board is shared.
 ### Common Mistakes
 
 - Not marking board cells visited during the current path.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Board Search Trie Pruning: Do not restart a full word search for every word when the board is shared.
+- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -173,8 +183,8 @@ Do not DFS entire subtrees repeatedly if top results can be stored per node.
 ### Common Mistakes
 
 - Returning unsorted suggestions when lexicographic order is required.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Autocomplete Suggestions: Do not DFS entire subtrees repeatedly if top results can be stored per node.
+- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -220,8 +230,8 @@ Do not use a character trie for numeric bit choices.
 ### Common Mistakes
 
 - Processing bits from low to high, which loses greedy significance.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Bit Trie: Do not use a character trie for numeric bit choices.
+- Failing to test empty strings, duplicate words, terminal markers, and large alphabets against the stated invariant.
 
 ### Pseudocode Or Template
 

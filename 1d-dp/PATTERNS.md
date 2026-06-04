@@ -2,6 +2,19 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| State Definition | dp meaning | Do not code transitions before the state has a precise English meaning |
+| Memoization | recursive | Do not use if recursion depth will exceed limits and bottom-up is simple |
+| Tabulation | bottom up | Do not fill before dependencies are initialized |
+| Transition Choice | choose skip | Do not include choices that violate problem constraints |
+| Knapsack | capacity | Do not iterate capacity forward for 0/1 choices if it reuses the same item |
+| Subsequence DP | subsequence | Do not require contiguity unless the problem says substring or subarray |
+| State Compression | rolling | Do not compress when later transitions still need overwritten values |
+| Kadane | maximum subarray | Do not use for subsequences or non-contiguous choices |
+
 ## Pattern: State Definition
 
 ### Beginner Intuition
@@ -30,8 +43,8 @@ Do not code transitions before the state has a precise English meaning.
 ### Common Mistakes
 
 - Changing state meaning midway through code.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for State Definition: Do not code transitions before the state has a precise English meaning.
+- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -76,8 +89,8 @@ Do not use if recursion depth will exceed limits and bottom-up is simple.
 ### Common Mistakes
 
 - Caching by incomplete state keys.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Memoization: Do not use if recursion depth will exceed limits and bottom-up is simple.
+- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -125,8 +138,8 @@ Do not fill before dependencies are initialized.
 ### Common Mistakes
 
 - Using dp[i-1] before it is defined.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Tabulation: Do not fill before dependencies are initialized.
+- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -172,8 +185,8 @@ Do not include choices that violate problem constraints.
 ### Common Mistakes
 
 - Taking max when the problem asks for count, or sum when choices are exclusive.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Transition Choice: Do not include choices that violate problem constraints.
+- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -217,8 +230,8 @@ Do not iterate capacity forward for 0/1 choices if it reuses the same item.
 ### Common Mistakes
 
 - Using unbounded update order for a 0/1 problem.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Knapsack: Do not iterate capacity forward for 0/1 choices if it reuses the same item.
+- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -264,8 +277,8 @@ Do not require contiguity unless the problem says substring or subarray.
 ### Common Mistakes
 
 - Confusing subsequence with substring.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Subsequence DP: Do not require contiguity unless the problem says substring or subarray.
+- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -311,8 +324,8 @@ Do not compress when later transitions still need overwritten values.
 ### Common Mistakes
 
 - Updating variables in the wrong order.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for State Compression: Do not compress when later transitions still need overwritten values.
+- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -357,8 +370,8 @@ Do not use for subsequences or non-contiguous choices.
 ### Common Mistakes
 
 - Initializing best to zero when all values may be negative.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Kadane: Do not use for subsequences or non-contiguous choices.
+- Failing to test base cases, invalid states, iteration order, and memory compression direction against the stated invariant.
 
 ### Pseudocode Or Template
 

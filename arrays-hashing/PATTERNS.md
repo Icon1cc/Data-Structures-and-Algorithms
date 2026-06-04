@@ -2,6 +2,18 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Frequency Counting | duplicates | Do not use counts alone when positions or ordering are the answer |
+| Hash Lookup | seen before | Do not use when sorted two pointers gives O(1) space and original order is irrelevant |
+| Prefix Sum | subarray sum | Do not use a simple sliding window when numbers can be negative and the sum is not monotonic |
+| Bucket Counting | top k | Do not allocate buckets for a huge sparse domain |
+| Sorting Plus Hashing | canonical key | Do not sort if original indices must be returned and cannot be preserved |
+| Grouping by Canonical Key | group | Do not use a lossy signature that maps different items together |
+| In-place Index Marking | constant space | Do not mutate input if the caller needs it unchanged |
+
 ## Pattern: Frequency Counting
 
 ### Beginner Intuition
@@ -32,8 +44,8 @@ Do not use counts alone when positions or ordering are the answer.
 ### Common Mistakes
 
 - Forgetting to decrement counts or remove zero-count keys.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Frequency Counting: Do not use counts alone when positions or ordering are the answer.
+- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -80,8 +92,8 @@ Do not use when sorted two pointers gives O(1) space and original order is irrel
 ### Common Mistakes
 
 - Checking after insertion when the value could match itself.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Hash Lookup: Do not use when sorted two pointers gives O(1) space and original order is irrelevant.
+- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -131,8 +143,8 @@ Do not use a simple sliding window when numbers can be negative and the sum is n
 ### Common Mistakes
 
 - Forgetting the initial prefix value 0.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Prefix Sum: Do not use a simple sliding window when numbers can be negative and the sum is not monotonic.
+- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -181,8 +193,8 @@ Do not allocate buckets for a huge sparse domain.
 ### Common Mistakes
 
 - Creating buckets for values instead of frequencies when frequencies are what need ordering.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Bucket Counting: Do not allocate buckets for a huge sparse domain.
+- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -228,8 +240,8 @@ Do not sort if original indices must be returned and cannot be preserved.
 ### Common Mistakes
 
 - Forgetting that sorting each long string adds L log L cost.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Sorting Plus Hashing: Do not sort if original indices must be returned and cannot be preserved.
+- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -276,8 +288,8 @@ Do not use a lossy signature that maps different items together.
 ### Common Mistakes
 
 - Using a mutable list as a key.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Grouping by Canonical Key: Do not use a lossy signature that maps different items together.
+- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -322,8 +334,8 @@ Do not mutate input if the caller needs it unchanged.
 ### Common Mistakes
 
 - Mixing value and index by forgetting the minus one conversion.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for In-place Index Marking: Do not mutate input if the caller needs it unchanged.
+- Failing to test duplicates, empty input, negative values, missing keys, and key overwrite order against the stated invariant.
 
 ### Pseudocode Or Template
 

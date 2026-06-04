@@ -2,6 +2,16 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| LIFO Simulation | most recent | Do not use when the oldest item must leave first |
+| Balanced Delimiters | balanced | Do not use counts alone when delimiter type and order matter |
+| Monotonic Increasing Stack | previous smaller | Do not use if the nearest unresolved relationship is not ordered |
+| Monotonic Decreasing Stack | next greater | Do not use if every item can be resolved independently without order |
+| Expression Stack | operators | Do not use ad hoc string parsing without a precedence model |
+
 ## Pattern: LIFO Simulation
 
 ### Beginner Intuition
@@ -31,8 +41,8 @@ Do not use when the oldest item must leave first.
 ### Common Mistakes
 
 - Forgetting that multiple stack items may be resolved by one new item.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for LIFO Simulation: Do not use when the oldest item must leave first.
+- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -80,8 +90,8 @@ Do not use counts alone when delimiter type and order matter.
 ### Common Mistakes
 
 - Accepting the string when the stack still has opens.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Balanced Delimiters: Do not use counts alone when delimiter type and order matter.
+- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -127,8 +137,8 @@ Do not use if the nearest unresolved relationship is not ordered.
 ### Common Mistakes
 
 - Storing values when indices are needed for widths.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Monotonic Increasing Stack: Do not use if the nearest unresolved relationship is not ordered.
+- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -175,8 +185,8 @@ Do not use if every item can be resolved independently without order.
 ### Common Mistakes
 
 - Forgetting to compute distance before popping the index.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Monotonic Decreasing Stack: Do not use if every item can be resolved independently without order.
+- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -225,8 +235,8 @@ Do not use ad hoc string parsing without a precedence model.
 ### Common Mistakes
 
 - Dropping the sign before entering a parenthesized expression.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Expression Stack: Do not use ad hoc string parsing without a precedence model.
+- Failing to test empty stack, equal values, sentinel handling, and index versus value storage against the stated invariant.
 
 ### Pseudocode Or Template
 

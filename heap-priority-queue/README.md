@@ -12,6 +12,13 @@ Heaps are the interview tool for top-k, streaming order statistics, k-way merge,
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: prove why the heap top is the next safe item to process.
+- Meta: keep heap tuple ordering and tie-breakers deterministic.
+- Amazon: explain memory cost, stale deletion, and streaming behavior.
+- Beginner: write what priority each heap entry uses before pushing.
+
 ## Real-World Use
 
 Used in schedulers, timers, event loops, search frontiers, merge pipelines, stream analytics, load balancers, and priority task queues.
@@ -69,6 +76,33 @@ flowchart TD
     E --> F[Sink until heap order is restored]
 ```
 
+## Additional Visuals
+
+### Top K Heap
+
+```mermaid
+flowchart LR
+    A[Scan item] --> B[Push candidate]
+    B --> C{heap size greater than k?}
+    C -->|yes| D[Pop worst kept item]
+    C -->|no| E[Keep heap]
+    D --> F[Heap contains best k so far]
+    E --> F
+```
+
+### K-way Merge Frontier
+
+```mermaid
+flowchart TD
+    A[List 1 head] --> H[min-heap]
+    B[List 2 head] --> H
+    C[List k head] --> H
+    H --> D[Pop smallest head]
+    D --> E[Append to output]
+    E --> F[Push next from same source]
+    F --> H
+```
+
 ## Foundations And Invariants
 
 The heap invariant is local parent-child order, not global sorted order. That is why extracting all values one by one sorts them but peeking at the array does not.
@@ -81,10 +115,10 @@ Look for top k, kth largest, smallest next item, streaming median, merge sorted 
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Do you repeatedly need the current best, smallest, largest, or next scheduled item?
+- Is k much smaller than n, making a bounded heap better than sorting?
+- Can stale heap entries exist, and how will they be skipped?
+- Does the problem need one heap, two heaps, or a heap plus hash map?
 
 ## Common Interview Patterns
 
@@ -103,11 +137,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- State whether the heap stores all candidates or only k active candidates.
+- Use deterministic tie-breakers when values can compare equal.
+- Explain stale-entry pruning before returning or expanding a heap top.
+- For two heaps, rebalance after every update.
+- Compare O(n log k) heap selection against O(n log n) sorting.
 
 ## Mini Exercises
 

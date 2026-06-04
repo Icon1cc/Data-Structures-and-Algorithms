@@ -2,6 +2,16 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Opposite Direction Pointers | sorted | Do not use if moving one side cannot be justified by an ordering rule |
+| Same Direction Pointers | read write | Do not use when relative order does not matter and partitioning is simpler |
+| Fast And Slow Pointers | cycle | Do not use if the structure has no linked movement or next relation |
+| Partitioning | three regions | Do not use if stable ordering is required and the swaps would break it |
+| Merge From End | merge sorted | Do not use when output order or memory layout does not protect unread values |
+
 ## Pattern: Opposite Direction Pointers
 
 ### Beginner Intuition
@@ -32,8 +42,8 @@ Do not use if moving one side cannot be justified by an ordering rule.
 ### Common Mistakes
 
 - Moving the pointer with the larger value in container problems.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Opposite Direction Pointers: Do not use if moving one side cannot be justified by an ordering rule.
+- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -79,8 +89,8 @@ Do not use when relative order does not matter and partitioning is simpler.
 ### Common Mistakes
 
 - Incrementing write before the assignment is complete.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Same Direction Pointers: Do not use when relative order does not matter and partitioning is simpler.
+- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -129,8 +139,8 @@ Do not use if the structure has no linked movement or next relation.
 ### Common Mistakes
 
 - Failing to separate cycle detection from locating the cycle entrance.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Fast And Slow Pointers: Do not use if the structure has no linked movement or next relation.
+- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -178,8 +188,8 @@ Do not use if stable ordering is required and the swaps would break it.
 ### Common Mistakes
 
 - Advancing the current pointer after swapping with an unknown region.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Partitioning: Do not use if stable ordering is required and the swaps would break it.
+- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -226,8 +236,8 @@ Do not use when output order or memory layout does not protect unread values.
 ### Common Mistakes
 
 - Writing from the front and destroying needed values.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Merge From End: Do not use when output order or memory layout does not protect unread values.
+- Failing to test off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation against the stated invariant.
 
 ### Pseudocode Or Template
 

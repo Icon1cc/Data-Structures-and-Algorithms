@@ -12,6 +12,13 @@ Two pointers turn many O(n^2) pair checks into O(n) scans when order, sortedness
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: prove that every discarded pair or segment is impossible.
+- Meta: implement duplicate skipping and pointer moves without extra passes.
+- Amazon: state mutation and sorting tradeoffs before changing the input.
+- Beginner: write the rule for moving left, right, slow, or fast before coding.
+
 ## Real-World Use
 
 Used in merge operations, stream compaction, partitioning, text processing, file diffing, deduplication, and sorted index joins.
@@ -80,10 +87,10 @@ Look for sorted input, palindromes, pairs, triplets, in-place removal, merging, 
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Is the input sorted, partially ordered, or safely sortable without losing required positions?
+- Can moving one boundary only forward preserve all candidates?
+- Are duplicates supposed to be skipped, counted once, or kept as distinct answers?
+- Does the problem need a pair, a partition, a compaction, or a cycle relation?
 
 ## Common Interview Patterns
 
@@ -102,11 +109,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- State whether sorting is allowed and whether original indices matter.
+- Tie each pointer move to a proof that no valid answer was skipped.
+- Dry run duplicates because they are the most common source of wrong answers.
+- For linked-style fast and slow problems, explain why meeting or gap length proves correctness.
+- Give space complexity honestly when sorting creates a copy.
 
 ## Mini Exercises
 

@@ -10,6 +10,8 @@ TOPICS = ["arrays-hashing","two-pointers","stack","binary-search","sliding-windo
 ROOT_REQUIRED = ["README.md","ROADMAP.md","STUDY_PLAN.md","INTERVIEW_GUIDE.md","REPO_INDEX.md"]
 TOPIC_REQUIRED = ["README.md","CHEATSHEET.md","PATTERNS.md","easy.md","medium.md","hard.md"]
 LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+PLACEHOLDER_RE = re.compile(r"\b(TODO|FIXME|placeholder|lorem)\b", re.IGNORECASE)
+PROBLEM_RE = re.compile(r"^## \d+\. (.+)$", re.MULTILINE)
 
 def md_files() -> list[Path]:
     return sorted(p for p in ROOT.rglob("*.md") if ".git" not in p.parts)
@@ -32,6 +34,7 @@ def local_link_failure(source: Path, target: str) -> str | None:
 
 def main() -> int:
     failures = []
+    problem_locations: dict[str, list[Path]] = {}
     for name in ROOT_REQUIRED:
         if not (ROOT / name).exists():
             failures.append(f"missing root file: {name}")
@@ -52,10 +55,19 @@ def main() -> int:
             failures.append(f"missing navigation: {rel}")
         if "\u2014" in text:
             failures.append(f"em dash found: {rel}")
+        if PLACEHOLDER_RE.search(text):
+            failures.append(f"placeholder or TODO term found: {rel}")
+        if path.name in {"easy.md", "medium.md", "hard.md"}:
+            for title in PROBLEM_RE.findall(text):
+                problem_locations.setdefault(title, []).append(rel)
         for match in LINK_RE.finditer(text):
             failure = local_link_failure(path, match.group(1))
             if failure:
                 failures.append(failure)
+    for title, locations in sorted(problem_locations.items()):
+        if len(locations) > 1:
+            joined = ", ".join(str(location) for location in locations)
+            failures.append(f"duplicate problem title: {title} in {joined}")
     if failures:
         print("Markdown quality check failed:")
         for failure in failures:

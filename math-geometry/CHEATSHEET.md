@@ -39,6 +39,19 @@ This topic covers modular arithmetic, divisibility, greatest common divisor, pri
 
 Look for rotate matrix, spiral, lines, slopes, random weights, divisibility, primes, powers, palindrome numbers, or arithmetic overflow.
 
+## Pattern Choice Checklist
+
+- Modulo problems need normalized remainders.
+- GCD normalizes ratios, slopes, and repeated cycles.
+- Fast power halves the exponent each step.
+- Matrix traversal is usually boundary management, not graph traversal.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run zero, negative values, overflow, precision, and normalized coordinate keys before submitting.
+
 ## Templates
 
 ### Modulo Arithmetic

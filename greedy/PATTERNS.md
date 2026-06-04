@@ -2,6 +2,17 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Sort And Scan | sort | Do not sort by a key that does not match the proof |
+| Greedy With Proof | exchange | Do not rely on intuition alone |
+| Interval Greedy | earliest end | Do not pick longest interval unless that is specifically proven |
+| Jump Greedy | farthest reach | Do not BFS all indices when range tracking is enough |
+| Heap-Assisted Greedy | available choices | Do not sort once if availability and priority are separate dimensions |
+| Monotonic Greedy | lexicographic | Do not pop a value if it cannot appear again and is required |
+
 ## Pattern: Sort And Scan
 
 ### Beginner Intuition
@@ -30,8 +41,8 @@ Do not sort by a key that does not match the proof.
 ### Common Mistakes
 
 - Sorting by start when the proof needs end.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Sort And Scan: Do not sort by a key that does not match the proof.
+- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -77,8 +88,8 @@ Do not rely on intuition alone.
 ### Common Mistakes
 
 - Skipping the correctness argument.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Greedy With Proof: Do not rely on intuition alone.
+- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -123,8 +134,8 @@ Do not pick longest interval unless that is specifically proven.
 ### Common Mistakes
 
 - Treating touching endpoints incorrectly.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Interval Greedy: Do not pick longest interval unless that is specifically proven.
+- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -171,8 +182,8 @@ Do not BFS all indices when range tracking is enough.
 ### Common Mistakes
 
 - Updating jump count before finishing the current range.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Jump Greedy: Do not BFS all indices when range tracking is enough.
+- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -219,8 +230,8 @@ Do not sort once if availability and priority are separate dimensions.
 ### Common Mistakes
 
 - Pushing candidates too late after they become reachable.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Heap-Assisted Greedy: Do not sort once if availability and priority are separate dimensions.
+- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -267,8 +278,8 @@ Do not pop a value if it cannot appear again and is required.
 ### Common Mistakes
 
 - Popping required characters without checking future availability.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Monotonic Greedy: Do not pop a value if it cannot appear again and is required.
+- Failing to test counterexamples, tie-breaking, proof gaps, and sorted-order assumptions against the stated invariant.
 
 ### Pseudocode Or Template
 

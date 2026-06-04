@@ -6,12 +6,27 @@ A structured repository for learning data structures, algorithms, interview patt
 
 This repository is designed to help a beginner become interview-ready without memorizing solution dumps. The goal is to build durable intuition, pattern recognition, edge-case discipline, and precise complexity analysis.
 
-Each topic folder contains:
+The curation favors the pattern coverage of [NeetCode 150](https://neetcode.io/practice/practice/neetcode150), [Blind 75](https://www.crackr.dev/blind75), [Grind 75](https://www.techinterviewhandbook.org/grind75), and classic high-frequency interview problems. It also adds targeted extras where a topic needs more practice than the major public lists provide.
 
-- `README.md`: beginner-first theory, visual explanation, operations, mistakes, exercises, and navigation.
-- `PATTERNS.md`: the main interview pattern guide for that topic.
-- `CHEATSHEET.md`: fast revision before timed practice.
-- `easy.md`, `medium.md`, and `hard.md`: curated LeetCode practice with problem intent, skills tested, and follow-ups.
+## Repository Quality Standard
+
+Every topic should answer five questions for a learner and for an interviewer:
+
+- What is the core intuition?
+- What invariant makes the pattern correct?
+- Which examples and edge cases expose the pattern?
+- Which mistakes cause wrong answers in interviews?
+- Which problems build the skill without duplicating practice entries elsewhere?
+
+Each problem appears once in the repository. When a problem is relevant to more than one topic, it is assigned to the topic where the dominant interview pattern is most useful.
+
+## Audit Lenses
+
+- Google interviewer: looks for invariants, proof sketches, and clean complexity analysis.
+- Meta interviewer: looks for fast pattern recognition, concise code, and reliable edge-case execution.
+- Amazon interviewer: looks for clarification, tradeoffs, operational thinking, and practical communication.
+- OpenAI, Anthropic, and Mistral engineer: look for correctness under changed constraints, careful reasoning, and simple maintainable logic.
+- Beginner learner: needs plain-language intuition, diagrams, deliberate practice order, and mistakes called out before they happen.
 
 ## How To Use This Repository
 

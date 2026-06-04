@@ -12,6 +12,13 @@ Backtracking is the clean way to enumerate combinations, permutations, partition
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: state the search tree and the pruning proof.
+- Meta: code choose, recurse, undo without leaking state across branches.
+- Amazon: explain duplicate handling and constraint checks before recursion.
+- Beginner: write one recursion frame as a stack of choices.
+
 ## Real-World Use
 
 Used in schedulers, puzzle solvers, search engines, configuration generation, parsers, and constraint optimization.
@@ -71,6 +78,21 @@ flowchart TD
     F --> G
 ```
 
+## Additional Visuals
+
+### Choose, Explore, Undo
+
+```mermaid
+flowchart TD
+    A[Current state] --> B[Choose candidate]
+    B --> C[Mark or append choice]
+    C --> D[Recurse]
+    D --> E[Undo choice]
+    E --> F[Try next candidate]
+    D --> G{complete and valid?}
+    G -->|yes| H[Record answer]
+```
+
 ## Foundations And Invariants
 
 The invariant is the meaning of the partial path. If path contains chosen values in increasing index order, duplicate branches can be avoided systematically.
@@ -83,10 +105,10 @@ Look for all possible, generate, combinations, permutations, subsets, valid arra
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Is the problem asking for all valid choices, not only one best value?
+- What are the choice, constraint, recursion depth, and undo operation?
+- Can sorting, counts, or bounds prune duplicate or impossible branches?
+- Does the output size itself force exponential time?
 
 ## Common Interview Patterns
 
@@ -106,11 +128,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Define the recursion state with index, path, remaining constraint, and output.
+- Undo every mutation before the next branch.
+- Sort when it enables duplicate skipping or early stopping.
+- Explain exponential complexity in terms of branching and depth.
+- Test empty choices, duplicate inputs, and impossible constraints.
 
 ## Mini Exercises
 

@@ -2,6 +2,18 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Grid DP | grid | Do not use if movement has cycles without a topological order |
+| Two String DP | two strings | Do not use substring logic when order can skip characters |
+| Knapsack Table | items | Do not reuse the same item unless the problem is unbounded |
+| Interval DP | interval | Do not fill by start index alone if inner intervals are not ready |
+| Path Counting With Obstacles | obstacle | Do not add paths through invalid cells |
+| State Compression | rolling row | Do not compress if reconstruction of the answer path is required |
+| Game DP | two players | Do not greedily take the larger end without proof |
+
 ## Pattern: Grid DP
 
 ### Beginner Intuition
@@ -31,8 +43,8 @@ Do not use if movement has cycles without a topological order.
 ### Common Mistakes
 
 - Not initializing first row and first column correctly.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Grid DP: Do not use if movement has cycles without a topological order.
+- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -79,8 +91,8 @@ Do not use substring logic when order can skip characters.
 ### Common Mistakes
 
 - Off-by-one errors between string indices and dp dimensions.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Two String DP: Do not use substring logic when order can skip characters.
+- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -126,8 +138,8 @@ Do not reuse the same item unless the problem is unbounded.
 ### Common Mistakes
 
 - Using the wrong direction when compressing to one row.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Knapsack Table: Do not reuse the same item unless the problem is unbounded.
+- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -172,8 +184,8 @@ Do not fill by start index alone if inner intervals are not ready.
 ### Common Mistakes
 
 - Filling longer intervals before shorter dependencies.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Interval DP: Do not fill by start index alone if inner intervals are not ready.
+- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -219,8 +231,8 @@ Do not add paths through invalid cells.
 ### Common Mistakes
 
 - Initializing through an obstacle in the first row or column.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Path Counting With Obstacles: Do not add paths through invalid cells.
+- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -265,8 +277,8 @@ Do not compress if reconstruction of the answer path is required.
 ### Common Mistakes
 
 - Overwriting dp[j-1] or diagonal values before saving them.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for State Compression: Do not compress if reconstruction of the answer path is required.
+- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -314,8 +326,8 @@ Do not greedily take the larger end without proof.
 ### Common Mistakes
 
 - Modeling only current player score and losing opponent effect.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Game DP: Do not greedily take the larger end without proof.
+- Failing to test empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites against the stated invariant.
 
 ### Pseudocode Or Template
 

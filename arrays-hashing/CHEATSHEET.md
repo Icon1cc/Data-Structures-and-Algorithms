@@ -41,6 +41,19 @@ An array is an indexed sequence with O(1) random access. A hash table maps keys 
 
 Look for duplicates, pairs, anagrams, grouping, subarray sums, longest consecutive runs, first occurrence, or a brute force loop that repeatedly asks whether a previous value exists.
 
+## Pattern Choice Checklist
+
+- If the question asks for earlier information, try seen-set or map lookup first.
+- If it asks for exact subarray totals with negatives, use prefix sums rather than a window.
+- If values or frequencies are bounded, compare bucket counting against sorting.
+- If strings need grouping, define a canonical key that preserves equivalence.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run duplicates, empty input, negative values, missing keys, and key overwrite order before submitting.
+
 ## Templates
 
 ### Frequency Counting

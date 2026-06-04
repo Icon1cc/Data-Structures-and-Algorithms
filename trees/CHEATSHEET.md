@@ -39,6 +39,19 @@ A tree is an acyclic connected graph with a root in rooted tree problems. Each n
 
 Look for subtree, ancestor, descendant, path sum, balanced, diameter, serialize, kth in BST, level order, or lowest common ancestor.
 
+## Pattern Choice Checklist
+
+- Preorder is useful when parent state is passed down.
+- Postorder is useful when node answer depends on children.
+- BFS is useful for shortest depth or level output.
+- BST problems need lower and upper bounds, not only local comparisons.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run null roots, skewed depth, duplicate BST values, and global-state reset before submitting.
+
 ## Templates
 
 ### Recursive DFS

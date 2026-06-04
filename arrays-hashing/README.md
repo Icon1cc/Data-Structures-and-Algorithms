@@ -12,6 +12,13 @@ Most interview problems begin as a slow nested scan over an array or string. Has
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: state the stored-map invariant and prove each element is processed once.
+- Meta: recognize complement lookup, anagram counting, prefix sums, and bucket selection quickly.
+- Amazon: call out duplicate keys, missing keys, and whether input order must be preserved.
+- Beginner: choose between set, map, counter, prefix, and bucket before coding.
+
 ## Real-World Use
 
 Used in caches, analytics counters, de-duplication pipelines, indexes, log aggregation, rate-limit buckets, feature flag maps, and request routing tables.
@@ -85,10 +92,10 @@ Look for duplicates, pairs, anagrams, grouping, subarray sums, longest consecuti
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Can a set, map, counter, bucket, or prefix summary remove a repeated scan?
+- Does multiplicity matter, or is membership alone enough?
+- Do negative values break a sliding-window assumption and point to prefix sums instead?
+- Would sorting destroy required indices, ordering, or stable grouping information?
 
 ## Common Interview Patterns
 
@@ -109,11 +116,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Name exactly what the hash structure stores before writing the loop.
+- Say whether the lookup is expected O(1) and what drives auxiliary space.
+- Test duplicates, empty input, and negative values when prefix sums or windows are involved.
+- Explain why sorting is optional, required, or harmful for the current problem.
+- When a follow-up asks for less memory, discuss sorting, in-place marking, or two pointers.
 
 ## Mini Exercises
 

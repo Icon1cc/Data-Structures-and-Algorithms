@@ -2,6 +2,19 @@
 
 Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
+## Curation Rules
+
+- Problems are selected for pattern coverage before volume.
+- Priority goes to NeetCode 150, Blind 75, Grind 75, and classic high-frequency interview variants.
+- Each problem appears once in this repository; related topics should transfer the pattern instead of duplicating the entry.
+- Difficulty placement follows the listed LeetCode difficulty and the expected interview reasoning load.
+
+## Practice Order
+
+- First pass: solve in the listed Easy order and write the invariant before coding.
+- Second pass: shuffle this file with adjacent topic files to avoid memorizing folder context.
+- Retry pass: redo misses after 2 days, 7 days, and 21 days.
+
 ## 1. Maximum Depth of Binary Tree
 
 LeetCode: [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
@@ -13,15 +26,15 @@ Pattern: Recursive DFS
 Why It Matters: The simplest recursive return contract.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Recursive DFS signal before choosing a template.
+- State the invariant for Maximum Depth of Binary Tree: the simplest recursive return contract.
+- Handle null roots, skewed depth, duplicate BST values, and global-state reset.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Maximum Depth of Binary Tree toward iterative stack, BFS queue, parent maps, or graph traversal?
+- Which null roots case would break the first implementation?
+- Can the Recursive DFS invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 2. Same Tree
 
@@ -34,15 +47,15 @@ Pattern: Recursive DFS
 Why It Matters: Tests paired traversal and structural equality.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Recursive DFS signal before choosing a template.
+- State the invariant for Same Tree: tests paired traversal and structural equality.
+- Handle null roots, skewed depth, duplicate BST values, and global-state reset.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Same Tree toward iterative stack, BFS queue, parent maps, or graph traversal?
+- Which null roots case would break the first implementation?
+- Can the Recursive DFS invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 3. Invert Binary Tree
 
@@ -55,15 +68,15 @@ Pattern: Recursive DFS
 Why It Matters: Practices local subtree mutation.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Recursive DFS signal before choosing a template.
+- State the invariant for Invert Binary Tree: practices local subtree mutation.
+- Handle null roots, skewed depth, duplicate BST values, and global-state reset.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Invert Binary Tree toward iterative stack, BFS queue, parent maps, or graph traversal?
+- Which null roots case would break the first implementation?
+- Can the Recursive DFS invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 4. Balanced Binary Tree
 
@@ -76,15 +89,15 @@ Pattern: Postorder DFS
 Why It Matters: Combines height and validity.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Postorder DFS signal before choosing a template.
+- State the invariant for Balanced Binary Tree: combines height and validity.
+- Handle null roots, skewed depth, duplicate BST values, and global-state reset.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Balanced Binary Tree toward iterative stack, BFS queue, parent maps, or graph traversal?
+- Which null roots case would break the first implementation?
+- Can the Postorder DFS invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 5. Diameter of Binary Tree
 
@@ -97,15 +110,15 @@ Pattern: Tree DP
 Why It Matters: Introduces global answer plus local height.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Tree DP signal before choosing a template.
+- State the invariant for Diameter of Binary Tree: introduces global answer plus local height.
+- Handle null roots, skewed depth, duplicate BST values, and global-state reset.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Diameter of Binary Tree toward iterative stack, BFS queue, parent maps, or graph traversal?
+- Which null roots case would break the first implementation?
+- Can the Tree DP invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ---
 

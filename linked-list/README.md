@@ -12,6 +12,13 @@ Linked lists test pointer discipline, mutation order, and ability to reason abou
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: prove every pointer rewire preserves the remaining list.
+- Meta: avoid extra passes when a gap or fast-slow relation gives the answer.
+- Amazon: call out whether nodes are mutated, copied, or reused.
+- Beginner: draw prev, curr, next, and dummy before writing assignments.
+
 ## Real-World Use
 
 Used in memory allocators, LRU caches, queues, adjacency lists, undo lists, and low-level systems where splicing is cheap.
@@ -79,10 +86,10 @@ Look for head deletion, nth from end, reverse in place, cycle, merge sorted list
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Does the solution need node identity rather than value identity?
+- Would a dummy head remove special cases at the front of the list?
+- Which pointer must be saved before rewiring links?
+- Can two pointers encode distance from the end without knowing length first?
 
 ## Common Interview Patterns
 
@@ -101,11 +108,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Use a dummy head when deleting or inserting near the head.
+- Save next before changing curr.next in reversal problems.
+- Explain node identity versus node value when copying or detecting cycles.
+- Use two-pass length logic only when one-pass gap logic is not clearer.
+- Test empty, one-node, and head-removal cases.
 
 ## Mini Exercises
 

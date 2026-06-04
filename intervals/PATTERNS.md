@@ -2,6 +2,17 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Merge Intervals | merge | Do not compare every pair after sorting |
+| Insert Interval | insert | Do not sort again if one linear pass is enough |
+| Sweep Line | events | Do not use when simple merging is enough |
+| Meeting Rooms | rooms | Do not allocate a new room before checking the earliest end |
+| Difference Array | range update | Do not allocate by huge raw coordinate ranges |
+| Greedy Erase Overlap | remove overlap | Do not keep the longer interval just because it starts earlier |
+
 ## Pattern: Merge Intervals
 
 ### Beginner Intuition
@@ -29,8 +40,8 @@ Do not compare every pair after sorting.
 ### Common Mistakes
 
 - Forgetting to append the final active interval.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Merge Intervals: Do not compare every pair after sorting.
+- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -77,8 +88,8 @@ Do not sort again if one linear pass is enough.
 ### Common Mistakes
 
 - Missing intervals after the merged block.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Insert Interval: Do not sort again if one linear pass is enough.
+- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -124,8 +135,8 @@ Do not use when simple merging is enough.
 ### Common Mistakes
 
 - Ordering start and end events incorrectly at the same time.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Sweep Line: Do not use when simple merging is enough.
+- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -169,8 +180,8 @@ Do not allocate a new room before checking the earliest end.
 ### Common Mistakes
 
 - Comparing against the latest end instead of earliest end.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Meeting Rooms: Do not allocate a new room before checking the earliest end.
+- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -217,8 +228,8 @@ Do not allocate by huge raw coordinate ranges.
 ### Common Mistakes
 
 - Forgetting to subtract at the exclusive end.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Difference Array: Do not allocate by huge raw coordinate ranges.
+- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -264,8 +275,8 @@ Do not keep the longer interval just because it starts earlier.
 ### Common Mistakes
 
 - Updating end to max instead of min on an overlap conflict.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Greedy Erase Overlap: Do not keep the longer interval just because it starts earlier.
+- Failing to test equal endpoints, open versus closed intervals, empty interval lists, and event tie order against the stated invariant.
 
 ### Pseudocode Or Template
 

@@ -37,6 +37,19 @@ Two-pointer algorithms maintain one or more indices whose movement is monotonic.
 
 Look for sorted input, palindromes, pairs, triplets, in-place removal, merging, cycle detection, or language that says use constant extra space.
 
+## Pattern Choice Checklist
+
+- Opposite-direction pointers need an ordered search space.
+- Same-direction pointers need a monotonic boundary or compaction invariant.
+- Fast and slow pointers need a distance, cycle, or phase relationship.
+- Partitioning problems usually care about overwrite order and stable versus unstable output.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run off-by-one bounds, duplicates, sortedness assumptions, and in-place mutation before submitting.
+
 ## Templates
 
 ### Opposite Direction Pointers

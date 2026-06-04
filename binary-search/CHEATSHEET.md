@@ -38,6 +38,19 @@ Binary search repeatedly narrows a monotonic range while preserving an invariant
 
 Look for sorted data, first or last valid value, minimum feasible capacity, maximum allowed minimum, rotated arrays, peaks, or the phrase smallest possible maximum.
 
+## Pattern Choice Checklist
+
+- Classic search needs sorted data and exact equality handling.
+- Lower bound returns the first index satisfying a predicate.
+- Answer search costs O(log R * check_cost).
+- Rotated search needs proof of which half is ordered.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries before submitting.
+
 ## Templates
 
 ### Classic Target Search

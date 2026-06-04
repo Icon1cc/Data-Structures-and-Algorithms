@@ -38,6 +38,19 @@ Backtracking is depth-first search over a state space with pruning. Correctness 
 
 Look for all possible, generate, combinations, permutations, subsets, valid arrangements, board search, partition, or constraints that require trying choices.
 
+## Pattern Choice Checklist
+
+- Subsets decide include or exclude, or iterate next choices.
+- Combinations advance the start index to prevent reuse.
+- Permutations track used elements or swap in place.
+- Grid search marks visited before recursion and unmarks after.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run duplicate choices, missing undo, invalid pruning, and output-size complexity before submitting.
+
 ## Templates
 
 ### Subsets

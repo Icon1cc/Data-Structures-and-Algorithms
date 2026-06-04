@@ -2,6 +2,18 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Classic Target Search | sorted | Do not use when the input is unsorted or the predicate is not monotonic |
+| Lower Bound | first true | Do not use without defining what true means at each index |
+| Upper Bound | rightmost | Do not mix greater-than with greater-or-equal semantics |
+| Rotated Sorted Search | rotated | Do not use unchanged when duplicates make both halves ambiguous |
+| Binary Search On Answer | minimum feasible | Do not use if feasibility can switch back and forth |
+| Matrix Binary Search | sorted matrix | Do not flatten when rows and columns are sorted independently but not globally |
+| Peak Search | peak | Do not use for arbitrary unsorted target lookup |
+
 ## Pattern: Classic Target Search
 
 ### Beginner Intuition
@@ -30,8 +42,8 @@ Do not use when the input is unsorted or the predicate is not monotonic.
 ### Common Mistakes
 
 - Changing the wrong boundary after equality.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Classic Target Search: Do not use when the input is unsorted or the predicate is not monotonic.
+- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -79,8 +91,8 @@ Do not use without defining what true means at each index.
 ### Common Mistakes
 
 - Returning hi in one template and lo in another without knowing why.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Lower Bound: Do not use without defining what true means at each index.
+- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -128,8 +140,8 @@ Do not mix greater-than with greater-or-equal semantics.
 ### Common Mistakes
 
 - Returning the first invalid index when the caller expects the last valid index.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Upper Bound: Do not mix greater-than with greater-or-equal semantics.
+- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -177,8 +189,8 @@ Do not use unchanged when duplicates make both halves ambiguous.
 ### Common Mistakes
 
 - Testing the target against the unsorted half.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Rotated Sorted Search: Do not use unchanged when duplicates make both halves ambiguous.
+- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -226,8 +238,8 @@ Do not use if feasibility can switch back and forth.
 ### Common Mistakes
 
 - Picking low and high bounds that exclude the answer.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Binary Search On Answer: Do not use if feasibility can switch back and forth.
+- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -275,8 +287,8 @@ Do not flatten when rows and columns are sorted independently but not globally.
 ### Common Mistakes
 
 - Using the wrong row and column conversion.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Matrix Binary Search: Do not flatten when rows and columns are sorted independently but not globally.
+- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -322,8 +334,8 @@ Do not use for arbitrary unsorted target lookup.
 ### Common Mistakes
 
 - Comparing to both neighbors when one slope comparison is sufficient.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Peak Search: Do not use for arbitrary unsorted target lookup.
+- Failing to test single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries against the stated invariant.
 
 ### Pseudocode Or Template
 

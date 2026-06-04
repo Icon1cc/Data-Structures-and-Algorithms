@@ -12,6 +12,13 @@ Stacks make hidden order explicit. They are the natural tool for parsing, backtr
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: state the exact meaning of each item kept on the stack.
+- Meta: code monotonic stack loops with correct comparison direction under time pressure.
+- Amazon: explain empty-stack behavior, invalid tokens, and malformed input.
+- Beginner: decide whether the top stores a value, index, pair, or partial expression.
+
 ## Real-World Use
 
 Used in call stacks, expression parsing, undo systems, browser history, compiler syntax checks, monotonic queues, and event processing.
@@ -66,6 +73,32 @@ flowchart TD
     D --> E[Invariant restored]
 ```
 
+## Additional Visuals
+
+### Monotonic Stack Resolution
+
+```mermaid
+flowchart LR
+    A[Current value] --> B{resolves stack top?}
+    B -->|yes| C[pop top and write answer]
+    C --> B
+    B -->|no| D[push current index]
+    D --> E[unresolved indices remain ordered]
+```
+
+### Balanced Delimiters
+
+```mermaid
+flowchart TD
+    A[Read token] --> B{opening token?}
+    B -->|yes| C[push expected close]
+    B -->|no| D{matches stack top?}
+    D -->|yes| E[pop expected close]
+    D -->|no| F[invalid]
+    E --> G{input finished?}
+    G -->|yes| H[valid only if stack empty]
+```
+
 ## Foundations And Invariants
 
 Amortized analysis matters: in a monotonic stack each item is pushed once and popped once, so repeated inner pops still sum to O(n).
@@ -78,10 +111,10 @@ Look for nested delimiters, next greater, previous smaller, stock spans, histogr
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Does the newest unresolved item have to be resolved before older items?
+- Is the structure nested, reversible, or based on nearest greater or smaller values?
+- Do indices matter for distance or width, or are values enough?
+- Can one incoming item resolve multiple previous items?
 
 ## Common Interview Patterns
 
@@ -100,11 +133,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Define what the stack top represents at every iteration.
+- Say whether equal values should stay or be popped in monotonic problems.
+- Use indices when the answer asks for distance, width, or expiration.
+- Dry run the case where one item pops many previous items.
+- Separate parsing, precedence, and evaluation when expressions are involved.
 
 ## Mini Exercises
 

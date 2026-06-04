@@ -2,6 +2,19 @@
 
 Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
+## Curation Rules
+
+- Problems are selected for pattern coverage before volume.
+- Priority goes to NeetCode 150, Blind 75, Grind 75, and classic high-frequency interview variants.
+- Each problem appears once in this repository; related topics should transfer the pattern instead of duplicating the entry.
+- Difficulty placement follows the listed LeetCode difficulty and the expected interview reasoning load.
+
+## Practice Order
+
+- First pass: solve in the listed Medium order and write the invariant before coding.
+- Second pass: shuffle this file with adjacent topic files to avoid memorizing folder context.
+- Retry pass: redo misses after 2 days, 7 days, and 21 days.
+
 ## 1. Longest Substring Without Repeating Characters
 
 LeetCode: [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
@@ -13,15 +26,15 @@ Pattern: Variable Frequency Window
 Why It Matters: The core longest-valid-substring pattern.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Variable Frequency Window signal before choosing a template.
+- State the invariant for Longest Substring Without Repeating Characters: the core longest-valid-substring pattern.
+- Handle zero-count keys, negative values, recording order, and k larger than input.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Longest Substring Without Repeating Characters toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
+- Which zero-count keys case would break the first implementation?
+- Can the Variable Frequency Window invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 2. Longest Repeating Character Replacement
 
@@ -34,15 +47,15 @@ Pattern: Frequency Window
 Why It Matters: Tests maintaining a max frequency while shrinking.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Frequency Window signal before choosing a template.
+- State the invariant for Longest Repeating Character Replacement: tests maintaining a max frequency while shrinking.
+- Handle zero-count keys, negative values, recording order, and k larger than input.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Longest Repeating Character Replacement toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
+- Which zero-count keys case would break the first implementation?
+- Can the Frequency Window invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 3. Permutation in String
 
@@ -55,15 +68,15 @@ Pattern: Frequency Window
 Why It Matters: Fixed-length anagram matching with counts.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Frequency Window signal before choosing a template.
+- State the invariant for Permutation in String: fixed-length anagram matching with counts.
+- Handle zero-count keys, negative values, recording order, and k larger than input.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Permutation in String toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
+- Which zero-count keys case would break the first implementation?
+- Can the Frequency Window invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 4. Find All Anagrams in a String
 
@@ -76,15 +89,15 @@ Pattern: Frequency Window
 Why It Matters: Collects every matching fixed-length window.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Frequency Window signal before choosing a template.
+- State the invariant for Find All Anagrams in a String: collects every matching fixed-length window.
+- Handle zero-count keys, negative values, recording order, and k larger than input.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Find All Anagrams in a String toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
+- Which zero-count keys case would break the first implementation?
+- Can the Frequency Window invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 5. Minimum Size Subarray Sum
 
@@ -97,15 +110,15 @@ Pattern: Variable Sum Window
 Why It Matters: Classic shortest valid positive-sum window.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Variable Sum Window signal before choosing a template.
+- State the invariant for Minimum Size Subarray Sum: classic shortest valid positive-sum window.
+- Handle zero-count keys, negative values, recording order, and k larger than input.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Minimum Size Subarray Sum toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
+- Which zero-count keys case would break the first implementation?
+- Can the Variable Sum Window invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 6. Max Consecutive Ones III
 
@@ -118,15 +131,15 @@ Pattern: At Most K Window
 Why It Matters: Transforms flips into a count of invalid values.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the At Most K Window signal before choosing a template.
+- State the invariant for Max Consecutive Ones III: transforms flips into a count of invalid values.
+- Handle zero-count keys, negative values, recording order, and k larger than input.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Max Consecutive Ones III toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
+- Which zero-count keys case would break the first implementation?
+- Can the At Most K Window invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 7. Fruit Into Baskets
 
@@ -139,15 +152,15 @@ Pattern: At Most Two Distinct
 Why It Matters: The standard at-most-k distinct window.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the At Most Two Distinct signal before choosing a template.
+- State the invariant for Fruit Into Baskets: the standard at-most-k distinct window.
+- Handle zero-count keys, negative values, recording order, and k larger than input.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Fruit Into Baskets toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
+- Which zero-count keys case would break the first implementation?
+- Can the At Most Two Distinct invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 8. Frequency of the Most Frequent Element
 
@@ -160,15 +173,15 @@ Pattern: Sorted Window Cost
 Why It Matters: Combines sorting with a window cost invariant.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Sorted Window Cost signal before choosing a template.
+- State the invariant for Frequency of the Most Frequent Element: combines sorting with a window cost invariant.
+- Handle zero-count keys, negative values, recording order, and k larger than input.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Frequency of the Most Frequent Element toward prefix sums, hash maps, binary search, monotonic deque, or sorting?
+- Which zero-count keys case would break the first implementation?
+- Can the Sorted Window Cost invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ---
 

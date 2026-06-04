@@ -2,6 +2,19 @@
 
 Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
+## Curation Rules
+
+- Problems are selected for pattern coverage before volume.
+- Priority goes to NeetCode 150, Blind 75, Grind 75, and classic high-frequency interview variants.
+- Each problem appears once in this repository; related topics should transfer the pattern instead of duplicating the entry.
+- Difficulty placement follows the listed LeetCode difficulty and the expected interview reasoning load.
+
+## Practice Order
+
+- First pass: solve in the listed Hard order and write the invariant before coding.
+- Second pass: shuffle this file with adjacent topic files to avoid memorizing folder context.
+- Retry pass: redo misses after 2 days, 7 days, and 21 days.
+
 ## 1. Median of Two Sorted Arrays
 
 LeetCode: [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/)
@@ -13,15 +26,15 @@ Pattern: Binary Search Partition
 Why It Matters: High-value boundary partition problem.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Binary Search Partition signal before choosing a template.
+- State the invariant for Median of Two Sorted Arrays: high-value boundary partition problem.
+- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Median of Two Sorted Arrays toward linear scan, two pointers, heap selection, or direct math?
+- Which single-element ranges case would break the first implementation?
+- Can the Binary Search Partition invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 2. Split Array Largest Sum
 
@@ -34,15 +47,15 @@ Pattern: Binary Search On Answer
 Why It Matters: Minimizes the largest partition sum with monotonic feasibility.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Binary Search On Answer signal before choosing a template.
+- State the invariant for Split Array Largest Sum: minimizes the largest partition sum with monotonic feasibility.
+- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Split Array Largest Sum toward linear scan, two pointers, heap selection, or direct math?
+- Which single-element ranges case would break the first implementation?
+- Can the Binary Search On Answer invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 3. Find Minimum in Rotated Sorted Array II
 
@@ -55,15 +68,15 @@ Pattern: Rotated Search With Duplicates
 Why It Matters: Shows how duplicates weaken logarithmic guarantees.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Rotated Search With Duplicates signal before choosing a template.
+- State the invariant for Find Minimum in Rotated Sorted Array II: shows how duplicates weaken logarithmic guarantees.
+- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Find Minimum in Rotated Sorted Array II toward linear scan, two pointers, heap selection, or direct math?
+- Which single-element ranges case would break the first implementation?
+- Can the Rotated Search With Duplicates invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 4. Kth Smallest Number in Multiplication Table
 
@@ -76,15 +89,15 @@ Pattern: Binary Search Counting
 Why It Matters: Searches answer value using a counting predicate.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Binary Search Counting signal before choosing a template.
+- State the invariant for Kth Smallest Number in Multiplication Table: searches answer value using a counting predicate.
+- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Kth Smallest Number in Multiplication Table toward linear scan, two pointers, heap selection, or direct math?
+- Which single-element ranges case would break the first implementation?
+- Can the Binary Search Counting invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ---
 

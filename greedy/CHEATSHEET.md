@@ -37,6 +37,19 @@ A greedy algorithm builds a solution step by step using a locally optimal rule. 
 
 Look for earliest finish, minimum removals, maximum reach, choose once, local replacement, intervals, scheduling, or problems asking for fewest resources.
 
+## Pattern Choice Checklist
+
+- Sort and scan when order reveals the earliest safe commitment.
+- Interval greedy often sorts by end time, not start time.
+- Jump greedy keeps the farthest reach in the current layer.
+- Heap-assisted greedy delays choices until a deadline or capacity forces a decision.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run counterexamples, tie-breaking, proof gaps, and sorted-order assumptions before submitting.
+
 ## Templates
 
 ### Sort And Scan

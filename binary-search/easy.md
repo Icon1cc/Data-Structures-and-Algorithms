@@ -2,6 +2,19 @@
 
 Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
+## Curation Rules
+
+- Problems are selected for pattern coverage before volume.
+- Priority goes to NeetCode 150, Blind 75, Grind 75, and classic high-frequency interview variants.
+- Each problem appears once in this repository; related topics should transfer the pattern instead of duplicating the entry.
+- Difficulty placement follows the listed LeetCode difficulty and the expected interview reasoning load.
+
+## Practice Order
+
+- First pass: solve in the listed Easy order and write the invariant before coding.
+- Second pass: shuffle this file with adjacent topic files to avoid memorizing folder context.
+- Retry pass: redo misses after 2 days, 7 days, and 21 days.
+
 ## 1. Binary Search
 
 LeetCode: [Binary Search](https://leetcode.com/problems/binary-search/)
@@ -13,15 +26,15 @@ Pattern: Classic Target Search
 Why It Matters: Baseline exact lookup with clear inclusive bounds.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Classic Target Search signal before choosing a template.
+- State the invariant for Binary Search: baseline exact lookup with clear inclusive bounds.
+- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Binary Search toward linear scan, two pointers, heap selection, or direct math?
+- Which single-element ranges case would break the first implementation?
+- Can the Classic Target Search invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 2. Search Insert Position
 
@@ -34,15 +47,15 @@ Pattern: Lower Bound
 Why It Matters: Turns missing targets into insertion boundaries.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Lower Bound signal before choosing a template.
+- State the invariant for Search Insert Position: turns missing targets into insertion boundaries.
+- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Search Insert Position toward linear scan, two pointers, heap selection, or direct math?
+- Which single-element ranges case would break the first implementation?
+- Can the Lower Bound invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 3. First Bad Version
 
@@ -55,15 +68,15 @@ Pattern: First True Predicate
 Why It Matters: The cleanest monotonic predicate example.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the First True Predicate signal before choosing a template.
+- State the invariant for First Bad Version: the cleanest monotonic predicate example.
+- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push First Bad Version toward linear scan, two pointers, heap selection, or direct math?
+- Which single-element ranges case would break the first implementation?
+- Can the First True Predicate invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 4. Guess Number Higher or Lower
 
@@ -76,15 +89,15 @@ Pattern: Classic Target Search
 Why It Matters: Practices halving based on comparison feedback.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Classic Target Search signal before choosing a template.
+- State the invariant for Guess Number Higher or Lower: practices halving based on comparison feedback.
+- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Guess Number Higher or Lower toward linear scan, two pointers, heap selection, or direct math?
+- Which single-element ranges case would break the first implementation?
+- Can the Classic Target Search invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 5. Sqrt(x)
 
@@ -97,15 +110,15 @@ Pattern: Binary Search On Answer
 Why It Matters: Introduces numeric answer search with overflow awareness.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Binary Search On Answer signal before choosing a template.
+- State the invariant for Sqrt(x): introduces numeric answer search with overflow awareness.
+- Handle single-element ranges, equality handling, duplicate ambiguity, and excluded boundaries.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Sqrt(x) toward linear scan, two pointers, heap selection, or direct math?
+- Which single-element ranges case would break the first implementation?
+- Can the Binary Search On Answer invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ---
 

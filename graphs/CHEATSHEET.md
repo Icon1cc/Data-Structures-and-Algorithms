@@ -40,6 +40,19 @@ A graph is a set of vertices and edges. Edges may be directed or undirected, wei
 
 Look for connected, reachable, shortest path in unweighted graph, dependencies, courses, islands, components, cycles, clone, or transformation steps.
 
+## Pattern Choice Checklist
+
+- BFS gives shortest path only in unweighted graphs.
+- DFS is strong for components, reachability, and recursion-state cycle checks.
+- Topological sort requires a DAG and detects cycles by incomplete output.
+- Union Find answers connectivity but does not give path order.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run disconnected components, cycles, duplicate enqueues, and directed versus undirected edges before submitting.
+
 ## Templates
 
 ### DFS Traversal

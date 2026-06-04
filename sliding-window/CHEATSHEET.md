@@ -37,6 +37,19 @@ A sliding window keeps two monotonic boundaries and an aggregate over the interv
 
 Look for contiguous subarray, substring, longest, shortest, at most k, exactly k via at most transforms, fixed length k, or stream-style language.
 
+## Pattern Choice Checklist
+
+- Fixed window records after the first full length k window exists.
+- Longest valid window shrinks while invalid, then records.
+- Shortest valid window shrinks while valid, recording before removal.
+- Exactly k counts often become at_most(k) minus at_most(k - 1).
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run zero-count keys, negative values, recording order, and k larger than input before submitting.
+
 ## Templates
 
 ### Fixed Window

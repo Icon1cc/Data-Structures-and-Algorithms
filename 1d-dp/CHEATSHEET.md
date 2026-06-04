@@ -40,6 +40,19 @@ Dynamic programming applies when optimal substructure and overlapping subproblem
 
 Look for count ways, min cost, max profit, can reach, choose or skip, subsequence, partition, coin change, or repeated recursion over indices.
 
+## Pattern Choice Checklist
+
+- Memoization is easier when recursion expresses choices naturally.
+- Tabulation is easier when fill order is obvious.
+- Knapsack needs item and capacity or compressed capacity order.
+- Kadane keeps best subarray ending here and best overall.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run base cases, invalid states, iteration order, and memory compression direction before submitting.
+
 ## Templates
 
 ### State Definition

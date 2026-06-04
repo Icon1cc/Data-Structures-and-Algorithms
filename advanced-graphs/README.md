@@ -12,6 +12,13 @@ Advanced graph interviews test algorithm selection. The same input shape can req
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: justify the exact graph algorithm from edge-weight and graph-structure assumptions.
+- Meta: know when Dijkstra, Bellman-Ford, topo DP, and Union Find apply without debate.
+- Amazon: explain failure modes such as negative edges, disconnected graphs, and stale heap entries.
+- Beginner: classify weighted, negative, DAG, dense, sparse, and connectivity questions first.
+
 ## Real-World Use
 
 Used in routing, dependency analysis, arbitrage detection, network reliability, infrastructure planning, compiler optimization, maps, and ranking systems.
@@ -73,6 +80,33 @@ flowchart TD
     G --> C
 ```
 
+## Additional Visuals
+
+### Dijkstra Frontier
+
+```mermaid
+flowchart TD
+    A[Source distance 0] --> H[min-heap frontier]
+    H --> B[Pop smallest tentative distance]
+    B --> C{entry is stale?}
+    C -->|yes| H
+    C -->|no| D[Relax outgoing edges]
+    D --> E[Push improved distances]
+    E --> H
+```
+
+### Minimum Spanning Tree With Kruskal
+
+```mermaid
+flowchart LR
+    A[Sort edges by weight] --> B[Take next lightest edge]
+    B --> C{endpoints already connected?}
+    C -->|yes| D[Skip edge]
+    C -->|no| E[Union endpoints and keep edge]
+    D --> B
+    E --> B
+```
+
 ## Foundations And Invariants
 
 Dijkstra relies on non-negative weights. Bellman-Ford tolerates negative edges and detects negative cycles. MST connects all nodes cheaply but does not solve shortest paths.
@@ -85,10 +119,10 @@ Look for weighted shortest path, negative edge, all-pairs distance, connect all 
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Are edge weights non-negative, negative, or irrelevant?
+- Do you need one-source shortest path, all-pairs shortest path, MST, bridges, or SCCs?
+- Is the graph sparse enough for adjacency-list algorithms?
+- What invariant makes a node, edge, or component final?
 
 ## Common Interview Patterns
 
@@ -109,11 +143,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Choose the algorithm from graph properties, not from problem wording alone.
+- Reject Dijkstra when negative edges can improve an already-settled distance.
+- For MST, say whether Kruskal or Prim is simpler for the input representation.
+- For low-link algorithms, define discovery time and low value before coding.
+- Compare O(E log V), O(VE), and O(V^3) honestly against constraints.
 
 ## Mini Exercises
 

@@ -2,6 +2,19 @@
 
 Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
+## Curation Rules
+
+- Problems are selected for pattern coverage before volume.
+- Priority goes to NeetCode 150, Blind 75, Grind 75, and classic high-frequency interview variants.
+- Each problem appears once in this repository; related topics should transfer the pattern instead of duplicating the entry.
+- Difficulty placement follows the listed LeetCode difficulty and the expected interview reasoning load.
+
+## Practice Order
+
+- First pass: solve in the listed Hard order and write the invariant before coding.
+- Second pass: shuffle this file with adjacent topic files to avoid memorizing folder context.
+- Retry pass: redo misses after 2 days, 7 days, and 21 days.
+
 ## 1. Candy
 
 LeetCode: [Candy](https://leetcode.com/problems/candy/)
@@ -13,36 +26,36 @@ Pattern: Two Pass Greedy
 Why It Matters: Satisfies local neighbor constraints both directions.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Two Pass Greedy signal before choosing a template.
+- State the invariant for Candy: satisfies local neighbor constraints both directions.
+- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Candy toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
+- Which counterexamples case would break the first implementation?
+- Can the Two Pass Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
 
-## 2. Trapping Rain Water
+## 2. Maximum Performance of a Team
 
-LeetCode: [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
+LeetCode: [Maximum Performance of a Team](https://leetcode.com/problems/maximum-performance-of-a-team/)
 
 Difficulty: Hard
 
-Pattern: Boundary Greedy
+Pattern: Sort Plus Heap Greedy
 
-Why It Matters: Uses max boundaries to finalize trapped water.
+Why It Matters: Combines a sorted bottleneck metric with a heap of best supporting candidates.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Sort Plus Heap Greedy signal before choosing a template.
+- State the invariant for Maximum Performance of a Team: combines a sorted bottleneck metric with a heap of best supporting candidates.
+- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Maximum Performance of a Team toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
+- Which counterexamples case would break the first implementation?
+- Can the Sort Plus Heap Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 3. Minimum Number of Refueling Stops
 
@@ -55,15 +68,15 @@ Pattern: Heap-Assisted Greedy
 Why It Matters: Chooses best previous station only when needed.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Heap-Assisted Greedy signal before choosing a template.
+- State the invariant for Minimum Number of Refueling Stops: chooses best previous station only when needed.
+- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Minimum Number of Refueling Stops toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
+- Which counterexamples case would break the first implementation?
+- Can the Heap-Assisted Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 4. Create Maximum Number
 
@@ -76,15 +89,15 @@ Pattern: Monotonic Greedy
 Why It Matters: Builds best subsequences and merges them.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Monotonic Greedy signal before choosing a template.
+- State the invariant for Create Maximum Number: builds best subsequences and merges them.
+- Handle counterexamples, tie-breaking, proof gaps, and sorted-order assumptions.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Create Maximum Number toward dynamic programming, heap scheduling, interval sweep, binary search, or backtracking?
+- Which counterexamples case would break the first implementation?
+- Can the Monotonic Greedy invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ---
 

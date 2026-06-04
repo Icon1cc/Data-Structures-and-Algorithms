@@ -2,6 +2,17 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Modulo Arithmetic | mod | Do not forget negative values may need normalization |
+| GCD And LCM | gcd | Do not compute lcm before reducing if overflow is possible |
+| Prime Sieve | prime | Do not test divisibility from scratch for every number if n is large |
+| Matrix Traversal | matrix | Do not mutate dimensions without checking crossing bounds |
+| Coordinate Geometry | slope | Do not compare floating point slopes for exact equality |
+| Randomized Prefix | random | Do not use modulo bias when uniform weighted choice is required |
+
 ## Pattern: Modulo Arithmetic
 
 ### Beginner Intuition
@@ -30,8 +41,8 @@ Do not forget negative values may need normalization.
 ### Common Mistakes
 
 - Assuming every language returns positive modulo for negatives.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Modulo Arithmetic: Do not forget negative values may need normalization.
+- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -75,8 +86,8 @@ Do not compute lcm before reducing if overflow is possible.
 ### Common Mistakes
 
 - Not normalizing signs in reduced pairs.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for GCD And LCM: Do not compute lcm before reducing if overflow is possible.
+- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -120,8 +131,8 @@ Do not test divisibility from scratch for every number if n is large.
 ### Common Mistakes
 
 - Starting marking too early instead of at p * p.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Prime Sieve: Do not test divisibility from scratch for every number if n is large.
+- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -168,8 +179,8 @@ Do not mutate dimensions without checking crossing bounds.
 ### Common Mistakes
 
 - Processing a row or column twice after bounds cross.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Matrix Traversal: Do not mutate dimensions without checking crossing bounds.
+- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -216,8 +227,8 @@ Do not compare floating point slopes for exact equality.
 ### Common Mistakes
 
 - Not handling duplicate points.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Coordinate Geometry: Do not compare floating point slopes for exact equality.
+- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -264,8 +275,8 @@ Do not use modulo bias when uniform weighted choice is required.
 ### Common Mistakes
 
 - Using floating ranges with off-by-one errors.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Randomized Prefix: Do not use modulo bias when uniform weighted choice is required.
+- Failing to test zero, negative values, overflow, precision, and normalized coordinate keys against the stated invariant.
 
 ### Pseudocode Or Template
 

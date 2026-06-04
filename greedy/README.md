@@ -12,6 +12,13 @@ Greedy problems look simple but demand proof. Interviewers use them to separate 
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: provide a proof sketch, not only an intuition.
+- Meta: recognize sorted scans, jump ranges, and interval endpoints quickly.
+- Amazon: explain why the local choice remains valid after edge cases.
+- Beginner: do not use greedy until you can say why DP is not needed.
+
 ## Real-World Use
 
 Used in scheduling, caching, compression, resource allocation, routing heuristics, interval selection, and load balancing.
@@ -79,10 +86,10 @@ Look for earliest finish, minimum removals, maximum reach, choose once, local re
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- What local choice are you claiming is globally safe?
+- Can an exchange argument replace an arbitrary optimal solution with your choice?
+- Does sorting expose the safe choice, deadline, endpoint, or priority?
+- Would a future constraint invalidate a choice that looks best now?
 
 ## Common Interview Patterns
 
@@ -102,11 +109,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- State the greedy choice and the invariant it preserves.
+- Give an exchange argument or a staying-ahead argument.
+- Sort by the property that makes the choice safe, not by habit.
+- Watch for counterexamples where the largest immediate reward fails.
+- Compare against DP when previous choices affect future feasibility.
 
 ## Mini Exercises
 

@@ -12,6 +12,13 @@ Binary search is the standard way to convert linear trial into logarithmic reaso
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: prove the predicate is monotonic before discussing code.
+- Meta: use one lower-bound template consistently and avoid equality loops.
+- Amazon: clarify inclusive and exclusive bounds out loud before implementation.
+- Beginner: write what low and high mean after every loop iteration.
+
 ## Real-World Use
 
 Used in database indexes, version search, capacity planning, ranking, distributed storage ranges, numeric approximation, and feature rollout boundaries.
@@ -69,6 +76,34 @@ flowchart TD
     F -->|yes| G[Return boundary]
 ```
 
+## Additional Visuals
+
+### Lower Bound Boundary
+
+```mermaid
+flowchart LR
+    A[false] --> B[false]
+    B --> C[false]
+    C --> D[first true]
+    D --> E[true]
+    E --> F[true]
+    G[low tracks possible first true] --> D
+    H[high never drops below answer] --> D
+```
+
+### Binary Search On Answer
+
+```mermaid
+flowchart TD
+    A[Choose answer range] --> B[Build feasibility check]
+    B --> C{mid is feasible?}
+    C -->|yes, minimize| D[high = mid]
+    C -->|no| E[low = mid + 1]
+    D --> F[Invariant: answer remains in range]
+    E --> F
+    F --> C
+```
+
 ## Foundations And Invariants
 
 The predicate must be monotonic. If true and false values alternate, halving is unsound no matter how clean the code looks.
@@ -81,10 +116,10 @@ Look for sorted data, first or last valid value, minimum feasible capacity, maxi
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- What is the monotonic predicate, and where does false change to true or true change to false?
+- Are you searching an index, a value, an answer range, or a rotated segment?
+- Does equality return immediately, keep the left boundary, or keep the right boundary?
+- Do duplicates break the side-order proof?
 
 ## Common Interview Patterns
 
@@ -105,11 +140,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Name the search domain and the predicate separately.
+- State whether the template returns first true, last false, exact target, or insertion point.
+- Choose initial bounds that cannot exclude the real answer.
+- Use midpoint arithmetic that avoids overflow in fixed-width languages.
+- Test the smallest range and the case where the answer is at each boundary.
 
 ## Mini Exercises
 

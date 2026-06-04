@@ -2,6 +2,18 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Recursive DFS | subtree | Do not use recursion blindly if depth can exceed stack limits |
+| Iterative DFS | explicit stack | Do not use if recursive code is clearer and depth is safe |
+| BFS Level Order | level | Do not use DFS when shortest edge count by level is required |
+| Path Problems | path sum | Do not keep one mutable path without undoing after recursion |
+| Tree DP | choose skip | Do not collapse state if parent needs to know different choices |
+| Lowest Common Ancestor | ancestor | Do not use BST ordering on a non-BST |
+| BST Bounds | BST | Do not validate a BST by comparing only parent and child |
+
 ## Pattern: Recursive DFS
 
 ### Beginner Intuition
@@ -30,8 +42,8 @@ Do not use recursion blindly if depth can exceed stack limits.
 ### Common Mistakes
 
 - Returning global answer instead of the local value the parent needs.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Recursive DFS: Do not use recursion blindly if depth can exceed stack limits.
+- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -79,8 +91,8 @@ Do not use if recursive code is clearer and depth is safe.
 ### Common Mistakes
 
 - Pushing children in the wrong order for the desired traversal.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Iterative DFS: Do not use if recursive code is clearer and depth is safe.
+- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -129,8 +141,8 @@ Do not use DFS when shortest edge count by level is required.
 ### Common Mistakes
 
 - Mixing nodes from different levels by not capturing level size.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for BFS Level Order: Do not use DFS when shortest edge count by level is required.
+- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -177,8 +189,8 @@ Do not keep one mutable path without undoing after recursion.
 ### Common Mistakes
 
 - Appending live path objects instead of copies.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Path Problems: Do not keep one mutable path without undoing after recursion.
+- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -224,8 +236,8 @@ Do not collapse state if parent needs to know different choices.
 ### Common Mistakes
 
 - Returning only the best value when parent needs selected and unselected cases.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Tree DP: Do not collapse state if parent needs to know different choices.
+- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -271,8 +283,8 @@ Do not use BST ordering on a non-BST.
 ### Common Mistakes
 
 - Continuing past the split point in a BST.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Lowest Common Ancestor: Do not use BST ordering on a non-BST.
+- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -320,8 +332,8 @@ Do not validate a BST by comparing only parent and child.
 ### Common Mistakes
 
 - Allowing equality on the wrong side when duplicates are not allowed.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for BST Bounds: Do not validate a BST by comparing only parent and child.
+- Failing to test null roots, skewed depth, duplicate BST values, and global-state reset against the stated invariant.
 
 ### Pseudocode Or Template
 

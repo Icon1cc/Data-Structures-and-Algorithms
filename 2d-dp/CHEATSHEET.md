@@ -39,6 +39,19 @@ A 2-D DP table stores solutions for pairs of positions, capacities, or interval 
 
 Look for two strings, grid paths, edit distance, subsequences, palindromes, matrix costs, intervals, or choices involving two moving indices.
 
+## Pattern Choice Checklist
+
+- Grid DP usually reads from top and left, or from all valid directions.
+- Two-string DP compares prefixes ending at i and j.
+- Knapsack table separates item choice from capacity.
+- Interval DP fills by increasing interval length.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run empty dimensions, boundary initialization, diagonal fill order, and compressed-row overwrites before submitting.
+
 ## Templates
 
 ### Grid DP

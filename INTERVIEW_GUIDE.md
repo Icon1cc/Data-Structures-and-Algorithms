@@ -43,6 +43,18 @@ Do not skip brute force. A clear brute force solution shows you understand the p
 | Repeated recursive subproblem | Dynamic programming |
 | Repeated reachability from scratch | Graph traversal or Union Find |
 
+## Interviewer Lenses
+
+| Lens | What To Show |
+|---|---|
+| Google | A correct invariant, proof sketch, and complexity tied to constraints. |
+| Meta | Fast pattern recognition, concise implementation, and bug-free dry runs. |
+| Amazon | Clarifying questions, edge cases, tradeoffs, and practical maintainability. |
+| OpenAI | Robust reasoning when constraints change or the problem becomes unfamiliar. |
+| Anthropic | Careful assumptions, transparent uncertainty, and simple correct logic. |
+| Mistral | Strong fundamentals, efficient algorithms, and clean implementation choices. |
+| Beginner learner | Plain-language explanation of why the pattern is enough. |
+
 ## Complexity Analysis
 
 Always separate:
@@ -75,12 +87,16 @@ Examples:
 - Overflow in fixed-width languages.
 - Mutating input when the caller may expect it preserved.
 
-## Big-Tech Preparation Notes
+## Follow-Up Playbook
 
-- **Google**: emphasize invariants, proofs, and clean reasoning on unfamiliar variants.
-- **Meta**: emphasize speed, pattern recognition, and bug-free implementation.
-- **Amazon**: emphasize communication, edge cases, and practical tradeoffs.
-- **OpenAI, Anthropic, Mistral**: emphasize fundamentals, clarity, correctness, and ability to adapt under changed constraints.
+| Follow-Up Type | What To Reconsider |
+|---|---|
+| Less memory | In-place mutation, sorting, state compression, or streaming summaries. |
+| More data | Asymptotic bottleneck, cache behavior, external sorting, or incremental state. |
+| Negative values | Sliding-window assumptions, Dijkstra assumptions, and numeric overflow. |
+| Duplicates | Stable ordering, counting, skip logic, and canonical keys. |
+| Online input | Heap, queue, rolling state, or amortized updates. |
+| Return all answers | Output-size complexity and duplicate suppression. |
 
 ## Mock Interview Strategy
 

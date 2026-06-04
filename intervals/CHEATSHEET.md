@@ -38,6 +38,19 @@ An interval represents a continuous range [start, end] or [start, end). Algorith
 
 Look for merge, insert, overlap, meeting rooms, minimum removals, arrows, calendar, booking, timeline, or active count.
 
+## Pattern Choice Checklist
+
+- Merge intervals sorts by start and extends current end.
+- Insert interval handles before, overlap, and after phases.
+- Meeting rooms counts concurrent active intervals.
+- Erase overlap usually keeps the interval with the earliest end.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run equal endpoints, open versus closed intervals, empty interval lists, and event tie order before submitting.
+
 ## Templates
 
 ### Merge Intervals

@@ -12,6 +12,13 @@ Bit problems test fundamentals: XOR cancellation, shifts, masks, two's complemen
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: prove the bit identity and state its constraints.
+- Meta: recognize XOR, lowbit, mask subset, and count-bits templates quickly.
+- Amazon: discuss signedness, overflow, and fixed-width behavior.
+- Beginner: write one binary example before using an operator.
+
 ## Real-World Use
 
 Used in permissions, compression, cryptography primitives, networking flags, embedded systems, bitmap indexes, and performance-sensitive state sets.
@@ -81,10 +88,10 @@ Look for single number, parity, powers of two, subset masks, permissions, turn b
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Is the problem about parity, bit counts, masks, subsets, or low-level arithmetic?
+- Can XOR cancellation remove paired values?
+- What bit width and signed-number model does the language use?
+- Is bitmask enumeration smaller than enumerating full objects?
 
 ## Common Interview Patterns
 
@@ -104,11 +111,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Name the identity, such as x XOR x equals 0 or x & -x isolates lowbit.
+- State bit width and signed behavior when the language requires it.
+- Use masks only when n is small enough for 2^n states.
+- Test zero, powers of two, all bits set, and duplicate values.
+- Explain why bit operations do not automatically make exponential enumeration cheap.
 
 ## Mini Exercises
 

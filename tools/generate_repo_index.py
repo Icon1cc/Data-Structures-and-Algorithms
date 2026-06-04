@@ -14,17 +14,22 @@ def main() -> int:
     rows = []
     total_problems = 0
     total_patterns = 0
+    problem_titles = []
     for slug, name in TOPICS:
         folder = ROOT / slug
         easy = count(folder / "easy.md", r"^## \d+\. ")
         medium = count(folder / "medium.md", r"^## \d+\. ")
         hard = count(folder / "hard.md", r"^## \d+\. ")
         patterns = count(folder / "PATTERNS.md", r"^## Pattern: ")
+        for difficulty in ("easy.md", "medium.md", "hard.md"):
+            problem_titles.extend(re.findall(r"^## \d+\. (.+)$", (folder / difficulty).read_text(encoding="utf-8"), flags=re.MULTILINE))
         subtotal = easy + medium + hard
         total_problems += subtotal
         total_patterns += patterns
         rows.append(f"| [{name}]({slug}/README.md) | {easy} | {medium} | {hard} | {subtotal} | {patterns} |")
     markdown_count = len([p for p in ROOT.rglob("*.md") if ".git" not in p.parts])
+    unique_problems = len(set(problem_titles))
+    duplicate_problems = total_problems - unique_problems
     content = f"""# Repository Index
 
 Generated overview of the Data Structures and Algorithms repository.
@@ -36,6 +41,8 @@ Generated overview of the Data Structures and Algorithms repository.
 | Topic folders | {len(TOPICS)} |
 | Markdown files | {markdown_count} |
 | Curated problem entries | {total_problems} |
+| Unique problem titles | {unique_problems} |
+| Duplicate problem titles | {duplicate_problems} |
 | Pattern sections | {total_patterns} |
 
 ## Topics

@@ -38,6 +38,19 @@ Bit manipulation operates on the binary representation of integers using AND, OR
 
 Look for single number, parity, powers of two, subset masks, permissions, turn bits on or off, XOR ranges, or constraints with n <= 20.
 
+## Pattern Choice Checklist
+
+- XOR cancels equal pairs and preserves the unique value.
+- x & (x - 1) removes the lowest set bit.
+- Masks represent subsets when n is small.
+- Submask enumeration walks all subsets of a mask with `(sub - 1) & mask`.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run zero, negative numbers, fixed bit width, overflow, and 2^n mask limits before submitting.
+
 ## Templates
 
 ### XOR Cancellation

@@ -35,12 +35,23 @@ Use this roadmap to learn topics in an order that builds prerequisites before ad
 | 17 | [Bit Manipulation](bit-manipulation/README.md) | Intervals | Use binary representation directly for sets, parity, masks, and low-level arithmetic. |
 | 18 | [Math & Geometry](math-geometry/README.md) | Bit Manipulation | Apply arithmetic, number theory, coordinate reasoning, and matrix movement cleanly. |
 
+## Readiness Gates
+
+| Gate | You Are Ready When |
+|---|---|
+| Leave Easy practice | You can explain the invariant and solve without checking a template. |
+| Start Medium practice | You can choose among the topic patterns from constraints, not keywords. |
+| Start Hard practice | You can solve Medium follow-ups and discuss alternative patterns. |
+| Start mixed timed sets | You can identify the topic from examples in under 5 minutes. |
+| Start final interview review | You can explain complexity and edge cases while coding. |
+
 ## Interview Relevance
 
 - **Google-style problem solving**: emphasize invariants, proofs, and clean complexity analysis.
 - **Meta-style speed**: emphasize Arrays & Hashing, Two Pointers, Sliding Window, Trees, Graphs, and fast pattern recall.
 - **Amazon-style communication**: emphasize clarifying assumptions, edge cases, and tradeoffs before coding.
-- **AI-lab fundamentals**: emphasize correctness under constraints, graph search, DP, and clean reasoning over unfamiliar variants.
+- **OpenAI, Anthropic, and Mistral fundamentals**: emphasize correctness under constraints, graph search, DP, and clean reasoning over unfamiliar variants.
+- **Beginner learning**: emphasize plain-language explanations, diagrams, and a mistake log before volume.
 
 ## Prerequisite Rules
 

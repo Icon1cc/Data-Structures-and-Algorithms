@@ -9,6 +9,25 @@ Choose a plan based on deadline and background. A problem only counts when you c
 - 10 minutes: write what failed, even when the final solution passed.
 - Twice per week: do one timed 45-minute problem with verbal explanation.
 
+## Counting A Problem Correctly
+
+A solved problem only counts when all of these are true:
+
+- You can name the pattern before looking at past notes.
+- You can state the invariant in one sentence.
+- You can explain the main edge case that would break a naive implementation.
+- You can give time and auxiliary space without mixing them with output size.
+- You can redo the problem after a spaced retry without memorizing line-by-line code.
+
+## Weekly Review Mix
+
+| Review Block | Purpose |
+|---|---|
+| One old Easy | Keep mechanics automatic. |
+| One old Medium | Keep pattern recognition warm. |
+| One missed problem | Repair the exact invariant or edge case that failed. |
+| One mixed-topic problem | Prevent overfitting to a folder name. |
+
 ## 8-Week Interview Sprint
 
 | Week | Topics | Problem Targets | Weekly Goal |

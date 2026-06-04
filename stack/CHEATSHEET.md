@@ -36,6 +36,19 @@ A stack supports push, pop, and top in O(1). Monotonic stacks add an invariant t
 
 Look for nested delimiters, next greater, previous smaller, stock spans, histogram areas, collision simulation, or the phrase most recent unresolved item.
 
+## Pattern Choice Checklist
+
+- Nested syntax uses a plain LIFO stack.
+- Next greater or warmer day uses a decreasing stack of unresolved indices.
+- Histogram and previous smaller usually use an increasing stack plus sentinels.
+- Expression problems need an explicit precedence or sign model.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run empty stack, equal values, sentinel handling, and index versus value storage before submitting.
+
 ## Templates
 
 ### LIFO Simulation

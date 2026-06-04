@@ -12,6 +12,13 @@ Graph fluency is required for dependencies, connectivity, shortest unweighted pa
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: define graph representation and prove O(V + E) traversal.
+- Meta: choose BFS for shortest unweighted paths and DFS for component structure quickly.
+- Amazon: explain disconnected components, cycles, and input conversion.
+- Beginner: write the node type and neighbor generation rule first.
+
 ## Real-World Use
 
 Used in social networks, package managers, routing, service dependencies, compilers, build systems, fraud rings, maps, and workflow engines.
@@ -75,31 +82,41 @@ flowchart LR
 
 ## Additional Visuals
 
-### BFS And DFS Traversal
+### BFS Visited Timing
 
 ```mermaid
 flowchart LR
-    S[Start node] --> Q[BFS queue]
-    S --> T[DFS stack or recursion]
-    Q --> L1[Visit all distance-1 neighbors first]
-    L1 --> L2[Then distance-2 neighbors]
-    T --> D1[Follow one path deeply]
-    D1 --> D2[Backtrack to the next branch]
+    A[Discover neighbor] --> B[Mark visited immediately]
+    B --> C[Enqueue once]
+    C --> D[Process by level]
+    A --> E[If marking waits until pop]
+    E --> F[Duplicate queue entries can appear]
+```
+
+### DFS Component Scan
+
+```mermaid
+flowchart TD
+    A[Loop over all nodes] --> B{unvisited?}
+    B -->|yes| C[start DFS]
+    C --> D[mark entire component]
+    D --> A
+    B -->|no| A
 ```
 
 ### Topological Sort
 
 ```mermaid
 flowchart TD
-    A[Build indegree for every node] --> B[Queue nodes with indegree 0]
-    B --> C[Pop a node into order]
-    C --> D[Decrease indegree of neighbors]
-    D --> E{Neighbor indegree now 0?}
+    A[Compute indegree for every node] --> B[Queue nodes with indegree 0]
+    B --> C[Pop node into order]
+    C --> D[Decrease indegree of outgoing neighbors]
+    D --> E{neighbor indegree is 0?}
     E -->|yes| B
-    E -->|no| F[Keep scanning]
-    B --> G{Order contains every node?}
-    G -->|yes| H[Valid DAG order]
-    G -->|no| I[Cycle exists]
+    E -->|no| F[continue scanning edges]
+    C --> G{processed all nodes?}
+    G -->|yes| H[DAG order is valid]
+    G -->|no| I[cycle if queue is empty early]
 ```
 
 ## Foundations And Invariants
@@ -114,10 +131,10 @@ Look for connected, reachable, shortest path in unweighted graph, dependencies, 
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- What is a node, and what counts as a legal edge?
+- Is the graph directed, undirected, weighted, unweighted, explicit, or implicit?
+- Do you need reachability, shortest unweighted distance, components, cycles, or dependency order?
+- When should a node be marked visited to avoid duplicates or infinite loops?
 
 ## Common Interview Patterns
 
@@ -138,11 +155,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Define vertices and edges before choosing BFS, DFS, Union Find, or topological sort.
+- Mark visited on enqueue for BFS when duplicate enqueues would grow the queue.
+- Handle disconnected components by restarting traversal when required.
+- Separate directed-cycle and undirected-cycle logic.
+- Use O(V + E) for adjacency traversal and O(rows * cols) for grid traversal.
 
 ## Mini Exercises
 

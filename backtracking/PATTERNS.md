@@ -2,6 +2,17 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Subsets | all subsets | Do not use permutations when order does not matter |
+| Combinations | choose k | Do not restart from zero after each choice |
+| Permutations | arrangements | Do not sort-and-skip incorrectly when duplicates exist |
+| Constraint Grid Search | grid | Do not use a global visited set when paths must be independent |
+| Partition Backtracking | partition | Do not copy large substrings unnecessarily if indices are enough |
+| Pruned Search | constraints | Do not prune on a condition that future choices could fix |
+
 ## Pattern: Subsets
 
 ### Beginner Intuition
@@ -30,8 +41,8 @@ Do not use permutations when order does not matter.
 ### Common Mistakes
 
 - Failing to skip duplicates after sorting.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Subsets: Do not use permutations when order does not matter.
+- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -78,8 +89,8 @@ Do not restart from zero after each choice.
 ### Common Mistakes
 
 - Allowing the same combination in different orders.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Combinations: Do not restart from zero after each choice.
+- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -127,8 +138,8 @@ Do not sort-and-skip incorrectly when duplicates exist.
 ### Common Mistakes
 
 - Not unmarking used after recursion.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Permutations: Do not sort-and-skip incorrectly when duplicates exist.
+- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -179,8 +190,8 @@ Do not use a global visited set when paths must be independent.
 ### Common Mistakes
 
 - Leaving a cell marked after backtracking.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Constraint Grid Search: Do not use a global visited set when paths must be independent.
+- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -227,8 +238,8 @@ Do not copy large substrings unnecessarily if indices are enough.
 ### Common Mistakes
 
 - Checking validity after recursing instead of before choosing.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Partition Backtracking: Do not copy large substrings unnecessarily if indices are enough.
+- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -274,8 +285,8 @@ Do not prune on a condition that future choices could fix.
 ### Common Mistakes
 
 - Using an unsound prune that removes valid answers.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Pruned Search: Do not prune on a condition that future choices could fix.
+- Failing to test duplicate choices, missing undo, invalid pruning, and output-size complexity against the stated invariant.
 
 ### Pseudocode Or Template
 

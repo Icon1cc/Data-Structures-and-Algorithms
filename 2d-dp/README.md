@@ -12,6 +12,13 @@ This topic is a reusable mental model, not a bag of isolated tricks. You should 
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: prove the recurrence and fill order for each dimension.
+- Meta: recognize grid, string, knapsack, and interval DP forms quickly.
+- Amazon: handle obstacles, empty strings, and boundary rows explicitly.
+- Beginner: label dp[i][j] in words before drawing the table.
+
 ## Real-World Use
 
 Used in diff tools, spell check, bioinformatics alignment, grid routing, parsing, resource planning, and sequence comparison.
@@ -68,6 +75,29 @@ flowchart TD
     F[Base row and column] --> A
 ```
 
+## Additional Visuals
+
+### Grid DP Fill Order
+
+```mermaid
+flowchart TD
+    A[dp r-1 c] --> C[dp r c]
+    B[dp r c-1] --> C
+    C --> D[dp r c+1]
+    C --> E[dp r+1 c]
+```
+
+### Two-String DP Cell
+
+```mermaid
+flowchart LR
+    A[prefix s up to i] --> C[dp i j]
+    B[prefix t up to j] --> C
+    C --> D{chars match?}
+    D -->|yes| E[use diagonal]
+    D -->|no| F[use skip or combine]
+```
+
 ## Foundations And Invariants
 
 Fill order must respect dependencies. Grid DP often fills top-left to bottom-right, while interval DP often fills by increasing interval length.
@@ -80,10 +110,10 @@ Look for two strings, grid paths, edit distance, subsequences, palindromes, matr
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- What do the two dimensions represent: indices, coordinates, capacity, interval bounds, or players?
+- Which neighboring states feed the current cell?
+- Does fill order move by rows, columns, diagonals, length, or compressed dimension?
+- Is the answer a table value, a path, a count, or an optimized score?
 
 ## Common Interview Patterns
 
@@ -104,11 +134,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Define both dimensions and the meaning of one cell.
+- Initialize boundary row and boundary column before the main transition.
+- Use diagonal or length order for interval-style dependencies.
+- Mention table size and transition cost separately.
+- Only compress space when the previous-row dependency is unambiguous.
 
 ## Mini Exercises
 

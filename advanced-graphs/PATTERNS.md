@@ -2,6 +2,18 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Dijkstra | weighted shortest path | Do not use when any reachable edge can be negative |
+| Bellman-Ford | negative edge | Do not choose it over Dijkstra when all weights are non-negative and constraints are large |
+| Floyd-Warshall | all pairs | Do not use on large sparse graphs where n cubed is impossible |
+| Minimum Spanning Tree | connect all | Do not use MST for shortest path between two nodes |
+| Strongly Connected Components | mutual reachability | Do not use undirected component logic on directed graphs |
+| Bridges And Articulation Points | critical edge | Do not apply bridge logic to directed SCC problems unchanged |
+| DAG Shortest Or Longest Path | DAG | Do not use when cycles exist |
+
 ## Pattern: Dijkstra
 
 ### Beginner Intuition
@@ -30,8 +42,8 @@ Do not use when any reachable edge can be negative.
 ### Common Mistakes
 
 - Not skipping stale heap entries.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Dijkstra: Do not use when any reachable edge can be negative.
+- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -80,8 +92,8 @@ Do not choose it over Dijkstra when all weights are non-negative and constraints
 ### Common Mistakes
 
 - Updating distances in-place when a bounded-edge version needs previous round values.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Bellman-Ford: Do not choose it over Dijkstra when all weights are non-negative and constraints are large.
+- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -126,8 +138,8 @@ Do not use on large sparse graphs where n cubed is impossible.
 ### Common Mistakes
 
 - Wrong loop order: intermediate node must be outermost.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Floyd-Warshall: Do not use on large sparse graphs where n cubed is impossible.
+- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -174,8 +186,8 @@ Do not use MST for shortest path between two nodes.
 ### Common Mistakes
 
 - Confusing total connection cost with distance from a source.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Minimum Spanning Tree: Do not use MST for shortest path between two nodes.
+- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -221,8 +233,8 @@ Do not use undirected component logic on directed graphs.
 ### Common Mistakes
 
 - Mixing finish order and low-link meanings.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Strongly Connected Components: Do not use undirected component logic on directed graphs.
+- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -266,8 +278,8 @@ Do not apply bridge logic to directed SCC problems unchanged.
 ### Common Mistakes
 
 - Treating the parent edge as a back edge.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Bridges And Articulation Points: Do not apply bridge logic to directed SCC problems unchanged.
+- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -313,8 +325,8 @@ Do not use when cycles exist.
 ### Common Mistakes
 
 - Running Dijkstra when topological DP is simpler for a DAG.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for DAG Shortest Or Longest Path: Do not use when cycles exist.
+- Failing to test negative weights, disconnected graphs, stale heap entries, and dense-graph constraints against the stated invariant.
 
 ### Pseudocode Or Template
 

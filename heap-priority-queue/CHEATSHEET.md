@@ -38,6 +38,19 @@ A binary heap is a complete tree stored in an array that satisfies parent-child 
 
 Look for top k, kth largest, smallest next item, streaming median, merge sorted lists, scheduling by priority, shortest path frontier, or repeated min or max selection.
 
+## Pattern Choice Checklist
+
+- Top k uses a heap of size k when k is small.
+- K-way merge keeps one head from each sorted source.
+- Two heaps maintain lower and upper partitions for medians.
+- Dijkstra uses a min-heap only with non-negative edge weights.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run tie-breakers, stale entries, empty heaps, and heap size invariants before submitting.
+
 ## Templates
 
 ### Top K Heap

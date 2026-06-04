@@ -12,6 +12,13 @@ Intervals appear in calendars, reservations, meeting rooms, network ranges, and 
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: state endpoint semantics and prove the sorted scan invariant.
+- Meta: implement merge, insert, meeting rooms, and sweep-line templates quickly.
+- Amazon: clarify inclusivity and equal-endpoint behavior before coding.
+- Beginner: draw intervals on a number line before choosing a sort key.
+
 ## Real-World Use
 
 Used in calendar systems, booking engines, CPU scheduling, log windows, IP ranges, genomic ranges, and resource allocation.
@@ -80,10 +87,10 @@ Look for merge, insert, overlap, meeting rooms, minimum removals, arrows, calend
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Are intervals closed, open, half-open, or represented only by integer endpoints?
+- Does sorting by start, end, or event time expose the invariant?
+- Are you merging, inserting, counting overlaps, finding rooms, or deleting intervals?
+- How should equal endpoints be handled for the problem definition?
 
 ## Common Interview Patterns
 
@@ -103,11 +110,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Clarify whether touching endpoints overlap.
+- Choose sort key from the operation: start for merge, end for erase, event for sweep.
+- Keep current interval state small and explicit.
+- For sweep line, process tie events in the order required by endpoint semantics.
+- Mention sorting cost before scan cost.
 
 ## Mini Exercises
 

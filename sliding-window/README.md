@@ -12,6 +12,13 @@ Sliding window converts many repeated subarray or substring scans into one pass 
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: prove each pointer moves at most n times.
+- Meta: maintain counts and distinct values without stale keys.
+- Amazon: explain when to record the answer before or after shrinking.
+- Beginner: write the valid or invalid condition before the loop.
+
 ## Real-World Use
 
 Used in rate limiting, streaming metrics, fraud detection, packet windows, time-series analytics, log monitoring, and substring search.
@@ -72,6 +79,33 @@ sequenceDiagram
     W->>R: record best valid window
 ```
 
+## Additional Visuals
+
+### Expand And Shrink Timeline
+
+```mermaid
+flowchart LR
+    A[left] --> B[window values]
+    B --> C[right]
+    C --> D[add right]
+    D --> E{valid?}
+    E -->|no| F[remove left and advance]
+    F --> E
+    E -->|yes| G[record answer]
+```
+
+### Frequency Window
+
+```mermaid
+flowchart TD
+    A[Move right] --> B[Increment count]
+    B --> C{Constraint exceeded?}
+    C -->|yes| D[Decrement left count]
+    D --> E[Delete zero-count key]
+    E --> C
+    C -->|no| F[Use current window]
+```
+
 ## Foundations And Invariants
 
 Sliding window needs contiguity and monotonic boundary movement. Negative numbers often break simple sum windows because shrinking may not move the sum predictably.
@@ -84,10 +118,10 @@ Look for contiguous subarray, substring, longest, shortest, at most k, exactly k
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Is the answer restricted to a contiguous subarray or substring?
+- Does adding right and removing left change validity predictably?
+- Are you maximizing a valid window, minimizing a valid window, or counting valid windows?
+- Do negative numbers or non-monotonic constraints make prefix sums safer?
 
 ## Common Interview Patterns
 
@@ -106,11 +140,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- State the window invariant before choosing fixed, variable, or frequency window.
+- Explain why shrinking cannot skip the optimal answer.
+- Remove zero-count keys when distinct counts matter.
+- Record the answer at the point where the invariant is true for that problem type.
+- Mention why negative values often break sum-based sliding windows.
 
 ## Mini Exercises
 

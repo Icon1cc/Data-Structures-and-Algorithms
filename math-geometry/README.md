@@ -12,6 +12,13 @@ Math and geometry questions are less about memorizing formulas and more about tu
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: derive the formula or invariant rather than memorizing it.
+- Meta: implement matrix rotation, spiral traversal, powers, and number conversion cleanly.
+- Amazon: call out overflow, precision, and input-domain assumptions.
+- Beginner: work one numeric example by hand before coding.
+
 ## Real-World Use
 
 Used in graphics, robotics, mapping, simulations, analytics, cryptography, pagination, hashing, randomized load balancing, and matrix processing.
@@ -84,10 +91,10 @@ Look for rotate matrix, spiral, lines, slopes, random weights, divisibility, pri
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- Is the core operation arithmetic, modular reduction, coordinate transform, or matrix traversal?
+- What invariant survives scaling, rotation, translation, or modulo wrapping?
+- Can overflow, precision, or integer division change correctness?
+- Is simulation necessary, or does a formula capture the process?
 
 ## Common Interview Patterns
 
@@ -107,11 +114,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- State the numeric invariant or coordinate transform before coding.
+- Handle zero, one, negative values, and maximum bounds explicitly.
+- Use integer arithmetic when precision matters.
+- For geometry, normalize slopes or vectors to avoid equivalent representations splitting apart.
+- For matrix traversal, mark boundaries and update them in one consistent order.
 
 ## Mini Exercises
 

@@ -2,6 +2,18 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| DFS Traversal | reachability | Do not use recursive DFS blindly on very deep graphs |
+| BFS Traversal | shortest unweighted | Do not use DFS when minimum edge count is required |
+| Connected Components | components | Do not assume a graph is connected unless stated |
+| Cycle Detection | cycle | Do not use the same rule for directed and undirected cycles |
+| Topological Sort | DAG | Do not use topological sort if cycles are allowed in a valid answer |
+| Union Find | connectivity | Do not use when you need actual path order or shortest distance |
+| Grid Graph BFS | grid | Do not build an explicit graph when neighbor generation is simple |
+
 ## Pattern: DFS Traversal
 
 ### Beginner Intuition
@@ -30,8 +42,8 @@ Do not use recursive DFS blindly on very deep graphs.
 ### Common Mistakes
 
 - Marking visited after recursive calls, allowing cycles to recurse forever.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for DFS Traversal: Do not use recursive DFS blindly on very deep graphs.
+- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -78,8 +90,8 @@ Do not use DFS when minimum edge count is required.
 ### Common Mistakes
 
 - Marking visited on pop instead of enqueue, causing duplicates.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for BFS Traversal: Do not use DFS when minimum edge count is required.
+- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -127,8 +139,8 @@ Do not assume a graph is connected unless stated.
 ### Common Mistakes
 
 - Forgetting to scan every node after one traversal.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Connected Components: Do not assume a graph is connected unless stated.
+- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -176,8 +188,8 @@ Do not use the same rule for directed and undirected cycles.
 ### Common Mistakes
 
 - Treating an undirected edge back to parent as a cycle.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Cycle Detection: Do not use the same rule for directed and undirected cycles.
+- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -222,8 +234,8 @@ Do not use topological sort if cycles are allowed in a valid answer.
 ### Common Mistakes
 
 - Not detecting that fewer output nodes than total means a cycle.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Topological Sort: Do not use topological sort if cycles are allowed in a valid answer.
+- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -271,8 +283,8 @@ Do not use when you need actual path order or shortest distance.
 ### Common Mistakes
 
 - Forgetting path compression or union by rank on large inputs.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Union Find: Do not use when you need actual path order or shortest distance.
+- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -320,8 +332,8 @@ Do not build an explicit graph when neighbor generation is simple.
 ### Common Mistakes
 
 - Mixing row and column bounds.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Grid Graph BFS: Do not build an explicit graph when neighbor generation is simple.
+- Failing to test disconnected components, cycles, duplicate enqueues, and directed versus undirected edges against the stated invariant.
 
 ### Pseudocode Or Template
 

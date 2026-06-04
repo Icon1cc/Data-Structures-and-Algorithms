@@ -12,6 +12,13 @@ Tree problems test whether you can define a local contract for each subtree and 
 
 In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
+## Interviewer Lens
+
+- Google: define a recursive contract that proves the whole tree by induction.
+- Meta: pick the traversal order quickly and keep base cases small.
+- Amazon: explain null handling, skewed-tree depth, and mutation of nodes.
+- Beginner: say what the helper returns before coding its body.
+
 ## Real-World Use
 
 Used in file systems, DOM trees, ASTs, indexes, decision trees, routing hierarchies, and permission inheritance.
@@ -71,6 +78,28 @@ flowchart TD
     B -. postorder returns height .-> A
 ```
 
+## Additional Visuals
+
+### Traversal Order
+
+```mermaid
+flowchart TD
+    A[Node] --> B[Preorder: use node before children]
+    A --> C[Inorder: left, node, right]
+    A --> D[Postorder: combine child returns first]
+    D --> E[height, balance, diameter, tree DP]
+```
+
+### Subtree Return Contract
+
+```mermaid
+flowchart LR
+    L[left subtree result] --> N[node combines]
+    R[right subtree result] --> N
+    N --> P[return one result to parent]
+    N --> G[optionally update global answer]
+```
+
 ## Foundations And Invariants
 
 The recursive contract is the proof. For example, height(node) returns the height of this subtree, so diameter can combine left height, right height, and child diameters.
@@ -83,10 +112,10 @@ Look for subtree, ancestor, descendant, path sum, balanced, diameter, serialize,
 
 Ask these questions:
 
-- What is the smallest state that makes the next decision easy?
-- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
-- Does any boundary move monotonically?
-- Are constraints small enough for exponential search or DP state?
+- What does each subtree return to its parent?
+- Is the answer based on preorder, inorder, postorder, or level order?
+- Does the problem use binary-tree structure or BST ordering?
+- Is global state safer than a returned tuple, or would it hide the invariant?
 
 ## Common Interview Patterns
 
@@ -107,11 +136,11 @@ Ask these questions:
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work or missing invariant.
-- State why the chosen pattern removes that waste.
-- Keep edge cases visible while coding.
-- Give both time and auxiliary space complexity.
-- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
+- Start by deciding traversal order from when the node answer is known.
+- State the helper return type and update rule before coding recursion.
+- Do not assume BST ordering unless the prompt says BST.
+- Mention recursion stack space and skewed tree risk.
+- Test null root, single node, and unbalanced tree cases.
 
 ## Mini Exercises
 

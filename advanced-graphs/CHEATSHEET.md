@@ -41,6 +41,19 @@ Weighted graph algorithms optimize path or connection cost under assumptions abo
 
 Look for weighted shortest path, negative edge, all-pairs distance, connect all points with minimum cost, critical edge, strongly connected, or network delay.
 
+## Pattern Choice Checklist
+
+- Dijkstra: non-negative weights, one source, sparse graph friendly.
+- Bellman-Ford: negative edges allowed, detects negative cycles.
+- Floyd-Warshall: all pairs, dense or small V.
+- Kruskal: sort edges and Union Find for MST.
+
+## Interview Calibration
+
+- Say the brute force baseline and the exact wasted work.
+- State the invariant before code, not after the solution works.
+- Dry run negative weights, disconnected graphs, stale heap entries, and dense-graph constraints before submitting.
+
 ## Templates
 
 ### Dijkstra

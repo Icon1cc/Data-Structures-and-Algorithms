@@ -2,6 +2,19 @@
 
 Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
+## Curation Rules
+
+- Problems are selected for pattern coverage before volume.
+- Priority goes to NeetCode 150, Blind 75, Grind 75, and classic high-frequency interview variants.
+- Each problem appears once in this repository; related topics should transfer the pattern instead of duplicating the entry.
+- Difficulty placement follows the listed LeetCode difficulty and the expected interview reasoning load.
+
+## Practice Order
+
+- First pass: solve in the listed Hard order and write the invariant before coding.
+- Second pass: shuffle this file with adjacent topic files to avoid memorizing folder context.
+- Retry pass: redo misses after 2 days, 7 days, and 21 days.
+
 ## 1. Word Ladder
 
 LeetCode: [Word Ladder](https://leetcode.com/problems/word-ladder/)
@@ -13,15 +26,15 @@ Pattern: BFS Shortest Transformation
 Why It Matters: High-frequency shortest unweighted path problem.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the BFS Shortest Transformation signal before choosing a template.
+- State the invariant for Word Ladder: high-frequency shortest unweighted path problem.
+- Handle disconnected components, cycles, duplicate enqueues, and directed versus undirected edges.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Word Ladder toward Union Find, topological sort, Dijkstra, dynamic programming, or backtracking?
+- Which disconnected components case would break the first implementation?
+- Can the BFS Shortest Transformation invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 2. Alien Dictionary
 
@@ -34,15 +47,15 @@ Pattern: Topological Sort
 Why It Matters: Builds graph constraints from sorted words.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Topological Sort signal before choosing a template.
+- State the invariant for Alien Dictionary: builds graph constraints from sorted words.
+- Handle disconnected components, cycles, duplicate enqueues, and directed versus undirected edges.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Alien Dictionary toward Union Find, topological sort, Dijkstra, dynamic programming, or backtracking?
+- Which disconnected components case would break the first implementation?
+- Can the Topological Sort invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 3. Reconstruct Itinerary
 
@@ -55,36 +68,36 @@ Pattern: Hierholzer DFS
 Why It Matters: Uses lexical edge ordering and Eulerian path reasoning.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Hierholzer DFS signal before choosing a template.
+- State the invariant for Reconstruct Itinerary: uses lexical edge ordering and Eulerian path reasoning.
+- Handle disconnected components, cycles, duplicate enqueues, and directed versus undirected edges.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Reconstruct Itinerary toward Union Find, topological sort, Dijkstra, dynamic programming, or backtracking?
+- Which disconnected components case would break the first implementation?
+- Can the Hierholzer DFS invariant survive streaming input, in-place restrictions, or lower memory limits?
 
-## 4. Critical Connections in a Network
+## 4. Making A Large Island
 
-LeetCode: [Critical Connections in a Network](https://leetcode.com/problems/critical-connections-in-a-network/)
+LeetCode: [Making A Large Island](https://leetcode.com/problems/making-a-large-island/)
 
 Difficulty: Hard
 
-Pattern: Bridge Detection
+Pattern: Grid Components With Relabeling
 
-Why It Matters: Introduces low-link graph structure.
+Why It Matters: Combines component labeling with neighbor deduplication to evaluate a single flip.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Grid Components With Relabeling signal before choosing a template.
+- State the invariant for Making A Large Island: combines component labeling with neighbor deduplication to evaluate a single flip.
+- Handle disconnected components, cycles, duplicate enqueues, and directed versus undirected edges.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Making A Large Island toward Union Find, topological sort, Dijkstra, dynamic programming, or backtracking?
+- Which disconnected components case would break the first implementation?
+- Can the Grid Components With Relabeling invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ---
 

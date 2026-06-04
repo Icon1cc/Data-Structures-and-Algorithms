@@ -2,6 +2,16 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Dummy Head | delete head | Do not expose the dummy as part of the returned list |
+| Two Pointer Gap | nth from end | Do not use when the list length can be shorter without guarding null |
+| Fast And Slow Pointers | cycle | Do not use when random access or length is already cheaper |
+| In-place Reversal | reverse | Do not use when node identity order must remain unchanged |
+| Merge Lists | merge sorted | Do not allocate new nodes if the problem expects node reuse |
+
 ## Pattern: Dummy Head
 
 ### Beginner Intuition
@@ -31,8 +41,8 @@ Do not expose the dummy as part of the returned list.
 ### Common Mistakes
 
 - Returning dummy instead of dummy.next.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Dummy Head: Do not expose the dummy as part of the returned list.
+- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -78,8 +88,8 @@ Do not use when the list length can be shorter without guarding null.
 ### Common Mistakes
 
 - Advancing past null when n equals length.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Two Pointer Gap: Do not use when the list length can be shorter without guarding null.
+- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -127,8 +137,8 @@ Do not use when random access or length is already cheaper.
 ### Common Mistakes
 
 - Not checking fast and fast.next before moving two steps.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Fast And Slow Pointers: Do not use when random access or length is already cheaper.
+- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -175,8 +185,8 @@ Do not use when node identity order must remain unchanged.
 ### Common Mistakes
 
 - Losing next before reassigning current.next.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for In-place Reversal: Do not use when node identity order must remain unchanged.
+- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -226,8 +236,8 @@ Do not allocate new nodes if the problem expects node reuse.
 ### Common Mistakes
 
 - Forgetting to attach the remaining tail after one list ends.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Merge Lists: Do not allocate new nodes if the problem expects node reuse.
+- Failing to test empty lists, head replacement, tail links, cycles, and pointer save order against the stated invariant.
 
 ### Pseudocode Or Template
 

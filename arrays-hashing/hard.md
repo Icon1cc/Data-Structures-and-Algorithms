@@ -2,6 +2,19 @@
 
 Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
+## Curation Rules
+
+- Problems are selected for pattern coverage before volume.
+- Priority goes to NeetCode 150, Blind 75, Grind 75, and classic high-frequency interview variants.
+- Each problem appears once in this repository; related topics should transfer the pattern instead of duplicating the entry.
+- Difficulty placement follows the listed LeetCode difficulty and the expected interview reasoning load.
+
+## Practice Order
+
+- First pass: solve in the listed Hard order and write the invariant before coding.
+- Second pass: shuffle this file with adjacent topic files to avoid memorizing folder context.
+- Retry pass: redo misses after 2 days, 7 days, and 21 days.
+
 ## 1. First Missing Positive
 
 LeetCode: [First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
@@ -13,57 +26,57 @@ Pattern: In-place Index Marking
 Why It Matters: Classic constant-space array indexing problem with difficult boundary handling.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the In-place Index Marking signal before choosing a template.
+- State the invariant for First Missing Positive: classic constant-space array indexing problem with difficult boundary handling.
+- Handle duplicates, empty input, negative values, missing keys, and key overwrite order.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push First Missing Positive toward sorting, two pointers, prefix sums, buckets, or in-place marking?
+- Which duplicates case would break the first implementation?
+- Can the In-place Index Marking invariant survive streaming input, in-place restrictions, or lower memory limits?
 
-## 2. Minimum Window Substring
+## 2. Longest Duplicate Substring
 
-LeetCode: [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
+LeetCode: [Longest Duplicate Substring](https://leetcode.com/problems/longest-duplicate-substring/)
 
 Difficulty: Hard
 
-Pattern: Frequency Window
+Pattern: Rolling Hash With Binary Search
 
-Why It Matters: Tests precise count maintenance and shrink timing under pressure.
+Why It Matters: Combines hashing, collision awareness, and answer search over substring length.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Rolling Hash With Binary Search signal before choosing a template.
+- State the invariant for Longest Duplicate Substring: combines hashing, collision awareness, and answer search over substring length.
+- Handle duplicates, empty input, negative values, missing keys, and key overwrite order.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Longest Duplicate Substring toward sorting, two pointers, prefix sums, buckets, or in-place marking?
+- Which duplicates case would break the first implementation?
+- Can the Rolling Hash With Binary Search invariant survive streaming input, in-place restrictions, or lower memory limits?
 
-## 3. Substring with Concatenation of All Words
+## 3. Count of Smaller Numbers After Self
 
-LeetCode: [Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
+LeetCode: [Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/)
 
 Difficulty: Hard
 
-Pattern: Hash Counts With Fixed Blocks
+Pattern: Ordered Counting
 
-Why It Matters: Combines word-frequency accounting with window alignment.
+Why It Matters: Forces prefix-style counting with an ordered structure rather than plain hashing.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Ordered Counting signal before choosing a template.
+- State the invariant for Count of Smaller Numbers After Self: forces prefix-style counting with an ordered structure rather than plain hashing.
+- Handle duplicates, empty input, negative values, missing keys, and key overwrite order.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Count of Smaller Numbers After Self toward sorting, two pointers, prefix sums, buckets, or in-place marking?
+- Which duplicates case would break the first implementation?
+- Can the Ordered Counting invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 4. Count of Range Sum
 
@@ -76,15 +89,15 @@ Pattern: Prefix Sum With Ordered Counting
 Why It Matters: Advanced prefix reasoning where counting prior prefixes requires ordered structure.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Prefix Sum With Ordered Counting signal before choosing a template.
+- State the invariant for Count of Range Sum: advanced prefix reasoning where counting prior prefixes requires ordered structure.
+- Handle duplicates, empty input, negative values, missing keys, and key overwrite order.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Count of Range Sum toward sorting, two pointers, prefix sums, buckets, or in-place marking?
+- Which duplicates case would break the first implementation?
+- Can the Prefix Sum With Ordered Counting invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ---
 

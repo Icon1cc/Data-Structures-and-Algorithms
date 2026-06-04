@@ -2,6 +2,16 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Top K Heap | top k | Do not heap all n items if k is small and only k results are needed |
+| K-way Merge | k sorted | Do not push every item upfront if sources can be advanced lazily |
+| Two Heaps | median | Do not let heap sizes drift beyond one |
+| Lazy Deletion Heap | stale | Do not trust heap top until stale entries are pruned |
+| Dijkstra Frontier | shortest path | Do not use when negative edges are present |
+
 ## Pattern: Top K Heap
 
 ### Beginner Intuition
@@ -31,8 +41,8 @@ Do not heap all n items if k is small and only k results are needed.
 ### Common Mistakes
 
 - Using a min-heap when the eviction logic requires a max-heap or vice versa.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Top K Heap: Do not heap all n items if k is small and only k results are needed.
+- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -79,8 +89,8 @@ Do not push every item upfront if sources can be advanced lazily.
 ### Common Mistakes
 
 - Forgetting tie-breakers when heap elements compare equal.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for K-way Merge: Do not push every item upfront if sources can be advanced lazily.
+- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -128,8 +138,8 @@ Do not let heap sizes drift beyond one.
 ### Common Mistakes
 
 - Not rebalancing after every insertion or deletion.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Two Heaps: Do not let heap sizes drift beyond one.
+- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -175,8 +185,8 @@ Do not trust heap top until stale entries are pruned.
 ### Common Mistakes
 
 - Forgetting to decrement delayed counts while pruning.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Lazy Deletion Heap: Do not trust heap top until stale entries are pruned.
+- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -223,8 +233,8 @@ Do not use when negative edges are present.
 ### Common Mistakes
 
 - Processing stale distance entries as final.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Dijkstra Frontier: Do not use when negative edges are present.
+- Failing to test tie-breakers, stale entries, empty heaps, and heap size invariants against the stated invariant.
 
 ### Pseudocode Or Template
 

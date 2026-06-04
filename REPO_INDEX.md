@@ -9,6 +9,8 @@ Generated overview of the Data Structures and Algorithms repository.
 | Topic folders | 18 |
 | Markdown files | 113 |
 | Curated problem entries | 293 |
+| Unique problem titles | 293 |
+| Duplicate problem titles | 0 |
 | Pattern sections | 110 |
 
 ## Topics

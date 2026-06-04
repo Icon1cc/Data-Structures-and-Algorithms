@@ -2,6 +2,16 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| Fixed Window | length k | Do not use if valid window length changes based on content |
+| Variable Window | longest | Do not use when removing left does not predictably improve validity |
+| Frequency Window | counts | Do not leave zero-count keys that make distinct counts wrong |
+| At Most K Window | at most k | Do not use when at most k is not monotonic under shrinking |
+| Monotonic Window | max in window | Do not use a heap unless stale deletion is handled |
+
 ## Pattern: Fixed Window
 
 ### Beginner Intuition
@@ -30,8 +40,8 @@ Do not use if valid window length changes based on content.
 ### Common Mistakes
 
 - Updating answer before the first full window exists.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Fixed Window: Do not use if valid window length changes based on content.
+- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -80,8 +90,8 @@ Do not use when removing left does not predictably improve validity.
 ### Common Mistakes
 
 - Shrinking only once when the window may still be invalid.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Variable Window: Do not use when removing left does not predictably improve validity.
+- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -132,8 +142,8 @@ Do not leave zero-count keys that make distinct counts wrong.
 ### Common Mistakes
 
 - Comparing full maps too often when a matched counter would be cleaner.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Frequency Window: Do not leave zero-count keys that make distinct counts wrong.
+- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -180,8 +190,8 @@ Do not use when at most k is not monotonic under shrinking.
 ### Common Mistakes
 
 - Forgetting exactly(k) = at_most(k) - at_most(k - 1).
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for At Most K Window: Do not use when at most k is not monotonic under shrinking.
+- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -231,8 +241,8 @@ Do not use a heap unless stale deletion is handled.
 ### Common Mistakes
 
 - Forgetting to evict indices that leave the window.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Monotonic Window: Do not use a heap unless stale deletion is handled.
+- Failing to test zero-count keys, negative values, recording order, and k larger than input against the stated invariant.
 
 ### Pseudocode Or Template
 

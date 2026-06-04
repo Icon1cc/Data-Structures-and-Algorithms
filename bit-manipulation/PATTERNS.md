@@ -2,6 +2,17 @@
 
 PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
+## Pattern Selection Table
+
+| Pattern | Strongest Signal | Avoid When |
+|---|---|---|
+| XOR Cancellation | single number | Do not use when duplicates appear more than twice unless adjusted |
+| Bit Counting | number of 1 bits | Do not loop forever on negative values in fixed-width languages |
+| Masks For Sets | subset | Do not use masks when n is too large for exponential states |
+| Single Bit Checks | power of two | Do not use modulo when bit logic is clearer for powers of two |
+| Submask Enumeration | submask | Do not use when all 2^n masks are already too many |
+| Arithmetic Bit Tricks | shift | Do not ignore overflow and sign limits in fixed-width languages |
+
 ## Pattern: XOR Cancellation
 
 ### Beginner Intuition
@@ -30,8 +41,8 @@ Do not use when duplicates appear more than twice unless adjusted.
 ### Common Mistakes
 
 - Forgetting that XOR ignores order but not multiplicity.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for XOR Cancellation: Do not use when duplicates appear more than twice unless adjusted.
+- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -77,8 +88,8 @@ Do not loop forever on negative values in fixed-width languages.
 ### Common Mistakes
 
 - Using n >>= 1 on signed negative values without width control.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Bit Counting: Do not loop forever on negative values in fixed-width languages.
+- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -125,8 +136,8 @@ Do not use masks when n is too large for exponential states.
 ### Common Mistakes
 
 - Confusing mask value with item index.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Masks For Sets: Do not use masks when n is too large for exponential states.
+- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -171,8 +182,8 @@ Do not use modulo when bit logic is clearer for powers of two.
 ### Common Mistakes
 
 - Not excluding zero for power-of-two tests.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Single Bit Checks: Do not use modulo when bit logic is clearer for powers of two.
+- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -216,8 +227,8 @@ Do not use when all 2^n masks are already too many.
 ### Common Mistakes
 
 - Forgetting that submask 0 needs separate handling if required.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Submask Enumeration: Do not use when all 2^n masks are already too many.
+- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
 
 ### Pseudocode Or Template
 
@@ -265,8 +276,8 @@ Do not ignore overflow and sign limits in fixed-width languages.
 ### Common Mistakes
 
 - Forgetting language-specific integer width.
-- Applying the pattern after one keyword match without checking the invariant.
-- Ignoring empty input, duplicate values, and boundary cases.
+- Ignoring the exclusion case for Arithmetic Bit Tricks: Do not ignore overflow and sign limits in fixed-width languages.
+- Failing to test zero, negative numbers, fixed bit width, overflow, and 2^n mask limits against the stated invariant.
 
 ### Pseudocode Or Template
 

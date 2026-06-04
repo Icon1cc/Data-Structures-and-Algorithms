@@ -2,6 +2,19 @@
 
 Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
+## Curation Rules
+
+- Problems are selected for pattern coverage before volume.
+- Priority goes to NeetCode 150, Blind 75, Grind 75, and classic high-frequency interview variants.
+- Each problem appears once in this repository; related topics should transfer the pattern instead of duplicating the entry.
+- Difficulty placement follows the listed LeetCode difficulty and the expected interview reasoning load.
+
+## Practice Order
+
+- First pass: solve in the listed Hard order and write the invariant before coding.
+- Second pass: shuffle this file with adjacent topic files to avoid memorizing folder context.
+- Retry pass: redo misses after 2 days, 7 days, and 21 days.
+
 ## 1. Largest Rectangle in Histogram
 
 LeetCode: [Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/)
@@ -13,15 +26,15 @@ Pattern: Monotonic Increasing Stack
 Why It Matters: The classic width computation stack problem.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Monotonic Increasing Stack signal before choosing a template.
+- State the invariant for Largest Rectangle in Histogram: the classic width computation stack problem.
+- Handle empty stack, equal values, sentinel handling, and index versus value storage.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Largest Rectangle in Histogram toward deque, heap, recursion, counters, or direct simulation?
+- Which empty stack case would break the first implementation?
+- Can the Monotonic Increasing Stack invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 2. Basic Calculator
 
@@ -34,15 +47,15 @@ Pattern: Expression Stack
 Why It Matters: Tests signs, parentheses, and streaming parse state.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Expression Stack signal before choosing a template.
+- State the invariant for Basic Calculator: tests signs, parentheses, and streaming parse state.
+- Handle empty stack, equal values, sentinel handling, and index versus value storage.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Basic Calculator toward deque, heap, recursion, counters, or direct simulation?
+- Which empty stack case would break the first implementation?
+- Can the Expression Stack invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 3. Maximal Rectangle
 
@@ -55,15 +68,15 @@ Pattern: Histogram Stack Per Row
 Why It Matters: Reduces a 2-D matrix to repeated histogram problems.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Histogram Stack Per Row signal before choosing a template.
+- State the invariant for Maximal Rectangle: reduces a 2-D matrix to repeated histogram problems.
+- Handle empty stack, equal values, sentinel handling, and index versus value storage.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Maximal Rectangle toward deque, heap, recursion, counters, or direct simulation?
+- Which empty stack case would break the first implementation?
+- Can the Histogram Stack Per Row invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ## 4. Parsing A Boolean Expression
 
@@ -76,15 +89,15 @@ Pattern: Nested Expression Stack
 Why It Matters: Practices parsing nested logical expressions.
 
 Skills Tested:
-- Recognize the pattern from constraints and examples.
-- State the invariant before coding.
-- Handle edge cases before submitting.
-- Analyze time and auxiliary space complexity.
+- Identify the Nested Expression Stack signal before choosing a template.
+- State the invariant for Parsing A Boolean Expression: practices parsing nested logical expressions.
+- Handle empty stack, equal values, sentinel handling, and index versus value storage.
+- Explain time, auxiliary space, and any output-size cost separately.
 
 Common Follow-Ups:
-- Explain the brute force approach and the repeated work it performs.
-- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
-- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
+- What changes if the constraints push Parsing A Boolean Expression toward deque, heap, recursion, counters, or direct simulation?
+- Which empty stack case would break the first implementation?
+- Can the Nested Expression Stack invariant survive streaming input, in-place restrictions, or lower memory limits?
 
 ---
 
