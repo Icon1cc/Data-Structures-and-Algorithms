@@ -1,91 +1,110 @@
 # Backtracking Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+Backtracking is depth-first search over a state space with pruning. Correctness depends on complete candidate generation and precise state restoration.
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| Subsets | O(2^n) |
+| Permutations | O(n!) |
+| Combinations | O(C(n, k)) |
+| Board search | O(cells * branching^depth) before pruning |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Recursion depth | O(depth) |
+| Visited set or board marks | O(depth) or O(cells) |
+| Output | Often exponential and counted separately |
 
-## Common Templates
+## Pattern Summary
+
+| Pattern | Use When |
+|---|---|
+| Subsets | Use when every element may be taken or skipped. |
+| Combinations | Use for choose k, combination sum, and unordered selections. |
+| Permutations | Use when order matters. |
+| Constraint Grid Search | Use for word search and maze-style constraint traversal. |
+| Partition Backtracking | Use for palindrome partitions, IP addresses, and expression generation. |
+| Pruned Search | Use for N-Queens, Sudoku, and target sums. |
+
+## Recognition Hints
+
+Look for all possible, generate, combinations, permutations, subsets, valid arrangements, board search, partition, or constraints that require trying choices.
+
+## Templates
 
 ### Subsets
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+def dfs(i):
+    if i == n: record(path); return
+    dfs(i + 1)
+    path.append(nums[i]); dfs(i + 1); path.pop()
 ```
 
 ### Combinations
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+def dfs(start):
+    for i in range(start, n):
+        choose nums[i]
+        dfs(next_start)
+        undo
 ```
 
 ### Permutations
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+def dfs():
+    if len(path) == n: record(path)
+    for i in range(n):
+        if used[i]: continue
+        used[i] = True; path.append(nums[i])
+        dfs()
+        path.pop(); used[i] = False
 ```
 
-## Pattern Summary
+### Constraint Grid Search
 
-| Pattern | Recognition Hint |
-|---|---|
-| Subsets | Use when the prompt matches subsets signals. |
-| Combinations | Use when the prompt matches combinations signals. |
-| Permutations | Use when the prompt matches permutations signals. |
-| Constraint Search | Use when the prompt matches constraint search signals. |
-| Board DFS | Use when the prompt matches board dfs signals. |
-| Partitioning | Use when the prompt matches partitioning signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
+```text
+mark cell
+for neighbor in neighbors:
+    dfs(neighbor)
+unmark cell
+```
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Appending the live path instead of a copy.
+- Forgetting to undo mutable state.
+- Skipping duplicate logic after sorting.
+- Pruning a branch that could still become valid.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../backtracking/README.md) | [Home](../README.md) | [Next](../backtracking/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

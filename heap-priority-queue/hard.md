@@ -1,250 +1,93 @@
 # Heap / Priority Queue Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
-## 1. Find Median from Data Stream
+## 1. Merge k Sorted Lists
 
-LeetCode:
-https://leetcode.com/problems/find-median-from-data-stream/
+LeetCode: [Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Top K
+Pattern: K-way Merge
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying top k.
+Why It Matters: Most common heap merge problem.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. Merge k Sorted Lists
+## 2. Find Median from Data Stream
 
-LeetCode:
-https://leetcode.com/problems/merge-k-sorted-lists/
+LeetCode: [Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-K-way Merge
+Pattern: Two Heaps
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying k-way merge.
+Why It Matters: Core streaming order statistic design.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Sliding Window Median
+## 3. IPO
 
-LeetCode:
-https://leetcode.com/problems/sliding-window-median/
+LeetCode: [IPO](https://leetcode.com/problems/ipo/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Two Heaps
+Pattern: Heap-Assisted Greedy
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying two heaps.
+Why It Matters: Selects best affordable project at each step.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. IPO
+## 4. Sliding Window Median
 
-LeetCode:
-https://leetcode.com/problems/ipo/
+LeetCode: [Sliding Window Median](https://leetcode.com/problems/sliding-window-median/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Scheduling by Priority
+Pattern: Two Heaps With Lazy Deletion
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying scheduling by priority.
+Why It Matters: Combines balance, stale removal, and window movement.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Smallest Range Covering Elements from K Lists
-
-LeetCode:
-https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
-
-Difficulty:
-Hard
-
-Pattern:
-Greedy Heap
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying greedy heap.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Maximum Performance of a Team
-
-LeetCode:
-https://leetcode.com/problems/maximum-performance-of-a-team/
-
-Difficulty:
-Hard
-
-Pattern:
-Lazy Deletion
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying lazy deletion.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Minimum Cost to Hire K Workers
-
-LeetCode:
-https://leetcode.com/problems/minimum-cost-to-hire-k-workers/
-
-Difficulty:
-Hard
-
-Pattern:
-Top K
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying top k.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Trapping Rain Water II
-
-LeetCode:
-https://leetcode.com/problems/trapping-rain-water-ii/
-
-Difficulty:
-Hard
-
-Pattern:
-K-way Merge
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying k-way merge.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Swim in Rising Water
-
-LeetCode:
-https://leetcode.com/problems/swim-in-rising-water/
-
-Difficulty:
-Hard
-
-Pattern:
-Two Heaps
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying two heaps.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Minimum Number of Refueling Stops
-
-LeetCode:
-https://leetcode.com/problems/minimum-number-of-refueling-stops/
-
-Difficulty:
-Hard
-
-Pattern:
-Scheduling by Priority
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying scheduling by priority.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../heap-priority-queue/medium.md) | [Home](../README.md) | [Next](../backtracking/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

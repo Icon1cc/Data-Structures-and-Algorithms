@@ -1,250 +1,93 @@
 # Graphs Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Word Ladder
 
-LeetCode:
-https://leetcode.com/problems/word-ladder/
+LeetCode: [Word Ladder](https://leetcode.com/problems/word-ladder/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-BFS Traversal
+Pattern: BFS Shortest Transformation
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bfs traversal.
+Why It Matters: High-frequency shortest unweighted path problem.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. Word Ladder II
+## 2. Alien Dictionary
 
-LeetCode:
-https://leetcode.com/problems/word-ladder-ii/
+LeetCode: [Alien Dictionary](https://leetcode.com/problems/alien-dictionary/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-DFS Traversal
+Pattern: Topological Sort
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying dfs traversal.
+Why It Matters: Builds graph constraints from sorted words.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Alien Dictionary
+## 3. Reconstruct Itinerary
 
-LeetCode:
-https://leetcode.com/problems/alien-dictionary/
+LeetCode: [Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Connected Components
+Pattern: Hierholzer DFS
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying connected components.
+Why It Matters: Uses lexical edge ordering and Eulerian path reasoning.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 4. Critical Connections in a Network
 
-LeetCode:
-https://leetcode.com/problems/critical-connections-in-a-network/
+LeetCode: [Critical Connections in a Network](https://leetcode.com/problems/critical-connections-in-a-network/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Grid Graphs
+Pattern: Bridge Detection
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying grid graphs.
+Why It Matters: Introduces low-link graph structure.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Bus Routes
-
-LeetCode:
-https://leetcode.com/problems/bus-routes/
-
-Difficulty:
-Hard
-
-Pattern:
-Union Find
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying union find.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Shortest Path Visiting All Nodes
-
-LeetCode:
-https://leetcode.com/problems/shortest-path-visiting-all-nodes/
-
-Difficulty:
-Hard
-
-Pattern:
-Topological Sort
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying topological sort.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Making A Large Island
-
-LeetCode:
-https://leetcode.com/problems/making-a-large-island/
-
-Difficulty:
-Hard
-
-Pattern:
-BFS Traversal
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bfs traversal.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Swim in Rising Water
-
-LeetCode:
-https://leetcode.com/problems/swim-in-rising-water/
-
-Difficulty:
-Hard
-
-Pattern:
-DFS Traversal
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying dfs traversal.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Minimum Cost to Make at Least One Valid Path in a Grid
-
-LeetCode:
-https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/
-
-Difficulty:
-Hard
-
-Pattern:
-Connected Components
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying connected components.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Contain Virus
-
-LeetCode:
-https://leetcode.com/problems/contain-virus/
-
-Difficulty:
-Hard
-
-Pattern:
-Grid Graphs
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying grid graphs.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../graphs/medium.md) | [Home](../README.md) | [Next](../advanced-graphs/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

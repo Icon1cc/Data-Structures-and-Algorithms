@@ -1,250 +1,93 @@
 # Tries Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Word Search II
 
-LeetCode:
-https://leetcode.com/problems/word-search-ii/
+LeetCode: [Word Search II](https://leetcode.com/problems/word-search-ii/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Prefix Tree
+Pattern: Board Search Trie Pruning
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying prefix tree.
+Why It Matters: The classic trie plus backtracking problem.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. Prefix and Suffix Search
+## 2. Concatenated Words
 
-LeetCode:
-https://leetcode.com/problems/prefix-and-suffix-search/
+LeetCode: [Concatenated Words](https://leetcode.com/problems/concatenated-words/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Wildcard Trie DFS
+Pattern: Trie Or DP Word Composition
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying wildcard trie dfs.
+Why It Matters: Tests reusable dictionary decomposition.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Concatenated Words
+## 3. Palindrome Pairs
 
-LeetCode:
-https://leetcode.com/problems/concatenated-words/
+LeetCode: [Palindrome Pairs](https://leetcode.com/problems/palindrome-pairs/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Autocomplete Suggestions
+Pattern: Trie With Reversed Words
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying autocomplete suggestions.
+Why It Matters: Advanced string-pair matching.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 4. Stream of Characters
 
-LeetCode:
-https://leetcode.com/problems/stream-of-characters/
+LeetCode: [Stream of Characters](https://leetcode.com/problems/stream-of-characters/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Word Search Trie Pruning
+Pattern: Reversed Trie Stream
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying word search trie pruning.
+Why It Matters: Maintains suffix queries over a stream.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Design Search Autocomplete System
-
-LeetCode:
-https://leetcode.com/problems/design-search-autocomplete-system/
-
-Difficulty:
-Hard
-
-Pattern:
-Bitwise Trie
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bitwise trie.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Maximum Genetic Difference Query
-
-LeetCode:
-https://leetcode.com/problems/maximum-genetic-difference-query/
-
-Difficulty:
-Hard
-
-Pattern:
-Compressed Trie Awareness
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying compressed trie awareness.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Palindrome Pairs
-
-LeetCode:
-https://leetcode.com/problems/palindrome-pairs/
-
-Difficulty:
-Hard
-
-Pattern:
-Prefix Tree
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying prefix tree.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Word Ladder II
-
-LeetCode:
-https://leetcode.com/problems/word-ladder-ii/
-
-Difficulty:
-Hard
-
-Pattern:
-Wildcard Trie DFS
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying wildcard trie dfs.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Delete Duplicate Folders in System
-
-LeetCode:
-https://leetcode.com/problems/delete-duplicate-folders-in-system/
-
-Difficulty:
-Hard
-
-Pattern:
-Autocomplete Suggestions
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying autocomplete suggestions.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Number of Valid Words for Each Puzzle
-
-LeetCode:
-https://leetcode.com/problems/number-of-valid-words-for-each-puzzle/
-
-Difficulty:
-Hard
-
-Pattern:
-Word Search Trie Pruning
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying word search trie pruning.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../tries/medium.md) | [Home](../README.md) | [Next](../heap-priority-queue/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

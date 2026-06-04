@@ -1,250 +1,93 @@
 # Arrays & Hashing Hard Problems
 
-Curated LeetCode practice for this topic. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
-## 1. Minimum Window Substring
+## 1. First Missing Positive
 
-LeetCode:
-https://leetcode.com/problems/minimum-window-substring/
+LeetCode: [First Missing Positive](https://leetcode.com/problems/first-missing-positive/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Frequency Counting
+Pattern: In-place Index Marking
 
-Why It Matters:
-This problem is a high-signal way to practice frequency counting inside arrays and hashing questions.
+Why It Matters: Classic constant-space array indexing problem with difficult boundary handling.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. First Missing Positive
+## 2. Minimum Window Substring
 
-LeetCode:
-https://leetcode.com/problems/first-missing-positive/
+LeetCode: [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Hash Lookup
+Pattern: Frequency Window
 
-Why It Matters:
-This problem is a high-signal way to practice hash lookup inside arrays and hashing questions.
+Why It Matters: Tests precise count maintenance and shrink timing under pressure.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Count of Smaller Numbers After Self
+## 3. Substring with Concatenation of All Words
 
-LeetCode:
-https://leetcode.com/problems/count-of-smaller-numbers-after-self/
+LeetCode: [Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Prefix Sum
+Pattern: Hash Counts With Fixed Blocks
 
-Why It Matters:
-This problem is a high-signal way to practice prefix sum inside arrays and hashing questions.
+Why It Matters: Combines word-frequency accounting with window alignment.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Longest Duplicate Substring
+## 4. Count of Range Sum
 
-LeetCode:
-https://leetcode.com/problems/longest-duplicate-substring/
+LeetCode: [Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Grouping by Canonical Key
+Pattern: Prefix Sum With Ordered Counting
 
-Why It Matters:
-This problem is a high-signal way to practice grouping by canonical key inside arrays and hashing questions.
+Why It Matters: Advanced prefix reasoning where counting prior prefixes requires ordered structure.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 5. Max Points on a Line
-
-LeetCode:
-https://leetcode.com/problems/max-points-on-a-line/
-
-Difficulty:
-Hard
-
-Pattern:
-Bucket Counting
-
-Why It Matters:
-This problem is a high-signal way to practice bucket counting inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 6. Substring with Concatenation of All Words
-
-LeetCode:
-https://leetcode.com/problems/substring-with-concatenation-of-all-words/
-
-Difficulty:
-Hard
-
-Pattern:
-In-place Marking
-
-Why It Matters:
-This problem is a high-signal way to practice in-place marking inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 7. LFU Cache
-
-LeetCode:
-https://leetcode.com/problems/lfu-cache/
-
-Difficulty:
-Hard
-
-Pattern:
-Frequency Counting
-
-Why It Matters:
-This problem is a high-signal way to practice frequency counting inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 8. All O`one Data Structure
-
-LeetCode:
-https://leetcode.com/problems/all-oone-data-structure/
-
-Difficulty:
-Hard
-
-Pattern:
-Hash Lookup
-
-Why It Matters:
-This problem is a high-signal way to practice hash lookup inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 9. Number of Good Paths
-
-LeetCode:
-https://leetcode.com/problems/number-of-good-paths/
-
-Difficulty:
-Hard
-
-Pattern:
-Prefix Sum
-
-Why It Matters:
-This problem is a high-signal way to practice prefix sum inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 10. Longest Consecutive Sequence
-
-LeetCode:
-https://leetcode.com/problems/longest-consecutive-sequence/
-
-Difficulty:
-Hard
-
-Pattern:
-Grouping by Canonical Key
-
-Why It Matters:
-This problem is a high-signal way to practice grouping by canonical key inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../arrays-hashing/medium.md) | [Home](../README.md) | [Next](../two-pointers/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

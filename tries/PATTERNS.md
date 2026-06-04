@@ -1,39 +1,39 @@
 # Tries Patterns
 
-This file is the main pattern-recognition reference for tries. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
-## Pattern: Prefix Tree
+## Pattern: Prefix Insert And Search
 
-### Intuition
+### Beginner Intuition
 
-Share common prefixes so word and prefix queries walk one character at a time.
+Follow or create one edge per character and mark complete words.
 
 ### When To Use It
 
-Use for dictionaries, prefix search, replace words, and suggestions.
+Use for dictionary insert, search, and startsWith.
 
 ### When Not To Use It
 
-Do not build a trie for one exact lookup when a set is simpler.
+Do not build a trie for one-off exact membership checks.
 
 ### Recognition Signals
 
-- prefix tree
-- constraints match the invariant
-- brute force repeats the same decision
+- prefix
+- starts with
+- dictionary
 
-### Problem Examples
+### Example Problems
 
-- Implement Trie Prefix Tree
-- Word Search II
+- Implement Trie
+- Replace Words
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Forgetting the terminal marker.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 node = root
@@ -42,127 +42,160 @@ for ch in word:
 node.is_word = True
 ```
 
+### Complexity Notes
+
+O(L) per word, O(total characters) space.
+
+### Interview Explanation
+
+The path represents the prefix and the terminal marker represents a full word.
+
 ## Pattern: Wildcard Trie DFS
 
-### Intuition
+### Beginner Intuition
 
-Branch through children only where the pattern contains a wildcard.
+Branch only when the query has a wildcard.
 
 ### When To Use It
 
-Use for dot wildcard searches and pattern dictionaries.
+Use for dot or unknown-character dictionary queries.
 
 ### When Not To Use It
 
-Do not expand all paths when the fixed prefix already fails.
+Do not branch for normal characters.
 
 ### Recognition Signals
 
-- wildcard trie dfs
-- constraints match the invariant
-- brute force repeats the same decision
+- wildcard
+- dot
+- branch
+- dictionary
 
-### Problem Examples
+### Example Problems
 
-- Word Search II
-- Maximum XOR of Two Numbers in an Array
+- Design Add and Search Words Data Structure
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Returning true for a prefix that is not terminal.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 def search(node, i):
-    if pattern[i] == wildcard: try each child
-    else: follow exact child
+    if i == len(word): return node.is_word
+    if word[i] == '.': try all children
+    else: follow one child
 ```
 
-## Pattern: Autocomplete Suggestions
+### Complexity Notes
 
-### Intuition
+O(branches explored), worst case exponential in wildcards.
 
-Walk to the prefix node, then collect a bounded number of ordered completions.
+### Interview Explanation
+
+Trie pruning keeps ordinary characters cheap and wildcards explicit.
+
+## Pattern: Board Search Trie Pruning
+
+### Beginner Intuition
+
+Use trie prefixes to stop DFS paths that cannot form any word.
 
 ### When To Use It
 
-Use for search suggestions and top prefix matches.
+Use for word search with many target words.
 
 ### When Not To Use It
 
-Do not collect an entire subtree if only a small number of suggestions is needed.
+Do not restart a full word search for every word when the board is shared.
 
 ### Recognition Signals
 
-- autocomplete suggestions
-- constraints match the invariant
-- brute force repeats the same decision
+- board
+- many words
+- prefix pruning
 
-### Problem Examples
+### Example Problems
 
-- Maximum XOR of Two Numbers in an Array
-- Implement Trie Prefix Tree
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-node = walk(prefix)
-dfs children in sorted order until k results
-```
-
-## Pattern: Word Search Trie Pruning
-
-### Intuition
-
-Combine grid DFS with trie prefixes so impossible word paths stop early.
-
-### When To Use It
-
-Use when many words are searched on the same board.
-
-### When Not To Use It
-
-Do not run full board DFS for every word if a trie can share prefixes.
-
-### Recognition Signals
-
-- word search trie pruning
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Implement Trie Prefix Tree
 - Word Search II
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Not marking board cells visited during the current path.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-dfs(r, c, node):
-    if board[r][c] not in node.children: return
-    mark visited and continue
+dfs(cell, trie_node):
+    if char not in trie_node.children: return
+    mark cell
+    explore neighbors
+    unmark cell
 ```
 
-## Pattern: Bitwise Trie
+### Complexity Notes
 
-### Intuition
+Often far faster than words * board DFS; worst case still exponential.
 
-Store numbers by bits and greedily follow opposite bits to maximize XOR.
+### Interview Explanation
+
+The trie answers whether the current path can still lead to a word.
+
+## Pattern: Autocomplete Suggestions
+
+### Beginner Intuition
+
+Find a prefix node, then collect or maintain best suggestions below it.
+
+### When To Use It
+
+Use for search suggestions and top-k prefix queries.
+
+### When Not To Use It
+
+Do not DFS entire subtrees repeatedly if top results can be stored per node.
+
+### Recognition Signals
+
+- autocomplete
+- suggestions
+- prefix top k
+
+### Example Problems
+
+- Search Suggestions System
+
+### Common Mistakes
+
+- Returning unsorted suggestions when lexicographic order is required.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+node = follow(prefix)
+collect up to k words below node in sorted order
+```
+
+### Complexity Notes
+
+O(prefix length + output traversal), with optional stored top-k per node.
+
+### Interview Explanation
+
+I separate finding the prefix from ranking suggestions.
+
+## Pattern: Bit Trie
+
+### Beginner Intuition
+
+Store binary bits from high to low to maximize or query XOR greedily.
 
 ### When To Use It
 
@@ -170,71 +203,44 @@ Use for maximum XOR and constrained XOR queries.
 
 ### When Not To Use It
 
-Do not forget fixed bit width and query constraints.
+Do not use a character trie for numeric bit choices.
 
 ### Recognition Signals
 
-- bitwise trie
-- constraints match the invariant
-- brute force repeats the same decision
+- xor
+- bits
+- maximum
+- high bit
 
-### Problem Examples
+### Example Problems
 
-- Word Search II
 - Maximum XOR of Two Numbers in an Array
+- Maximum XOR With an Element From Array
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Processing bits from low to high, which loses greedy significance.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for bit in reversed(range(max_bit)):
+for bit from high to low:
     preferred = 1 - current_bit
-    take preferred child if present
+    take preferred child if it exists
 ```
 
-## Pattern: Compressed Trie Awareness
+### Complexity Notes
 
-### Intuition
+O(n * word_bits) time and space.
 
-Compress chains of single-child nodes to reduce memory in large static prefix structures.
+### Interview Explanation
 
-### When To Use It
+High bits dominate XOR value, so each greedy branch is locally safe.
 
-Use as a concept for suffix trees, radix trees, and memory-heavy dictionaries.
-
-### When Not To Use It
-
-Do not implement compression during interviews unless the prompt requires it.
-
-### Recognition Signals
-
-- compressed trie awareness
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Maximum XOR of Two Numbers in an Array
-- Implement Trie Prefix Tree
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-store edge labels as strings instead of one character per edge
-```
 ---
 
 ## Navigation
 
-[Previous](../tries/CHEATSHEET.md) | [Home](../README.md) | [Next](../tries/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

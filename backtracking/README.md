@@ -1,28 +1,44 @@
 # Backtracking
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind backtracking, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Explore a decision tree by choosing, recursing, and undoing choices under constraints.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Backtracking problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+Backtracking is the clean way to enumerate combinations, permutations, partitions, and constraint satisfaction problems without mixing branches.
 
-Used in puzzle solvers, constraint satisfaction, scheduling, combinatorial generation, test-case generation, and search-based planning.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in schedulers, puzzle solvers, search engines, configuration generation, parsers, and constraint optimization.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-Backtracking is depth-first search over a decision tree where each recursive call extends a partial candidate and then restores state.
+## Beginner Intuition
 
-## Core Data Structure Or Algorithm
+Imagine walking down a decision tree. At each node, make one legal choice, explore the consequences, then return to try the next choice with state restored.
 
-Use choose, explore, unchoose. Add pruning only when you can prove skipped branches cannot help.
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
+
+Backtracking is depth-first search over a state space with pruning. Correctness depends on complete candidate generation and precise state restoration.
+
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
+
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Choose | Add one candidate to the partial state. |
+| Explore | Recurse to the next decision. |
+| Unchoose | Restore state before trying another branch. |
+| Prune | Stop branches that cannot lead to a valid answer. |
+| Record | Copy a completed result at the base case. |
 
 ## Time Complexity
 
@@ -30,92 +46,101 @@ Use choose, explore, unchoose. Add pruning only when you can prove skipped branc
 |---|---:|
 | Subsets | O(2^n) |
 | Permutations | O(n!) |
-| Combinations | O(C(n,k)) |
-| Board search | O(branch^depth) before pruning |
+| Combinations | O(C(n, k)) |
+| Board search | O(cells * branching^depth) before pruning |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Recursion stack | O(depth) |
-| Current path | O(depth) |
-| Output | Often exponential |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Choose | Add one candidate to the path. |
-| Validate | Reject impossible partial states early. |
-| Explore | Recurse to the next decision. |
-| Undo | Restore state before trying the next candidate. |
+| Recursion depth | O(depth) |
+| Visited set or board marks | O(depth) or O(cells) |
+| Output | Often exponential and counted separately |
 
 ## Visual Explanation
 
 ```mermaid
-flowchart TB
-    S[start] --> A[choose]
-    A --> B[explore]
-    B --> C[undo]
-    S --> D[next choice]
+flowchart TD
+    A[start] --> B[choose a]
+    A --> C[choose b]
+    B --> D[choose a,b]
+    B --> E[choose a,c]
+    C --> F[choose b,c]
+    D --> G[record or prune]
+    E --> G
+    F --> G
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-The search tree size is usually exponential. Pruning is correct only when skipped branches cannot produce a valid or better answer.
+The invariant is the meaning of the partial path. If path contains chosen values in increasing index order, duplicate branches can be avoided systematically.
 
-## Common Interview Patterns
-
-- **Subsets**: For each element, branch into include and exclude choices.
-- **Combinations**: Choose elements in increasing index order to avoid duplicate orderings.
-- **Permutations**: At each position, try every unused element.
-- **Constraint Search**: Carry constraint sets so invalid partial assignments are rejected immediately.
-- **Board DFS**: Move through neighboring cells while marking the current cell visited.
-- **Partitioning**: Choose a valid prefix, recurse on the suffix, and record complete decompositions.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for all possible, generate, combinations, permutations, subsets, valid arrangements, board search, partition, or constraints that require trying choices.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Subsets**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Combinations**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Permutations**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Constraint Grid Search**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Partition Backtracking**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Pruned Search**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Appending the live path instead of a copy.
+- Forgetting to undo mutable state.
+- Skipping duplicate logic after sorting.
+- Pruning a branch that could still become valid.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `Subsets` aloud, then write its invariant and template from memory.
+- Explain `Combinations` aloud, then write its invariant and template from memory.
+- Explain `Permutations` aloud, then write its invariant and template from memory.
+- Explain `Constraint Grid Search` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study Subsets in [PATTERNS.md](PATTERNS.md).
-2. Study Combinations in [PATTERNS.md](PATTERNS.md).
-3. Study Permutations in [PATTERNS.md](PATTERNS.md).
-4. Study Constraint Search in [PATTERNS.md](PATTERNS.md).
-5. Study Board DFS in [PATTERNS.md](PATTERNS.md).
-6. Study Partitioning in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
+1. Read `Subsets` in [PATTERNS.md](PATTERNS.md).
+2. Read `Combinations` in [PATTERNS.md](PATTERNS.md).
+3. Read `Permutations` in [PATTERNS.md](PATTERNS.md).
+4. Read `Constraint Grid Search` in [PATTERNS.md](PATTERNS.md).
+5. Read `Partition Backtracking` in [PATTERNS.md](PATTERNS.md).
+6. Read `Pruned Search` in [PATTERNS.md](PATTERNS.md).
+7. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
 8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../heap-priority-queue/README.md) | [Home](../README.md) | [Next](../backtracking/CHEATSHEET.md)
+[Previous](../heap-priority-queue/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

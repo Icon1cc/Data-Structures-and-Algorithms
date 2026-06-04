@@ -1,91 +1,99 @@
 # Bit Manipulation Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+Bit manipulation operates on the binary representation of integers using AND, OR, XOR, NOT, shifts, and masks.
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| Single bit operation | O(1) |
+| Scan word bits | O(word_size) |
+| Submask enumeration | O(3^n) across all masks |
+| Bitmask DP | O(n * 2^n) common |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Single mask | O(1) |
+| Mask DP table | O(2^n) |
+| Bit count table | O(n) |
 
-## Common Templates
+## Pattern Summary
+
+| Pattern | Use When |
+|---|---|
+| XOR Cancellation | Use for single-number and missing-number style problems. |
+| Bit Counting | Use for Hamming weight and counting bits ranges. |
+| Masks For Sets | Use when n is small enough for 2^n states. |
+| Single Bit Checks | Use for power-of-two and permission checks. |
+| Submask Enumeration | Use for subset DP and combinatorial optimization. |
+| Arithmetic Bit Tricks | Use for sum without plus, divide integers, and range bitwise AND. |
+
+## Recognition Hints
+
+Look for single number, parity, powers of two, subset masks, permissions, turn bits on or off, XOR ranges, or constraints with n <= 20.
+
+## Templates
 
 ### XOR Cancellation
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+ans = 0
+for x in nums:
+    ans ^= x
 ```
 
 ### Bit Counting
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+while x:
+    x &= x - 1
+    count += 1
 ```
 
-### Masks for Sets
+### Masks For Sets
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+mask |= 1 << i
+if mask & (1 << i): present
 ```
 
-## Pattern Summary
+### Single Bit Checks
 
-| Pattern | Recognition Hint |
-|---|---|
-| XOR Cancellation | Use when the prompt matches xor cancellation signals. |
-| Bit Counting | Use when the prompt matches bit counting signals. |
-| Masks for Sets | Use when the prompt matches masks for sets signals. |
-| Subset Enumeration | Use when the prompt matches subset enumeration signals. |
-| Bitwise Trie | Use when the prompt matches bitwise trie signals. |
-| Bitmask DP | Use when the prompt matches bitmask dp signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
+```text
+is_power_two = x > 0 and (x & (x - 1)) == 0
+```
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Confusing bit index with bit value.
+- Forgetting signed integer behavior in fixed-width languages.
+- Using addition where XOR without carry is intended.
+- Missing parentheses around shifts and masks.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../bit-manipulation/README.md) | [Home](../README.md) | [Next](../bit-manipulation/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

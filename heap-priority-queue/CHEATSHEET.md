@@ -1,91 +1,105 @@
 # Heap / Priority Queue Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+A binary heap is a complete tree stored in an array that satisfies parent-child priority order. Push and pop are O(log n), peek is O(1).
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| Peek | O(1) |
+| Push | O(log n) |
+| Pop | O(log n) |
+| Heapify n items | O(n) |
+| Keep top k | O(n log k) |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Heap of k items | O(k) |
+| Heap of all candidates | O(n) |
+| Lazy deletion map | O(n) worst case |
 
-## Common Templates
+## Pattern Summary
 
-### Top K
+| Pattern | Use When |
+|---|---|
+| Top K Heap | Use for kth largest, top frequencies, and closest points. |
+| K-way Merge | Use for merging sorted lists, arrays, or streams. |
+| Two Heaps | Use for streaming median and balancing lower/upper partitions. |
+| Lazy Deletion Heap | Use when arbitrary deletion from a heap would be expensive. |
+| Dijkstra Frontier | Use for non-negative weighted shortest paths. |
+
+## Recognition Hints
+
+Look for top k, kth largest, smallest next item, streaming median, merge sorted lists, scheduling by priority, shortest path frontier, or repeated min or max selection.
+
+## Templates
+
+### Top K Heap
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+heap = []
+for item in items:
+    push item
+    if len(heap) > k: pop worst among kept
 ```
 
 ### K-way Merge
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+push first item from each source
+while heap:
+    value, source = heappop(heap)
+    push next from same source
 ```
 
 ### Two Heaps
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+lower = max_heap
+upper = min_heap
+rebalance so sizes differ by at most one
 ```
 
-## Pattern Summary
+### Lazy Deletion Heap
 
-| Pattern | Recognition Hint |
-|---|---|
-| Top K | Use when the prompt matches top k signals. |
-| K-way Merge | Use when the prompt matches k-way merge signals. |
-| Two Heaps | Use when the prompt matches two heaps signals. |
-| Scheduling by Priority | Use when the prompt matches scheduling by priority signals. |
-| Greedy Heap | Use when the prompt matches greedy heap signals. |
-| Lazy Deletion | Use when the prompt matches lazy deletion signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
+```text
+delayed[value] += 1
+while heap and delayed[top(heap)]:
+    delayed[top(heap)] -= 1
+    pop(heap)
+```
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Sorting every iteration instead of using a heap.
+- Using max-heap logic in a min-heap language without negating keys carefully.
+- Forgetting tie-breakers for stable ordering.
+- Leaving stale entries without validating them on pop.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../heap-priority-queue/README.md) | [Home](../README.md) | [Next](../heap-priority-queue/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

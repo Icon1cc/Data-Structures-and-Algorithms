@@ -1,242 +1,292 @@
 # Intervals Patterns
 
-This file is the main pattern-recognition reference for intervals. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
 ## Pattern: Merge Intervals
 
-### Intuition
+### Beginner Intuition
 
-Sort by start and combine intervals that overlap the active interval.
+Sort by start and absorb every interval that overlaps the current one.
 
 ### When To Use It
 
-Use when output should be disjoint ranges.
+Use for union of ranges.
 
 ### When Not To Use It
 
-Do not use merge when overlapping intervals should be counted separately.
+Do not compare every pair after sorting.
 
 ### Recognition Signals
 
-- merge intervals
-- constraints match the invariant
-- brute force repeats the same decision
+- merge
+- overlap
+- ranges
 
-### Problem Examples
+### Example Problems
 
 - Merge Intervals
-- Meeting Rooms II
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Forgetting to append the final active interval.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for start, end in sorted(intervals):
-    if no overlap: append
-    else: extend current end
+sort intervals by start
+current = first
+for interval in rest:
+    if interval.start <= current.end: current.end = max(current.end, interval.end)
+    else: output current; current = interval
 ```
+
+### Complexity Notes
+
+O(n log n) time, O(n) output.
+
+### Interview Explanation
+
+Sorting makes overlaps adjacent.
 
 ## Pattern: Insert Interval
 
-### Intuition
+### Beginner Intuition
 
-Copy intervals before the new range, merge overlaps with the new range, then copy the rest.
+Add intervals before, merge overlaps with the new interval, then append the rest.
 
 ### When To Use It
 
-Use when inserting one interval into sorted disjoint intervals.
+Use when existing intervals are sorted and non-overlapping.
 
 ### When Not To Use It
 
-Do not resort everything if existing order can be reused.
+Do not sort again if one linear pass is enough.
 
 ### Recognition Signals
 
-- insert interval
-- constraints match the invariant
-- brute force repeats the same decision
+- insert
+- sorted non-overlap
+- new interval
 
-### Problem Examples
+### Example Problems
 
-- Meeting Rooms II
-- The Skyline Problem
+- Insert Interval
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Missing intervals after the merged block.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-add intervals ending before new starts
-merge overlaps
+append intervals ending before new starts
+merge while overlap
 append remaining intervals
 ```
 
-## Pattern: Meeting Rooms
+### Complexity Notes
 
-### Intuition
+O(n) time, O(n) output.
 
-Track active intervals by end time to know how many resources are needed.
+### Interview Explanation
 
-### When To Use It
-
-Use for room counts, servers, and concurrent bookings.
-
-### When Not To Use It
-
-Do not merge intervals when each overlap needs a separate resource.
-
-### Recognition Signals
-
-- meeting rooms
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- The Skyline Problem
-- Merge Intervals
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-sort by start
-heap stores end times
-reuse room if earliest end <= start
-```
+The sorted invariant lets the input split into before, overlapping, and after.
 
 ## Pattern: Sweep Line
 
-### Intuition
+### Beginner Intuition
 
-Convert starts and ends into events, sort them, and scan active count or state.
+Turn starts and ends into events and scan active count.
 
 ### When To Use It
 
-Use for skyline, car pooling, active intervals, and range coverage.
+Use for meeting rooms, calendars, and maximum overlap.
 
 ### When Not To Use It
 
-Do not ignore event ordering when coordinates tie.
+Do not use when simple merging is enough.
 
 ### Recognition Signals
 
-- sweep line
-- constraints match the invariant
-- brute force repeats the same decision
+- events
+- active count
+- timeline
 
-### Problem Examples
+### Example Problems
 
-- Merge Intervals
 - Meeting Rooms II
+- My Calendar III
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Ordering start and end events incorrectly at the same time.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 events = [(start, +1), (end, -1)]
-scan sorted events
+for time, delta in sorted(events): active += delta
 ```
 
-## Pattern: Interval Scheduling
+### Complexity Notes
 
-### Intuition
+O(n log n) time, O(n) space.
 
-Choose compatible intervals by a boundary that leaves maximum room for the future.
+### Interview Explanation
+
+The active count changes only at endpoints.
+
+## Pattern: Meeting Rooms
+
+### Beginner Intuition
+
+Track the earliest ending active meeting to know if a room is freed.
 
 ### When To Use It
 
-Use for maximizing count or minimizing removals.
+Use for minimum rooms and resource reuse.
 
 ### When Not To Use It
 
-Do not use it for weighted intervals without DP.
+Do not allocate a new room before checking the earliest end.
 
 ### Recognition Signals
 
-- interval scheduling
-- constraints match the invariant
-- brute force repeats the same decision
+- rooms
+- earliest end
+- min heap
 
-### Problem Examples
+### Example Problems
 
 - Meeting Rooms II
-- The Skyline Problem
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Comparing against the latest end instead of earliest end.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
+
+```text
+sort meetings by start
+heap = end times
+if heap[0] <= start: pop
+push end
+```
+
+### Complexity Notes
+
+O(n log n) time.
+
+### Interview Explanation
+
+The earliest ending room is the only one that can free first.
+
+## Pattern: Difference Array
+
+### Beginner Intuition
+
+Add range deltas and prefix them to recover active counts.
+
+### When To Use It
+
+Use when coordinates are bounded or compressed.
+
+### When Not To Use It
+
+Do not allocate by huge raw coordinate ranges.
+
+### Recognition Signals
+
+- range update
+- difference
+- bookings
+
+### Example Problems
+
+- Car Pooling
+- Corporate Flight Bookings
+
+### Common Mistakes
+
+- Forgetting to subtract at the exclusive end.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+diff[start] += value
+diff[end] -= value
+running += diff[i]
+```
+
+### Complexity Notes
+
+O(n + range) or O(n log n) with coordinate compression.
+
+### Interview Explanation
+
+Range updates become two endpoint changes.
+
+## Pattern: Greedy Erase Overlap
+
+### Beginner Intuition
+
+Keep the interval with the earliest end when overlaps conflict.
+
+### When To Use It
+
+Use to remove the fewest intervals or shoot minimum arrows.
+
+### When Not To Use It
+
+Do not keep the longer interval just because it starts earlier.
+
+### Recognition Signals
+
+- remove overlap
+- earliest end
+- arrows
+
+### Example Problems
+
+- Non-overlapping Intervals
+- Minimum Number of Arrows to Burst Balloons
+
+### Common Mistakes
+
+- Updating end to max instead of min on an overlap conflict.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
 
 ```text
 sort by end
-if interval.start >= last_end:
-    take interval
+count = 0
+last_end = -inf
+for interval in intervals:
+    if interval.start >= last_end: keep and update
 ```
 
-## Pattern: Range Query with Heap
+### Complexity Notes
 
-### Intuition
+O(n log n) time.
 
-Sort queries and intervals, add intervals that can cover the query, and pop expired ones.
+### Interview Explanation
 
-### When To Use It
+Earliest end leaves the most room for future intervals.
 
-Use when each point asks for the best covering interval.
-
-### When Not To Use It
-
-Do not scan all intervals per query.
-
-### Recognition Signals
-
-- range query with heap
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- The Skyline Problem
-- Merge Intervals
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-for q in sorted_queries:
-    add intervals with start <= q
-    remove intervals with end < q
-    answer from heap top
-```
 ---
 
 ## Navigation
 
-[Previous](../intervals/CHEATSHEET.md) | [Home](../README.md) | [Next](../intervals/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

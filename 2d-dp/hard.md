@@ -1,250 +1,93 @@
 # 2-D Dynamic Programming Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
-## 1. Regular Expression Matching
+## 1. Edit Distance
 
-LeetCode:
-https://leetcode.com/problems/regular-expression-matching/
+LeetCode: [Edit Distance](https://leetcode.com/problems/edit-distance/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Grid Paths
+Pattern: Two String DP
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying grid paths.
+Why It Matters: Classic insert/delete/replace recurrence.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. Wildcard Matching
+## 2. Regular Expression Matching
 
-LeetCode:
-https://leetcode.com/problems/wildcard-matching/
+LeetCode: [Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Two String DP
+Pattern: Two String DP With Operators
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying two string dp.
+Why It Matters: Hard pattern matching state transitions.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Edit Distance
+## 3. Burst Balloons
 
-LeetCode:
-https://leetcode.com/problems/edit-distance/
+LeetCode: [Burst Balloons](https://leetcode.com/problems/burst-balloons/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Knapsack Table
+Pattern: Interval DP
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying knapsack table.
+Why It Matters: Canonical split-point interval DP.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 4. Distinct Subsequences
 
-LeetCode:
-https://leetcode.com/problems/distinct-subsequences/
+LeetCode: [Distinct Subsequences](https://leetcode.com/problems/distinct-subsequences/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Interval DP
+Pattern: Two String Counting DP
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying interval dp.
+Why It Matters: Counts ways to form a target subsequence.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Burst Balloons
-
-LeetCode:
-https://leetcode.com/problems/burst-balloons/
-
-Difficulty:
-Hard
-
-Pattern:
-Palindrome DP
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying palindrome dp.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Scramble String
-
-LeetCode:
-https://leetcode.com/problems/scramble-string/
-
-Difficulty:
-Hard
-
-Pattern:
-State Compression
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying state compression.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Minimum Insertion Steps to Make a String Palindrome
-
-LeetCode:
-https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/
-
-Difficulty:
-Hard
-
-Pattern:
-Grid Paths
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying grid paths.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Maximal Rectangle
-
-LeetCode:
-https://leetcode.com/problems/maximal-rectangle/
-
-Difficulty:
-Hard
-
-Pattern:
-Two String DP
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying two string dp.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Cherry Pickup
-
-LeetCode:
-https://leetcode.com/problems/cherry-pickup/
-
-Difficulty:
-Hard
-
-Pattern:
-Knapsack Table
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying knapsack table.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Cherry Pickup II
-
-LeetCode:
-https://leetcode.com/problems/cherry-pickup-ii/
-
-Difficulty:
-Hard
-
-Pattern:
-Interval DP
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying interval dp.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../2d-dp/medium.md) | [Home](../README.md) | [Next](../greedy/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

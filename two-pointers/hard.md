@@ -1,250 +1,93 @@
 # Two Pointers Hard Problems
 
-Curated LeetCode practice for this topic. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Trapping Rain Water
 
-LeetCode:
-https://leetcode.com/problems/trapping-rain-water/
+LeetCode: [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Opposite Ends
+Pattern: Two Pointers With Boundary Max
 
-Why It Matters:
-This problem is a high-signal way to practice opposite ends inside two pointers questions.
+Why It Matters: Requires proving which side can be finalized.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 2. Minimum Window Substring
 
-LeetCode:
-https://leetcode.com/problems/minimum-window-substring/
+LeetCode: [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Fast and Slow
+Pattern: Frequency Window And Pointers
 
-Why It Matters:
-This problem is a high-signal way to practice fast and slow inside two pointers questions.
+Why It Matters: Uses pointer-controlled shrinking over character counts.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Shortest Palindrome
+## 3. Substring with Concatenation of All Words
 
-LeetCode:
-https://leetcode.com/problems/shortest-palindrome/
+LeetCode: [Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Sorted Pair Search
+Pattern: Block Pointers
 
-Why It Matters:
-This problem is a high-signal way to practice sorted pair search inside two pointers questions.
+Why It Matters: Tests aligned pointer movement over repeated word lengths.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Palindrome Pairs
+## 4. Median of Two Sorted Arrays
 
-LeetCode:
-https://leetcode.com/problems/palindrome-pairs/
+LeetCode: [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Merge Pointers
+Pattern: Partitioned Pointer Reasoning
 
-Why It Matters:
-This problem is a high-signal way to practice merge pointers inside two pointers questions.
+Why It Matters: Advanced sorted partition problem that rewards boundary precision.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 5. Minimum Number of Moves to Make Palindrome
-
-LeetCode:
-https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/
-
-Difficulty:
-Hard
-
-Pattern:
-Partition Pointers
-
-Why It Matters:
-This problem is a high-signal way to practice partition pointers inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 6. Subarrays with K Different Integers
-
-LeetCode:
-https://leetcode.com/problems/subarrays-with-k-different-integers/
-
-Difficulty:
-Hard
-
-Pattern:
-Cycle Detection
-
-Why It Matters:
-This problem is a high-signal way to practice cycle detection inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 7. Median of Two Sorted Arrays
-
-LeetCode:
-https://leetcode.com/problems/median-of-two-sorted-arrays/
-
-Difficulty:
-Hard
-
-Pattern:
-Opposite Ends
-
-Why It Matters:
-This problem is a high-signal way to practice opposite ends inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 8. Merge k Sorted Lists
-
-LeetCode:
-https://leetcode.com/problems/merge-k-sorted-lists/
-
-Difficulty:
-Hard
-
-Pattern:
-Fast and Slow
-
-Why It Matters:
-This problem is a high-signal way to practice fast and slow inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 9. Reverse Nodes in k-Group
-
-LeetCode:
-https://leetcode.com/problems/reverse-nodes-in-k-group/
-
-Difficulty:
-Hard
-
-Pattern:
-Sorted Pair Search
-
-Why It Matters:
-This problem is a high-signal way to practice sorted pair search inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 10. Smallest Range Covering Elements from K Lists
-
-LeetCode:
-https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
-
-Difficulty:
-Hard
-
-Pattern:
-Merge Pointers
-
-Why It Matters:
-This problem is a high-signal way to practice merge pointers inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../two-pointers/medium.md) | [Home](../README.md) | [Next](../stack/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

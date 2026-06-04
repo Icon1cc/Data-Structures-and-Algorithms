@@ -1,237 +1,257 @@
 # Sliding Window Patterns
 
-Patterns are the bridge between theory and interview execution. Read these before solving the curated problems.
-## Pattern: Fixed Size Window
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
-### Intuition
+## Pattern: Fixed Window
 
-Maintain exactly k elements and update the answer after each step.
+### Beginner Intuition
+
+Keep exactly k items and update the answer as the window slides one step.
 
 ### When To Use It
 
-Use for average, sum, max vowels, and fixed-length substrings.
+Use for fixed length averages, sums, and counts.
 
 ### When Not To Use It
 
-Do not use for variable constraints where shrinking length matters.
+Do not use if valid window length changes based on content.
 
 ### Recognition Signals
 
 - length k
-- fixed window
-- every k
+- fixed size
+- average
 
-### Problem Examples
+### Example Problems
 
 - Maximum Average Subarray I
-- Maximum Number of Vowels in a Substring
+- Contains Duplicate II
 
 ### Common Mistakes
 
-- Removing the wrong outgoing element
-- Recording before reaching k elements
+- Updating answer before the first full window exists.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
+window = 0
 for right, x in enumerate(nums):
-    add x
-    if right >= k: remove nums[right-k]
-    if right >= k-1: record
+    window += x
+    if right >= k: window -= nums[right - k]
+    if right >= k - 1: update_answer(window)
 ```
 
-## Pattern: Variable Size Window
+### Complexity Notes
 
-### Intuition
+O(n) time, O(1) or O(k) space depending on state.
 
-Expand until invalid, then shrink until valid again.
+### Interview Explanation
+
+The invariant is that the state describes the last k elements exactly.
+
+## Pattern: Variable Window
+
+### Beginner Intuition
+
+Expand until useful, then shrink while the invariant allows or requires it.
 
 ### When To Use It
 
-Use for longest or shortest contiguous ranges under a constraint.
+Use for longest or shortest contiguous segments under a condition.
 
 ### When Not To Use It
 
-Do not use if values can move the constraint non-monotonically in both directions.
+Do not use when removing left does not predictably improve validity.
 
 ### Recognition Signals
 
-- longest substring
-- minimum length
-- while invalid
+- longest
+- shortest
+- contiguous
+- shrink
 
-### Problem Examples
+### Example Problems
 
-- Longest Substring Without Repeating Characters
 - Minimum Size Subarray Sum
+- Longest Substring Without Repeating Characters
 
 ### Common Mistakes
 
-- Shrinking too little
-- Forgetting to update answer at the right time
+- Shrinking only once when the window may still be invalid.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 left = 0
 for right in range(n):
-    add right
-    while invalid(): remove left; left += 1
-    record
+    add(right)
+    while invalid():
+        remove(left)
+        left += 1
+    record()
 ```
 
-## Pattern: At Most K
+### Complexity Notes
 
-### Intuition
+O(n) time because each side moves at most n times.
 
-Keep a window with no more than k distinct or invalid items.
+### Interview Explanation
+
+I maintain a valid window before recording the best answer.
+
+## Pattern: Frequency Window
+
+### Beginner Intuition
+
+Track character or value counts inside the current window.
 
 ### When To Use It
 
-Use when the phrase says at most k or can be transformed to exactly k.
+Use for permutations, anagrams, replacement, and at-most-k distinct problems.
 
 ### When Not To Use It
 
-Do not use when k is not monotonic with window expansion.
+Do not leave zero-count keys that make distinct counts wrong.
+
+### Recognition Signals
+
+- counts
+- anagram
+- permutation
+- distinct
+
+### Example Problems
+
+- Permutation in String
+- Find All Anagrams in a String
+
+### Common Mistakes
+
+- Comparing full maps too often when a matched counter would be cleaner.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+counts[x] += 1
+while too_many():
+    counts[left_value] -= 1
+    left += 1
+```
+
+### Complexity Notes
+
+O(n) expected time, O(alphabet or k) space.
+
+### Interview Explanation
+
+The map is the window, so every move of a boundary updates the map.
+
+## Pattern: At Most K Window
+
+### Beginner Intuition
+
+Count windows with at most k, then derive exactly k by subtraction.
+
+### When To Use It
+
+Use when exactly k is hard but at most k is monotonic.
+
+### When Not To Use It
+
+Do not use when at most k is not monotonic under shrinking.
 
 ### Recognition Signals
 
 - at most k
-- distinct
-- replace k
+- exactly k
+- distinct count
 
-### Problem Examples
+### Example Problems
 
 - Fruit Into Baskets
 - Max Consecutive Ones III
 
 ### Common Mistakes
 
-- Not deleting zero counts
-- Confusing replacements with distinct count
+- Forgetting exactly(k) = at_most(k) - at_most(k - 1).
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-while distinct > k:
-    remove nums[left]
-    left += 1
+def at_most(k):
+    left = answer = 0
+    for right in range(n):
+        add(right)
+        while invalid(k): shrink()
+        answer += right - left + 1
 ```
 
-## Pattern: Exactly K via At Most
+### Complexity Notes
 
-### Intuition
+O(n) for each at-most pass.
 
-Count exactly k by subtracting counts of at most k and at most k-1.
+### Interview Explanation
+
+I transform exactly into two monotonic counts because that is easier to maintain.
+
+## Pattern: Monotonic Window
+
+### Beginner Intuition
+
+Use a deque to keep the best candidate in the current window.
 
 ### When To Use It
 
-Use for subarray count problems with distinct elements or odds.
+Use for sliding maximum, minimum, and bounded absolute difference.
 
 ### When Not To Use It
 
-Do not use for min or max length objectives directly.
+Do not use a heap unless stale deletion is handled.
 
 ### Recognition Signals
 
-- exactly k
-- count subarrays
-- distinct
-
-### Problem Examples
-
-- Subarrays with K Different Integers
-- Count Number of Nice Subarrays
-
-### Common Mistakes
-
-- Trying to maintain exactly k directly and missing counts
-- Not handling k = 0
-
-### Reusable Template Or Pseudocode
-
-```text
-exactly(k) = at_most(k) - at_most(k - 1)
-```
-
-## Pattern: Minimum Valid Window
-
-### Intuition
-
-Shrink a valid window as much as possible while preserving required counts.
-
-### When To Use It
-
-Use for covering characters, words, or required frequencies.
-
-### When Not To Use It
-
-Do not use when the target is not contiguous.
-
-### Recognition Signals
-
-- minimum window
-- contains all
-- cover
-
-### Problem Examples
-
-- Minimum Window Substring
-- Minimum Window Subsequence
-
-### Common Mistakes
-
-- Counting unique satisfied keys incorrectly
-- Dropping required duplicates
-
-### Reusable Template Or Pseudocode
-
-```text
-expand right
-while window covers target:
-    record
-    remove left
-```
-
-## Pattern: Monotonic Deque Window
-
-### Intuition
-
-Keep candidate indices in a deque ordered by value and inside the window.
-
-### When To Use It
-
-Use for sliding maximum or minimum.
-
-### When Not To Use It
-
-Do not use when the query is not an extremum.
-
-### Recognition Signals
-
-- sliding maximum
-- window max
+- max in window
 - deque
+- monotonic
+- absolute diff
 
-### Problem Examples
+### Example Problems
 
 - Sliding Window Maximum
-- Constrained Subsequence Sum
+- Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit
 
 ### Common Mistakes
 
-- Leaving expired indices
-- Storing values instead of indices when duplicates matter
+- Forgetting to evict indices that leave the window.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-while deque and deque[0] <= right-k: popleft
-while deque and nums[deque[-1]] <= nums[right]: pop
+while deque and nums[deque[-1]] <= x: deque.pop()
+deque.append(right)
+while deque[0] <= right - k: deque.popleft()
 ```
+
+### Complexity Notes
+
+O(n) amortized time, O(k) space.
+
+### Interview Explanation
+
+The deque stores only candidates that can still become the answer.
 
 ---
 
 ## Navigation
 
-[Previous](../sliding-window/CHEATSHEET.md) | [Home](../README.md) | [Next](../sliding-window/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

@@ -1,139 +1,105 @@
 # Interview Guide
 
-This guide explains how to turn data structures and algorithms knowledge into interview performance.
+This guide focuses on execution during a live coding interview.
 
-## How Coding Interviews Work
+## Interview Process
 
-A typical coding interview is 35 to 50 minutes. The interviewer gives a problem, expects clarifying questions, watches how you reason, and evaluates both the final code and the path you took to reach it.
+Most technical interviews follow this shape:
 
-The usual flow is:
+1. Clarify the task and constraints.
+2. Work through examples and edge cases.
+3. State a brute force approach.
+4. Identify wasted work.
+5. Propose an optimized pattern.
+6. Code with a stated invariant.
+7. Test manually.
+8. Analyze time and space.
+9. Discuss follow-ups.
 
-1. Clarify input, output, constraints, and edge cases.
-2. Propose a brute force solution.
-3. Identify wasted work.
-4. Choose a data structure or algorithmic pattern.
-5. Explain the optimized approach.
-6. Code while narrating important decisions.
-7. Test with examples and edge cases.
-8. Analyze time and space complexity.
+## Communication
 
-## What Interviewers Evaluate
-
-Interviewers usually care about:
-
-- Problem understanding.
-- Pattern recognition.
-- Correctness and edge-case handling.
-- Code clarity.
-- Communication.
-- Complexity analysis.
-- Ability to respond to hints.
-- Debugging discipline.
-
-They are not only checking whether you have seen the exact problem before.
-
-## Communication Strategy
-
-Start with concise questions. Then state your assumptions. Keep the interviewer synchronized with your reasoning, especially when you change approach.
+Speak in short, concrete statements. Interviewers are listening for whether you can reason, not whether you can narrate every keystroke.
 
 Useful phrases:
 
-- "I want to confirm whether the input can be empty."
-- "A brute force approach would be..."
+- "The brute force approach is..."
 - "The repeated work is..."
 - "The invariant I want to maintain is..."
-- "This data structure helps because..."
-- "Before coding, I will test this against..."
-
-## Clarification Questions
-
-Ask questions that change the algorithm or edge cases:
-
-- Can the input be empty?
-- Are values unique?
-- Are values sorted?
-- Are negative numbers allowed?
-- Can there be duplicates?
-- Is the graph directed or undirected?
-- Are edge weights non-negative?
-- Should the answer preserve input order?
-- What should happen if no valid answer exists?
-- Are we optimizing for time, space, or both?
+- "This pattern works because..."
+- "This edge case matters because..."
+- "The auxiliary space is..."
 
 ## Brute Force To Optimized Thinking
 
-Do not skip brute force. Brute force reveals the search space.
+Do not skip brute force. A clear brute force solution shows you understand the problem. Optimization usually comes from naming the wasted work:
 
-A good optimization path looks like this:
-
-1. State the brute force idea.
-2. Name the repeated work.
-3. Ask what summary would remove that work.
-4. Choose a pattern.
-5. State the invariant.
-6. Derive complexity.
-
-Example:
-
-- Brute force checks every pair in O(n^2).
-- The repeated work is searching for a complement.
-- A hash map stores previous values.
-- The invariant is that `seen` contains exactly the values before the current index.
-- The optimized solution is O(n) time and O(n) space.
+| Wasted Work | Common Optimization |
+|---|---|
+| Repeated membership scan | Hash set or hash map |
+| Recomputed range sum | Prefix sum |
+| Rechecking every substring | Sliding window |
+| Pair search in sorted data | Two pointers |
+| Repeated min or max selection | Heap |
+| Repeated recursive subproblem | Dynamic programming |
+| Repeated reachability from scratch | Graph traversal or Union Find |
 
 ## Complexity Analysis
 
-Be precise:
+Always separate:
 
-- Time complexity counts how many operations grow with input size.
-- Space complexity counts auxiliary memory, including recursion stack.
-- Sorting is usually O(n log n).
-- Hash maps are expected O(1) per operation, but can degrade in pathological cases.
-- BFS and DFS over graphs are O(V + E).
-- Dynamic programming is usually number of states times transition cost.
+- Input size.
+- Number of states or nodes visited.
+- Work per state.
+- Auxiliary space.
+- Output size when output can be large.
 
-## Common Mistakes
+Examples:
 
-- Coding before clarifying constraints.
-- Memorizing solutions without understanding invariants.
-- Using DFS for shortest path in an unweighted graph when BFS is needed.
-- Using Dijkstra with negative weights.
-- Forgetting duplicates in sorted two-pointer problems.
-- Missing empty input and single-element cases.
-- Claiming O(1) space while recursion uses O(n) stack.
-- Treating a greedy idea as correct without proof.
-- Compressing DP state before the recurrence is stable.
+- Sliding window: each pointer moves at most n times, so O(n).
+- Monotonic stack: each item is pushed once and popped once, so O(n) amortized.
+- DP: states times transition cost.
+- Graph traversal: O(V + E), not only O(V).
+- Backtracking: exponential output is expected, but pruning still matters.
+
+## Edge-Case Checklist
+
+- Empty input.
+- One item.
+- Duplicates.
+- Negative values.
+- Sorted versus unsorted input.
+- All equal values.
+- Disconnected graph.
+- Cycle.
+- Deep recursion.
+- Overflow in fixed-width languages.
+- Mutating input when the caller may expect it preserved.
+
+## Big-Tech Preparation Notes
+
+- **Google**: emphasize invariants, proofs, and clean reasoning on unfamiliar variants.
+- **Meta**: emphasize speed, pattern recognition, and bug-free implementation.
+- **Amazon**: emphasize communication, edge cases, and practical tradeoffs.
+- **OpenAI, Anthropic, Mistral**: emphasize fundamentals, clarity, correctness, and ability to adapt under changed constraints.
 
 ## Mock Interview Strategy
 
-Use mocks to practice execution, not only correctness.
+- Do one untimed explanation mock before timed mocks.
+- In timed mocks, spend the first 5 minutes clarifying and planning.
+- After each mock, write the exact moment where you lost time.
+- Retry the same problem three days later without notes.
+- Practice follow-ups: memory reduction, streaming input, duplicates, negative weights, very large input, and concurrency only when relevant.
 
-- Week 1 to 2: untimed walkthroughs with full explanation.
-- Week 3 to 4: one 45-minute timed problem twice per week.
-- Week 5 onward: two full mocks per week.
-- After every mock, write what failed and which pattern would have helped.
-- Redo the same problem after 3 days without reading the old code.
+## Final Interview Checklist
 
-## Revision Strategy
-
-Use spaced repetition:
-
-- Same day: rewrite the solution idea without code.
-- Next day: re-solve from scratch.
-- One week later: re-solve under time pressure.
-- One month later: explain the pattern and solve a variant.
-
-## Interview Day Checklist
-
-- Read the prompt twice.
-- Clarify constraints before solving.
-- State brute force.
-- Name the pattern.
-- Maintain an invariant.
-- Code in small, testable chunks.
-- Test normal, edge, and adversarial cases.
-- Give exact complexity.
-
+- [ ] I clarified inputs, outputs, and constraints.
+- [ ] I stated brute force.
+- [ ] I identified wasted work.
+- [ ] I chose a pattern and named the invariant.
+- [ ] I coded with edge cases visible.
+- [ ] I tested manually.
+- [ ] I gave precise time and auxiliary space.
+- [ ] I handled at least one follow-up.
 
 ---
 

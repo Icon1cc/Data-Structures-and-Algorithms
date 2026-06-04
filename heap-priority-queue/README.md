@@ -1,121 +1,142 @@
 # Heap / Priority Queue
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind heap / priority queue, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Repeatedly retrieve the smallest or largest active item without fully sorting every time.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Heap / Priority Queue problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+Heaps are the interview tool for top-k, streaming order statistics, k-way merge, scheduling, and frontier-based graph algorithms.
 
-Used in job schedulers, event simulation, timers, stream ranking, median tracking, shortest paths, and k-way merge pipelines.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in schedulers, timers, event loops, search frontiers, merge pipelines, stream analytics, load balancers, and priority task queues.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-A heap is a complete tree usually stored in an array where each parent has priority no worse than its children.
+## Beginner Intuition
 
-## Core Data Structure Or Algorithm
+A heap does not sort everything. It only guarantees the next best item is at the top, which is exactly enough for many repeated-choice problems.
 
-Push candidates as they become available, pop the current best candidate, and rebalance when two priority views are needed.
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
+
+A binary heap is a complete tree stored in an array that satisfies parent-child priority order. Push and pop are O(log n), peek is O(1).
+
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
+
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Push | Insert a candidate. |
+| Pop | Remove the highest-priority candidate. |
+| Peek | Inspect the current best item. |
+| Heapify | Build a heap from an array. |
+| Lazy delete | Ignore stale heap entries when popped. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
 | Peek | O(1) |
-| Push or pop | O(log n) |
-| Heapify | O(n) |
-| K-way merge | O(n log k) |
+| Push | O(log n) |
+| Pop | O(log n) |
+| Heapify n items | O(n) |
+| Keep top k | O(n log k) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
 | Heap of k items | O(k) |
-| Heap of all items | O(n) |
-| Two heaps | O(n) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Push | Insert an item and restore heap order. |
-| Pop | Remove the best item and restore heap order. |
-| Peek | Inspect best item without removing. |
-| Heapify | Build a heap from existing values. |
+| Heap of all candidates | O(n) |
+| Lazy deletion map | O(n) worst case |
 
 ## Visual Explanation
 
 ```mermaid
-flowchart TB
-    A[highest priority] --> B[next]
-    A --> C[next]
-    B --> D[lower]
-    B --> E[lower]
+flowchart TD
+    A[push item] --> B[Bubble toward root]
+    B --> C[peek best]
+    C --> D[pop root]
+    D --> E[Move last to root]
+    E --> F[Sink until heap order is restored]
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-A complete binary heap has logarithmic height. Heapify is linear because most nodes are close to leaves and require little movement.
+The heap invariant is local parent-child order, not global sorted order. That is why extracting all values one by one sorts them but peeking at the array does not.
 
-## Common Interview Patterns
-
-- **Top K**: Keep only the best k candidates in a heap or bucket structure.
-- **K-way Merge**: Use a heap of current heads from sorted sources and push the successor from the source you popped.
-- **Two Heaps**: Keep lower and upper halves balanced so the median or middle boundary is available.
-- **Scheduling by Priority**: Use one priority for availability and another for which job should run next.
-- **Greedy Heap**: Use a heap to repeatedly choose the best available candidate as constraints evolve.
-- **Lazy Deletion**: Mark entries as deleted and remove them only when they reach the heap top.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for top k, kth largest, smallest next item, streaming median, merge sorted lists, scheduling by priority, shortest path frontier, or repeated min or max selection.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Top K Heap**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **K-way Merge**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Two Heaps**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Lazy Deletion Heap**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Dijkstra Frontier**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Sorting every iteration instead of using a heap.
+- Using max-heap logic in a min-heap language without negating keys carefully.
+- Forgetting tie-breakers for stable ordering.
+- Leaving stale entries without validating them on pop.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `Top K Heap` aloud, then write its invariant and template from memory.
+- Explain `K-way Merge` aloud, then write its invariant and template from memory.
+- Explain `Two Heaps` aloud, then write its invariant and template from memory.
+- Explain `Lazy Deletion Heap` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study Top K in [PATTERNS.md](PATTERNS.md).
-2. Study K-way Merge in [PATTERNS.md](PATTERNS.md).
-3. Study Two Heaps in [PATTERNS.md](PATTERNS.md).
-4. Study Scheduling by Priority in [PATTERNS.md](PATTERNS.md).
-5. Study Greedy Heap in [PATTERNS.md](PATTERNS.md).
-6. Study Lazy Deletion in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
-8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
+1. Read `Top K Heap` in [PATTERNS.md](PATTERNS.md).
+2. Read `K-way Merge` in [PATTERNS.md](PATTERNS.md).
+3. Read `Two Heaps` in [PATTERNS.md](PATTERNS.md).
+4. Read `Lazy Deletion Heap` in [PATTERNS.md](PATTERNS.md).
+5. Read `Dijkstra Frontier` in [PATTERNS.md](PATTERNS.md).
+6. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
+7. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../tries/README.md) | [Home](../README.md) | [Next](../heap-priority-queue/CHEATSHEET.md)
+[Previous](../tries/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

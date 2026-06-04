@@ -1,139 +1,145 @@
 # Sliding Window
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn what sliding window means, when it is useful, what operations it supports, and how it appears in coding interviews. By the end of this topic, you should be able to explain the core idea, select the right pattern, implement the usual template, and analyze time and space complexity.
+Maintain a contiguous range while expanding and shrinking it under an invariant.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Sliding windows solve contiguous subarray and substring problems by updating state incrementally instead of recomputing each range.
+## Why It Matters
 
-Interview problems often hide the topic behind a story. Your job is to translate the story into operations: lookup, scan, traverse, split, merge, choose, or optimize.
+Sliding window converts many repeated subarray or substring scans into one pass by reusing state as the range moves.
 
-## Real World Usage
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-Used in streaming metrics, rate limiting, anomaly detection, rolling averages, session windows, and text analytics.
+## Real-World Use
 
-Real systems rarely announce the data structure by name. They expose constraints such as fast lookup, ordered traversal, prefix search, shortest route, or bounded memory. Those constraints point to the right tool.
+Used in rate limiting, streaming metrics, fraud detection, packet windows, time-series analytics, log monitoring, and substring search.
 
-## Intuition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-Keep a current interval. Expand to include new data. Shrink when the interval becomes invalid or when a smaller valid interval may be better.
+## Beginner Intuition
 
-A beginner-friendly way to approach this topic is to ask: what information do I need to remember, and what information can I safely discard?
+The window is a living summary of a contiguous segment. Expand to include new information, then shrink until the rule is valid again.
 
-## Formal Definition
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
 
-A sliding window algorithm maintains a contiguous segment with left and right boundaries plus summary state for that segment.
+## Formal Explanation
 
-The formal definition matters because it tells you which operations are cheap, which operations are expensive, and which invariants cannot be broken.
+A sliding window keeps two monotonic boundaries and an aggregate over the interval between them. Each boundary moves at most n times.
 
-## Core Data Structure Or Algorithm
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
 
-Fixed windows handle exact length. Variable windows handle constraints such as at most k distinct values or sum at least target.
+## Core Operations
 
-In interviews, the core algorithm is usually small. The difficulty is choosing it, naming the invariant, and handling edge cases cleanly.
+| Operation | Meaning |
+|---|---|
+| Expand right | Add a new item to the window state. |
+| Shrink left | Remove old items until the invariant holds. |
+| Record answer | Update length, count, max, or min at the correct moment. |
+| Maintain auxiliary structure | Use counts or a deque when simple sums are insufficient. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Fixed window | O(n) |
-| Variable window | O(n) when each pointer moves forward |
-| Window with balanced tree | O(n log k) |
-| Deque maximum | O(n) |
+| Standard window | O(n) |
+| Window with hash counts | O(n) expected |
+| Monotonic deque window | O(n) amortized |
+| Bad nested rescan | O(nk) or O(n^2) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Counter map | O(k) |
-| Deque | O(k) |
-| Constant summaries | O(1) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Expand | Move right and add one element. |
-| Shrink | Move left and remove one element. |
-| Validate | Check whether the current window satisfies the rule. |
-| Record | Update best length, count, or value. |
+| Numeric window | O(1) |
+| Frequency map | O(k) distinct values |
+| Deque | O(k) window size |
 
 ## Visual Explanation
 
 ```mermaid
-flowchart LR
-    A[Start left and right] --> B[Expand right]
-    B --> C[Update window state]
-    C --> D{Window valid?}
-    D -->|yes| E[Record answer]
-    D -->|no| F[Shrink left]
-    F --> C
+sequenceDiagram
+    participant L as left
+    participant W as window state
+    participant R as right
+    R->>W: add nums[right]
+    W->>W: invariant may break
+    loop while invalid
+        L->>W: remove nums[left]
+        L->>L: left += 1
+    end
+    W->>R: record best valid window
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-The key invariant is contiguity. For many positive-number problems, sums are monotonic as the window expands, which makes shrinking safe. For negative numbers, prefix sums may be needed instead.
+Sliding window needs contiguity and monotonic boundary movement. Negative numbers often break simple sum windows because shrinking may not move the sum predictably.
 
-## Common Interview Patterns
-
-- **Fixed Size Window**: see [sliding-window/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Variable Size Window**: see [sliding-window/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **At Most K**: see [sliding-window/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Exactly K via At Most**: see [sliding-window/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Minimum Valid Window**: see [sliding-window/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Monotonic Deque Window**: see [sliding-window/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for contiguous subarray, substring, longest, shortest, fixed length k, at most k, exactly k, or streaming range wording.
+Look for contiguous subarray, substring, longest, shortest, at most k, exactly k via at most transforms, fixed length k, or stream-style language.
 
-When you read a problem, underline the constraint words first. Words like "sorted", "contiguous", "prefix", "shortest", "k", "all possible", "minimum", or "dependencies" usually reveal the intended pattern.
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Fixed Window**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Variable Window**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Frequency Window**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **At Most K Window**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Monotonic Window**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Using sliding window with negative sums when monotonicity is required.
-- Not removing left-side state when shrinking.
-- Confusing at most k with exactly k.
+- Recording the answer before restoring validity.
+- Using a window when prefix sums are required for negative numbers.
+- Forgetting to remove zero-count keys.
+- Confusing exactly k with at most k.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep edge cases visible: empty input, one item, duplicates, negative values, and boundary indices.
-- Explain why your data structure supports the needed operation efficiently.
-- Give time and space complexity after testing the code mentally.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Implement and explain fixed size window without looking at notes.
-- Implement and explain variable size window without looking at notes.
-- Implement and explain at most k without looking at notes.
-- Implement and explain exactly k via at most without looking at notes.
-- Pick two Easy problems from [easy.md](easy.md) and explain the pattern before coding.
-- Pick one Medium problem from [medium.md](medium.md) and write only pseudocode first.
+- Explain `Fixed Window` aloud, then write its invariant and template from memory.
+- Explain `Variable Window` aloud, then write its invariant and template from memory.
+- Explain `Frequency Window` aloud, then write its invariant and template from memory.
+- Explain `At Most K Window` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Read the section on Fixed Size Window in [PATTERNS.md](PATTERNS.md).
-2. Read the section on Variable Size Window in [PATTERNS.md](PATTERNS.md).
-3. Read the section on At Most K in [PATTERNS.md](PATTERNS.md).
-4. Read the section on Exactly K via At Most in [PATTERNS.md](PATTERNS.md).
-5. Read the section on Minimum Valid Window in [PATTERNS.md](PATTERNS.md).
-6. Read the section on Monotonic Deque Window in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
-8. Solve Easy, then Medium, then selected Hard problems.
+1. Read `Fixed Window` in [PATTERNS.md](PATTERNS.md).
+2. Read `Variable Window` in [PATTERNS.md](PATTERNS.md).
+3. Read `Frequency Window` in [PATTERNS.md](PATTERNS.md).
+4. Read `At Most K Window` in [PATTERNS.md](PATTERNS.md).
+5. Read `Monotonic Window` in [PATTERNS.md](PATTERNS.md).
+6. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
+7. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-- [Easy problems](easy.md)
-- [Medium problems](medium.md)
-- [Hard problems](hard.md)
-
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../binary-search/README.md) | [Home](../README.md) | [Next](../sliding-window/CHEATSHEET.md)
+[Previous](../binary-search/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

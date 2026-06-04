@@ -1,91 +1,100 @@
 # Math & Geometry Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+This topic covers modular arithmetic, divisibility, greatest common divisor, primes, coordinates, slopes, rotations, and matrix traversal.
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| Euclid GCD | O(log min(a,b)) |
+| Sieve | O(n log log n) |
+| Matrix traversal | O(mn) |
+| Pairwise geometry | O(n^2) |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Formula only | O(1) |
+| Sieve array | O(n) |
+| Matrix output | O(mn) |
+| Slope map | O(n) |
 
-## Common Templates
+## Pattern Summary
+
+| Pattern | Use When |
+|---|---|
+| Modulo Arithmetic | Use for cyclic arrays, clocks, hashes, and large counts. |
+| GCD And LCM | Use for fractions, slopes, grouping by ratio, and common periods. |
+| Prime Sieve | Use when many prime queries share an upper bound. |
+| Matrix Traversal | Use for spiral order, rotation, and diagonal traversal. |
+| Coordinate Geometry | Use for lines, hulls, and nearest or collinear points. |
+| Randomized Prefix | Use for weighted random pick and reservoir sampling variants. |
+
+## Recognition Hints
+
+Look for rotate matrix, spiral, lines, slopes, random weights, divisibility, primes, powers, palindrome numbers, or arithmetic overflow.
+
+## Templates
 
 ### Modulo Arithmetic
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+normalized = ((x % m) + m) % m
 ```
 
-### GCD and Number Theory
+### GCD And LCM
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+while b:
+    a, b = b, a % b
+```
+
+### Prime Sieve
+
+```text
+is_prime = [True] * n
+for p in range(2, sqrt(n)):
+    if is_prime[p]: mark multiples
 ```
 
 ### Matrix Traversal
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+top, bottom, left, right = bounds
+while top <= bottom and left <= right:
+    traverse edges and shrink
 ```
-
-## Pattern Summary
-
-| Pattern | Recognition Hint |
-|---|---|
-| Modulo Arithmetic | Use when the prompt matches modulo arithmetic signals. |
-| GCD and Number Theory | Use when the prompt matches gcd and number theory signals. |
-| Matrix Traversal | Use when the prompt matches matrix traversal signals. |
-| Coordinate Hashing | Use when the prompt matches coordinate hashing signals. |
-| Line and Slope | Use when the prompt matches line and slope signals. |
-| Geometry Simulation | Use when the prompt matches geometry simulation signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Comparing floating-point slopes directly.
+- Ignoring negative modulo behavior.
+- Using O(n^2) geometry without normalizing duplicates.
+- Forgetting overflow in multiplication or exponentiation.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../math-geometry/README.md) | [Home](../README.md) | [Next](../math-geometry/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

@@ -1,28 +1,44 @@
 # Advanced Graphs
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind advanced graphs, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Choose specialized graph algorithms for weighted paths, all-pairs paths, connectivity structure, and spanning trees.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Advanced Graphs problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+Advanced graph interviews test algorithm selection. The same input shape can require Dijkstra, Bellman-Ford, Floyd-Warshall, MST, SCC, or topological DP depending on constraints.
 
-Used in routing, cloud infrastructure, network design, delivery systems, dependency optimization, fraud graphs, and graph analytics.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in routing, dependency analysis, arbitrage detection, network reliability, infrastructure planning, compiler optimization, maps, and ranking systems.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-Advanced graph problems add weights, directed dependencies, critical edges, all-pairs relationships, or minimum-cost connectivity.
+## Beginner Intuition
 
-## Core Data Structure Or Algorithm
+Basic traversal only counts steps. Advanced graphs add weights, global structure, or stronger guarantees, so the algorithm must match what the edge weights and constraints allow.
 
-Use relaxation for shortest paths, cut and cycle properties for MST, low-link values for bridges, and topological order for DAG DP.
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
+
+Weighted graph algorithms optimize path or connection cost under assumptions about weights, cycles, and directedness. Violating assumptions changes correctness.
+
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
+
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Relax edge | Improve a known distance through an edge. |
+| Priority frontier | Expand the cheapest unsettled node. |
+| All-pairs update | Allow an intermediate node and improve every pair. |
+| Union components | Add cheapest safe edges for MST. |
+| Finish order | Use DFS order to find SCCs. |
 
 ## Time Complexity
 
@@ -32,90 +48,103 @@ Use relaxation for shortest paths, cut and cycle properties for MST, low-link va
 | Bellman-Ford | O(VE) |
 | Floyd-Warshall | O(V^3) |
 | Kruskal MST | O(E log E) |
+| Tarjan SCC | O(V + E) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Weighted adjacency | O(V + E) |
-| Distance table | O(V) |
-| All-pairs table | O(V^2) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Relax | Improve a distance through an edge. |
-| Extract minimum | Process the closest unsettled node. |
-| Union components | Accept safe MST edges. |
-| Low-link update | Track whether a subtree can reach an ancestor. |
+| Distances | O(V) or O(V^2) |
+| Heap frontier | O(E) worst case |
+| DSU | O(V) |
+| DFS stacks | O(V) |
 
 ## Visual Explanation
 
 ```mermaid
-flowchart LR
-    A((A)) -- 4 --> B((B))
-    A -- 1 --> C((C))
-    C -- 2 --> B
-    B -- 1 --> D((D))
+flowchart TD
+    A[Distances start at infinity] --> B[Push source with distance 0]
+    B --> C[Pop cheapest unsettled node]
+    C --> D[Relax outgoing edges]
+    D --> E{Better distance found?}
+    E -->|yes| F[Push updated candidate]
+    E -->|no| G[Ignore]
+    F --> C
+    G --> C
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-Relaxation drives shortest paths, cut properties drive MST, and low-link values identify critical connectivity structure.
+Dijkstra relies on non-negative weights. Bellman-Ford tolerates negative edges and detects negative cycles. MST connects all nodes cheaply but does not solve shortest paths.
 
-## Common Interview Patterns
-
-- **Dijkstra Shortest Path**: Expand the unsettled node with the smallest known distance and relax its outgoing edges.
-- **Bellman-Ford**: Relax every edge repeatedly so paths with more edges can improve distances.
-- **Floyd-Warshall**: Allow each node as an intermediate and improve all-pairs distances.
-- **Minimum Spanning Tree**: Choose edges that connect components with minimum total cost and no cycles.
-- **Tarjan Bridges**: Use discovery time and low-link values to find edges whose removal disconnects the graph.
-- **Topological DP**: Process DAG nodes in prerequisite order and push best values to outgoing edges.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for weighted shortest path, negative edge, all-pairs distance, connect all points with minimum cost, critical edge, strongly connected, or network delay.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Dijkstra**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Bellman-Ford**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Floyd-Warshall**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Minimum Spanning Tree**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Strongly Connected Components**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Bridges And Articulation Points**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **DAG Shortest Or Longest Path**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Using Dijkstra with negative weights.
+- Confusing MST with shortest path.
+- Forgetting stale heap entries.
+- Ignoring disconnected graphs or unreachable nodes.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `Dijkstra` aloud, then write its invariant and template from memory.
+- Explain `Bellman-Ford` aloud, then write its invariant and template from memory.
+- Explain `Floyd-Warshall` aloud, then write its invariant and template from memory.
+- Explain `Minimum Spanning Tree` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study Dijkstra Shortest Path in [PATTERNS.md](PATTERNS.md).
-2. Study Bellman-Ford in [PATTERNS.md](PATTERNS.md).
-3. Study Floyd-Warshall in [PATTERNS.md](PATTERNS.md).
-4. Study Minimum Spanning Tree in [PATTERNS.md](PATTERNS.md).
-5. Study Tarjan Bridges in [PATTERNS.md](PATTERNS.md).
-6. Study Topological DP in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
-8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
+1. Read `Dijkstra` in [PATTERNS.md](PATTERNS.md).
+2. Read `Bellman-Ford` in [PATTERNS.md](PATTERNS.md).
+3. Read `Floyd-Warshall` in [PATTERNS.md](PATTERNS.md).
+4. Read `Minimum Spanning Tree` in [PATTERNS.md](PATTERNS.md).
+5. Read `Strongly Connected Components` in [PATTERNS.md](PATTERNS.md).
+6. Read `Bridges And Articulation Points` in [PATTERNS.md](PATTERNS.md).
+7. Read `DAG Shortest Or Longest Path` in [PATTERNS.md](PATTERNS.md).
+8. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
+9. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../graphs/README.md) | [Home](../README.md) | [Next](../advanced-graphs/CHEATSHEET.md)
+[Previous](../graphs/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

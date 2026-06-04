@@ -1,370 +1,114 @@
 # Trees Easy Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
-## 1. Invert Binary Tree
+## 1. Maximum Depth of Binary Tree
 
-LeetCode:
-https://leetcode.com/problems/invert-binary-tree/
+LeetCode: [Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Recursive DFS
+Pattern: Recursive DFS
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying recursive dfs.
+Why It Matters: The simplest recursive return contract.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. Maximum Depth of Binary Tree
+## 2. Same Tree
 
-LeetCode:
-https://leetcode.com/problems/maximum-depth-of-binary-tree/
+LeetCode: [Same Tree](https://leetcode.com/problems/same-tree/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Iterative DFS
+Pattern: Recursive DFS
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying iterative dfs.
+Why It Matters: Tests paired traversal and structural equality.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Diameter of Binary Tree
+## 3. Invert Binary Tree
 
-LeetCode:
-https://leetcode.com/problems/diameter-of-binary-tree/
+LeetCode: [Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Level Order BFS
+Pattern: Recursive DFS
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying level order bfs.
+Why It Matters: Practices local subtree mutation.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 4. Balanced Binary Tree
 
-LeetCode:
-https://leetcode.com/problems/balanced-binary-tree/
+LeetCode: [Balanced Binary Tree](https://leetcode.com/problems/balanced-binary-tree/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-BST Invariant
+Pattern: Postorder DFS
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bst invariant.
+Why It Matters: Combines height and validity.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 5. Same Tree
+## 5. Diameter of Binary Tree
 
-LeetCode:
-https://leetcode.com/problems/same-tree/
+LeetCode: [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Lowest Common Ancestor
+Pattern: Tree DP
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying lowest common ancestor.
+Why It Matters: Introduces global answer plus local height.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Subtree of Another Tree
-
-LeetCode:
-https://leetcode.com/problems/subtree-of-another-tree/
-
-Difficulty:
-Easy
-
-Pattern:
-Tree DP
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying tree dp.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Path Sum
-
-LeetCode:
-https://leetcode.com/problems/path-sum/
-
-Difficulty:
-Easy
-
-Pattern:
-Recursive DFS
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying recursive dfs.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Binary Tree Inorder Traversal
-
-LeetCode:
-https://leetcode.com/problems/binary-tree-inorder-traversal/
-
-Difficulty:
-Easy
-
-Pattern:
-Iterative DFS
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying iterative dfs.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Symmetric Tree
-
-LeetCode:
-https://leetcode.com/problems/symmetric-tree/
-
-Difficulty:
-Easy
-
-Pattern:
-Level Order BFS
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying level order bfs.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Convert Sorted Array to Binary Search Tree
-
-LeetCode:
-https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
-
-Difficulty:
-Easy
-
-Pattern:
-BST Invariant
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bst invariant.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 11. Minimum Depth of Binary Tree
-
-LeetCode:
-https://leetcode.com/problems/minimum-depth-of-binary-tree/
-
-Difficulty:
-Easy
-
-Pattern:
-Lowest Common Ancestor
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying lowest common ancestor.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 12. Merge Two Binary Trees
-
-LeetCode:
-https://leetcode.com/problems/merge-two-binary-trees/
-
-Difficulty:
-Easy
-
-Pattern:
-Tree DP
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying tree dp.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 13. Range Sum of BST
-
-LeetCode:
-https://leetcode.com/problems/range-sum-of-bst/
-
-Difficulty:
-Easy
-
-Pattern:
-Recursive DFS
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying recursive dfs.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 14. Search in a Binary Search Tree
-
-LeetCode:
-https://leetcode.com/problems/search-in-a-binary-search-tree/
-
-Difficulty:
-Easy
-
-Pattern:
-Iterative DFS
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying iterative dfs.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 15. Increasing Order Search Tree
-
-LeetCode:
-https://leetcode.com/problems/increasing-order-search-tree/
-
-Difficulty:
-Easy
-
-Pattern:
-Level Order BFS
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying level order bfs.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../trees/PATTERNS.md) | [Home](../README.md) | [Next](../trees/medium.md)
+[Previous](PATTERNS.md) | [Home](../README.md) | [Next](medium.md)

@@ -1,91 +1,109 @@
 # Advanced Graphs Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+Weighted graph algorithms optimize path or connection cost under assumptions about weights, cycles, and directedness. Violating assumptions changes correctness.
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| Dijkstra with heap | O((V + E) log V) |
+| Bellman-Ford | O(VE) |
+| Floyd-Warshall | O(V^3) |
+| Kruskal MST | O(E log E) |
+| Tarjan SCC | O(V + E) |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Distances | O(V) or O(V^2) |
+| Heap frontier | O(E) worst case |
+| DSU | O(V) |
+| DFS stacks | O(V) |
 
-## Common Templates
+## Pattern Summary
 
-### Dijkstra Shortest Path
+| Pattern | Use When |
+|---|---|
+| Dijkstra | Use for shortest paths with non-negative weights. |
+| Bellman-Ford | Use for negative edges and negative-cycle detection. |
+| Floyd-Warshall | Use for dense graphs and all-pairs shortest paths with small n. |
+| Minimum Spanning Tree | Use for cheapest network connection in undirected weighted graphs. |
+| Strongly Connected Components | Use for condensation graphs, dependency cycles, and mutual reachability. |
+| Bridges And Articulation Points | Use for network reliability and critical connections. |
+| DAG Shortest Or Longest Path | Use for weighted DAGs and dependency optimization. |
+
+## Recognition Hints
+
+Look for weighted shortest path, negative edge, all-pairs distance, connect all points with minimum cost, critical edge, strongly connected, or network delay.
+
+## Templates
+
+### Dijkstra
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+dist[source] = 0
+heap = [(0, source)]
+while heap:
+    d, u = heappop(heap)
+    if d != dist[u]: continue
+    relax neighbors
 ```
 
 ### Bellman-Ford
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+for _ in range(V - 1):
+    for u, v, w in edges:
+        dist[v] = min(dist[v], dist[u] + w)
 ```
 
 ### Floyd-Warshall
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+for k in range(n):
+    for i in range(n):
+        for j in range(n):
+            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
 ```
 
-## Pattern Summary
+### Minimum Spanning Tree
 
-| Pattern | Recognition Hint |
-|---|---|
-| Dijkstra Shortest Path | Use when the prompt matches dijkstra shortest path signals. |
-| Bellman-Ford | Use when the prompt matches bellman-ford signals. |
-| Floyd-Warshall | Use when the prompt matches floyd-warshall signals. |
-| Minimum Spanning Tree | Use when the prompt matches minimum spanning tree signals. |
-| Tarjan Bridges | Use when the prompt matches tarjan bridges signals. |
-| Topological DP | Use when the prompt matches topological dp signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
+```text
+sort edges by weight
+for edge in edges:
+    if union(u, v): take edge
+```
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Using Dijkstra with negative weights.
+- Confusing MST with shortest path.
+- Forgetting stale heap entries.
+- Ignoring disconnected graphs or unreachable nodes.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../advanced-graphs/README.md) | [Home](../README.md) | [Next](../advanced-graphs/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

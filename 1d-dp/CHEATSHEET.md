@@ -1,91 +1,103 @@
 # 1-D Dynamic Programming Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+Dynamic programming applies when optimal substructure and overlapping subproblems exist. A 1-D DP state usually depends on earlier indices or capacities.
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| Linear recurrence | O(n) |
+| Capacity DP | O(n * capacity) |
+| LIS quadratic | O(n^2) |
+| LIS with binary search | O(n log n) |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Full table | O(n) or O(n * capacity) |
+| Rolling variables | O(1) |
+| Memo recursion | O(states) plus call stack |
 
-## Common Templates
+## Pattern Summary
+
+| Pattern | Use When |
+|---|---|
+| State Definition | Use for every DP problem. |
+| Memoization | Use when top-down choices are easier to express than fill order. |
+| Tabulation | Use when dependency order is clear. |
+| Transition Choice | Use for min/max/counting DP. |
+| Knapsack | Use for subset sum, partition, and bounded resource selection. |
+| Subsequence DP | Use for LIS, word break variants, and sequence scoring. |
+| State Compression | Use when dp[i] depends on a fixed small window of earlier states. |
+| Kadane | Use for maximum subarray and local extend-or-restart decisions. |
+
+## Recognition Hints
+
+Look for count ways, min cost, max profit, can reach, choose or skip, subsequence, partition, coin change, or repeated recursion over indices.
+
+## Templates
+
+### State Definition
+
+```text
+dp[i] = answer for the prefix ending at i
+# or answer using first i items
+```
 
 ### Memoization
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+memo = {}
+def solve(i):
+    if i in memo: return memo[i]
+    memo[i] = combine(next states)
+    return memo[i]
 ```
 
 ### Tabulation
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+dp = [base values]
+for i in fill_order:
+    dp[i] = transition(previous states)
 ```
 
-### Rolling State
+### Transition Choice
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+dp[i] = best(dp[i - 1], value[i] + dp[i - 2])
 ```
-
-## Pattern Summary
-
-| Pattern | Recognition Hint |
-|---|---|
-| Memoization | Use when the prompt matches memoization signals. |
-| Tabulation | Use when the prompt matches tabulation signals. |
-| Rolling State | Use when the prompt matches rolling state signals. |
-| House Robber Choice | Use when the prompt matches house robber choice signals. |
-| Coin Change | Use when the prompt matches coin change signals. |
-| Longest Increasing Subsequence | Use when the prompt matches longest increasing subsequence signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Coding before defining the state.
+- Mixing ending-at with up-to-index states.
+- Using wrong fill direction for 0/1 knapsack.
+- Forgetting impossible-state sentinels.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../1d-dp/README.md) | [Home](../README.md) | [Next](../1d-dp/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

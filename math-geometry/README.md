@@ -1,120 +1,147 @@
 # Math & Geometry
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind math & geometry, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Apply arithmetic, number theory, coordinate reasoning, and matrix movement cleanly.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Math & Geometry problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+Math and geometry questions are less about memorizing formulas and more about turning constraints into invariants, coordinate transforms, and safe arithmetic.
 
-Used in graphics, payments, maps, robotics, simulations, ranking formulas, ML feature geometry, and coordinate systems.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in graphics, robotics, mapping, simulations, analytics, cryptography, pagination, hashing, randomized load balancing, and matrix processing.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-Math and geometry problems use arithmetic, number theory, combinatorics, matrices, coordinates, vectors, lines, and areas.
+## Beginner Intuition
 
-## Core Data Structure Or Algorithm
+When a problem looks nonstandard, reduce it to a formula, invariant, or coordinate relation. Then test the formula on small cases before coding.
 
-Normalize numeric representations, avoid floating precision when possible, and handle zero, duplicate, overflow, and boundary cases deliberately.
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
+
+This topic covers modular arithmetic, divisibility, greatest common divisor, primes, coordinates, slopes, rotations, and matrix traversal.
+
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
+
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Modulo normalize | Keep values inside a range. |
+| GCD | Compute shared divisibility. |
+| Sieve | Mark composite numbers. |
+| Matrix rotate | Map coordinates. |
+| Slope normalize | Represent lines without floating point. |
+| Random prefix | Map random numbers to weighted buckets. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| GCD Euclid | O(log min(a,b)) |
-| Prime sieve | O(n log log n) |
-| Matrix traversal | O(rows times cols) |
-| Pair geometry | O(n^2) |
+| Euclid GCD | O(log min(a,b)) |
+| Sieve | O(n log log n) |
+| Matrix traversal | O(mn) |
+| Pairwise geometry | O(n^2) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
 | Formula only | O(1) |
-| Sieve | O(n) |
-| Slope map | O(n) per anchor |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Normalize | Reduce fractions, slopes, or directions. |
-| Transform | Rotate, reflect, or translate coordinates. |
-| Count | Use formulas or maps instead of repeated simulation. |
-| Guard boundaries | Handle zero and duplicate cases. |
+| Sieve array | O(n) |
+| Matrix output | O(mn) |
+| Slope map | O(n) |
 
 ## Visual Explanation
 
 ```mermaid
-flowchart LR
-    A[points] --> B[normalize]
-    B --> C[count or transform]
-    C --> D[answer]
+flowchart TD
+    A[Coordinate x,y] --> B[Choose invariant]
+    B --> C[slope dy/dx]
+    B --> D[distance squared]
+    B --> E[rotation y, n-1-x]
+    C --> F[Normalize to avoid floating point]
+    D --> F
+    E --> F
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-Use gcd, modular arithmetic, vectors, slopes, area, and orientation. Prefer exact integer normalization over floating-point comparisons.
+Avoid floating point when equality matters. Normalize signs and divide by GCD for slopes, use squared distances for comparisons, and reason about modulo with negative values.
 
-## Common Interview Patterns
-
-- **Modulo Arithmetic**: Use remainders to reason about divisibility, cycles, and large numbers.
-- **GCD and Number Theory**: Use gcd, lcm, primes, and factors to normalize numeric relationships.
-- **Matrix Traversal**: Move through matrix layers, rows, columns, or diagonals with explicit boundaries.
-- **Coordinate Hashing**: Store points or normalized coordinate facts in sets and maps.
-- **Line and Slope**: Normalize slope as an integer pair using gcd and count equal slopes from each anchor.
-- **Geometry Simulation**: Update coordinates, direction, or area according to exact geometric rules.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for rotate matrix, spiral, lines, slopes, random weights, divisibility, primes, powers, palindrome numbers, or arithmetic overflow.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Modulo Arithmetic**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **GCD And LCM**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Prime Sieve**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Matrix Traversal**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Coordinate Geometry**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Randomized Prefix**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Comparing floating-point slopes directly.
+- Ignoring negative modulo behavior.
+- Using O(n^2) geometry without normalizing duplicates.
+- Forgetting overflow in multiplication or exponentiation.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `Modulo Arithmetic` aloud, then write its invariant and template from memory.
+- Explain `GCD And LCM` aloud, then write its invariant and template from memory.
+- Explain `Prime Sieve` aloud, then write its invariant and template from memory.
+- Explain `Matrix Traversal` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study Modulo Arithmetic in [PATTERNS.md](PATTERNS.md).
-2. Study GCD and Number Theory in [PATTERNS.md](PATTERNS.md).
-3. Study Matrix Traversal in [PATTERNS.md](PATTERNS.md).
-4. Study Coordinate Hashing in [PATTERNS.md](PATTERNS.md).
-5. Study Line and Slope in [PATTERNS.md](PATTERNS.md).
-6. Study Geometry Simulation in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
+1. Read `Modulo Arithmetic` in [PATTERNS.md](PATTERNS.md).
+2. Read `GCD And LCM` in [PATTERNS.md](PATTERNS.md).
+3. Read `Prime Sieve` in [PATTERNS.md](PATTERNS.md).
+4. Read `Matrix Traversal` in [PATTERNS.md](PATTERNS.md).
+5. Read `Coordinate Geometry` in [PATTERNS.md](PATTERNS.md).
+6. Read `Randomized Prefix` in [PATTERNS.md](PATTERNS.md).
+7. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
 8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../bit-manipulation/README.md) | [Home](../README.md) | [Next](../math-geometry/CHEATSHEET.md)
+[Previous](../bit-manipulation/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

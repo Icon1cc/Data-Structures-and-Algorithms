@@ -1,250 +1,93 @@
 # Stack Hard Problems
 
-Curated LeetCode practice for this topic. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Largest Rectangle in Histogram
 
-LeetCode:
-https://leetcode.com/problems/largest-rectangle-in-histogram/
+LeetCode: [Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Balanced Delimiters
+Pattern: Monotonic Increasing Stack
 
-Why It Matters:
-This problem is a high-signal way to practice balanced delimiters inside stack questions.
+Why It Matters: The classic width computation stack problem.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 2. Basic Calculator
 
-LeetCode:
-https://leetcode.com/problems/basic-calculator/
+LeetCode: [Basic Calculator](https://leetcode.com/problems/basic-calculator/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Expression Evaluation
+Pattern: Expression Stack
 
-Why It Matters:
-This problem is a high-signal way to practice expression evaluation inside stack questions.
+Why It Matters: Tests signs, parentheses, and streaming parse state.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Basic Calculator III
+## 3. Maximal Rectangle
 
-LeetCode:
-https://leetcode.com/problems/basic-calculator-iii/
+LeetCode: [Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Monotonic Increasing Stack
+Pattern: Histogram Stack Per Row
 
-Why It Matters:
-This problem is a high-signal way to practice monotonic increasing stack inside stack questions.
+Why It Matters: Reduces a 2-D matrix to repeated histogram problems.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Maximal Rectangle
+## 4. Parsing A Boolean Expression
 
-LeetCode:
-https://leetcode.com/problems/maximal-rectangle/
+LeetCode: [Parsing A Boolean Expression](https://leetcode.com/problems/parsing-a-boolean-expression/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Monotonic Decreasing Stack
+Pattern: Nested Expression Stack
 
-Why It Matters:
-This problem is a high-signal way to practice monotonic decreasing stack inside stack questions.
+Why It Matters: Practices parsing nested logical expressions.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 5. Trapping Rain Water
-
-LeetCode:
-https://leetcode.com/problems/trapping-rain-water/
-
-Difficulty:
-Hard
-
-Pattern:
-Simulation Stack
-
-Why It Matters:
-This problem is a high-signal way to practice simulation stack inside stack questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 6. Dinner Plate Stacks
-
-LeetCode:
-https://leetcode.com/problems/dinner-plate-stacks/
-
-Difficulty:
-Hard
-
-Pattern:
-Auxiliary Stack
-
-Why It Matters:
-This problem is a high-signal way to practice auxiliary stack inside stack questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 7. Parsing A Boolean Expression
-
-LeetCode:
-https://leetcode.com/problems/parsing-a-boolean-expression/
-
-Difficulty:
-Hard
-
-Pattern:
-Balanced Delimiters
-
-Why It Matters:
-This problem is a high-signal way to practice balanced delimiters inside stack questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 8. Remove Invalid Parentheses
-
-LeetCode:
-https://leetcode.com/problems/remove-invalid-parentheses/
-
-Difficulty:
-Hard
-
-Pattern:
-Expression Evaluation
-
-Why It Matters:
-This problem is a high-signal way to practice expression evaluation inside stack questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 9. Number of Atoms
-
-LeetCode:
-https://leetcode.com/problems/number-of-atoms/
-
-Difficulty:
-Hard
-
-Pattern:
-Monotonic Increasing Stack
-
-Why It Matters:
-This problem is a high-signal way to practice monotonic increasing stack inside stack questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 10. Create Maximum Number
-
-LeetCode:
-https://leetcode.com/problems/create-maximum-number/
-
-Difficulty:
-Hard
-
-Pattern:
-Monotonic Decreasing Stack
-
-Why It Matters:
-This problem is a high-signal way to practice monotonic decreasing stack inside stack questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../stack/medium.md) | [Home](../README.md) | [Next](../binary-search/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

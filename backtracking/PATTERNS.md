@@ -1,247 +1,299 @@
 # Backtracking Patterns
 
-This file is the main pattern-recognition reference for backtracking. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
 ## Pattern: Subsets
 
-### Intuition
+### Beginner Intuition
 
-For each element, branch into include and exclude choices.
+At each item choose include or exclude, producing every subset once.
 
 ### When To Use It
 
-Use for power sets and all subset generation.
+Use when every element may be taken or skipped.
 
 ### When Not To Use It
 
-Do not use when order matters and permutations are required.
+Do not use permutations when order does not matter.
 
 ### Recognition Signals
 
-- subsets
-- constraints match the invariant
-- brute force repeats the same decision
+- all subsets
+- power set
+- include exclude
 
-### Problem Examples
+### Example Problems
 
 - Subsets
-- Combination Sum
+- Subsets II
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Failing to skip duplicates after sorting.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-def backtrack(i):
-    if i == n: record path
-    choose nums[i]; backtrack(i+1); undo
-    backtrack(i+1)
+def dfs(i):
+    if i == n: record(path); return
+    dfs(i + 1)
+    path.append(nums[i]); dfs(i + 1); path.pop()
 ```
+
+### Complexity Notes
+
+O(n * 2^n) including output.
+
+### Interview Explanation
+
+The decision tree has two branches per element.
 
 ## Pattern: Combinations
 
-### Intuition
+### Beginner Intuition
 
-Choose elements in increasing index order to avoid duplicate orderings.
+Build choices in increasing index order so order does not create duplicates.
 
 ### When To Use It
 
-Use for choose-k and target-sum combinations.
+Use for choose k, combination sum, and unordered selections.
 
 ### When Not To Use It
 
-Do not restart from zero after each choice unless reuse is allowed.
+Do not restart from zero after each choice.
 
 ### Recognition Signals
 
+- choose k
 - combinations
-- constraints match the invariant
-- brute force repeats the same decision
+- start index
 
-### Problem Examples
+### Example Problems
 
 - Combination Sum
-- Sudoku Solver
+- Combination Sum II
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Allowing the same combination in different orders.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for j in range(start, n):
-    path.append(nums[j])
-    backtrack(j + 1)
-    path.pop()
+def dfs(start):
+    for i in range(start, n):
+        choose nums[i]
+        dfs(next_start)
+        undo
 ```
+
+### Complexity Notes
+
+Exponential output, often pruned by target.
+
+### Interview Explanation
+
+The start index enforces a canonical order.
 
 ## Pattern: Permutations
 
-### Intuition
+### Beginner Intuition
 
-At each position, try every unused element.
+Track used elements so each position chooses from remaining values.
 
 ### When To Use It
 
-Use when arrangements with different orders are distinct.
+Use when order matters.
 
 ### When Not To Use It
 
-Do not use for combination problems where order should not matter.
+Do not sort-and-skip incorrectly when duplicates exist.
 
 ### Recognition Signals
 
-- permutations
-- constraints match the invariant
-- brute force repeats the same decision
+- arrangements
+- order matters
+- used set
 
-### Problem Examples
+### Example Problems
 
-- Sudoku Solver
-- Subsets
+- Permutations
+- Next Permutation
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Not unmarking used after recursion.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for i in range(n):
-    if used[i]: continue
-    used[i] = True
-    backtrack()
-    used[i] = False
+def dfs():
+    if len(path) == n: record(path)
+    for i in range(n):
+        if used[i]: continue
+        used[i] = True; path.append(nums[i])
+        dfs()
+        path.pop(); used[i] = False
 ```
 
-## Pattern: Constraint Search
+### Complexity Notes
 
-### Intuition
+O(n * n!) time including output.
 
-Carry constraint sets so invalid partial assignments are rejected immediately.
+### Interview Explanation
+
+Each depth fixes one position in the arrangement.
+
+## Pattern: Constraint Grid Search
+
+### Beginner Intuition
+
+DFS through grid cells while marking visited for the current path.
 
 ### When To Use It
 
-Use for sudoku, n-queens, matchsticks, and equal partitioning.
+Use for word search and maze-style constraint traversal.
 
 ### When Not To Use It
 
-Do not recompute all constraints from scratch if incremental sets are simple.
+Do not use a global visited set when paths must be independent.
 
 ### Recognition Signals
 
-- constraint search
-- constraints match the invariant
-- brute force repeats the same decision
+- grid
+- path
+- visited
+- neighbors
 
-### Problem Examples
+### Example Problems
 
-- Subsets
-- Combination Sum
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-if candidate is valid:
-    place candidate and mark constraints
-    backtrack()
-    undo
-```
-
-## Pattern: Board DFS
-
-### Intuition
-
-Move through neighboring cells while marking the current cell visited.
-
-### When To Use It
-
-Use for word search, grid paths, and board coverage.
-
-### When Not To Use It
-
-Do not allow revisits unless the prompt explicitly permits them.
-
-### Recognition Signals
-
-- board dfs
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Combination Sum
+- Word Search
 - Sudoku Solver
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Leaving a cell marked after backtracking.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 mark cell
-for neighbor in directions: dfs(neighbor)
+for neighbor in neighbors:
+    dfs(neighbor)
 unmark cell
 ```
 
-## Pattern: Partitioning
+### Complexity Notes
 
-### Intuition
+O(cells * branching^depth) before pruning.
 
-Choose a valid prefix, recurse on the suffix, and record complete decompositions.
+### Interview Explanation
+
+Visited means used in this current path, not forever.
+
+## Pattern: Partition Backtracking
+
+### Beginner Intuition
+
+Cut the input into valid pieces and recurse on the suffix.
 
 ### When To Use It
 
-Use for palindrome cuts, IP addresses, and string splitting.
+Use for palindrome partitions, IP addresses, and expression generation.
 
 ### When Not To Use It
 
-Do not accept a piece without checking length and validity constraints.
+Do not copy large substrings unnecessarily if indices are enough.
 
 ### Recognition Signals
 
-- partitioning
-- constraints match the invariant
-- brute force repeats the same decision
+- partition
+- cuts
+- valid piece
 
-### Problem Examples
+### Example Problems
 
-- Sudoku Solver
-- Subsets
+- Palindrome Partitioning
+- Restore IP Addresses
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Checking validity after recursing instead of before choosing.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for end in range(start + 1, n + 1):
+for end in valid_ends(start):
     piece = s[start:end]
-    if valid(piece): choose and recurse
+    if valid(piece): choose and dfs(end)
 ```
+
+### Complexity Notes
+
+Exponential in number of valid cuts.
+
+### Interview Explanation
+
+Every branch chooses the next valid segment boundary.
+
+## Pattern: Pruned Search
+
+### Beginner Intuition
+
+Use constraints to stop branches before they become complete failures.
+
+### When To Use It
+
+Use for N-Queens, Sudoku, and target sums.
+
+### When Not To Use It
+
+Do not prune on a condition that future choices could fix.
+
+### Recognition Signals
+
+- constraints
+- early stop
+- board
+
+### Example Problems
+
+- N-Queens
+- Expression Add Operators
+
+### Common Mistakes
+
+- Using an unsound prune that removes valid answers.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+if violates_constraints(state): return
+continue search
+```
+
+### Complexity Notes
+
+Same worst case, much better practical runtime.
+
+### Interview Explanation
+
+I state why the pruned branch cannot become valid.
+
 ---
 
 ## Navigation
 
-[Previous](../backtracking/CHEATSHEET.md) | [Home](../README.md) | [Next](../backtracking/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

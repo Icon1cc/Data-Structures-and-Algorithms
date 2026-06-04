@@ -1,120 +1,145 @@
 # 2-D Dynamic Programming
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind 2-d dynamic programming, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Use a table whose state depends on two indices, dimensions, strings, or interval boundaries.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-2-D Dynamic Programming problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+2-D DP is where many candidates fail because base cases, fill order, and state meaning become visible in the table.
 
-Used in text diffing, sequence alignment, grid routing, inventory planning, image grids, and language processing.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in diff tools, spell check, bioinformatics alignment, grid routing, parsing, resource planning, and sequence comparison.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-2-D dynamic programming stores answers by two coordinates such as two string positions, grid cells, item and capacity, or interval endpoints.
+## Beginner Intuition
 
-## Core Data Structure Or Algorithm
+Each cell answers a precise subproblem. If you can explain what row and column mean, the recurrence usually becomes a small local choice.
 
-Define table meaning, initialize borders, fill cells in dependency order, and compress only after the recurrence is clear.
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
+
+A 2-D DP table stores solutions for pairs of positions, capacities, or interval endpoints. Transitions refer to already computed neighboring or smaller interval states.
+
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
+
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Grid move | Combine top and left states. |
+| String compare | Use previous prefixes. |
+| Knapsack table | Decide take or skip. |
+| Interval split | Try a middle point between boundaries. |
+| Compress row | Keep prior row when dependencies allow. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Grid DP | O(rows times cols) |
-| Two-string DP | O(n times m) |
-| Knapsack | O(items times capacity) |
+| m by n table | O(mn) |
 | Interval DP | O(n^3) common |
+| Two-string DP | O(mn) |
+| Compressed row | Same time, lower space |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Full table | O(n times m) |
-| Rolling rows | O(min(n,m)) |
+| Full table | O(mn) |
+| Two rows | O(n) |
 | Interval table | O(n^2) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Initialize borders | Handle empty prefixes or first row and column. |
-| Fill cells | Use smaller solved states. |
-| Choose transition | Min, max, count, or boolean. |
-| Compress rows | Keep only rows that future cells need. |
 
 ## Visual Explanation
 
 ```mermaid
-flowchart TB
-    A[dp i-1 j] --> D[dp i j]
-    B[dp i j-1] --> D
-    C[dp i-1 j-1] --> D
+flowchart TD
+    A[dp[i-1][j]] --> C[dp[i][j]]
+    B[dp[i][j-1]] --> C
+    D[dp[i-1][j-1]] --> C
+    C --> E[future cells]
+    F[Base row and column] --> A
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-A 2-D table creates a partial order of dependencies. Fill order is correct only when every needed neighbor or subrange is already solved.
+Fill order must respect dependencies. Grid DP often fills top-left to bottom-right, while interval DP often fills by increasing interval length.
 
-## Common Interview Patterns
-
-- **Grid Paths**: Compute each cell from previously reachable neighbor cells.
-- **Two String DP**: Use prefixes of two strings as the two state dimensions.
-- **Knapsack Table**: Track item progress and remaining capacity or target.
-- **Interval DP**: Solve ranges by splitting each interval into smaller intervals.
-- **Palindrome DP**: Use inner substrings to decide whether larger substrings are palindromes or how costly they are.
-- **State Compression**: Reduce table dimensions when only recent rows, columns, or masks are needed.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for two strings, grid paths, edit distance, subsequences, palindromes, matrix costs, intervals, or choices involving two moving indices.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Grid DP**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Two String DP**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Knapsack Table**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Interval DP**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Path Counting With Obstacles**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **State Compression**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Game DP**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Leaving base row or column undefined.
+- Overwriting a row before it is no longer needed.
+- Using substring DP when subsequence DP is required.
+- Filling interval DP in the wrong length order.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `Grid DP` aloud, then write its invariant and template from memory.
+- Explain `Two String DP` aloud, then write its invariant and template from memory.
+- Explain `Knapsack Table` aloud, then write its invariant and template from memory.
+- Explain `Interval DP` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study Grid Paths in [PATTERNS.md](PATTERNS.md).
-2. Study Two String DP in [PATTERNS.md](PATTERNS.md).
-3. Study Knapsack Table in [PATTERNS.md](PATTERNS.md).
-4. Study Interval DP in [PATTERNS.md](PATTERNS.md).
-5. Study Palindrome DP in [PATTERNS.md](PATTERNS.md).
-6. Study State Compression in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
-8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
+1. Read `Grid DP` in [PATTERNS.md](PATTERNS.md).
+2. Read `Two String DP` in [PATTERNS.md](PATTERNS.md).
+3. Read `Knapsack Table` in [PATTERNS.md](PATTERNS.md).
+4. Read `Interval DP` in [PATTERNS.md](PATTERNS.md).
+5. Read `Path Counting With Obstacles` in [PATTERNS.md](PATTERNS.md).
+6. Read `State Compression` in [PATTERNS.md](PATTERNS.md).
+7. Read `Game DP` in [PATTERNS.md](PATTERNS.md).
+8. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
+9. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../1d-dp/README.md) | [Home](../README.md) | [Next](../2d-dp/CHEATSHEET.md)
+[Previous](../1d-dp/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

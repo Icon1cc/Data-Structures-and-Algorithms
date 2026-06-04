@@ -1,80 +1,136 @@
 # Linked List Patterns
 
-This file is the main pattern-recognition reference for linked list. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
 ## Pattern: Dummy Head
 
-### Intuition
+### Beginner Intuition
 
-Add a sentinel node before the real head so deleting or inserting near the head has the same logic as every other position.
+Add a stable node before the real head so head edits become ordinary edits.
 
 ### When To Use It
 
-Use when the head can change or when list construction needs a stable tail pointer.
+Use for deletion, insertion, merging, and partitioning near the head.
 
 ### When Not To Use It
 
-Do not use it as a substitute for understanding which real node should be returned.
+Do not expose the dummy as part of the returned list.
 
 ### Recognition Signals
 
-- dummy head
-- constraints match the invariant
-- brute force repeats the same decision
+- delete head
+- merge
+- sentinel
+- dummy
 
-### Problem Examples
+### Example Problems
 
-- Add Two Numbers
-- Copy List with Random Pointer
+- Merge Two Sorted Lists
+- Remove Nth Node From End of List
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Returning dummy instead of dummy.next.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-dummy = Node(0)
-dummy.next = head
+dummy = ListNode(0, head)
 prev = dummy
-# mutate prev.next
+# mutate prev.next safely
 return dummy.next
 ```
 
-## Pattern: Fast and Slow Pointers
+### Complexity Notes
 
-### Intuition
+O(n) time, O(1) space for traversal edits.
 
-Move two references at different speeds or with a fixed gap to reveal cycles, middles, and nth-from-end positions.
+### Interview Explanation
+
+The dummy removes special cases because every real node has a predecessor.
+
+## Pattern: Two Pointer Gap
+
+### Beginner Intuition
+
+Advance one pointer k steps so the distance between pointers encodes the target.
 
 ### When To Use It
 
-Use for linked-list cycles, middle nodes, palindrome splits, and kth-from-end deletion.
+Use for nth from end and fixed-distance deletion.
 
 ### When Not To Use It
 
-Do not use when random access makes a simpler index calculation available.
+Do not use when the list length can be shorter without guarding null.
 
 ### Recognition Signals
 
-- fast and slow pointers
-- constraints match the invariant
-- brute force repeats the same decision
+- nth from end
+- fixed gap
+- distance
 
-### Problem Examples
+### Example Problems
 
-- Copy List with Random Pointer
-- Reverse Nodes in k-Group
+- Remove Nth Node From End of List
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Advancing past null when n equals length.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
+
+```text
+fast = slow = dummy
+for _ in range(n): fast = fast.next
+while fast.next:
+    fast = fast.next
+    slow = slow.next
+```
+
+### Complexity Notes
+
+O(n) time, O(1) space.
+
+### Interview Explanation
+
+When fast reaches the end, slow is exactly before the node to remove.
+
+## Pattern: Fast And Slow Pointers
+
+### Beginner Intuition
+
+Use speed difference to find middle or detect a cycle.
+
+### When To Use It
+
+Use for cycle detection, palindrome split, and middle node.
+
+### When Not To Use It
+
+Do not use when random access or length is already cheaper.
+
+### Recognition Signals
+
+- cycle
+- middle
+- slow fast
+
+### Example Problems
+
+- Linked List Cycle
+- Middle of the Linked List
+
+### Common Mistakes
+
+- Not checking fast and fast.next before moving two steps.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
 
 ```text
 slow = fast = head
@@ -83,168 +139,115 @@ while fast and fast.next:
     fast = fast.next.next
 ```
 
+### Complexity Notes
+
+O(n) time, O(1) space.
+
+### Interview Explanation
+
+The speed difference makes cycle detection inevitable if a cycle exists.
+
 ## Pattern: In-place Reversal
 
-### Intuition
+### Beginner Intuition
 
-Reverse links one node at a time while preserving the next node before rewiring.
+Flip links one at a time while preserving the next node before mutation.
 
 ### When To Use It
 
-Use for full reversal, sublist reversal, and k-group reversal.
+Use for reverse list, reverse sublist, and palindrome checks.
 
 ### When Not To Use It
 
-Do not use recursively when list length can exceed the call stack.
+Do not use when node identity order must remain unchanged.
 
 ### Recognition Signals
 
-- in-place reversal
-- constraints match the invariant
-- brute force repeats the same decision
+- reverse
+- prev current next
+- in place
 
-### Problem Examples
+### Example Problems
 
+- Reverse Linked List
 - Reverse Nodes in k-Group
-- Add Two Numbers
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Losing next before reassigning current.next.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 prev = None
-curr = head
-while curr:
-    nxt = curr.next
-    curr.next = prev
-    prev, curr = curr, nxt
+cur = head
+while cur:
+    nxt = cur.next
+    cur.next = prev
+    prev = cur
+    cur = nxt
 ```
+
+### Complexity Notes
+
+O(n) time, O(1) space.
+
+### Interview Explanation
+
+I save next first, then flip current to point backward.
 
 ## Pattern: Merge Lists
 
-### Intuition
+### Beginner Intuition
 
-Always attach the smaller available head from sorted lists and advance that source.
+Repeatedly attach the smaller current node and advance that list.
 
 ### When To Use It
 
-Use for sorted linked lists, sorted arrays, and k-way merge with a heap.
+Use for sorted lists and k-way merge with a heap.
 
 ### When Not To Use It
 
-Do not use if the inputs are not sorted by the same key.
+Do not allocate new nodes if the problem expects node reuse.
 
 ### Recognition Signals
 
-- merge lists
-- constraints match the invariant
-- brute force repeats the same decision
+- merge sorted
+- attach
+- tail
 
-### Problem Examples
+### Example Problems
 
-- Add Two Numbers
-- Copy List with Random Pointer
+- Merge Two Sorted Lists
+- Merge k Sorted Lists
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Forgetting to attach the remaining tail after one list ends.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 tail = dummy
 while a and b:
-    attach the smaller node
-attach the remaining tail
+    attach smaller node to tail
+attach remaining a or b
 ```
 
-## Pattern: Cycle Detection
+### Complexity Notes
 
-### Intuition
+O(n + m) for two lists, O(N log k) for k lists with heap.
 
-A faster pointer eventually catches a slower pointer if a cycle exists.
+### Interview Explanation
 
-### When To Use It
+The merged prefix is always sorted and tail points to its end.
 
-Use for linked lists and functional graphs where each node has one next state.
-
-### When Not To Use It
-
-Do not use plain Floyd logic on general graphs with many outgoing edges.
-
-### Recognition Signals
-
-- cycle detection
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Copy List with Random Pointer
-- Reverse Nodes in k-Group
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-slow = fast = start
-while fast and next(fast):
-    slow = next(slow)
-    fast = next(next(fast))
-```
-
-## Pattern: Copy with Random Pointer
-
-### Intuition
-
-Create a mapping from original node identity to cloned node, then wire next and random references.
-
-### When To Use It
-
-Use when nodes have extra cross references that must be deep-copied.
-
-### When Not To Use It
-
-Do not key the map by value because values may repeat.
-
-### Recognition Signals
-
-- copy with random pointer
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Reverse Nodes in k-Group
-- Add Two Numbers
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-old_to_new = {None: None}
-for node in nodes: old_to_new[node] = Node(node.val)
-for node in nodes: wire clone links
-```
 ---
 
 ## Navigation
 
-[Previous](../linked-list/CHEATSHEET.md) | [Home](../README.md) | [Next](../linked-list/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

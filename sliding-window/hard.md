@@ -1,250 +1,93 @@
 # Sliding Window Hard Problems
 
-Curated LeetCode practice for this topic. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Minimum Window Substring
 
-LeetCode:
-https://leetcode.com/problems/minimum-window-substring/
+LeetCode: [Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Fixed Size Window
+Pattern: Frequency Window
 
-Why It Matters:
-This problem is a high-signal way to practice fixed size window inside sliding window questions.
+Why It Matters: The most important hard sliding-window problem.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 2. Sliding Window Maximum
 
-LeetCode:
-https://leetcode.com/problems/sliding-window-maximum/
+LeetCode: [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Variable Size Window
+Pattern: Monotonic Window
 
-Why It Matters:
-This problem is a high-signal way to practice variable size window inside sliding window questions.
+Why It Matters: Uses a deque to keep maximum candidates.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Subarrays with K Different Integers
+## 3. Substring with Concatenation of All Words
 
-LeetCode:
-https://leetcode.com/problems/subarrays-with-k-different-integers/
+LeetCode: [Substring with Concatenation of All Words](https://leetcode.com/problems/substring-with-concatenation-of-all-words/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-At Most K
+Pattern: Fixed Block Window
 
-Why It Matters:
-This problem is a high-signal way to practice at most k inside sliding window questions.
+Why It Matters: Maintains word counts over aligned chunks.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Minimum Window Subsequence
+## 4. Minimum Number of K Consecutive Bit Flips
 
-LeetCode:
-https://leetcode.com/problems/minimum-window-subsequence/
+LeetCode: [Minimum Number of K Consecutive Bit Flips](https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Exactly K via At Most
+Pattern: Difference Window
 
-Why It Matters:
-This problem is a high-signal way to practice exactly k via at most inside sliding window questions.
+Why It Matters: Tracks active flips over a moving range.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 5. Count Subarrays With Fixed Bounds
-
-LeetCode:
-https://leetcode.com/problems/count-subarrays-with-fixed-bounds/
-
-Difficulty:
-Hard
-
-Pattern:
-Minimum Valid Window
-
-Why It Matters:
-This problem is a high-signal way to practice minimum valid window inside sliding window questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 6. Shortest Subarray With Sum at Least K
-
-LeetCode:
-https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/
-
-Difficulty:
-Hard
-
-Pattern:
-Monotonic Deque Window
-
-Why It Matters:
-This problem is a high-signal way to practice monotonic deque window inside sliding window questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 7. Minimum Number of K Consecutive Bit Flips
-
-LeetCode:
-https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/
-
-Difficulty:
-Hard
-
-Pattern:
-Fixed Size Window
-
-Why It Matters:
-This problem is a high-signal way to practice fixed size window inside sliding window questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 8. Constrained Subsequence Sum
-
-LeetCode:
-https://leetcode.com/problems/constrained-subsequence-sum/
-
-Difficulty:
-Hard
-
-Pattern:
-Variable Size Window
-
-Why It Matters:
-This problem is a high-signal way to practice variable size window inside sliding window questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 9. Max Value of Equation
-
-LeetCode:
-https://leetcode.com/problems/max-value-of-equation/
-
-Difficulty:
-Hard
-
-Pattern:
-At Most K
-
-Why It Matters:
-This problem is a high-signal way to practice at most k inside sliding window questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 10. Maximum Number of Robots Within Budget
-
-LeetCode:
-https://leetcode.com/problems/maximum-number-of-robots-within-budget/
-
-Difficulty:
-Hard
-
-Pattern:
-Exactly K via At Most
-
-Why It Matters:
-This problem is a high-signal way to practice exactly k via at most inside sliding window questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../sliding-window/medium.md) | [Home](../README.md) | [Next](../linked-list/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

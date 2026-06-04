@@ -1,250 +1,93 @@
 # Backtracking Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. N-Queens
 
-LeetCode:
-https://leetcode.com/problems/n-queens/
+LeetCode: [N-Queens](https://leetcode.com/problems/n-queens/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Subsets
+Pattern: Pruned Search
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying subsets.
+Why It Matters: Classic constraints over columns and diagonals.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. N-Queens II
+## 2. Sudoku Solver
 
-LeetCode:
-https://leetcode.com/problems/n-queens-ii/
+LeetCode: [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Combinations
+Pattern: Constraint Grid Search
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying combinations.
+Why It Matters: Tests pruning and mutable board state.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Sudoku Solver
+## 3. Word Search II
 
-LeetCode:
-https://leetcode.com/problems/sudoku-solver/
+LeetCode: [Word Search II](https://leetcode.com/problems/word-search-ii/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Permutations
+Pattern: Trie-Pruned Backtracking
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying permutations.
+Why It Matters: Combines dictionary prefixes with board DFS.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Word Search II
+## 4. Expression Add Operators
 
-LeetCode:
-https://leetcode.com/problems/word-search-ii/
+LeetCode: [Expression Add Operators](https://leetcode.com/problems/expression-add-operators/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Constraint Search
+Pattern: Partition And Evaluate
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying constraint search.
+Why It Matters: Hard expression-generation state management.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Expression Add Operators
-
-LeetCode:
-https://leetcode.com/problems/expression-add-operators/
-
-Difficulty:
-Hard
-
-Pattern:
-Board DFS
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying board dfs.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Remove Invalid Parentheses
-
-LeetCode:
-https://leetcode.com/problems/remove-invalid-parentheses/
-
-Difficulty:
-Hard
-
-Pattern:
-Partitioning
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying partitioning.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Palindrome Partitioning II
-
-LeetCode:
-https://leetcode.com/problems/palindrome-partitioning-ii/
-
-Difficulty:
-Hard
-
-Pattern:
-Subsets
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying subsets.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Regular Expression Matching
-
-LeetCode:
-https://leetcode.com/problems/regular-expression-matching/
-
-Difficulty:
-Hard
-
-Pattern:
-Combinations
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying combinations.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Wildcard Matching
-
-LeetCode:
-https://leetcode.com/problems/wildcard-matching/
-
-Difficulty:
-Hard
-
-Pattern:
-Permutations
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying permutations.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Unique Paths III
-
-LeetCode:
-https://leetcode.com/problems/unique-paths-iii/
-
-Difficulty:
-Hard
-
-Pattern:
-Constraint Search
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying constraint search.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../backtracking/medium.md) | [Home](../README.md) | [Next](../graphs/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

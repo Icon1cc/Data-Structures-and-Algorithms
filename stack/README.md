@@ -1,138 +1,139 @@
 # Stack
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn what stack means, when it is useful, what operations it supports, and how it appears in coding interviews. By the end of this topic, you should be able to explain the core idea, select the right pattern, implement the usual template, and analyze time and space complexity.
+Use last-in-first-out state to model nested structure, undo decisions, and nearest greater or smaller elements.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Stacks model last-in-first-out decisions. They are the natural fit for parsing, undo behavior, nested structures, and nearest-greater style questions.
+## Why It Matters
 
-Interview problems often hide the topic behind a story. Your job is to translate the story into operations: lookup, scan, traverse, split, merge, choose, or optimize.
+Stacks make hidden order explicit. They are the natural tool for parsing, backtracking state, and problems where the most recent unresolved item should be resolved first.
 
-## Real World Usage
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-Used in call stacks, browser history, expression evaluation, compilers, editors, parsers, and schedulers.
+## Real-World Use
 
-Real systems rarely announce the data structure by name. They expose constraints such as fast lookup, ordered traversal, prefix search, shortest route, or bounded memory. Those constraints point to the right tool.
+Used in call stacks, expression parsing, undo systems, browser history, compiler syntax checks, monotonic queues, and event processing.
 
-## Intuition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-When the most recent unresolved item should be resolved first, use a stack. Push unfinished work. Pop when the current value closes or improves it.
+## Beginner Intuition
 
-A beginner-friendly way to approach this topic is to ask: what information do I need to remember, and what information can I safely discard?
+A stack is a pile. You only touch the top. That limitation is useful when the newest open item is exactly the one that must close or be resolved next.
 
-## Formal Definition
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
 
-A stack is an abstract data type with push, pop, and peek operations where the newest element is removed first.
+## Formal Explanation
 
-The formal definition matters because it tells you which operations are cheap, which operations are expensive, and which invariants cannot be broken.
+A stack supports push, pop, and top in O(1). Monotonic stacks add an invariant that values are ordered from bottom to top.
 
-## Core Data Structure Or Algorithm
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
 
-Use a basic stack for nesting. Use a monotonic stack when elements should stay sorted by value so each element is pushed and popped at most once.
+## Core Operations
 
-In interviews, the core algorithm is usually small. The difficulty is choosing it, naming the invariant, and handling edge cases cleanly.
+| Operation | Meaning |
+|---|---|
+| Push | Add an unresolved item. |
+| Pop | Resolve the most recent item. |
+| Peek | Inspect without removing. |
+| Maintain monotonicity | Pop values that can no longer be answers. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Push | O(1) |
-| Pop | O(1) |
-| Peek | O(1) |
-| Monotonic scan | O(n) total |
+| Push or pop | O(1) |
+| Full monotonic scan | O(n) amortized |
+| Expression parse | O(n) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Simple stack | O(n) |
-| Auxiliary min stack | O(n) |
+| Balanced delimiter stack | O(depth) |
+| Monotonic stack | O(n) worst case |
 | Expression stack | O(n) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Push | Save unresolved data. |
-| Pop | Resolve the most recent item. |
-| Peek | Inspect without removing. |
-| Compress | Combine consecutive items into one stack frame. |
 
 ## Visual Explanation
 
 ```mermaid
-flowchart TB
-    T[Top: newest item]
-    M[Middle item]
-    B[Bottom: oldest item]
-    T --> M --> B
-    N[New input] --> T
+flowchart TD
+    A[New value arrives] --> B{Does it resolve stack top?}
+    B -->|yes| C[Pop and compute answer]
+    C --> B
+    B -->|no| D[Push current value]
+    D --> E[Invariant restored]
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-Amortized analysis matters for monotonic stacks. Even with an inner while loop, each element enters and leaves the stack once, so the full scan is linear.
+Amortized analysis matters: in a monotonic stack each item is pushed once and popped once, so repeated inner pops still sum to O(n).
 
-## Common Interview Patterns
-
-- **Balanced Delimiters**: see [stack/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Expression Evaluation**: see [stack/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Monotonic Increasing Stack**: see [stack/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Monotonic Decreasing Stack**: see [stack/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Simulation Stack**: see [stack/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Auxiliary Stack**: see [stack/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for nested parentheses, next greater or previous smaller values, reversible operations, path simplification, or resolving recent items first.
+Look for nested delimiters, next greater, previous smaller, stock spans, histogram areas, collision simulation, or the phrase most recent unresolved item.
 
-When you read a problem, underline the constraint words first. Words like "sorted", "contiguous", "prefix", "shortest", "k", "all possible", "minimum", or "dependencies" usually reveal the intended pattern.
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **LIFO Simulation**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Balanced Delimiters**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Monotonic Increasing Stack**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Monotonic Decreasing Stack**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Expression Stack**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Not checking empty stack before peek.
-- Using stack order when queue order is required.
-- Forgetting that monotonic stacks are amortized linear.
+- Forgetting to process values left in the stack.
+- Using a stack when a queue is required by order.
+- Losing indices when distances or widths are needed.
+- Breaking monotonic order after equal values.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep edge cases visible: empty input, one item, duplicates, negative values, and boundary indices.
-- Explain why your data structure supports the needed operation efficiently.
-- Give time and space complexity after testing the code mentally.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Implement and explain balanced delimiters without looking at notes.
-- Implement and explain expression evaluation without looking at notes.
-- Implement and explain monotonic increasing stack without looking at notes.
-- Implement and explain monotonic decreasing stack without looking at notes.
-- Pick two Easy problems from [easy.md](easy.md) and explain the pattern before coding.
-- Pick one Medium problem from [medium.md](medium.md) and write only pseudocode first.
+- Explain `LIFO Simulation` aloud, then write its invariant and template from memory.
+- Explain `Balanced Delimiters` aloud, then write its invariant and template from memory.
+- Explain `Monotonic Increasing Stack` aloud, then write its invariant and template from memory.
+- Explain `Monotonic Decreasing Stack` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Read the section on Balanced Delimiters in [PATTERNS.md](PATTERNS.md).
-2. Read the section on Expression Evaluation in [PATTERNS.md](PATTERNS.md).
-3. Read the section on Monotonic Increasing Stack in [PATTERNS.md](PATTERNS.md).
-4. Read the section on Monotonic Decreasing Stack in [PATTERNS.md](PATTERNS.md).
-5. Read the section on Simulation Stack in [PATTERNS.md](PATTERNS.md).
-6. Read the section on Auxiliary Stack in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
-8. Solve Easy, then Medium, then selected Hard problems.
+1. Read `LIFO Simulation` in [PATTERNS.md](PATTERNS.md).
+2. Read `Balanced Delimiters` in [PATTERNS.md](PATTERNS.md).
+3. Read `Monotonic Increasing Stack` in [PATTERNS.md](PATTERNS.md).
+4. Read `Monotonic Decreasing Stack` in [PATTERNS.md](PATTERNS.md).
+5. Read `Expression Stack` in [PATTERNS.md](PATTERNS.md).
+6. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
+7. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-- [Easy problems](easy.md)
-- [Medium problems](medium.md)
-- [Hard problems](hard.md)
-
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../two-pointers/README.md) | [Home](../README.md) | [Next](../stack/CHEATSHEET.md)
+[Previous](../two-pointers/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

@@ -1,91 +1,103 @@
 # 2-D Dynamic Programming Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+A 2-D DP table stores solutions for pairs of positions, capacities, or interval endpoints. Transitions refer to already computed neighboring or smaller interval states.
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| m by n table | O(mn) |
+| Interval DP | O(n^3) common |
+| Two-string DP | O(mn) |
+| Compressed row | Same time, lower space |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Full table | O(mn) |
+| Two rows | O(n) |
+| Interval table | O(n^2) |
 
-## Common Templates
+## Pattern Summary
 
-### Grid Paths
+| Pattern | Use When |
+|---|---|
+| Grid DP | Use for unique paths, minimum path sum, and obstacle grids. |
+| Two String DP | Use for LCS, edit distance, interleaving, and distinct subsequences. |
+| Knapsack Table | Use when item choices interact with a numeric limit. |
+| Interval DP | Use for burst balloons, matrix-chain style costs, and palindrome intervals. |
+| Path Counting With Obstacles | Use for grids with barriers or forbidden transitions. |
+| State Compression | Use for grid and string DP after full table is understood. |
+| Game DP | Use for take-from-ends games and optimal play. |
+
+## Recognition Hints
+
+Look for two strings, grid paths, edit distance, subsequences, palindromes, matrix costs, intervals, or choices involving two moving indices.
+
+## Templates
+
+### Grid DP
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+for r in range(rows):
+    for c in range(cols):
+        dp[r][c] = combine(dp[r-1][c], dp[r][c-1])
 ```
 
 ### Two String DP
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+for i in range(1, m + 1):
+    for j in range(1, n + 1):
+        compare text1[i-1], text2[j-1]
 ```
 
 ### Knapsack Table
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+dp[i][cap] = dp[i-1][cap]
+if cap >= weight: dp[i][cap] = best(dp[i][cap], dp[i-1][cap-weight])
 ```
 
-## Pattern Summary
+### Interval DP
 
-| Pattern | Recognition Hint |
-|---|---|
-| Grid Paths | Use when the prompt matches grid paths signals. |
-| Two String DP | Use when the prompt matches two string dp signals. |
-| Knapsack Table | Use when the prompt matches knapsack table signals. |
-| Interval DP | Use when the prompt matches interval dp signals. |
-| Palindrome DP | Use when the prompt matches palindrome dp signals. |
-| State Compression | Use when the prompt matches state compression signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
+```text
+for length in range(1, n + 1):
+    for left in range(n - length + 1):
+        right = left + length - 1
+        try split points
+```
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Leaving base row or column undefined.
+- Overwriting a row before it is no longer needed.
+- Using substring DP when subsequence DP is required.
+- Filling interval DP in the wrong length order.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../2d-dp/README.md) | [Home](../README.md) | [Next](../2d-dp/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

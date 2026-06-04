@@ -1,236 +1,290 @@
 # Math & Geometry Patterns
 
-This file is the main pattern-recognition reference for math & geometry. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
 ## Pattern: Modulo Arithmetic
 
-### Intuition
+### Beginner Intuition
 
-Use remainders to reason about divisibility, cycles, and large numbers.
+Normalize repeating cycles and keep values inside a bounded range.
 
 ### When To Use It
 
-Use for wraparound, huge counts, and divisibility constraints.
+Use for cyclic arrays, clocks, hashes, and large counts.
 
 ### When Not To Use It
 
-Do not divide under modulo unless modular inverse rules apply.
+Do not forget negative values may need normalization.
 
 ### Recognition Signals
 
-- modulo arithmetic
-- constraints match the invariant
-- brute force repeats the same decision
+- mod
+- cycle
+- wrap around
 
-### Problem Examples
+### Example Problems
 
-- Rotate Image
-- Max Points on a Line
+- Happy Number
+- Add Digits
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Assuming every language returns positive modulo for negatives.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-value = (value * base + digit) % mod
+normalized = ((x % m) + m) % m
 ```
 
-## Pattern: GCD and Number Theory
+### Complexity Notes
 
-### Intuition
+O(1) per operation.
 
-Use gcd, lcm, primes, and factors to normalize numeric relationships.
+### Interview Explanation
+
+Modulo preserves remainders, which are the only part that matters in cyclic state.
+
+## Pattern: GCD And LCM
+
+### Beginner Intuition
+
+Use Euclid's algorithm to normalize ratios and divisibility.
 
 ### When To Use It
 
-Use for fractions, slopes, divisibility, and coprime checks.
+Use for fractions, slopes, grouping by ratio, and common periods.
 
 ### When Not To Use It
 
-Do not brute force factors when sqrt or Euclid is enough.
+Do not compute lcm before reducing if overflow is possible.
 
 ### Recognition Signals
 
-- gcd and number theory
-- constraints match the invariant
-- brute force repeats the same decision
+- gcd
+- divisibility
+- ratio
 
-### Problem Examples
+### Example Problems
 
+- Greatest Common Divisor of Strings
 - Max Points on a Line
-- Erect the Fence
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Not normalizing signs in reduced pairs.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 while b:
     a, b = b, a % b
 ```
 
+### Complexity Notes
+
+O(log min(a,b)) time.
+
+### Interview Explanation
+
+GCD gives the canonical unit for a ratio or repeated pattern.
+
+## Pattern: Prime Sieve
+
+### Beginner Intuition
+
+Mark multiples to precompute primality or prime counts.
+
+### When To Use It
+
+Use when many prime queries share an upper bound.
+
+### When Not To Use It
+
+Do not test divisibility from scratch for every number if n is large.
+
+### Recognition Signals
+
+- prime
+- count primes
+- sieve
+
+### Example Problems
+
+- Count Primes
+
+### Common Mistakes
+
+- Starting marking too early instead of at p * p.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+is_prime = [True] * n
+for p in range(2, sqrt(n)):
+    if is_prime[p]: mark multiples
+```
+
+### Complexity Notes
+
+O(n log log n) time, O(n) space.
+
+### Interview Explanation
+
+Each composite is eliminated by its smallest prime factor.
+
 ## Pattern: Matrix Traversal
 
-### Intuition
+### Beginner Intuition
 
-Move through matrix layers, rows, columns, or diagonals with explicit boundaries.
+Control row and column bounds or direction vectors explicitly.
 
 ### When To Use It
 
-Use for rotation, spiral order, and matrix transformations.
+Use for spiral order, rotation, and diagonal traversal.
 
 ### When Not To Use It
 
-Do not double-visit center rows or columns.
+Do not mutate dimensions without checking crossing bounds.
 
 ### Recognition Signals
 
-- matrix traversal
-- constraints match the invariant
-- brute force repeats the same decision
+- matrix
+- spiral
+- rotate
+- coordinates
 
-### Problem Examples
+### Example Problems
 
-- Erect the Fence
+- Spiral Matrix
 - Rotate Image
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Processing a row or column twice after bounds cross.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-top, bottom, left, right = 0, rows - 1, 0, cols - 1
-while top <= bottom and left <= right: traverse layer
+top, bottom, left, right = bounds
+while top <= bottom and left <= right:
+    traverse edges and shrink
 ```
 
-## Pattern: Coordinate Hashing
+### Complexity Notes
 
-### Intuition
+O(mn) time.
 
-Store points or normalized coordinate facts in sets and maps.
+### Interview Explanation
+
+The boundaries define which ring remains unprocessed.
+
+## Pattern: Coordinate Geometry
+
+### Beginner Intuition
+
+Normalize slopes, distances, and orientation tests.
 
 ### When To Use It
 
-Use for rectangles, squares, duplicate points, and fast point lookup.
+Use for lines, hulls, and nearest or collinear points.
 
 ### When Not To Use It
 
-Do not use raw lists as keys or floating keys when integer tuples work.
+Do not compare floating point slopes for exact equality.
 
 ### Recognition Signals
 
-- coordinate hashing
-- constraints match the invariant
-- brute force repeats the same decision
+- slope
+- line
+- distance
+- orientation
 
-### Problem Examples
-
-- Rotate Image
-- Max Points on a Line
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-points.add((x, y))
-if needed_point in points: update answer
-```
-
-## Pattern: Line and Slope
-
-### Intuition
-
-Normalize slope as an integer pair using gcd and count equal slopes from each anchor.
-
-### When To Use It
-
-Use for collinearity and maximum points on a line.
-
-### When Not To Use It
-
-Do not use floating-point slopes due precision and vertical lines.
-
-### Recognition Signals
-
-- line and slope
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
+### Example Problems
 
 - Max Points on a Line
 - Erect the Fence
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Not handling duplicate points.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-dx, dy = x2 - x1, y2 - y1
-g = gcd(abs(dx), abs(dy))
-key = (dx // g, dy // g)
+dy = y2 - y1; dx = x2 - x1
+g = gcd(abs(dy), abs(dx))
+key = normalized(dy // g, dx // g)
 ```
 
-## Pattern: Geometry Simulation
+### Complexity Notes
 
-### Intuition
+Often O(n^2) for pairwise line counting.
 
-Update coordinates, direction, or area according to exact geometric rules.
+### Interview Explanation
+
+A normalized integer slope is a stable key for collinearity.
+
+## Pattern: Randomized Prefix
+
+### Beginner Intuition
+
+Use prefix sums to map a random integer to a weighted bucket.
 
 ### When To Use It
 
-Use for robot movement, reflection, rectangles, and boundary simulation.
+Use for weighted random pick and reservoir sampling variants.
 
 ### When Not To Use It
 
-Do not skip duplicate, zero-area, and overflow cases.
+Do not use modulo bias when uniform weighted choice is required.
 
 ### Recognition Signals
 
-- geometry simulation
-- constraints match the invariant
-- brute force repeats the same decision
+- random
+- weights
+- prefix
+- reservoir
 
-### Problem Examples
+### Example Problems
 
-- Erect the Fence
-- Rotate Image
+- Random Pick with Weight
+- Random Pick Index
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Using floating ranges with off-by-one errors.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-position += direction
-if turn: direction = rotate(direction)
+prefix weights
+r = random integer in [1, total]
+return lower_bound(prefix, r)
 ```
+
+### Complexity Notes
+
+O(log n) pick after O(n) preprocessing.
+
+### Interview Explanation
+
+Prefix sums turn weights into contiguous integer ranges.
+
 ---
 
 ## Navigation
 
-[Previous](../math-geometry/CHEATSHEET.md) | [Home](../README.md) | [Next](../math-geometry/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

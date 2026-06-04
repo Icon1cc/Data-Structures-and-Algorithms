@@ -1,158 +1,183 @@
 # Advanced Graphs Patterns
 
-This file is the main pattern-recognition reference for advanced graphs. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
-## Pattern: Dijkstra Shortest Path
+## Pattern: Dijkstra
 
-### Intuition
+### Beginner Intuition
 
-Expand the unsettled node with the smallest known distance and relax its outgoing edges.
+Expand the cheapest known frontier node and relax non-negative edges.
 
 ### When To Use It
 
-Use for non-negative weighted shortest paths.
+Use for shortest paths with non-negative weights.
 
 ### When Not To Use It
 
-Do not use it with negative edge weights.
+Do not use when any reachable edge can be negative.
 
 ### Recognition Signals
 
-- dijkstra shortest path
-- constraints match the invariant
-- brute force repeats the same decision
+- weighted shortest path
+- non-negative
+- min heap
 
-### Problem Examples
+### Example Problems
 
 - Network Delay Time
-- Min Cost to Connect All Points
+- Path With Minimum Effort
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Not skipping stale heap entries.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-dist[src] = 0
-heap = [(0, src)]
+dist[source] = 0
+heap = [(0, source)]
 while heap:
-    d, u = pop min
-    relax edges from u
+    d, u = heappop(heap)
+    if d != dist[u]: continue
+    relax neighbors
 ```
+
+### Complexity Notes
+
+O((V + E) log V) with a heap.
+
+### Interview Explanation
+
+Non-negative weights make the popped shortest distance final.
 
 ## Pattern: Bellman-Ford
 
-### Intuition
+### Beginner Intuition
 
-Relax every edge repeatedly so paths with more edges can improve distances.
+Relax every edge repeatedly so paths with more edges become known.
 
 ### When To Use It
 
-Use when negative edges or limited stops matter.
+Use for negative edges and negative-cycle detection.
 
 ### When Not To Use It
 
-Do not use when all weights are non-negative and Dijkstra is simpler.
+Do not choose it over Dijkstra when all weights are non-negative and constraints are large.
 
 ### Recognition Signals
 
-- bellman-ford
-- constraints match the invariant
-- brute force repeats the same decision
+- negative edge
+- k stops
+- cycle detection
 
-### Problem Examples
+### Example Problems
 
-- Min Cost to Connect All Points
-- Critical Connections in a Network
+- Cheapest Flights Within K Stops
+- Network Delay variants
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Updating distances in-place when a bounded-edge version needs previous round values.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for round in range(limit):
-    next_dist = dist.copy()
-    for u, v, w in edges: relax
+for _ in range(V - 1):
+    for u, v, w in edges:
+        dist[v] = min(dist[v], dist[u] + w)
 ```
+
+### Complexity Notes
+
+O(VE) time, O(V) space.
+
+### Interview Explanation
+
+After i rounds, shortest paths using at most i edges are known.
 
 ## Pattern: Floyd-Warshall
 
-### Intuition
+### Beginner Intuition
 
-Allow each node as an intermediate and improve all-pairs distances.
+Allow each node as an intermediate and improve every pair distance.
 
 ### When To Use It
 
-Use for small dense graphs and all-pairs reachability.
+Use for dense graphs and all-pairs shortest paths with small n.
 
 ### When Not To Use It
 
-Do not use on large sparse graphs.
+Do not use on large sparse graphs where n cubed is impossible.
 
 ### Recognition Signals
 
-- floyd-warshall
-- constraints match the invariant
-- brute force repeats the same decision
+- all pairs
+- dense
+- intermediate
 
-### Problem Examples
+### Example Problems
 
-- Critical Connections in a Network
-- Network Delay Time
+- Find the City With the Smallest Number of Neighbors at a Threshold Distance
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Wrong loop order: intermediate node must be outermost.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for k in nodes:
-    for i in nodes:
-        for j in nodes: relax dist[i][j]
+for k in range(n):
+    for i in range(n):
+        for j in range(n):
+            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
 ```
+
+### Complexity Notes
+
+O(V^3) time, O(V^2) space.
+
+### Interview Explanation
+
+When k is outermost, dist only uses allowed intermediate nodes up to k.
 
 ## Pattern: Minimum Spanning Tree
 
-### Intuition
+### Beginner Intuition
 
-Choose edges that connect components with minimum total cost and no cycles.
+Connect all nodes with minimum total edge cost without cycles.
 
 ### When To Use It
 
-Use for connecting all points or cities at minimum cost.
+Use for cheapest network connection in undirected weighted graphs.
 
 ### When Not To Use It
 
-Do not confuse MST with shortest path from one source.
+Do not use MST for shortest path between two nodes.
 
 ### Recognition Signals
 
-- minimum spanning tree
-- constraints match the invariant
-- brute force repeats the same decision
+- connect all
+- minimum cost
+- undirected
 
-### Problem Examples
+### Example Problems
 
-- Network Delay Time
 - Min Cost to Connect All Points
+- Find Critical and Pseudo-Critical Edges in MST
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Confusing total connection cost with distance from a source.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 sort edges by weight
@@ -160,85 +185,155 @@ for edge in edges:
     if union(u, v): take edge
 ```
 
-## Pattern: Tarjan Bridges
+### Complexity Notes
 
-### Intuition
+Kruskal is O(E log E); Prim is O(E log V).
 
-Use discovery time and low-link values to find edges whose removal disconnects the graph.
+### Interview Explanation
+
+A cheapest safe edge crossing a cut can be added without hurting optimality.
+
+## Pattern: Strongly Connected Components
+
+### Beginner Intuition
+
+Group directed nodes that can all reach each other.
 
 ### When To Use It
 
-Use for critical connections and bridge detection.
+Use for condensation graphs, dependency cycles, and mutual reachability.
 
 ### When Not To Use It
 
-Do not apply bridge logic to directed SCC problems without changing the algorithm.
+Do not use undirected component logic on directed graphs.
 
 ### Recognition Signals
 
-- tarjan bridges
-- constraints match the invariant
-- brute force repeats the same decision
+- mutual reachability
+- SCC
+- directed
 
-### Problem Examples
+### Example Problems
 
-- Min Cost to Connect All Points
+- Critical Connections in a Network related
+- strongly connected designs
+
+### Common Mistakes
+
+- Mixing finish order and low-link meanings.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+Tarjan: assign index and lowlink during DFS
+when lowlink == index, pop one SCC
+```
+
+### Complexity Notes
+
+O(V + E) time.
+
+### Interview Explanation
+
+An SCC is a maximal region where every node can reach every other node.
+
+## Pattern: Bridges And Articulation Points
+
+### Beginner Intuition
+
+Use DFS low-link values to find edges or nodes whose removal disconnects the graph.
+
+### When To Use It
+
+Use for network reliability and critical connections.
+
+### When Not To Use It
+
+Do not apply bridge logic to directed SCC problems unchanged.
+
+### Recognition Signals
+
+- critical edge
+- bridge
+- lowlink
+
+### Example Problems
+
 - Critical Connections in a Network
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Treating the parent edge as a back edge.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 dfs(u, parent):
     disc[u] = low[u] = time
-    for v in graph[u]: update low values
+    for v in graph[u]: update low
+    if low[v] > disc[u]: edge is bridge
 ```
 
-## Pattern: Topological DP
+### Complexity Notes
 
-### Intuition
+O(V + E) time, O(V) space.
 
-Process DAG nodes in prerequisite order and push best values to outgoing edges.
+### Interview Explanation
+
+If a child cannot reach an ancestor of u, the edge to that child is critical.
+
+## Pattern: DAG Shortest Or Longest Path
+
+### Beginner Intuition
+
+Topologically order a DAG, then relax edges once in order.
 
 ### When To Use It
 
-Use for longest path, prerequisite accumulation, and DAG optimization.
+Use for weighted DAGs and dependency optimization.
 
 ### When Not To Use It
 
-Do not use before proving the graph is acyclic.
+Do not use when cycles exist.
 
 ### Recognition Signals
 
-- topological dp
-- constraints match the invariant
-- brute force repeats the same decision
+- DAG
+- topological order
+- relax once
 
-### Problem Examples
+### Example Problems
 
-- Critical Connections in a Network
-- Network Delay Time
+- Course Schedule style weighted variants
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Running Dijkstra when topological DP is simpler for a DAG.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for node in topo_order:
-    for nei in graph[node]:
-        dp[nei] = best(dp[nei], transition(dp[node]))
+order = topo_sort(graph)
+for u in order:
+    for v, w in graph[u]: relax
 ```
+
+### Complexity Notes
+
+O(V + E) time after topological sort.
+
+### Interview Explanation
+
+Topological order guarantees every predecessor is finalized before a node is processed.
+
 ---
 
 ## Navigation
 
-[Previous](../advanced-graphs/CHEATSHEET.md) | [Home](../README.md) | [Next](../advanced-graphs/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

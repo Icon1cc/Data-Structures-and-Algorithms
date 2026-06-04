@@ -1,91 +1,108 @@
 # Trees Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+A tree is an acyclic connected graph with a root in rooted tree problems. Each node can have children, and a binary tree has at most two children.
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| Traversal | O(n) |
+| Balanced BST search | O(log n) |
+| Skewed BST search | O(n) |
+| LCA general tree | O(n) |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Balanced recursive DFS | O(log n) stack |
+| Skewed recursive DFS | O(n) stack |
+| BFS queue | O(width) |
 
-## Common Templates
+## Pattern Summary
+
+| Pattern | Use When |
+|---|---|
+| Recursive DFS | Use for height, diameter, balance, path sums, and subtree checks. |
+| Iterative DFS | Use when recursion depth is risky or traversal state must be customized. |
+| BFS Level Order | Use for level order, right side view, minimum depth, and nearest target. |
+| Path Problems | Use for root-to-leaf sums, all paths, and ancestor-dependent checks. |
+| Tree DP | Use for rob/not rob, max path, cameras, and subtree optimization. |
+| Lowest Common Ancestor | Use for ancestor questions in binary trees and BSTs. |
+| BST Bounds | Use for validation, search, insert, and kth-order traversal. |
+
+## Recognition Hints
+
+Look for subtree, ancestor, descendant, path sum, balanced, diameter, serialize, kth in BST, level order, or lowest common ancestor.
+
+## Templates
 
 ### Recursive DFS
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+def dfs(node):
+    if not node: return base
+    left = dfs(node.left)
+    right = dfs(node.right)
+    return combine(node, left, right)
 ```
 
 ### Iterative DFS
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+stack = [root]
+while stack:
+    node = stack.pop()
+    process(node)
+    push children in reverse visit order
 ```
 
-### Level Order BFS
+### BFS Level Order
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+queue = deque([root])
+while queue:
+    for _ in range(len(queue)):
+        node = queue.popleft()
 ```
 
-## Pattern Summary
+### Path Problems
 
-| Pattern | Recognition Hint |
-|---|---|
-| Recursive DFS | Use when the prompt matches recursive dfs signals. |
-| Iterative DFS | Use when the prompt matches iterative dfs signals. |
-| Level Order BFS | Use when the prompt matches level order bfs signals. |
-| BST Invariant | Use when the prompt matches bst invariant signals. |
-| Lowest Common Ancestor | Use when the prompt matches lowest common ancestor signals. |
-| Tree DP | Use when the prompt matches tree dp signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
+```text
+path.append(node.val)
+explore children
+path.pop()
+```
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Using global state without defining when it updates.
+- Returning the wrong value from recursive helpers.
+- Forgetting null base cases.
+- Assuming a binary tree is a BST.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../trees/README.md) | [Home](../README.md) | [Next](../trees/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

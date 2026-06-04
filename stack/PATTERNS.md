@@ -1,237 +1,251 @@
 # Stack Patterns
 
-Patterns are the bridge between theory and interview execution. Read these before solving the curated problems.
-## Pattern: Balanced Delimiters
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
-### Intuition
+## Pattern: LIFO Simulation
 
-Push opening tokens and require matching closing tokens.
+### Beginner Intuition
 
-### When To Use It
-
-Use for parentheses, tags, and nested syntax.
-
-### When Not To Use It
-
-Do not use for crossing dependencies that are not nested.
-
-### Recognition Signals
-
-- parentheses
-- brackets
-- nested
-
-### Problem Examples
-
-- Valid Parentheses
-- Remove Outermost Parentheses
-
-### Common Mistakes
-
-- Accepting leftover openings
-- Not checking mismatched types
-
-### Reusable Template Or Pseudocode
-
-```text
-for ch in s:
-    if ch in opens: stack.append(ch)
-    else: verify stack.pop() matches ch
-```
-
-## Pattern: Expression Evaluation
-
-### Intuition
-
-Use stacks to defer operations until precedence or closing tokens allow evaluation.
+Model a process where the newest unresolved item must be handled first.
 
 ### When To Use It
 
-Use for RPN, calculators, and encoded strings.
+Use for collisions, undo, browser history, and simplified paths.
 
 ### When Not To Use It
 
-Do not use when a grammar parser would be clearer for a large language.
+Do not use when the oldest item must leave first.
 
 ### Recognition Signals
 
-- calculator
-- expression
-- RPN
-- decode
-
-### Problem Examples
-
-- Evaluate Reverse Polish Notation
-- Basic Calculator
-
-### Common Mistakes
-
-- Incorrect operator precedence
-- Not handling unary minus
-
-### Reusable Template Or Pseudocode
-
-```text
-for token in tokens:
-    if number: stack.append(number)
-    else: apply operator to top operands
-```
-
-## Pattern: Monotonic Increasing Stack
-
-### Intuition
-
-Keep stack values increasing so smaller previous candidates remain available.
-
-### When To Use It
-
-Use for previous smaller, histogram, and subarray minimums.
-
-### When Not To Use It
-
-Do not use when comparisons are not transitive or values can become stale without indices.
-
-### Recognition Signals
-
-- previous smaller
-- histogram
-- minimums
-
-### Problem Examples
-
-- Largest Rectangle in Histogram
-- Sum of Subarray Minimums
-
-### Common Mistakes
-
-- Using > instead of >= with duplicates
-- Forgetting sentinel values
-
-### Reusable Template Or Pseudocode
-
-```text
-for i, x in enumerate(values):
-    while stack and values[stack[-1]] > x:
-        j = stack.pop()
-```
-
-## Pattern: Monotonic Decreasing Stack
-
-### Intuition
-
-Keep stack values decreasing so greater previous candidates remain available.
-
-### When To Use It
-
-Use for next greater element and temperatures.
-
-### When Not To Use It
-
-Do not use when there is no nearest greater or dominance relation.
-
-### Recognition Signals
-
-- next greater
-- warmer day
-- span
-
-### Problem Examples
-
-- Daily Temperatures
-- Next Greater Element II
-
-### Common Mistakes
-
-- Returning values instead of distances
-- Ignoring circular traversal
-
-### Reusable Template Or Pseudocode
-
-```text
-for i, x in enumerate(values):
-    while stack and values[stack[-1]] < x:
-        j = stack.pop()
-```
-
-## Pattern: Simulation Stack
-
-### Intuition
-
-Model operations exactly with a stack when the last operation is undone first.
-
-### When To Use It
-
-Use for path simplification, asteroid collisions, and editor-like commands.
-
-### When Not To Use It
-
-Do not use when the real system is FIFO or priority ordered.
-
-### Recognition Signals
-
-- collisions
+- most recent
 - undo
+- collision
 - path
-- logs
 
-### Problem Examples
+### Example Problems
 
 - Asteroid Collision
 - Simplify Path
 
 ### Common Mistakes
 
-- Not resolving repeated collisions
-- Keeping no-op tokens
+- Forgetting that multiple stack items may be resolved by one new item.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for item in stream:
-    while stack and conflict(stack[-1], item): resolve
-    maybe push item
+stack = []
+for item in items:
+    while stack and resolves(stack[-1], item):
+        stack.pop()
+    stack.append(item)
 ```
 
-## Pattern: Auxiliary Stack
+### Complexity Notes
 
-### Intuition
+O(n) time, O(n) space.
 
-Keep a second stack of derived facts such as minimum values.
+### Interview Explanation
+
+The stack mirrors the process order, so top is the only unresolved item that can interact now.
+
+## Pattern: Balanced Delimiters
+
+### Beginner Intuition
+
+Push open tokens and require closing tokens to match the top.
 
 ### When To Use It
 
-Use when the stack must answer extra queries in O(1).
+Use for parentheses, brackets, tags, and nested syntax.
 
 ### When Not To Use It
 
-Do not use if the derived fact can be recomputed cheaply and queries are rare.
+Do not use counts alone when delimiter type and order matter.
 
 ### Recognition Signals
 
-- min stack
-- max stack
-- constant query
+- balanced
+- nested
+- brackets
+- close matches open
 
-### Problem Examples
+### Example Problems
 
-- Min Stack
-- Maximum Frequency Stack
+- Valid Parentheses
 
 ### Common Mistakes
 
-- Not syncing auxiliary stack on pop
-- Not handling duplicate minima
+- Accepting the string when the stack still has opens.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-values.append(x)
-mins.append(min(x, mins[-1] if mins else x))
+for ch in s:
+    if ch in opens: stack.append(ch)
+    else: require stack and stack.pop() matches ch
 ```
+
+### Complexity Notes
+
+O(n) time, O(depth) space.
+
+### Interview Explanation
+
+Order matters, so every close must match the most recent unmatched open.
+
+## Pattern: Monotonic Increasing Stack
+
+### Beginner Intuition
+
+Keep indices whose values increase so smaller previous elements remain available.
+
+### When To Use It
+
+Use for previous smaller, histogram widths, and removing larger elements.
+
+### When Not To Use It
+
+Do not use if the nearest unresolved relationship is not ordered.
+
+### Recognition Signals
+
+- previous smaller
+- histogram
+- increasing stack
+
+### Example Problems
+
+- Largest Rectangle in Histogram
+- Remove Duplicate Letters
+
+### Common Mistakes
+
+- Storing values when indices are needed for widths.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+for i, x in enumerate(nums):
+    while stack and nums[stack[-1]] > x:
+        stack.pop()
+    stack.append(i)
+```
+
+### Complexity Notes
+
+O(n) amortized time, O(n) space.
+
+### Interview Explanation
+
+Each popped item has found the first value that makes it impossible to remain a candidate.
+
+## Pattern: Monotonic Decreasing Stack
+
+### Beginner Intuition
+
+Keep indices whose values decrease so greater future values can resolve them.
+
+### When To Use It
+
+Use for next greater, temperatures, spans, and visibility.
+
+### When Not To Use It
+
+Do not use if every item can be resolved independently without order.
+
+### Recognition Signals
+
+- next greater
+- warmer day
+- stock span
+
+### Example Problems
+
+- Daily Temperatures
+- Online Stock Span
+
+### Common Mistakes
+
+- Forgetting to compute distance before popping the index.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+for i, x in enumerate(nums):
+    while stack and nums[stack[-1]] < x:
+        j = stack.pop()
+        answer[j] = i - j
+    stack.append(i)
+```
+
+### Complexity Notes
+
+O(n) amortized time, O(n) space.
+
+### Interview Explanation
+
+The current value resolves all smaller unresolved values on top of the stack.
+
+## Pattern: Expression Stack
+
+### Beginner Intuition
+
+Use stacks to delay operators or operands until precedence and parentheses are known.
+
+### When To Use It
+
+Use for RPN, calculators, and nested expression evaluation.
+
+### When Not To Use It
+
+Do not use ad hoc string parsing without a precedence model.
+
+### Recognition Signals
+
+- operators
+- operands
+- calculator
+- precedence
+
+### Example Problems
+
+- Evaluate Reverse Polish Notation
+- Basic Calculator
+
+### Common Mistakes
+
+- Dropping the sign before entering a parenthesized expression.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+for token in tokens:
+    if number: values.push(number)
+    elif operator: apply according to precedence
+```
+
+### Complexity Notes
+
+O(n) time, O(n) space.
+
+### Interview Explanation
+
+I separate parsing from evaluation state so precedence is explicit.
 
 ---
 
 ## Navigation
 
-[Previous](../stack/CHEATSHEET.md) | [Home](../README.md) | [Next](../stack/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

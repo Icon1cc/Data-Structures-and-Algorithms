@@ -1,240 +1,293 @@
 # Greedy Patterns
 
-This file is the main pattern-recognition reference for greedy. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
-## Pattern: Sort and Scan
+## Pattern: Sort And Scan
 
-### Intuition
+### Beginner Intuition
 
-Sort candidates so a single pass can make locally safe choices.
+Sort to expose the safest next candidate, then make one pass.
 
 ### When To Use It
 
-Use for many interval, assignment, and minimization problems.
+Use for intervals, cookies, arrows, and pairing.
 
 ### When Not To Use It
 
-Do not sort by a convenient key without a proof.
+Do not sort by a key that does not match the proof.
 
 ### Recognition Signals
 
-- sort and scan
-- constraints match the invariant
-- brute force repeats the same decision
+- sort
+- earliest finish
+- one pass
 
-### Problem Examples
+### Example Problems
 
-- Jump Game
-- Gas Station
+- Assign Cookies
+- Minimum Number of Arrows to Burst Balloons
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Sorting by start when the proof needs end.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-items.sort(key=chosen_key)
-for item in items: decide take or skip
+items.sort(key=key)
+for item in items:
+    if safe(item): take item
 ```
+
+### Complexity Notes
+
+O(n log n) time.
+
+### Interview Explanation
+
+The sorted order makes the exchange argument simple.
+
+## Pattern: Greedy With Proof
+
+### Beginner Intuition
+
+Choose locally only after proving the choice can appear in some optimal solution.
+
+### When To Use It
+
+Use for all greedy problems.
+
+### When Not To Use It
+
+Do not rely on intuition alone.
+
+### Recognition Signals
+
+- exchange
+- proof
+- locally optimal
+
+### Example Problems
+
+- Jump Game
+- Non-overlapping Intervals
+
+### Common Mistakes
+
+- Skipping the correctness argument.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+state greedy choice
+show any optimal solution can swap to it
+```
+
+### Complexity Notes
+
+Implementation varies; proof is required.
+
+### Interview Explanation
+
+I explain why taking this choice never blocks a better global answer.
 
 ## Pattern: Interval Greedy
 
-### Intuition
+### Beginner Intuition
 
-Choose by earliest finishing boundary or merge by start depending on the objective.
+Pick the interval that leaves the most room for future intervals.
 
 ### When To Use It
 
-Use for non-overlap, arrows, and interval selection.
+Use for erase overlap, meeting selection, and arrows.
 
 ### When Not To Use It
 
-Do not use unweighted interval greedy for weighted interval scheduling.
+Do not pick longest interval unless that is specifically proven.
 
 ### Recognition Signals
 
-- interval greedy
-- constraints match the invariant
-- brute force repeats the same decision
+- earliest end
+- overlap
+- scheduling
 
-### Problem Examples
+### Example Problems
 
-- Gas Station
-- Candy
+- Non-overlapping Intervals
+- Meeting Rooms II
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Treating touching endpoints incorrectly.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-sort intervals by end
-if start >= current_end: take
+sort by end
+last_end = -inf
+for interval in intervals:
+    if interval.start >= last_end: take it
 ```
+
+### Complexity Notes
+
+O(n log n) time.
+
+### Interview Explanation
+
+Earliest finishing compatible interval is safest because it leaves maximum remaining space.
 
 ## Pattern: Jump Greedy
 
-### Intuition
+### Beginner Intuition
 
-Track the farthest reachable position within the current jump boundary.
+Track the farthest reachable index within the current jump range.
 
 ### When To Use It
 
-Use for jump reachability and minimum jumps.
+Use for reachability and minimum jumps.
 
 ### When Not To Use It
 
-Do not use when every move has different weighted cost.
+Do not BFS all indices when range tracking is enough.
 
 ### Recognition Signals
 
-- jump greedy
-- constraints match the invariant
-- brute force repeats the same decision
+- farthest reach
+- jump
+- range
 
-### Problem Examples
+### Example Problems
 
-- Candy
 - Jump Game
+- Jump Game II
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Updating jump count before finishing the current range.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for i in range(n):
+end = farthest = jumps = 0
+for i in range(n - 1):
     farthest = max(farthest, i + nums[i])
-    if i == current_end: jumps += 1
+    if i == end: jumps += 1; end = farthest
 ```
 
-## Pattern: Heap Greedy
+### Complexity Notes
 
-### Intuition
+O(n) time, O(1) space.
 
-Use a heap to choose the best available candidate while constraints change over time.
+### Interview Explanation
+
+Each range represents all indices reachable with the current jump count.
+
+## Pattern: Heap-Assisted Greedy
+
+### Beginner Intuition
+
+Use a heap when the greedy choice changes as candidates become available.
 
 ### When To Use It
 
-Use for refueling, hiring, IPO, and scheduling.
+Use for scheduling, refueling, and selecting best active resource.
 
 ### When Not To Use It
 
-Do not use if no dynamic candidate set exists.
+Do not sort once if availability and priority are separate dimensions.
 
 ### Recognition Signals
 
-- heap greedy
-- constraints match the invariant
-- brute force repeats the same decision
+- available choices
+- heap
+- schedule
 
-### Problem Examples
+### Example Problems
 
-- Jump Game
-- Gas Station
+- Task Scheduler
+- Minimum Number of Refueling Stops
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Pushing candidates too late after they become reachable.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-add candidates that are now available
-choose best candidate from heap
+sort by availability
+while need progress:
+    add newly available choices to heap
+    take best choice
 ```
 
-## Pattern: Exchange Argument
+### Complexity Notes
 
-### Intuition
+O(n log n) time.
 
-Show any optimal solution can swap in the greedy choice without becoming worse.
+### Interview Explanation
+
+Sorting handles availability and the heap handles best active choice.
+
+## Pattern: Monotonic Greedy
+
+### Beginner Intuition
+
+Maintain a result stack and remove worse previous choices while it is safe.
 
 ### When To Use It
 
-Use to justify greedy correctness in interviews.
+Use for lexicographically smallest subsequences and digit removal.
 
 ### When Not To Use It
 
-Do not present greedy as correct without a proof or counterexample check.
+Do not pop a value if it cannot appear again and is required.
 
 ### Recognition Signals
 
-- exchange argument
-- constraints match the invariant
-- brute force repeats the same decision
+- lexicographic
+- remove k
+- stack greedy
 
-### Problem Examples
+### Example Problems
 
-- Gas Station
-- Candy
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-Assume optimal solution differs
-replace its first differing choice with greedy choice
-show value stays optimal
-```
-
-## Pattern: Greedy with Counts
-
-### Intuition
-
-Use frequencies to place, remove, or schedule the most constrained items first.
-
-### When To Use It
-
-Use for character rearrangement, task scheduler, and deletion minimization.
-
-### When Not To Use It
-
-Do not ignore impossible max-frequency conditions.
-
-### Recognition Signals
-
-- greedy with counts
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Candy
-- Jump Game
+- Remove K Digits
+- Remove Duplicate Letters
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Popping required characters without checking future availability.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-count items
-while counts remain:
-    choose highest valid count
-    update counts
+while stack and can_improve(stack[-1], x) and safe_to_pop:
+    stack.pop()
+stack.append(x)
 ```
+
+### Complexity Notes
+
+O(n) amortized time.
+
+### Interview Explanation
+
+I only remove a previous choice when a better current choice can replace it safely.
+
 ---
 
 ## Navigation
 
-[Previous](../greedy/CHEATSHEET.md) | [Home](../README.md) | [Next](../greedy/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

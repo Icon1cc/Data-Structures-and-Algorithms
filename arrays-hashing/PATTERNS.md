@@ -1,97 +1,119 @@
 # Arrays & Hashing Patterns
 
-Patterns are the bridge between theory and interview execution. Read these before solving the curated problems.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
+
 ## Pattern: Frequency Counting
 
-### Intuition
+### Beginner Intuition
 
-Count how often each value appears so later decisions are direct lookups.
+Count occurrences so equality, duplicates, and anagram checks become direct comparisons.
 
 ### When To Use It
 
-Use when the question asks about duplicates, anagrams, majority, or exact occurrence counts.
+Use when multiplicity matters, not only existence.
 
 ### When Not To Use It
 
-Do not use when order-sensitive positions are the main signal and counts lose needed detail.
+Do not use counts alone when positions or ordering are the answer.
 
 ### Recognition Signals
 
 - duplicates
-- frequency
 - anagram
 - majority
+- counts
 
-### Problem Examples
+### Example Problems
 
 - Valid Anagram
-- Top K Frequent Elements
+- Ransom Note
+- Majority Element
 
 ### Common Mistakes
 
-- Forgetting to decrement counts
-- Comparing maps before all updates are applied
+- Forgetting to decrement counts or remove zero-count keys.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for value in values:
-    count[value] += 1
+for x in values:
+    freq[x] = freq.get(x, 0) + 1
 ```
+
+### Complexity Notes
+
+O(n) time and O(k) space for k distinct keys.
+
+### Interview Explanation
+
+I use a frequency map because the repeated work is asking how many of each value exists.
 
 ## Pattern: Hash Lookup
 
-### Intuition
+### Beginner Intuition
 
-Store values already seen so a future value can find its complement or matching state.
+Store what has been seen so the current value can find a complement or prior state immediately.
 
 ### When To Use It
 
-Use for pair sums, seen states, membership, and first occurrence lookup.
+Use for pair sums, membership, first occurrence, and deduplication.
 
 ### When Not To Use It
 
-Do not use when sorted order gives a simpler two-pointer solution with less memory.
+Do not use when sorted two pointers gives O(1) space and original order is irrelevant.
 
 ### Recognition Signals
 
-- target pair
-- contains
 - seen before
 - complement
+- contains
+- first index
 
-### Problem Examples
+### Example Problems
 
 - Two Sum
 - Contains Duplicate
+- Insert Delete GetRandom O(1)
 
 ### Common Mistakes
 
-- Storing after lookup when current value can match itself
-- Overwriting first index
+- Checking after insertion when the value could match itself.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
+seen = {}
 for i, x in enumerate(nums):
-    need = target - x
-    if need in seen: return [seen[need], i]
+    if target - x in seen:
+        return [seen[target - x], i]
     seen[x] = i
 ```
 
+### Complexity Notes
+
+O(n) expected time, O(n) space.
+
+### Interview Explanation
+
+I trade extra memory for constant-time lookup and preserve the invariant that seen contains only earlier items.
+
 ## Pattern: Prefix Sum
 
-### Intuition
+### Beginner Intuition
 
-Convert range sums into differences between cumulative values.
+Turn every range sum into the difference between two cumulative sums.
 
 ### When To Use It
 
-Use for subarray sum, range query, and balance problems.
+Use for subarray sums, ranges, balance counts, and exactly-k totals.
 
 ### When Not To Use It
 
-Do not use alone when the operation is not invertible, such as range minimum.
+Do not use a simple sliding window when numbers can be negative and the sum is not monotonic.
 
 ### Recognition Signals
 
@@ -100,143 +122,228 @@ Do not use alone when the operation is not invertible, such as range minimum.
 - exactly k
 - balance
 
-### Problem Examples
+### Example Problems
 
 - Subarray Sum Equals K
-- Range Sum Query Immutable
+- Product of Array Except Self
+- Count of Range Sum
 
 ### Common Mistakes
 
-- Off-by-one prefix length
-- Not counting prefix zero
+- Forgetting the initial prefix value 0.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 prefix = 0
-seen = {0: 1}
+count = {0: 1}
 for x in nums:
     prefix += x
-    answer += seen[prefix - target]
-    seen[prefix] += 1
+    answer += count.get(prefix - k, 0)
+    count[prefix] = count.get(prefix, 0) + 1
 ```
 
-## Pattern: Grouping by Canonical Key
+### Complexity Notes
 
-### Intuition
+O(n) expected time, O(n) space.
 
-Normalize equivalent values to the same key, then group originals.
+### Interview Explanation
 
-### When To Use It
-
-Use for anagrams, equivalent strings, signatures, and normalized coordinates.
-
-### When Not To Use It
-
-Do not use when normalization is more expensive than direct comparison for tiny inputs.
-
-### Recognition Signals
-
-- group
-- same pattern
-- anagram
-- equivalent
-
-### Problem Examples
-
-- Group Anagrams
-- Valid Sudoku
-
-### Common Mistakes
-
-- Using mutable objects as keys
-- Choosing a key that collides for non-equivalent data
-
-### Reusable Template Or Pseudocode
-
-```text
-key = tuple(sorted(word))
-groups[key].append(word)
-```
+I define prefix before index i as the sum to the left, so any target subarray is found by a previous prefix.
 
 ## Pattern: Bucket Counting
 
-### Intuition
+### Beginner Intuition
 
-Use value ranges or frequencies as direct bucket indexes.
+Use frequency or bounded values as array indices instead of sorting everything.
 
 ### When To Use It
 
-Use when counts are bounded or top-k can avoid full sorting.
+Use when counts are bounded by n or the value domain is small.
 
 ### When Not To Use It
 
-Do not use when the value domain is enormous and sparse unless buckets are compressed.
+Do not allocate buckets for a huge sparse domain.
 
 ### Recognition Signals
 
-- bounded values
-- frequency buckets
 - top k
+- bounded range
+- frequency bucket
 
-### Problem Examples
+### Example Problems
 
 - Top K Frequent Elements
 - Sort Characters By Frequency
 
 ### Common Mistakes
 
-- Allocating buckets for huge domains
-- Forgetting ties
+- Creating buckets for values instead of frequencies when frequencies are what need ordering.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 buckets = [[] for _ in range(len(nums) + 1)]
-for value, freq in count.items():
+for value, freq in counts.items():
     buckets[freq].append(value)
 ```
 
-## Pattern: In-place Marking
+### Complexity Notes
 
-### Intuition
+O(n) time and O(n) space when bucket count is proportional to input.
 
-Use the input array as a visited marker when values map to indices.
+### Interview Explanation
+
+I avoid full sorting because frequencies are bounded by n, so buckets give direct frequency order.
+
+## Pattern: Sorting Plus Hashing
+
+### Beginner Intuition
+
+Sort to expose order, then use hashing for grouped or quick membership decisions.
 
 ### When To Use It
 
-Use when values are in the range 1..n and extra space is restricted.
+Use when both canonical ordering and lookup are helpful.
 
 ### When Not To Use It
 
-Do not use when the input must remain unchanged.
+Do not sort if original indices must be returned and cannot be preserved.
+
+### Recognition Signals
+
+- canonical key
+- sorted signature
+- grouped records
+
+### Example Problems
+
+- Group Anagrams
+- Longest Consecutive Sequence
+
+### Common Mistakes
+
+- Forgetting that sorting each long string adds L log L cost.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+key = tuple(sorted(word))
+groups.setdefault(key, []).append(word)
+```
+
+### Complexity Notes
+
+Usually O(n log n) for sorting, or O(total_chars log alphabet) for strings.
+
+### Interview Explanation
+
+I make equivalent values share a canonical key, then group by that key.
+
+## Pattern: Grouping by Canonical Key
+
+### Beginner Intuition
+
+Convert each item into a stable signature so equivalent items land together.
+
+### When To Use It
+
+Use for anagrams, isomorphism, normalized coordinates, and pattern strings.
+
+### When Not To Use It
+
+Do not use a lossy signature that maps different items together.
+
+### Recognition Signals
+
+- group
+- equivalent
+- normalized
+- signature
+
+### Example Problems
+
+- Group Anagrams
+- Isomorphic Strings
+- Valid Sudoku
+
+### Common Mistakes
+
+- Using a mutable list as a key.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+signature = tuple(counts)
+groups.setdefault(signature, []).append(item)
+```
+
+### Complexity Notes
+
+O(n * key_cost) time and O(n) space.
+
+### Interview Explanation
+
+I explain what makes two items equivalent, then encode exactly that property in the key.
+
+## Pattern: In-place Index Marking
+
+### Beginner Intuition
+
+Use values as pointers into the same array when the input range is 1..n.
+
+### When To Use It
+
+Use for missing positive or disappeared number questions with strict space limits.
+
+### When Not To Use It
+
+Do not mutate input if the caller needs it unchanged.
 
 ### Recognition Signals
 
 - constant space
-- values 1 to n
-- missing positive
+- values 1..n
+- missing number
 
-### Problem Examples
+### Example Problems
 
 - First Missing Positive
 - Find All Numbers Disappeared in an Array
 
 ### Common Mistakes
 
-- Index conversion errors
-- Destroying values needed later
+- Mixing value and index by forgetting the minus one conversion.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 for x in nums:
     i = abs(x) - 1
-    if 0 <= i < len(nums): nums[i] = -abs(nums[i])
+    if 0 <= i < len(nums):
+        nums[i] = -abs(nums[i])
 ```
+
+### Complexity Notes
+
+O(n) time and O(1) auxiliary space.
+
+### Interview Explanation
+
+I use the array as a visited table because each valid value maps to exactly one index.
 
 ---
 
 ## Navigation
 
-[Previous](../arrays-hashing/CHEATSHEET.md) | [Home](../README.md) | [Next](../arrays-hashing/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

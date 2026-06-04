@@ -1,250 +1,93 @@
 # 1-D Dynamic Programming Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
-## 1. Edit Distance
+## 1. Word Break II
 
-LeetCode:
-https://leetcode.com/problems/edit-distance/
+LeetCode: [Word Break II](https://leetcode.com/problems/word-break-ii/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Memoization
+Pattern: Memoized Sentence Generation
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying memoization.
+Why It Matters: Combines DP feasibility with output generation.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. Regular Expression Matching
+## 2. Longest Valid Parentheses
 
-LeetCode:
-https://leetcode.com/problems/regular-expression-matching/
+LeetCode: [Longest Valid Parentheses](https://leetcode.com/problems/longest-valid-parentheses/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Tabulation
+Pattern: DP Or Stack
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying tabulation.
+Why It Matters: String DP with tricky base cases.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Word Break II
+## 3. Best Time to Buy and Sell Stock IV
 
-LeetCode:
-https://leetcode.com/problems/word-break-ii/
+LeetCode: [Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Rolling State
+Pattern: State Machine DP
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying rolling state.
+Why It Matters: Optimizes over transaction count.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Palindrome Partitioning II
+## 4. Frog Jump
 
-LeetCode:
-https://leetcode.com/problems/palindrome-partitioning-ii/
+LeetCode: [Frog Jump](https://leetcode.com/problems/frog-jump/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-House Robber Choice
+Pattern: Memoized State Search
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying house robber choice.
+Why It Matters: Uses position and jump size as state.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Burst Balloons
-
-LeetCode:
-https://leetcode.com/problems/burst-balloons/
-
-Difficulty:
-Hard
-
-Pattern:
-Coin Change
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying coin change.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Distinct Subsequences
-
-LeetCode:
-https://leetcode.com/problems/distinct-subsequences/
-
-Difficulty:
-Hard
-
-Pattern:
-Longest Increasing Subsequence
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying longest increasing subsequence.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Decode Ways II
-
-LeetCode:
-https://leetcode.com/problems/decode-ways-ii/
-
-Difficulty:
-Hard
-
-Pattern:
-Memoization
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying memoization.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Frog Jump
-
-LeetCode:
-https://leetcode.com/problems/frog-jump/
-
-Difficulty:
-Hard
-
-Pattern:
-Tabulation
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying tabulation.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Russian Doll Envelopes
-
-LeetCode:
-https://leetcode.com/problems/russian-doll-envelopes/
-
-Difficulty:
-Hard
-
-Pattern:
-Rolling State
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying rolling state.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Longest Valid Parentheses
-
-LeetCode:
-https://leetcode.com/problems/longest-valid-parentheses/
-
-Difficulty:
-Hard
-
-Pattern:
-House Robber Choice
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying house robber choice.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../1d-dp/medium.md) | [Home](../README.md) | [Next](../2d-dp/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

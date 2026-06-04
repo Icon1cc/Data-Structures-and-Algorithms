@@ -1,250 +1,93 @@
 # Greedy Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Candy
 
-LeetCode:
-https://leetcode.com/problems/candy/
+LeetCode: [Candy](https://leetcode.com/problems/candy/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Sort and Scan
+Pattern: Two Pass Greedy
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying sort and scan.
+Why It Matters: Satisfies local neighbor constraints both directions.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. Minimum Number of Refueling Stops
+## 2. Trapping Rain Water
 
-LeetCode:
-https://leetcode.com/problems/minimum-number-of-refueling-stops/
+LeetCode: [Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Interval Greedy
+Pattern: Boundary Greedy
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying interval greedy.
+Why It Matters: Uses max boundaries to finalize trapped water.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. IPO
+## 3. Minimum Number of Refueling Stops
 
-LeetCode:
-https://leetcode.com/problems/ipo/
+LeetCode: [Minimum Number of Refueling Stops](https://leetcode.com/problems/minimum-number-of-refueling-stops/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Jump Greedy
+Pattern: Heap-Assisted Greedy
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying jump greedy.
+Why It Matters: Chooses best previous station only when needed.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Patching Array
+## 4. Create Maximum Number
 
-LeetCode:
-https://leetcode.com/problems/patching-array/
+LeetCode: [Create Maximum Number](https://leetcode.com/problems/create-maximum-number/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Heap Greedy
+Pattern: Monotonic Greedy
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying heap greedy.
+Why It Matters: Builds best subsequences and merges them.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Create Maximum Number
-
-LeetCode:
-https://leetcode.com/problems/create-maximum-number/
-
-Difficulty:
-Hard
-
-Pattern:
-Exchange Argument
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying exchange argument.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Split Array Largest Sum
-
-LeetCode:
-https://leetcode.com/problems/split-array-largest-sum/
-
-Difficulty:
-Hard
-
-Pattern:
-Greedy with Counts
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying greedy with counts.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Minimum Cost to Hire K Workers
-
-LeetCode:
-https://leetcode.com/problems/minimum-cost-to-hire-k-workers/
-
-Difficulty:
-Hard
-
-Pattern:
-Sort and Scan
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying sort and scan.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Maximum Performance of a Team
-
-LeetCode:
-https://leetcode.com/problems/maximum-performance-of-a-team/
-
-Difficulty:
-Hard
-
-Pattern:
-Interval Greedy
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying interval greedy.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Trapping Rain Water
-
-LeetCode:
-https://leetcode.com/problems/trapping-rain-water/
-
-Difficulty:
-Hard
-
-Pattern:
-Jump Greedy
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying jump greedy.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Super Washing Machines
-
-LeetCode:
-https://leetcode.com/problems/super-washing-machines/
-
-Difficulty:
-Hard
-
-Pattern:
-Heap Greedy
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying heap greedy.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../greedy/medium.md) | [Home](../README.md) | [Next](../intervals/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

@@ -1,250 +1,93 @@
 # Bit Manipulation Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
-## 1. Minimum XOR Sum of Two Arrays
+## 1. Minimum Number of K Consecutive Bit Flips
 
-LeetCode:
-https://leetcode.com/problems/minimum-xor-sum-of-two-arrays/
+LeetCode: [Minimum Number of K Consecutive Bit Flips](https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-XOR Cancellation
+Pattern: Difference Bit State
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying xor cancellation.
+Why It Matters: Tracks active flips efficiently.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. Maximum Genetic Difference Query
+## 2. Maximum XOR With an Element From Array
 
-LeetCode:
-https://leetcode.com/problems/maximum-genetic-difference-query/
+LeetCode: [Maximum XOR With an Element From Array](https://leetcode.com/problems/maximum-xor-with-an-element-from-array/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Bit Counting
+Pattern: Bit Trie With Queries
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bit counting.
+Why It Matters: Adds offline constraints to bit-trie search.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Number of Valid Words for Each Puzzle
+## 3. Count Pairs With XOR in a Range
 
-LeetCode:
-https://leetcode.com/problems/number-of-valid-words-for-each-puzzle/
+LeetCode: [Count Pairs With XOR in a Range](https://leetcode.com/problems/count-pairs-with-xor-in-a-range/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Masks for Sets
+Pattern: Bit Trie Counting
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying masks for sets.
+Why It Matters: Counts pairs by bounded XOR.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Count Pairs With XOR in a Range
+## 4. Smallest Sufficient Team
 
-LeetCode:
-https://leetcode.com/problems/count-pairs-with-xor-in-a-range/
+LeetCode: [Smallest Sufficient Team](https://leetcode.com/problems/smallest-sufficient-team/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Subset Enumeration
+Pattern: Bitmask DP
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying subset enumeration.
+Why It Matters: Uses skills as a set mask.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Maximum XOR With an Element From Array
-
-LeetCode:
-https://leetcode.com/problems/maximum-xor-with-an-element-from-array/
-
-Difficulty:
-Hard
-
-Pattern:
-Bitwise Trie
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bitwise trie.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Find a Value of a Mysterious Function Closest to Target
-
-LeetCode:
-https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/
-
-Difficulty:
-Hard
-
-Pattern:
-Bitmask DP
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bitmask dp.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Smallest Sufficient Team
-
-LeetCode:
-https://leetcode.com/problems/smallest-sufficient-team/
-
-Difficulty:
-Hard
-
-Pattern:
-XOR Cancellation
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying xor cancellation.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Shortest Path Visiting All Nodes
-
-LeetCode:
-https://leetcode.com/problems/shortest-path-visiting-all-nodes/
-
-Difficulty:
-Hard
-
-Pattern:
-Bit Counting
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bit counting.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Split Array With Same Average
-
-LeetCode:
-https://leetcode.com/problems/split-array-with-same-average/
-
-Difficulty:
-Hard
-
-Pattern:
-Masks for Sets
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying masks for sets.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Can I Win
-
-LeetCode:
-https://leetcode.com/problems/can-i-win/
-
-Difficulty:
-Hard
-
-Pattern:
-Subset Enumeration
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying subset enumeration.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../bit-manipulation/medium.md) | [Home](../README.md) | [Next](../math-geometry/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

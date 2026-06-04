@@ -1,120 +1,143 @@
 # Intervals
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind intervals, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Reason about ranges on a line by sorting endpoints, merging overlaps, or sweeping events.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Intervals problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+Intervals appear in calendars, reservations, meeting rooms, network ranges, and timeline conflicts. They test boundary definitions and sorting choices.
 
-Used in calendars, bookings, monitoring windows, timelines, memory ranges, rate limits, and version ranges.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in calendar systems, booking engines, CPU scheduling, log windows, IP ranges, genomic ranges, and resource allocation.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-An interval is a pair of endpoints describing a continuous range. Problems must define whether endpoints are closed or half-open.
+## Beginner Intuition
 
-## Core Data Structure Or Algorithm
+Intervals become easier after sorting. Once ordered by start or end, overlaps and gaps can be decided with the current active boundary.
 
-Sort by start or end, compare boundaries, and choose merge, scheduling, sweep line, or heap-based active interval tracking.
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
+
+An interval represents a continuous range [start, end] or [start, end). Algorithms depend on whether touching endpoints overlap.
+
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
+
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Sort by start | Group overlapping ranges. |
+| Sort by end | Choose earliest finishing compatible interval. |
+| Sweep endpoints | Track active intervals over time. |
+| Merge | Extend current end while overlaps continue. |
+| Insert | Place a new interval into sorted merged ranges. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
 | Sort intervals | O(n log n) |
-| Merge scan | O(n) |
-| Sweep events | O(n log n) |
-| Room heap | O(n log n) |
+| Merge after sort | O(n) scan |
+| Sweep line | O(n log n) |
+| Difference array with bounded coordinates | O(n + range) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Merged output | O(n) |
-| Sweep events | O(n) |
-| Heap | O(n) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Sort | Order by start for merging or end for scheduling. |
-| Overlap check | Compare next start with current end. |
-| Merge | Extend the active range. |
-| Sweep | Convert endpoints into ordered events. |
+| In-place merge | O(1) extra if output ignored |
+| Output merged intervals | O(n) |
+| Event list | O(n) |
 
 ## Visual Explanation
 
 ```mermaid
 flowchart LR
-    A[start1] --> B[end1]
-    C[start2] --> D[end2]
-    C -. overlap .-> B
+    A[[1,3]] --> B[[2,6]]
+    B --> C{overlap because 2 <= 3}
+    C --> D[[1,6]]
+    E[[8,10]] --> F{gap after 6}
+    F --> G[start new merged interval]
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-Endpoint semantics matter. Closed intervals and half-open time intervals can produce different overlap behavior.
+Boundary convention matters. If intervals are half-open, [1,3) and [3,5) do not overlap. If closed, touching endpoints may overlap.
 
-## Common Interview Patterns
-
-- **Merge Intervals**: Sort by start and combine intervals that overlap the active interval.
-- **Insert Interval**: Copy intervals before the new range, merge overlaps with the new range, then copy the rest.
-- **Meeting Rooms**: Track active intervals by end time to know how many resources are needed.
-- **Sweep Line**: Convert starts and ends into events, sort them, and scan active count or state.
-- **Interval Scheduling**: Choose compatible intervals by a boundary that leaves maximum room for the future.
-- **Range Query with Heap**: Sort queries and intervals, add intervals that can cover the query, and pop expired ones.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for merge, insert, overlap, meeting rooms, minimum removals, arrows, calendar, booking, timeline, or active count.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Merge Intervals**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Insert Interval**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Sweep Line**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Meeting Rooms**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Difference Array**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Greedy Erase Overlap**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Forgetting to sort before merging.
+- Mixing closed and half-open endpoint rules.
+- Updating the wrong endpoint after overlap.
+- Using pairwise comparisons after sorting would give a linear scan.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `Merge Intervals` aloud, then write its invariant and template from memory.
+- Explain `Insert Interval` aloud, then write its invariant and template from memory.
+- Explain `Sweep Line` aloud, then write its invariant and template from memory.
+- Explain `Meeting Rooms` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study Merge Intervals in [PATTERNS.md](PATTERNS.md).
-2. Study Insert Interval in [PATTERNS.md](PATTERNS.md).
-3. Study Meeting Rooms in [PATTERNS.md](PATTERNS.md).
-4. Study Sweep Line in [PATTERNS.md](PATTERNS.md).
-5. Study Interval Scheduling in [PATTERNS.md](PATTERNS.md).
-6. Study Range Query with Heap in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
+1. Read `Merge Intervals` in [PATTERNS.md](PATTERNS.md).
+2. Read `Insert Interval` in [PATTERNS.md](PATTERNS.md).
+3. Read `Sweep Line` in [PATTERNS.md](PATTERNS.md).
+4. Read `Meeting Rooms` in [PATTERNS.md](PATTERNS.md).
+5. Read `Difference Array` in [PATTERNS.md](PATTERNS.md).
+6. Read `Greedy Erase Overlap` in [PATTERNS.md](PATTERNS.md).
+7. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
 8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../greedy/README.md) | [Home](../README.md) | [Next](../intervals/CHEATSHEET.md)
+[Previous](../greedy/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

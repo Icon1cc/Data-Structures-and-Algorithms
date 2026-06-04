@@ -1,370 +1,114 @@
 # Arrays & Hashing Easy Problems
 
-Curated LeetCode practice for this topic. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Two Sum
 
-LeetCode:
-https://leetcode.com/problems/two-sum/
+LeetCode: [Two Sum](https://leetcode.com/problems/two-sum/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Frequency Counting
+Pattern: Hash Lookup
 
-Why It Matters:
-This problem is a high-signal way to practice frequency counting inside arrays and hashing questions.
+Why It Matters: The canonical complement lookup problem and the first test of replacing a nested loop with memory.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 2. Contains Duplicate
 
-LeetCode:
-https://leetcode.com/problems/contains-duplicate/
+LeetCode: [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Hash Lookup
+Pattern: Hash Set Membership
 
-Why It Matters:
-This problem is a high-signal way to practice hash lookup inside arrays and hashing questions.
+Why It Matters: Builds the simplest seen-set invariant and forces a clean early exit.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 3. Valid Anagram
 
-LeetCode:
-https://leetcode.com/problems/valid-anagram/
+LeetCode: [Valid Anagram](https://leetcode.com/problems/valid-anagram/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Prefix Sum
+Pattern: Frequency Counting
 
-Why It Matters:
-This problem is a high-signal way to practice prefix sum inside arrays and hashing questions.
+Why It Matters: Tests whether counts, not sorting alone, can represent character multiplicity.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 4. Ransom Note
 
-LeetCode:
-https://leetcode.com/problems/ransom-note/
+LeetCode: [Ransom Note](https://leetcode.com/problems/ransom-note/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Grouping by Canonical Key
+Pattern: Frequency Counting
 
-Why It Matters:
-This problem is a high-signal way to practice grouping by canonical key inside arrays and hashing questions.
+Why It Matters: Practices decrementing inventory and detecting when a count is exhausted.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 5. Isomorphic Strings
+## 5. Majority Element
 
-LeetCode:
-https://leetcode.com/problems/isomorphic-strings/
+LeetCode: [Majority Element](https://leetcode.com/problems/majority-element/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Bucket Counting
+Pattern: Frequency Counting Or Voting
 
-Why It Matters:
-This problem is a high-signal way to practice bucket counting inside arrays and hashing questions.
+Why It Matters: Introduces the idea that frequency structure can sometimes be compressed to constant space.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 6. Word Pattern
-
-LeetCode:
-https://leetcode.com/problems/word-pattern/
-
-Difficulty:
-Easy
-
-Pattern:
-In-place Marking
-
-Why It Matters:
-This problem is a high-signal way to practice in-place marking inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 7. First Unique Character in a String
-
-LeetCode:
-https://leetcode.com/problems/first-unique-character-in-a-string/
-
-Difficulty:
-Easy
-
-Pattern:
-Frequency Counting
-
-Why It Matters:
-This problem is a high-signal way to practice frequency counting inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 8. Majority Element
-
-LeetCode:
-https://leetcode.com/problems/majority-element/
-
-Difficulty:
-Easy
-
-Pattern:
-Hash Lookup
-
-Why It Matters:
-This problem is a high-signal way to practice hash lookup inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 9. Missing Number
-
-LeetCode:
-https://leetcode.com/problems/missing-number/
-
-Difficulty:
-Easy
-
-Pattern:
-Prefix Sum
-
-Why It Matters:
-This problem is a high-signal way to practice prefix sum inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 10. Intersection of Two Arrays
-
-LeetCode:
-https://leetcode.com/problems/intersection-of-two-arrays/
-
-Difficulty:
-Easy
-
-Pattern:
-Grouping by Canonical Key
-
-Why It Matters:
-This problem is a high-signal way to practice grouping by canonical key inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 11. Intersection of Two Arrays II
-
-LeetCode:
-https://leetcode.com/problems/intersection-of-two-arrays-ii/
-
-Difficulty:
-Easy
-
-Pattern:
-Bucket Counting
-
-Why It Matters:
-This problem is a high-signal way to practice bucket counting inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 12. Happy Number
-
-LeetCode:
-https://leetcode.com/problems/happy-number/
-
-Difficulty:
-Easy
-
-Pattern:
-In-place Marking
-
-Why It Matters:
-This problem is a high-signal way to practice in-place marking inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 13. Jewels and Stones
-
-LeetCode:
-https://leetcode.com/problems/jewels-and-stones/
-
-Difficulty:
-Easy
-
-Pattern:
-Frequency Counting
-
-Why It Matters:
-This problem is a high-signal way to practice frequency counting inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 14. Find the Difference
-
-LeetCode:
-https://leetcode.com/problems/find-the-difference/
-
-Difficulty:
-Easy
-
-Pattern:
-Hash Lookup
-
-Why It Matters:
-This problem is a high-signal way to practice hash lookup inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 15. Unique Number of Occurrences
-
-LeetCode:
-https://leetcode.com/problems/unique-number-of-occurrences/
-
-Difficulty:
-Easy
-
-Pattern:
-Prefix Sum
-
-Why It Matters:
-This problem is a high-signal way to practice prefix sum inside arrays and hashing questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../arrays-hashing/PATTERNS.md) | [Home](../README.md) | [Next](../arrays-hashing/medium.md)
+[Previous](PATTERNS.md) | [Home](../README.md) | [Next](medium.md)

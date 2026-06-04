@@ -1,138 +1,146 @@
 # Binary Search
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn what binary search means, when it is useful, what operations it supports, and how it appears in coding interviews. By the end of this topic, you should be able to explain the core idea, select the right pattern, implement the usual template, and analyze time and space complexity.
+Halve a sorted or monotonic search space until the target or boundary is isolated.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Binary search turns ordered decision spaces into logarithmic solutions. It is common in direct sorted lookup and in optimization problems with a yes/no predicate.
+## Why It Matters
 
-Interview problems often hide the topic behind a story. Your job is to translate the story into operations: lookup, scan, traverse, split, merge, choose, or optimize.
+Binary search is the standard way to convert linear trial into logarithmic reasoning when a yes/no predicate splits the answer space.
 
-## Real World Usage
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-Used in database indexes, version search, capacity planning, rate limits, ranking, distributed storage boundaries, and numeric approximation.
+## Real-World Use
 
-Real systems rarely announce the data structure by name. They expose constraints such as fast lookup, ordered traversal, prefix search, shortest route, or bounded memory. Those constraints point to the right tool.
+Used in database indexes, version search, capacity planning, ranking, distributed storage ranges, numeric approximation, and feature rollout boundaries.
 
-## Intuition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-If the answer space is ordered, ask a question that eliminates half of it. The hard part is defining the predicate and boundaries correctly.
+## Beginner Intuition
 
-A beginner-friendly way to approach this topic is to ask: what information do I need to remember, and what information can I safely discard?
+You are not guessing randomly. You are asking a question whose answer proves that half of the candidates can no longer contain the result.
 
-## Formal Definition
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
 
-Binary search repeatedly halves a monotonic search space until it finds an exact target or the first value satisfying a predicate.
+## Formal Explanation
 
-The formal definition matters because it tells you which operations are cheap, which operations are expensive, and which invariants cannot be broken.
+Binary search repeatedly narrows a monotonic range while preserving an invariant that the answer remains inside the current bounds.
 
-## Core Data Structure Or Algorithm
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
 
-There are two main forms: search for a target in sorted data, and search for the minimum or maximum feasible answer.
+## Core Operations
 
-In interviews, the core algorithm is usually small. The difficulty is choosing it, naming the invariant, and handling edge cases cleanly.
+| Operation | Meaning |
+|---|---|
+| Choose middle | Split the candidate range. |
+| Evaluate predicate | Decide which side can still contain the answer. |
+| Move boundary | Discard impossible candidates. |
+| Return boundary | Return first true, last false, exact target, or insertion point. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Search array | O(log n) |
-| Binary search over answer | O(log R * check) |
-| Matrix binary search | O(log(mn)) |
-| Rotated array search | O(log n) when duplicates do not break order |
+| Array search | O(log n) |
+| Answer search | O(log R * check_cost) |
+| Matrix flattened search | O(log(mn)) |
+| Rotated search without duplicate ambiguity | O(log n) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Iterative search | O(1) |
-| Recursive search | O(log n) stack |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Choose middle | Compute mid without overflow in fixed-width languages. |
-| Compare | Decide which half can still contain the answer. |
-| Shrink bounds | Move left or right without losing candidates. |
-| Return boundary | Return the first true or last false value. |
+| Iterative | O(1) |
+| Recursive | O(log n) call stack |
 
 ## Visual Explanation
 
 ```mermaid
-flowchart LR
-    A[Full ordered space] --> B[Check middle]
-    B --> C{Predicate true?}
-    C -->|yes| D[Discard right or keep middle]
-    C -->|no| E[Discard left including middle]
-    D --> F[Repeat]
+flowchart TD
+    A[Candidate answer range] --> B[Pick mid]
+    B --> C{Predicate true at mid?}
+    C -->|yes| D[Keep left side including mid]
+    C -->|no| E[Discard left side through mid]
+    D --> F{Range collapsed?}
     E --> F
+    F -->|no| B
+    F -->|yes| G[Return boundary]
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-Binary search relies on monotonic predicates. A predicate is monotonic when answers look like false false false true true, or the reverse. The proof is by maintaining that the answer always remains inside the current interval.
+The predicate must be monotonic. If true and false values alternate, halving is unsound no matter how clean the code looks.
 
-## Common Interview Patterns
-
-- **Classic Target Search**: see [binary-search/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Lower Bound**: see [binary-search/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Upper Bound**: see [binary-search/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Search Rotated Array**: see [binary-search/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Binary Search on Answer**: see [binary-search/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Matrix Search**: see [binary-search/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for sorted data, minimum feasible capacity, maximum allowed value, first bad version, peak, rotation, or any phrase like smallest possible maximum.
+Look for sorted data, first or last valid value, minimum feasible capacity, maximum allowed minimum, rotated arrays, peaks, or the phrase smallest possible maximum.
 
-When you read a problem, underline the constraint words first. Words like "sorted", "contiguous", "prefix", "shortest", "k", "all possible", "minimum", or "dependencies" usually reveal the intended pattern.
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Classic Target Search**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Lower Bound**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Upper Bound**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Rotated Sorted Search**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Binary Search On Answer**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Matrix Binary Search**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Peak Search**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Infinite loops from unchanged boundaries.
-- Returning mid instead of the boundary.
 - Using binary search without a monotonic predicate.
+- Changing neither bound on equality.
+- Returning mid instead of the converged boundary.
+- Choosing low and high bounds that exclude the real answer.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep edge cases visible: empty input, one item, duplicates, negative values, and boundary indices.
-- Explain why your data structure supports the needed operation efficiently.
-- Give time and space complexity after testing the code mentally.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Implement and explain classic target search without looking at notes.
-- Implement and explain lower bound without looking at notes.
-- Implement and explain upper bound without looking at notes.
-- Implement and explain search rotated array without looking at notes.
-- Pick two Easy problems from [easy.md](easy.md) and explain the pattern before coding.
-- Pick one Medium problem from [medium.md](medium.md) and write only pseudocode first.
+- Explain `Classic Target Search` aloud, then write its invariant and template from memory.
+- Explain `Lower Bound` aloud, then write its invariant and template from memory.
+- Explain `Upper Bound` aloud, then write its invariant and template from memory.
+- Explain `Rotated Sorted Search` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Read the section on Classic Target Search in [PATTERNS.md](PATTERNS.md).
-2. Read the section on Lower Bound in [PATTERNS.md](PATTERNS.md).
-3. Read the section on Upper Bound in [PATTERNS.md](PATTERNS.md).
-4. Read the section on Search Rotated Array in [PATTERNS.md](PATTERNS.md).
-5. Read the section on Binary Search on Answer in [PATTERNS.md](PATTERNS.md).
-6. Read the section on Matrix Search in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
-8. Solve Easy, then Medium, then selected Hard problems.
+1. Read `Classic Target Search` in [PATTERNS.md](PATTERNS.md).
+2. Read `Lower Bound` in [PATTERNS.md](PATTERNS.md).
+3. Read `Upper Bound` in [PATTERNS.md](PATTERNS.md).
+4. Read `Rotated Sorted Search` in [PATTERNS.md](PATTERNS.md).
+5. Read `Binary Search On Answer` in [PATTERNS.md](PATTERNS.md).
+6. Read `Matrix Binary Search` in [PATTERNS.md](PATTERNS.md).
+7. Read `Peak Search` in [PATTERNS.md](PATTERNS.md).
+8. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
+9. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-- [Easy problems](easy.md)
-- [Medium problems](medium.md)
-- [Hard problems](hard.md)
-
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../stack/README.md) | [Home](../README.md) | [Next](../binary-search/CHEATSHEET.md)
+[Previous](../stack/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

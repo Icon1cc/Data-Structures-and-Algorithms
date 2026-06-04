@@ -1,91 +1,107 @@
 # Graphs Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+A graph is a set of vertices and edges. Edges may be directed or undirected, weighted or unweighted, explicit or implicit.
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| Adjacency traversal | O(V + E) |
+| Grid traversal | O(rows * cols) |
+| Topological sort | O(V + E) |
+| Union Find operations | Almost O(1) amortized |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Adjacency list | O(V + E) |
+| Visited set | O(V) |
+| BFS queue | O(V) |
+| DFS stack | O(V) |
 
-## Common Templates
+## Pattern Summary
 
-### BFS Traversal
+| Pattern | Use When |
+|---|---|
+| DFS Traversal | Use for components, cycle detection, island shape, and reachability. |
+| BFS Traversal | Use for shortest path in unweighted graphs and level spread. |
+| Connected Components | Use for islands, provinces, and disconnected graphs. |
+| Cycle Detection | Use for directed course prerequisites and undirected graph validation. |
+| Topological Sort | Use for scheduling, course order, build dependencies, and alien dictionary. |
+| Union Find | Use for connectivity queries, redundant edges, and MST Kruskal. |
+| Grid Graph BFS | Use for islands, rotting spread, walls and gates, and shortest grid paths. |
 
-```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
-```
+## Recognition Hints
+
+Look for connected, reachable, shortest path in unweighted graph, dependencies, courses, islands, components, cycles, clone, or transformation steps.
+
+## Templates
 
 ### DFS Traversal
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+def dfs(node):
+    if node in visited: return
+    visited.add(node)
+    for nei in graph[node]: dfs(nei)
+```
+
+### BFS Traversal
+
+```text
+queue = deque([start])
+visited = {start}
+while queue:
+    node = queue.popleft()
+    for nei in graph[node]: enqueue unseen
 ```
 
 ### Connected Components
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+for node in nodes:
+    if node not in visited:
+        components += 1
+        dfs(node)
 ```
 
-## Pattern Summary
+### Cycle Detection
 
-| Pattern | Recognition Hint |
-|---|---|
-| BFS Traversal | Use when the prompt matches bfs traversal signals. |
-| DFS Traversal | Use when the prompt matches dfs traversal signals. |
-| Connected Components | Use when the prompt matches connected components signals. |
-| Grid Graphs | Use when the prompt matches grid graphs signals. |
-| Union Find | Use when the prompt matches union find signals. |
-| Topological Sort | Use when the prompt matches topological sort signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
+```text
+state: 0 unseen, 1 visiting, 2 done
+if neighbor is visiting: cycle
+```
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Mixing directed and undirected edge handling.
+- Marking visited too late in BFS.
+- Forgetting disconnected components.
+- Using DFS for shortest path in an unweighted graph when BFS is required.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../graphs/README.md) | [Home](../README.md) | [Next](../graphs/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

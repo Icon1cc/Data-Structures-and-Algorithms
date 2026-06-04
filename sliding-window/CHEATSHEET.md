@@ -1,83 +1,111 @@
 # Sliding Window Cheatsheet
 
-Fast revision notes for sliding window before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
+
+## Core Definitions
+
+A sliding window keeps two monotonic boundaries and an aggregate over the interval between them. Each boundary moves at most n times.
 
 ## Complexity Table
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Fixed window | O(n) |
-| Variable window | O(n) when each pointer moves forward |
-| Window with balanced tree | O(n log k) |
-| Deque maximum | O(n) |
+| Standard window | O(n) |
+| Window with hash counts | O(n) expected |
+| Monotonic deque window | O(n) amortized |
+| Bad nested rescan | O(nk) or O(n^2) |
 
-## Formulas And Invariants
+## Space Table
 
-- Define the invariant before writing loops or recursion.
-- Track exactly what state means at each step.
-- Prefer deterministic boundary rules over intuition.
-- Re-check empty input, one item, duplicate values, and maximum-size constraints.
+| Case | Complexity |
+|---|---:|
+| Numeric window | O(1) |
+| Frequency map | O(k) distinct values |
+| Deque | O(k) window size |
 
 ## Pattern Summary
 
 | Pattern | Use When |
 |---|---|
-| Fixed Size Window | Use for average, sum, max vowels, and fixed-length substrings. |
-| Variable Size Window | Use for longest or shortest contiguous ranges under a constraint. |
-| At Most K | Use when the phrase says at most k or can be transformed to exactly k. |
-| Exactly K via At Most | Use for subarray count problems with distinct elements or odds. |
-| Minimum Valid Window | Use for covering characters, words, or required frequencies. |
-| Monotonic Deque Window | Use for sliding maximum or minimum. |
+| Fixed Window | Use for fixed length averages, sums, and counts. |
+| Variable Window | Use for longest or shortest contiguous segments under a condition. |
+| Frequency Window | Use for permutations, anagrams, replacement, and at-most-k distinct problems. |
+| At Most K Window | Use when exactly k is hard but at most k is monotonic. |
+| Monotonic Window | Use for sliding maximum, minimum, and bounded absolute difference. |
 
-## Common Templates
+## Recognition Hints
 
-### Fixed Size Window
+Look for contiguous subarray, substring, longest, shortest, at most k, exactly k via at most transforms, fixed length k, or stream-style language.
+
+## Templates
+
+### Fixed Window
 
 ```text
+window = 0
 for right, x in enumerate(nums):
-    add x
-    if right >= k: remove nums[right-k]
-    if right >= k-1: record
+    window += x
+    if right >= k: window -= nums[right - k]
+    if right >= k - 1: update_answer(window)
 ```
 
-### Variable Size Window
+### Variable Window
 
 ```text
 left = 0
 for right in range(n):
-    add right
-    while invalid(): remove left; left += 1
-    record
+    add(right)
+    while invalid():
+        remove(left)
+        left += 1
+    record()
 ```
 
-### At Most K
+### Frequency Window
 
 ```text
-while distinct > k:
-    remove nums[left]
+counts[x] += 1
+while too_many():
+    counts[left_value] -= 1
     left += 1
 ```
 
-## Recognition Hints
+### At Most K Window
 
-Look for contiguous subarray, substring, longest, shortest, fixed length k, at most k, exactly k, or streaming range wording.
+```text
+def at_most(k):
+    left = answer = 0
+    for right in range(n):
+        add(right)
+        while invalid(k): shrink()
+        answer += right - left + 1
+```
 
 ## Common Traps
 
-- Using sliding window with negative sums when monotonicity is required.
-- Not removing left-side state when shrinking.
-- Confusing at most k with exactly k.
+- Recording the answer before restoring validity.
+- Using a window when prefix sums are required for negative numbers.
+- Forgetting to remove zero-count keys.
+- Confusing exactly k with at most k.
 
 ## Interview Reminders
 
-- Say the brute force solution first.
-- Explain why the optimized pattern removes repeated work.
-- Test at least one normal case, one edge case, and one failure case.
-- Include auxiliary space in the final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
 
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../sliding-window/README.md) | [Home](../README.md) | [Next](../sliding-window/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

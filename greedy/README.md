@@ -1,120 +1,142 @@
 # Greedy
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind greedy, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Make locally optimal choices only when an exchange argument or invariant proves they remain globally safe.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Greedy problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+Greedy problems look simple but demand proof. Interviewers use them to separate pattern memorization from correctness reasoning.
 
-Used in scheduling, caching, compression, resource allocation, interval selection, load assignment, and networking decisions.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in scheduling, caching, compression, resource allocation, routing heuristics, interval selection, and load balancing.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-A greedy algorithm builds a solution by committing to locally optimal choices that can be proven globally safe.
+## Beginner Intuition
 
-## Core Data Structure Or Algorithm
+A greedy choice is safe when any optimal solution can be rearranged to include it without becoming worse.
 
-Sort or prioritize candidates so the safe choice is visible, then maintain a proof-friendly invariant.
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
+
+A greedy algorithm builds a solution step by step using a locally optimal rule. Correctness usually follows from an exchange argument, staying-ahead proof, or cut property.
+
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
+
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Sort by key | Expose the choice order. |
+| Select if safe | Add the next candidate only when it preserves feasibility. |
+| Maintain best frontier | Track farthest reach, earliest finish, or cheapest active option. |
+| Prove exchange | Explain why replacing another choice with yours does not hurt. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Sort plus scan | O(n log n) |
-| Heap greedy | O(n log n) |
-| Linear greedy | O(n) |
-| Proof | Required even though it is not runtime |
+| Sort and scan | O(n log n) |
+| Single pass greedy | O(n) |
+| Heap-assisted greedy | O(n log n) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Constant counters | O(1) |
-| Heap | O(n) |
-| Frequency map | O(k) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Sort by key | Expose the choice order. |
-| Commit | Take a safe candidate. |
-| Exchange | Prove another optimal solution can adopt the choice. |
-| Repair | Use a heap or replacement when better candidates appear. |
+| In-place scan | O(1) |
+| Sorted copy | O(n) |
+| Heap support | O(n) |
 
 ## Visual Explanation
 
 ```mermaid
 flowchart LR
-    A[candidates] --> B[sort or prioritize]
-    B --> C[pick safe choice]
-    C --> D[update invariant]
+    A[Sort candidates] --> B[Take next best local choice]
+    B --> C{Still feasible?}
+    C -->|yes| D[Commit]
+    C -->|no| E[Skip or replace]
+    D --> F[Prove no optimal solution is worse]
+    E --> F
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-Greedy algorithms need proof through exchange arguments, cut properties, or stays-ahead reasoning.
+Greedy correctness is not intuition. Be ready to explain the exchange: if an optimal solution picked another compatible candidate, swapping in the greedy candidate preserves or improves the result.
 
-## Common Interview Patterns
-
-- **Sort and Scan**: Sort candidates so a single pass can make locally safe choices.
-- **Interval Greedy**: Choose by earliest finishing boundary or merge by start depending on the objective.
-- **Jump Greedy**: Track the farthest reachable position within the current jump boundary.
-- **Heap Greedy**: Use a heap to choose the best available candidate while constraints change over time.
-- **Exchange Argument**: Show any optimal solution can swap in the greedy choice without becoming worse.
-- **Greedy with Counts**: Use frequencies to place, remove, or schedule the most constrained items first.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for earliest finish, minimum removals, maximum reach, choose once, local replacement, intervals, scheduling, or problems asking for fewest resources.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Sort And Scan**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Greedy With Proof**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Interval Greedy**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Jump Greedy**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Heap-Assisted Greedy**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Monotonic Greedy**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Using greedy where future choices can invalidate local choice.
+- Skipping the proof in interviews.
+- Sorting by the wrong key.
+- Confusing DP choose-or-skip with greedy safe choice.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `Sort And Scan` aloud, then write its invariant and template from memory.
+- Explain `Greedy With Proof` aloud, then write its invariant and template from memory.
+- Explain `Interval Greedy` aloud, then write its invariant and template from memory.
+- Explain `Jump Greedy` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study Sort and Scan in [PATTERNS.md](PATTERNS.md).
-2. Study Interval Greedy in [PATTERNS.md](PATTERNS.md).
-3. Study Jump Greedy in [PATTERNS.md](PATTERNS.md).
-4. Study Heap Greedy in [PATTERNS.md](PATTERNS.md).
-5. Study Exchange Argument in [PATTERNS.md](PATTERNS.md).
-6. Study Greedy with Counts in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
+1. Read `Sort And Scan` in [PATTERNS.md](PATTERNS.md).
+2. Read `Greedy With Proof` in [PATTERNS.md](PATTERNS.md).
+3. Read `Interval Greedy` in [PATTERNS.md](PATTERNS.md).
+4. Read `Jump Greedy` in [PATTERNS.md](PATTERNS.md).
+5. Read `Heap-Assisted Greedy` in [PATTERNS.md](PATTERNS.md).
+6. Read `Monotonic Greedy` in [PATTERNS.md](PATTERNS.md).
+7. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
 8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../2d-dp/README.md) | [Home](../README.md) | [Next](../greedy/CHEATSHEET.md)
+[Previous](../2d-dp/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

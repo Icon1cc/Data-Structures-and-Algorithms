@@ -1,370 +1,114 @@
 # Math & Geometry Easy Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Palindrome Number
 
-LeetCode:
-https://leetcode.com/problems/palindrome-number/
+LeetCode: [Palindrome Number](https://leetcode.com/problems/palindrome-number/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Modulo Arithmetic
+Pattern: Numeric Reversal
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying modulo arithmetic.
+Why It Matters: Tests digit manipulation without string reliance.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 2. Roman to Integer
 
-LeetCode:
-https://leetcode.com/problems/roman-to-integer/
+LeetCode: [Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-GCD and Number Theory
+Pattern: Symbol Arithmetic
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying gcd and number theory.
+Why It Matters: Practices rule-based numeric parsing.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 3. Excel Sheet Column Number
 
-LeetCode:
-https://leetcode.com/problems/excel-sheet-column-number/
+LeetCode: [Excel Sheet Column Number](https://leetcode.com/problems/excel-sheet-column-number/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Matrix Traversal
+Pattern: Base Conversion
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying matrix traversal.
+Why It Matters: Converts alphabetic digits to base 26.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Fizz Buzz
+## 4. Add Digits
 
-LeetCode:
-https://leetcode.com/problems/fizz-buzz/
+LeetCode: [Add Digits](https://leetcode.com/problems/add-digits/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Coordinate Hashing
+Pattern: Modulo Arithmetic
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying coordinate hashing.
+Why It Matters: Introduces digital-root reasoning.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 5. Power of Three
+## 5. Happy Number
 
-LeetCode:
-https://leetcode.com/problems/power-of-three/
+LeetCode: [Happy Number](https://leetcode.com/problems/happy-number/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Line and Slope
+Pattern: Cycle Detection In Digits
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying line and slope.
+Why It Matters: Combines arithmetic transform with seen-state detection.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Plus One
-
-LeetCode:
-https://leetcode.com/problems/plus-one/
-
-Difficulty:
-Easy
-
-Pattern:
-Geometry Simulation
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying geometry simulation.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Sqrt(x)
-
-LeetCode:
-https://leetcode.com/problems/sqrtx/
-
-Difficulty:
-Easy
-
-Pattern:
-Modulo Arithmetic
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying modulo arithmetic.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Valid Perfect Square
-
-LeetCode:
-https://leetcode.com/problems/valid-perfect-square/
-
-Difficulty:
-Easy
-
-Pattern:
-GCD and Number Theory
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying gcd and number theory.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Add Digits
-
-LeetCode:
-https://leetcode.com/problems/add-digits/
-
-Difficulty:
-Easy
-
-Pattern:
-Matrix Traversal
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying matrix traversal.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Happy Number
-
-LeetCode:
-https://leetcode.com/problems/happy-number/
-
-Difficulty:
-Easy
-
-Pattern:
-Coordinate Hashing
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying coordinate hashing.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 11. Rectangle Overlap
-
-LeetCode:
-https://leetcode.com/problems/rectangle-overlap/
-
-Difficulty:
-Easy
-
-Pattern:
-Line and Slope
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying line and slope.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 12. Projection Area of 3D Shapes
-
-LeetCode:
-https://leetcode.com/problems/projection-area-of-3d-shapes/
-
-Difficulty:
-Easy
-
-Pattern:
-Geometry Simulation
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying geometry simulation.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 13. Self Dividing Numbers
-
-LeetCode:
-https://leetcode.com/problems/self-dividing-numbers/
-
-Difficulty:
-Easy
-
-Pattern:
-Modulo Arithmetic
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying modulo arithmetic.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 14. Count Primes
-
-LeetCode:
-https://leetcode.com/problems/count-primes/
-
-Difficulty:
-Easy
-
-Pattern:
-GCD and Number Theory
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying gcd and number theory.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 15. Missing Number
-
-LeetCode:
-https://leetcode.com/problems/missing-number/
-
-Difficulty:
-Easy
-
-Pattern:
-Matrix Traversal
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying matrix traversal.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../math-geometry/PATTERNS.md) | [Home](../README.md) | [Next](../math-geometry/medium.md)
+[Previous](PATTERNS.md) | [Home](../README.md) | [Next](medium.md)

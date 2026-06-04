@@ -1,140 +1,150 @@
 # Arrays & Hashing
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn what arrays and hashing means, when it is useful, what operations it supports, and how it appears in coding interviews. By the end of this topic, you should be able to explain the core idea, select the right pattern, implement the usual template, and analyze time and space complexity.
+Build direct lookup, counting, grouping, and prefix summaries over indexed data.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Most interview problems start with indexed data, strings, counts, membership checks, or grouped values. Arrays and hash maps are the first tools for turning a slow scan into direct access.
+## Why It Matters
 
-Interview problems often hide the topic behind a story. Your job is to translate the story into operations: lookup, scan, traverse, split, merge, choose, or optimize.
+Most interview problems begin as a slow nested scan over an array or string. Hashing teaches you to store exactly the information that makes the next lookup constant time.
 
-## Real World Usage
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-Used in caches, indexes, de-duplication, analytics counters, feature flags, log aggregation, and request routing tables.
+## Real-World Use
 
-Real systems rarely announce the data structure by name. They expose constraints such as fast lookup, ordered traversal, prefix search, shortest route, or bounded memory. Those constraints point to the right tool.
+Used in caches, analytics counters, de-duplication pipelines, indexes, log aggregation, rate-limit buckets, feature flag maps, and request routing tables.
 
-## Intuition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-An array gives position. A hash table gives names for things. Together they let you remember what has been seen, count it, and jump directly to useful information.
+## Beginner Intuition
 
-A beginner-friendly way to approach this topic is to ask: what information do I need to remember, and what information can I safely discard?
+An array gives position. A hash table gives a name to a value or state. The interview move is to ask what must be remembered from the left side of the scan so the current item can be decided immediately.
 
-## Formal Definition
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
 
-An array is a contiguous indexed sequence. A hash table maps keys to values through a hash function and resolves collisions so lookup, insert, and delete are expected constant time.
+## Formal Explanation
 
-The formal definition matters because it tells you which operations are cheap, which operations are expensive, and which invariants cannot be broken.
+An array is an indexed sequence with O(1) random access. A hash table maps keys to values with expected O(1) insert, lookup, and delete through hashing and collision handling.
 
-## Core Data Structure Or Algorithm
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
 
-Use arrays when order and index matter. Use hash sets for membership. Use hash maps for counts, first positions, last positions, and grouped records.
+## Core Operations
 
-In interviews, the core algorithm is usually small. The difficulty is choosing it, naming the invariant, and handling edge cases cleanly.
+| Operation | Meaning |
+|---|---|
+| Index access | Read or write a known position. |
+| Scan | Visit every value once and update state. |
+| Set membership | Ask whether a value has appeared. |
+| Map count | Track frequency, first index, last index, or grouped records. |
+| Prefix summary | Store cumulative state so range questions become differences. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Array index access | O(1) |
-| Array scan | O(n) |
+| Index access | O(1) |
+| Full scan | O(n) |
 | Hash lookup average | O(1) |
 | Hash lookup worst case | O(n) |
-| Sorting before scan | O(n log n) |
+| Sort then scan | O(n log n) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
 | In-place scan | O(1) |
-| Frequency map | O(k) |
-| Prefix table | O(n) |
-| Bucket array | O(n) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Append | Add to the end when capacity allows. |
-| Scan | Visit every element once. |
-| Count | Map each value to a frequency. |
-| Group | Map a normalized key to a list. |
-| Prefix | Store cumulative information for fast range queries. |
+| Hash set or map | O(k) distinct keys |
+| Prefix array | O(n) |
+| Bucket array | O(n) when indexed by frequency |
 
 ## Visual Explanation
 
 ```mermaid
 flowchart LR
-    A[Input values] --> B[Choose key]
-    B --> C[Hash map or set]
-    C --> D[Lookup previous information]
-    D --> E[Answer or update state]
+    A[Read value] --> B{What state is useful later?}
+    B --> C[Seen set]
+    B --> D[Frequency map]
+    B --> E[Prefix sum]
+    C --> F[Answer lookup]
+    D --> F
+    E --> F
+    F --> G[Update state before next value]
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-Counting arguments, set membership, modular arithmetic, and prefix sums are the main mathematical ideas. The key invariant is that the stored summary must be enough to answer the next step without re-reading all previous values.
+The key invariant is that the stored summary is sufficient for the next decision. Counting, set membership, modular arithmetic, and prefix differences are the most common tools.
 
-## Common Interview Patterns
-
-- **Frequency Counting**: see [arrays-hashing/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Hash Lookup**: see [arrays-hashing/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Prefix Sum**: see [arrays-hashing/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Grouping by Canonical Key**: see [arrays-hashing/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **Bucket Counting**: see [arrays-hashing/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
-- **In-place Marking**: see [arrays-hashing/PATTERNS.md](PATTERNS.md) for recognition signals and templates.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for duplicates, pairs with a target, anagrams, subarray sums, longest consecutive ranges, or repeated work caused by nested loops.
+Look for duplicates, pairs, anagrams, grouping, subarray sums, longest consecutive runs, first occurrence, or a brute force loop that repeatedly asks whether a previous value exists.
 
-When you read a problem, underline the constraint words first. Words like "sorted", "contiguous", "prefix", "shortest", "k", "all possible", "minimum", or "dependencies" usually reveal the intended pattern.
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Frequency Counting**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Hash Lookup**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Prefix Sum**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Bucket Counting**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Sorting Plus Hashing**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Grouping by Canonical Key**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **In-place Index Marking**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Forgetting that hash-table worst cases exist.
-- Using a list membership scan where a set is intended.
-- Losing first-index information by overwriting too early.
+- Using a list membership scan when a set is required.
+- Overwriting first-index information too early.
+- Forgetting prefix zero for subarray counts.
+- Ignoring negative values when choosing sliding window instead of prefix sums.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep edge cases visible: empty input, one item, duplicates, negative values, and boundary indices.
-- Explain why your data structure supports the needed operation efficiently.
-- Give time and space complexity after testing the code mentally.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Implement and explain frequency counting without looking at notes.
-- Implement and explain hash lookup without looking at notes.
-- Implement and explain prefix sum without looking at notes.
-- Implement and explain grouping by canonical key without looking at notes.
-- Pick two Easy problems from [easy.md](easy.md) and explain the pattern before coding.
-- Pick one Medium problem from [medium.md](medium.md) and write only pseudocode first.
+- Explain `Frequency Counting` aloud, then write its invariant and template from memory.
+- Explain `Hash Lookup` aloud, then write its invariant and template from memory.
+- Explain `Prefix Sum` aloud, then write its invariant and template from memory.
+- Explain `Bucket Counting` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Read the section on Frequency Counting in [PATTERNS.md](PATTERNS.md).
-2. Read the section on Hash Lookup in [PATTERNS.md](PATTERNS.md).
-3. Read the section on Prefix Sum in [PATTERNS.md](PATTERNS.md).
-4. Read the section on Grouping by Canonical Key in [PATTERNS.md](PATTERNS.md).
-5. Read the section on Bucket Counting in [PATTERNS.md](PATTERNS.md).
-6. Read the section on In-place Marking in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
-8. Solve Easy, then Medium, then selected Hard problems.
+1. Read `Frequency Counting` in [PATTERNS.md](PATTERNS.md).
+2. Read `Hash Lookup` in [PATTERNS.md](PATTERNS.md).
+3. Read `Prefix Sum` in [PATTERNS.md](PATTERNS.md).
+4. Read `Bucket Counting` in [PATTERNS.md](PATTERNS.md).
+5. Read `Sorting Plus Hashing` in [PATTERNS.md](PATTERNS.md).
+6. Read `Grouping by Canonical Key` in [PATTERNS.md](PATTERNS.md).
+7. Read `In-place Index Marking` in [PATTERNS.md](PATTERNS.md).
+8. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
+9. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-- [Easy problems](easy.md)
-- [Medium problems](medium.md)
-- [Hard problems](hard.md)
-
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../README.md) | [Home](../README.md) | [Next](../arrays-hashing/CHEATSHEET.md)
+[Previous](../README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

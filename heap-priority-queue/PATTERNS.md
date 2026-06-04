@@ -1,241 +1,251 @@
 # Heap / Priority Queue Patterns
 
-This file is the main pattern-recognition reference for heap / priority queue. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
-## Pattern: Top K
+## Pattern: Top K Heap
 
-### Intuition
+### Beginner Intuition
 
-Keep only the best k candidates in a heap or bucket structure.
+Keep only the k best candidates seen so far.
 
 ### When To Use It
 
-Use for kth largest, top frequent, ranking, and nearest points.
+Use for kth largest, top frequencies, and closest points.
 
 ### When Not To Use It
 
-Do not use if the full sorted order is required.
+Do not heap all n items if k is small and only k results are needed.
 
 ### Recognition Signals
 
 - top k
-- constraints match the invariant
-- brute force repeats the same decision
+- kth
+- closest
+- frequent
 
-### Problem Examples
+### Example Problems
 
 - Kth Largest Element in an Array
-- Find Median from Data Stream
+- K Closest Points to Origin
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Using a min-heap when the eviction logic requires a max-heap or vice versa.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
+heap = []
 for item in items:
     push item
-    if heap size > k: pop worst
+    if len(heap) > k: pop worst among kept
 ```
+
+### Complexity Notes
+
+O(n log k) time, O(k) space.
+
+### Interview Explanation
+
+The heap contains the best k candidates after each scan step.
 
 ## Pattern: K-way Merge
 
-### Intuition
+### Beginner Intuition
 
-Use a heap of current heads from sorted sources and push the successor from the source you popped.
+Use a heap containing the current head of each sorted source.
 
 ### When To Use It
 
-Use for merging k lists, k sorted arrays, and smallest range problems.
+Use for merging sorted lists, arrays, or streams.
 
 ### When Not To Use It
 
-Do not use if sources are unsorted.
+Do not push every item upfront if sources can be advanced lazily.
 
 ### Recognition Signals
 
-- k-way merge
-- constraints match the invariant
-- brute force repeats the same decision
+- k sorted
+- merge
+- smallest head
 
-### Problem Examples
+### Example Problems
 
-- Find Median from Data Stream
 - Merge k Sorted Lists
+- Find K Pairs with Smallest Sums
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Forgetting tie-breakers when heap elements compare equal.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 push first item from each source
-while heap: pop best and push next from same source
+while heap:
+    value, source = heappop(heap)
+    push next from same source
 ```
+
+### Complexity Notes
+
+O(N log k) time, O(k) space.
+
+### Interview Explanation
+
+Only one candidate from each source is needed because each source is sorted.
 
 ## Pattern: Two Heaps
 
-### Intuition
+### Beginner Intuition
 
-Keep lower and upper halves balanced so the median or middle boundary is available.
-
-### When To Use It
-
-Use for running median and sliding median.
-
-### When Not To Use It
-
-Do not ignore lazy deletion when old values leave a sliding window.
-
-### Recognition Signals
-
-- two heaps
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Merge k Sorted Lists
-- Kth Largest Element in an Array
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-low = max_heap; high = min_heap
-rebalance sizes after every update
-```
-
-## Pattern: Scheduling by Priority
-
-### Intuition
-
-Use one priority for availability and another for which job should run next.
+Maintain a max-heap for the lower half and min-heap for the upper half.
 
 ### When To Use It
 
-Use for CPU tasks, meeting rooms, servers, and cooldown scheduling.
+Use for streaming median and balancing lower/upper partitions.
 
 ### When Not To Use It
 
-Do not use a single heap when time and priority are separate concerns.
+Do not let heap sizes drift beyond one.
 
 ### Recognition Signals
 
-- scheduling by priority
-- constraints match the invariant
-- brute force repeats the same decision
+- median
+- lower half
+- upper half
+- stream
 
-### Problem Examples
-
-- Kth Largest Element in an Array
-- Find Median from Data Stream
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-move available tasks into ready heap
-if ready: run best
-else: advance time
-```
-
-## Pattern: Greedy Heap
-
-### Intuition
-
-Use a heap to repeatedly choose the best available candidate as constraints evolve.
-
-### When To Use It
-
-Use for refueling, hiring, capital growth, and worker selection.
-
-### When Not To Use It
-
-Do not use if a sorted scan already provides a proof and simpler state.
-
-### Recognition Signals
-
-- greedy heap
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
+### Example Problems
 
 - Find Median from Data Stream
-- Merge k Sorted Lists
+- Sliding Window Median
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Not rebalancing after every insertion or deletion.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-sort events
-for event in events:
-    add newly available candidates
-    choose best from heap
+lower = max_heap
+upper = min_heap
+rebalance so sizes differ by at most one
 ```
 
-## Pattern: Lazy Deletion
+### Complexity Notes
 
-### Intuition
+O(log n) update, O(1) median.
 
-Mark entries as deleted and remove them only when they reach the heap top.
+### Interview Explanation
+
+The partition invariant makes median retrieval immediate.
+
+## Pattern: Lazy Deletion Heap
+
+### Beginner Intuition
+
+Mark stale items and discard them only when they reach the top.
 
 ### When To Use It
 
-Use when a heap needs arbitrary deletion but the language heap cannot delete by handle.
+Use when arbitrary deletion from a heap would be expensive.
 
 ### When Not To Use It
 
-Do not forget to prune before every peek or pop.
+Do not trust heap top until stale entries are pruned.
 
 ### Recognition Signals
 
-- lazy deletion
-- constraints match the invariant
-- brute force repeats the same decision
+- stale
+- delayed deletion
+- sliding median
 
-### Problem Examples
+### Example Problems
 
-- Merge k Sorted Lists
-- Kth Largest Element in an Array
+- Sliding Window Median
+- Task Scheduler variants
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Forgetting to decrement delayed counts while pruning.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-while heap top is marked stale:
-    decrement stale count
-    pop heap
+delayed[value] += 1
+while heap and delayed[top(heap)]:
+    delayed[top(heap)] -= 1
+    pop(heap)
 ```
+
+### Complexity Notes
+
+O(log n) amortized update, extra stale storage possible.
+
+### Interview Explanation
+
+Lazy deletion keeps heap operations cheap while preserving correctness at pop time.
+
+## Pattern: Dijkstra Frontier
+
+### Beginner Intuition
+
+Use a min-heap to expand the next closest unsettled graph node.
+
+### When To Use It
+
+Use for non-negative weighted shortest paths.
+
+### When Not To Use It
+
+Do not use when negative edges are present.
+
+### Recognition Signals
+
+- shortest path
+- non-negative
+- frontier
+
+### Example Problems
+
+- Network Delay Time
+- Path With Minimum Effort
+
+### Common Mistakes
+
+- Processing stale distance entries as final.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+push (0, source)
+while heap:
+    dist, node = heappop(heap)
+    if dist != best[node]: continue
+    relax neighbors
+```
+
+### Complexity Notes
+
+O((V + E) log V) with adjacency list.
+
+### Interview Explanation
+
+The heap always gives the next cheapest candidate distance.
+
 ---
 
 ## Navigation
 
-[Previous](../heap-priority-queue/CHEATSHEET.md) | [Home](../README.md) | [Next](../heap-priority-queue/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

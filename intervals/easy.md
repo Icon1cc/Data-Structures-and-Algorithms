@@ -1,370 +1,72 @@
 # Intervals Easy Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Summary Ranges
 
-LeetCode:
-https://leetcode.com/problems/summary-ranges/
+LeetCode: [Summary Ranges](https://leetcode.com/problems/summary-ranges/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Merge Intervals
+Pattern: Range Compression
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying merge intervals.
+Why It Matters: Turns sorted values into disjoint intervals.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 2. Meeting Rooms
 
-LeetCode:
-https://leetcode.com/problems/meeting-rooms/
+LeetCode: [Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Insert Interval
+Pattern: Overlap Check
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying insert interval.
+Why It Matters: Baseline interval conflict detection.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Can Attend Meetings
+## 3. Merge Similar Items
 
-LeetCode:
-https://leetcode.com/problems/meeting-rooms/
+LeetCode: [Merge Similar Items](https://leetcode.com/problems/merge-similar-items/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Meeting Rooms
+Pattern: Endpoint Grouping
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying meeting rooms.
+Why It Matters: Small range-like aggregation warm-up.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 4. Merge Similar Items
-
-LeetCode:
-https://leetcode.com/problems/merge-similar-items/
-
-Difficulty:
-Easy
-
-Pattern:
-Sweep Line
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying sweep line.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Find Missing Ranges
-
-LeetCode:
-https://leetcode.com/problems/find-missing-ranges/
-
-Difficulty:
-Easy
-
-Pattern:
-Interval Scheduling
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying interval scheduling.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Teemo Attacking
-
-LeetCode:
-https://leetcode.com/problems/teemo-attacking/
-
-Difficulty:
-Easy
-
-Pattern:
-Range Query with Heap
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying range query with heap.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Employee Free Time
-
-LeetCode:
-https://leetcode.com/problems/employee-free-time/
-
-Difficulty:
-Easy
-
-Pattern:
-Merge Intervals
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying merge intervals.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Minimum Number of Arrows to Burst Balloons
-
-LeetCode:
-https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
-
-Difficulty:
-Easy
-
-Pattern:
-Insert Interval
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying insert interval.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Non-overlapping Intervals
-
-LeetCode:
-https://leetcode.com/problems/non-overlapping-intervals/
-
-Difficulty:
-Easy
-
-Pattern:
-Meeting Rooms
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying meeting rooms.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Merge Intervals
-
-LeetCode:
-https://leetcode.com/problems/merge-intervals/
-
-Difficulty:
-Easy
-
-Pattern:
-Sweep Line
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying sweep line.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 11. Insert Interval
-
-LeetCode:
-https://leetcode.com/problems/insert-interval/
-
-Difficulty:
-Easy
-
-Pattern:
-Interval Scheduling
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying interval scheduling.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 12. Interval List Intersections
-
-LeetCode:
-https://leetcode.com/problems/interval-list-intersections/
-
-Difficulty:
-Easy
-
-Pattern:
-Range Query with Heap
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying range query with heap.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 13. My Calendar I
-
-LeetCode:
-https://leetcode.com/problems/my-calendar-i/
-
-Difficulty:
-Easy
-
-Pattern:
-Merge Intervals
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying merge intervals.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 14. Remove Covered Intervals
-
-LeetCode:
-https://leetcode.com/problems/remove-covered-intervals/
-
-Difficulty:
-Easy
-
-Pattern:
-Insert Interval
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying insert interval.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 15. Partition Labels
-
-LeetCode:
-https://leetcode.com/problems/partition-labels/
-
-Difficulty:
-Easy
-
-Pattern:
-Meeting Rooms
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying meeting rooms.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../intervals/PATTERNS.md) | [Home](../README.md) | [Next](../intervals/medium.md)
+[Previous](PATTERNS.md) | [Home](../README.md) | [Next](medium.md)

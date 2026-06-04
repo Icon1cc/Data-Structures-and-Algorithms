@@ -1,121 +1,148 @@
 # 1-D Dynamic Programming
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind 1-d dynamic programming, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Define a one-dimensional state so overlapping subproblems are solved once.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-1-D Dynamic Programming problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+1-D dynamic programming teaches the central DP skill: naming what a state means before trying to code transitions.
 
-Used in pricing, scoring, string segmentation, scheduling, resource allocation, caching repeated computations, and sequential optimization.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in pricing, sequence scoring, scheduling, inventory planning, retries, resource allocation, and optimization over linear histories.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-1-D dynamic programming stores subproblem answers along one main index, amount, target, or state coordinate.
+## Beginner Intuition
 
-## Core Data Structure Or Algorithm
+DP is remembering answers to smaller versions of the same question. The hard part is choosing a state that contains enough history but not unnecessary detail.
 
-Define dp[i], seed base cases, choose a transition, and iterate in an order where dependencies are already known.
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
+
+Dynamic programming applies when optimal substructure and overlapping subproblems exist. A 1-D DP state usually depends on earlier indices or capacities.
+
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
+
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Define state | Write what dp[i] means in plain language. |
+| Choose transition | List previous states that can lead to current. |
+| Initialize base cases | Make the first states true by definition. |
+| Fill order | Compute dependencies before dependents. |
+| Compress | Keep only needed previous states when safe. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
 | Linear recurrence | O(n) |
-| Nested transition | O(n^2) |
-| Target DP | O(n times target) |
-| Memoized recursion | O(states times transition cost) |
+| Capacity DP | O(n * capacity) |
+| LIS quadratic | O(n^2) |
+| LIS with binary search | O(n log n) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Full array | O(n) |
+| Full table | O(n) or O(n * capacity) |
 | Rolling variables | O(1) |
-| Target table | O(target) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Define state | Say exactly what dp[i] means. |
-| Transition | Combine previous states. |
-| Initialize | Seed empty or first cases. |
-| Compress | Keep only recent states when safe. |
+| Memo recursion | O(states) plus call stack |
 
 ## Visual Explanation
 
 ```mermaid
 flowchart LR
-    D0[dp0] --> D1[dp1]
-    D1 --> D2[dp2]
-    D0 --> D2
-    D2 --> D3[dp3]
+    A[dp[i-2]] --> C[dp[i]]
+    B[dp[i-1]] --> C
+    C --> D[dp[i+1]]
+    C --> E[dp[i+2]]
+    F[State meaning] --> C
+    G[Transition choice] --> C
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-DP correctness is induction over states. Every transition must cover a valid way to build the current answer from smaller answers.
+State meaning drives everything. If dp[i] means best answer ending at i, the transition is different from best answer using first i items.
 
-## Common Interview Patterns
-
-- **Memoization**: Cache recursive state results so repeated subproblems are solved once.
-- **Tabulation**: Fill a DP table from base cases toward larger states.
-- **Rolling State**: Keep only the last few states required by the recurrence.
-- **House Robber Choice**: At each position, choose between taking current plus a non-adjacent state or skipping it.
-- **Coin Change**: Build answers for amounts by trying coin transitions.
-- **Longest Increasing Subsequence**: Track the best increasing sequence ending at each value, or maintain patience-sorting tails.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for count ways, min cost, max profit, can reach, choose or skip, subsequence, partition, coin change, or repeated recursion over indices.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **State Definition**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Memoization**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Tabulation**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Transition Choice**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Knapsack**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Subsequence DP**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **State Compression**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Kadane**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Coding before defining the state.
+- Mixing ending-at with up-to-index states.
+- Using wrong fill direction for 0/1 knapsack.
+- Forgetting impossible-state sentinels.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `State Definition` aloud, then write its invariant and template from memory.
+- Explain `Memoization` aloud, then write its invariant and template from memory.
+- Explain `Tabulation` aloud, then write its invariant and template from memory.
+- Explain `Transition Choice` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study Memoization in [PATTERNS.md](PATTERNS.md).
-2. Study Tabulation in [PATTERNS.md](PATTERNS.md).
-3. Study Rolling State in [PATTERNS.md](PATTERNS.md).
-4. Study House Robber Choice in [PATTERNS.md](PATTERNS.md).
-5. Study Coin Change in [PATTERNS.md](PATTERNS.md).
-6. Study Longest Increasing Subsequence in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
-8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
+1. Read `State Definition` in [PATTERNS.md](PATTERNS.md).
+2. Read `Memoization` in [PATTERNS.md](PATTERNS.md).
+3. Read `Tabulation` in [PATTERNS.md](PATTERNS.md).
+4. Read `Transition Choice` in [PATTERNS.md](PATTERNS.md).
+5. Read `Knapsack` in [PATTERNS.md](PATTERNS.md).
+6. Read `Subsequence DP` in [PATTERNS.md](PATTERNS.md).
+7. Read `State Compression` in [PATTERNS.md](PATTERNS.md).
+8. Read `Kadane` in [PATTERNS.md](PATTERNS.md).
+9. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
+10. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../advanced-graphs/README.md) | [Home](../README.md) | [Next](../1d-dp/CHEATSHEET.md)
+[Previous](../advanced-graphs/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

@@ -1,120 +1,140 @@
 # Linked List
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind linked list, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Manipulate node references safely when random access is unavailable.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Linked List problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+Linked lists test pointer discipline, mutation order, and ability to reason about head changes without array indexing.
 
-Used in LRU caches, memory allocators, undo stacks, schedulers, adjacency lists, and systems where O(1) splicing after a known node matters.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in memory allocators, LRU caches, queues, adjacency lists, undo lists, and low-level systems where splicing is cheap.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
 
-A linked list is a sequence of nodes where each node stores a value and one or more references to neighboring nodes. Unlike arrays, linked lists do not provide constant-time index access.
+## Beginner Intuition
 
-## Core Data Structure Or Algorithm
+Every operation is about links, not values. Before changing a link, know which node you still need to reach afterward.
 
-Use dummy nodes for head changes, fast and slow pointers for structural questions, and careful rewiring for reversal or splicing.
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
+
+A linked list is a sequence of nodes where each node stores data and one or more references to neighboring nodes. Access by position is O(n).
+
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
+
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Traverse | Move node by node. |
+| Insert | Redirect references around a new node. |
+| Delete | Bypass a node. |
+| Reverse | Flip next pointers while preserving the rest of the list. |
+| Detect cycle | Use relative pointer speed. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Search or access by position | O(n) |
+| Visit all nodes | O(n) |
 | Insert after known node | O(1) |
 | Delete after known node | O(1) |
-| Reverse list | O(n) |
+| Find by index | O(n) |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
-| Iterative rewiring | O(1) |
+| Iterative mutation | O(1) |
 | Recursive traversal | O(n) stack |
-| Copy with map | O(n) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Traverse | Move node by node because there is no random access. |
-| Rewire | Change next pointers in an order that never loses the remaining list. |
-| Splice | Insert or remove a segment by adjusting neighboring links. |
-| Detect cycle | Use two pointers moving at different speeds. |
+| Hash visited set | O(n) |
 
 ## Visual Explanation
 
 ```mermaid
 flowchart LR
-    A[prev] --> B[curr]
+    A[prev] --> B[current]
     B --> C[next]
-    C --> D[rest]
+    D[new or reversed link] -. carefully rewired .-> B
+    C --> E[rest of list]
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-Pointer algorithms are proved by preserving reachability. After each rewire, every node must still be reachable from either the reversed prefix or the unreversed suffix.
+A dummy head removes special cases at the real head. Fast and slow pointers encode distance without computing length first.
 
-## Common Interview Patterns
-
-- **Dummy Head**: Add a sentinel node before the real head so deleting or inserting near the head has the same logic as every other position.
-- **Fast and Slow Pointers**: Move two references at different speeds or with a fixed gap to reveal cycles, middles, and nth-from-end positions.
-- **In-place Reversal**: Reverse links one node at a time while preserving the next node before rewiring.
-- **Merge Lists**: Always attach the smaller available head from sorted lists and advance that source.
-- **Cycle Detection**: A faster pointer eventually catches a slower pointer if a cycle exists.
-- **Copy with Random Pointer**: Create a mapping from original node identity to cloned node, then wire next and random references.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for head deletion, nth from end, reverse in place, cycle, merge sorted lists, split list, random pointer, or cache eviction.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **Dummy Head**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Two Pointer Gap**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Fast And Slow Pointers**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **In-place Reversal**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Merge Lists**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Losing the rest of the list before saving next.
+- Forgetting that the head may change.
+- Creating cycles accidentally during reversal.
+- Using value swaps when node identity matters.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `Dummy Head` aloud, then write its invariant and template from memory.
+- Explain `Two Pointer Gap` aloud, then write its invariant and template from memory.
+- Explain `Fast And Slow Pointers` aloud, then write its invariant and template from memory.
+- Explain `In-place Reversal` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study Dummy Head in [PATTERNS.md](PATTERNS.md).
-2. Study Fast and Slow Pointers in [PATTERNS.md](PATTERNS.md).
-3. Study In-place Reversal in [PATTERNS.md](PATTERNS.md).
-4. Study Merge Lists in [PATTERNS.md](PATTERNS.md).
-5. Study Cycle Detection in [PATTERNS.md](PATTERNS.md).
-6. Study Copy with Random Pointer in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
-8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
+1. Read `Dummy Head` in [PATTERNS.md](PATTERNS.md).
+2. Read `Two Pointer Gap` in [PATTERNS.md](PATTERNS.md).
+3. Read `Fast And Slow Pointers` in [PATTERNS.md](PATTERNS.md).
+4. Read `In-place Reversal` in [PATTERNS.md](PATTERNS.md).
+5. Read `Merge Lists` in [PATTERNS.md](PATTERNS.md).
+6. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
+7. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../sliding-window/README.md) | [Home](../README.md) | [Next](../linked-list/CHEATSHEET.md)
+[Previous](../sliding-window/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

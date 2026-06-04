@@ -1,35 +1,44 @@
 # Binary Search Cheatsheet
 
-Fast revision notes for binary search before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
+
+## Core Definitions
+
+Binary search repeatedly narrows a monotonic range while preserving an invariant that the answer remains inside the current bounds.
 
 ## Complexity Table
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Search array | O(log n) |
-| Binary search over answer | O(log R * check) |
-| Matrix binary search | O(log(mn)) |
-| Rotated array search | O(log n) when duplicates do not break order |
+| Array search | O(log n) |
+| Answer search | O(log R * check_cost) |
+| Matrix flattened search | O(log(mn)) |
+| Rotated search without duplicate ambiguity | O(log n) |
 
-## Formulas And Invariants
+## Space Table
 
-- Define the invariant before writing loops or recursion.
-- Track exactly what state means at each step.
-- Prefer deterministic boundary rules over intuition.
-- Re-check empty input, one item, duplicate values, and maximum-size constraints.
+| Case | Complexity |
+|---|---:|
+| Iterative | O(1) |
+| Recursive | O(log n) call stack |
 
 ## Pattern Summary
 
 | Pattern | Use When |
 |---|---|
-| Classic Target Search | Use for sorted arrays and exact lookup. |
-| Lower Bound | Use for insertion point and first occurrence. |
-| Upper Bound | Use for counts, ranges, and rightmost occurrence. |
-| Search Rotated Array | Use when an originally sorted array has one rotation pivot. |
-| Binary Search on Answer | Use for capacity, speed, maximum minimum distance, and allocation. |
-| Matrix Search | Use for sorted matrices. |
+| Classic Target Search | Use when the input is sorted and any matching index is enough. |
+| Lower Bound | Use for first occurrence, insertion point, and minimum feasible answer. |
+| Upper Bound | Use for range counts and right boundary queries. |
+| Rotated Sorted Search | Use when a sorted array has one rotation pivot. |
+| Binary Search On Answer | Use for minimum capacity, speed, maximum minimum distance, and allocation. |
+| Matrix Binary Search | Use when each row continues after the previous row or row-column order supports stair-step search. |
+| Peak Search | Use for local maximum and mountain-array style problems. |
 
-## Common Templates
+## Recognition Hints
+
+Look for sorted data, first or last valid value, minimum feasible capacity, maximum allowed minimum, rotated arrays, peaks, or the phrase smallest possible maximum.
+
+## Templates
 
 ### Classic Target Search
 
@@ -37,6 +46,7 @@ Fast revision notes for binary search before interviews.
 lo, hi = 0, len(nums) - 1
 while lo <= hi:
     mid = (lo + hi) // 2
+    compare nums[mid] with target
 ```
 
 ### Lower Bound
@@ -59,26 +69,40 @@ while lo < hi:
     else: hi = mid
 ```
 
-## Recognition Hints
+### Rotated Sorted Search
 
-Look for sorted data, minimum feasible capacity, maximum allowed value, first bad version, peak, rotation, or any phrase like smallest possible maximum.
+```text
+if nums[lo] <= nums[mid]:
+    left side is sorted
+else:
+    right side is sorted
+```
 
 ## Common Traps
 
-- Infinite loops from unchanged boundaries.
-- Returning mid instead of the boundary.
 - Using binary search without a monotonic predicate.
+- Changing neither bound on equality.
+- Returning mid instead of the converged boundary.
+- Choosing low and high bounds that exclude the real answer.
 
 ## Interview Reminders
 
-- Say the brute force solution first.
-- Explain why the optimized pattern removes repeated work.
-- Test at least one normal case, one edge case, and one failure case.
-- Include auxiliary space in the final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
 
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../binary-search/README.md) | [Home](../README.md) | [Next](../binary-search/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

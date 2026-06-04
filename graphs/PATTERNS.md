@@ -1,248 +1,346 @@
 # Graphs Patterns
 
-This file is the main pattern-recognition reference for graphs. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
-
-## Pattern: BFS Traversal
-
-### Intuition
-
-Explore by distance layers from a starting node or set of sources.
-
-### When To Use It
-
-Use for shortest path in unweighted graphs and spreading processes.
-
-### When Not To Use It
-
-Do not use BFS alone for weighted shortest paths.
-
-### Recognition Signals
-
-- bfs traversal
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Number of Islands
-- Course Schedule
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-queue = deque(sources)
-while queue:
-    node = queue.popleft()
-    push unvisited neighbors
-```
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
 ## Pattern: DFS Traversal
 
-### Intuition
+### Beginner Intuition
 
-Explore one branch fully before returning to other branches.
+Explore as far as possible before backtracking.
 
 ### When To Use It
 
-Use for reachability, components, cycle checks, and flood fill.
+Use for components, cycle detection, island shape, and reachability.
 
 ### When Not To Use It
 
-Do not omit visited tracking in cyclic graphs.
+Do not use recursive DFS blindly on very deep graphs.
 
 ### Recognition Signals
 
-- dfs traversal
-- constraints match the invariant
-- brute force repeats the same decision
+- reachability
+- component
+- deep explore
 
-### Problem Examples
+### Example Problems
 
-- Course Schedule
-- Word Ladder
+- Number of Islands
+- Clone Graph
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Marking visited after recursive calls, allowing cycles to recurse forever.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 def dfs(node):
-    if node in seen: return
-    seen.add(node)
+    if node in visited: return
+    visited.add(node)
     for nei in graph[node]: dfs(nei)
 ```
 
-## Pattern: Connected Components
+### Complexity Notes
 
-### Intuition
+O(V + E) time, O(V) space.
 
-Start traversal from every unvisited node and count or label each independent region.
+### Interview Explanation
+
+Visited prevents repeat work and makes cycles safe.
+
+## Pattern: BFS Traversal
+
+### Beginner Intuition
+
+Explore nodes in distance layers from the start.
 
 ### When To Use It
 
-Use for islands, provinces, account groups, and disconnected graphs.
+Use for shortest path in unweighted graphs and level spread.
 
 ### When Not To Use It
 
-Do not assume one source reaches every node.
+Do not use DFS when minimum edge count is required.
 
 ### Recognition Signals
 
-- connected components
-- constraints match the invariant
-- brute force repeats the same decision
+- shortest unweighted
+- level
+- queue
 
-### Problem Examples
+### Example Problems
 
+- Rotting Oranges
 - Word Ladder
-- Number of Islands
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Marking visited on pop instead of enqueue, causing duplicates.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-count = 0
+queue = deque([start])
+visited = {start}
+while queue:
+    node = queue.popleft()
+    for nei in graph[node]: enqueue unseen
+```
+
+### Complexity Notes
+
+O(V + E) time, O(V) space.
+
+### Interview Explanation
+
+The first time BFS reaches a node is the shortest unweighted distance.
+
+## Pattern: Connected Components
+
+### Beginner Intuition
+
+Restart traversal from every unvisited node and count or collect groups.
+
+### When To Use It
+
+Use for islands, provinces, and disconnected graphs.
+
+### When Not To Use It
+
+Do not assume a graph is connected unless stated.
+
+### Recognition Signals
+
+- components
+- provinces
+- islands
+
+### Example Problems
+
+- Number of Connected Components in an Undirected Graph
+- Number of Provinces
+
+### Common Mistakes
+
+- Forgetting to scan every node after one traversal.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
 for node in nodes:
-    if node not in seen:
-        count += 1
+    if node not in visited:
+        components += 1
         dfs(node)
 ```
 
-## Pattern: Grid Graphs
+### Complexity Notes
 
-### Intuition
+O(V + E) time.
 
-Treat each cell as a node and neighboring cells as edges.
+### Interview Explanation
 
-### When To Use It
+Each restart discovers exactly one previously unseen component.
 
-Use for islands, surrounded regions, walls, and matrix shortest paths.
+## Pattern: Cycle Detection
 
-### When Not To Use It
+### Beginner Intuition
 
-Do not build explicit adjacency lists unless they simplify the problem.
-
-### Recognition Signals
-
-- grid graphs
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Number of Islands
-- Course Schedule
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-for dr, dc in directions:
-    nr, nc = r + dr, c + dc
-    if in_bounds(nr, nc): visit
-```
-
-## Pattern: Union Find
-
-### Intuition
-
-Maintain component parents and merge sets as edges arrive.
+Track visiting state or parent relationships to detect cycles.
 
 ### When To Use It
 
-Use for connectivity, redundant edges, MST, and grouping.
+Use for directed course prerequisites and undirected graph validation.
 
 ### When Not To Use It
 
-Do not use it when path order or shortest path is required.
+Do not use the same rule for directed and undirected cycles.
 
 ### Recognition Signals
 
-- union find
-- constraints match the invariant
-- brute force repeats the same decision
+- cycle
+- visiting
+- prerequisites
+- parent
 
-### Problem Examples
+### Example Problems
 
 - Course Schedule
-- Word Ladder
+- Graph Valid Tree
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Treating an undirected edge back to parent as a cycle.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-def find(x):
-    if parent[x] != x: parent[x] = find(parent[x])
-    return parent[x]
-def union(a, b): parent[find(a)] = find(b)
+state: 0 unseen, 1 visiting, 2 done
+if neighbor is visiting: cycle
 ```
+
+### Complexity Notes
+
+O(V + E) time, O(V) space.
+
+### Interview Explanation
+
+A directed cycle exists when DFS reaches a node already on the current recursion path.
 
 ## Pattern: Topological Sort
 
-### Intuition
+### Beginner Intuition
 
-Process nodes only after all prerequisites have been removed.
+Order DAG nodes so every prerequisite appears before dependents.
 
 ### When To Use It
 
-Use for course schedules, build order, and DAG processing.
+Use for scheduling, course order, build dependencies, and alien dictionary.
 
 ### When Not To Use It
 
-Do not expect a full order if the directed graph has a cycle.
+Do not use topological sort if cycles are allowed in a valid answer.
 
 ### Recognition Signals
 
-- topological sort
-- constraints match the invariant
-- brute force repeats the same decision
+- DAG
+- prerequisites
+- dependency order
 
-### Problem Examples
+### Example Problems
 
-- Word Ladder
-- Number of Islands
+- Course Schedule II
+- Alien Dictionary
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Not detecting that fewer output nodes than total means a cycle.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 queue = nodes with indegree 0
 while queue:
     node = pop
-    reduce indegree of neighbors
+    for nei in graph[node]: reduce indegree
 ```
+
+### Complexity Notes
+
+O(V + E) time, O(V) space.
+
+### Interview Explanation
+
+Indegree zero nodes have no remaining prerequisites, so they are safe next.
+
+## Pattern: Union Find
+
+### Beginner Intuition
+
+Maintain components under edge additions with parent pointers.
+
+### When To Use It
+
+Use for connectivity queries, redundant edges, and MST Kruskal.
+
+### When Not To Use It
+
+Do not use when you need actual path order or shortest distance.
+
+### Recognition Signals
+
+- connectivity
+- union
+- components
+- redundant
+
+### Example Problems
+
+- Redundant Connection
+- Accounts Merge
+
+### Common Mistakes
+
+- Forgetting path compression or union by rank on large inputs.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+def find(x):
+    if parent[x] != x: parent[x] = find(parent[x])
+    return parent[x]
+def union(a, b): connect roots
+```
+
+### Complexity Notes
+
+Almost O(1) amortized per operation.
+
+### Interview Explanation
+
+Union Find answers whether two nodes already belong to the same component.
+
+## Pattern: Grid Graph BFS
+
+### Beginner Intuition
+
+Treat each cell as a node and legal moves as edges.
+
+### When To Use It
+
+Use for islands, rotting spread, walls and gates, and shortest grid paths.
+
+### When Not To Use It
+
+Do not build an explicit graph when neighbor generation is simple.
+
+### Recognition Signals
+
+- grid
+- cells
+- four directions
+- shortest spread
+
+### Example Problems
+
+- Flood Fill
+- Shortest Path in Binary Matrix
+
+### Common Mistakes
+
+- Mixing row and column bounds.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+for dr, dc in directions:
+    nr, nc = r + dr, c + dc
+    if inside and valid: visit
+```
+
+### Complexity Notes
+
+O(rows * cols) time and space.
+
+### Interview Explanation
+
+The grid is the graph, so neighbor generation replaces adjacency construction.
+
 ---
 
 ## Navigation
 
-[Previous](../graphs/CHEATSHEET.md) | [Home](../README.md) | [Next](../graphs/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

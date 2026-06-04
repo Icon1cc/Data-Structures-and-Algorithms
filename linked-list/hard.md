@@ -1,250 +1,93 @@
 # Linked List Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Merge k Sorted Lists
 
-LeetCode:
-https://leetcode.com/problems/merge-k-sorted-lists/
+LeetCode: [Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Dummy Head
+Pattern: Heap Or Divide And Conquer Merge
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying dummy head.
+Why It Matters: Classic multi-list merge problem.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 2. Reverse Nodes in k-Group
 
-LeetCode:
-https://leetcode.com/problems/reverse-nodes-in-k-group/
+LeetCode: [Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Fast and Slow Pointers
+Pattern: Grouped Reversal
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying fast and slow pointers.
+Why It Matters: Tests reversal boundaries and incomplete groups.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 3. LFU Cache
 
-LeetCode:
-https://leetcode.com/problems/lfu-cache/
+LeetCode: [LFU Cache](https://leetcode.com/problems/lfu-cache/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-In-place Reversal
+Pattern: Frequency Lists
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying in-place reversal.
+Why It Matters: Advanced cache design with linked buckets.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. All O One Data Structure
+## 4. All O(1) Data Structure
 
-LeetCode:
-https://leetcode.com/problems/all-oone-data-structure/
+LeetCode: [All O(1) Data Structure](https://leetcode.com/problems/all-oone-data-structure/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Merge Lists
+Pattern: Bucketed Doubly Linked List
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying merge lists.
+Why It Matters: Maintains counts with O(1) key moves.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Design Skiplist
-
-LeetCode:
-https://leetcode.com/problems/design-skiplist/
-
-Difficulty:
-Hard
-
-Pattern:
-Cycle Detection
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying cycle detection.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Design a Text Editor
-
-LeetCode:
-https://leetcode.com/problems/design-a-text-editor/
-
-Difficulty:
-Hard
-
-Pattern:
-Copy with Random Pointer
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying copy with random pointer.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Dinner Plate Stacks
-
-LeetCode:
-https://leetcode.com/problems/dinner-plate-stacks/
-
-Difficulty:
-Hard
-
-Pattern:
-Dummy Head
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying dummy head.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Find Median from Data Stream
-
-LeetCode:
-https://leetcode.com/problems/find-median-from-data-stream/
-
-Difficulty:
-Hard
-
-Pattern:
-Fast and Slow Pointers
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying fast and slow pointers.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Serialize and Deserialize Binary Tree
-
-LeetCode:
-https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
-
-Difficulty:
-Hard
-
-Pattern:
-In-place Reversal
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying in-place reversal.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Copy List with Random Pointer
-
-LeetCode:
-https://leetcode.com/problems/copy-list-with-random-pointer/
-
-Difficulty:
-Hard
-
-Pattern:
-Merge Lists
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying merge lists.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../linked-list/medium.md) | [Home](../README.md) | [Next](../trees/README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

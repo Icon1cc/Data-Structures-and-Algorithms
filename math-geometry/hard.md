@@ -1,250 +1,93 @@
 # Math & Geometry Hard Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Max Points on a Line
 
-LeetCode:
-https://leetcode.com/problems/max-points-on-a-line/
+LeetCode: [Max Points on a Line](https://leetcode.com/problems/max-points-on-a-line/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Modulo Arithmetic
+Pattern: Coordinate Geometry
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying modulo arithmetic.
+Why It Matters: Uses normalized slopes and duplicate handling.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 2. Erect the Fence
+## 2. Basic Calculator
 
-LeetCode:
-https://leetcode.com/problems/erect-the-fence/
+LeetCode: [Basic Calculator](https://leetcode.com/problems/basic-calculator/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-GCD and Number Theory
+Pattern: Expression Arithmetic
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying gcd and number theory.
+Why It Matters: Tests parsing arithmetic state.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 3. Basic Calculator
+## 3. Erect the Fence
 
-LeetCode:
-https://leetcode.com/problems/basic-calculator/
+LeetCode: [Erect the Fence](https://leetcode.com/problems/erect-the-fence/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Matrix Traversal
+Pattern: Convex Hull
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying matrix traversal.
+Why It Matters: Classic orientation and hull problem.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Integer to English Words
+## 4. Rectangle Area II
 
-LeetCode:
-https://leetcode.com/problems/integer-to-english-words/
+LeetCode: [Rectangle Area II](https://leetcode.com/problems/rectangle-area-ii/)
 
-Difficulty:
-Hard
+Difficulty: Hard
 
-Pattern:
-Coordinate Hashing
+Pattern: Sweep Line Geometry
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying coordinate hashing.
+Why It Matters: Combines coordinate compression with area accumulation.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 5. Self Crossing
-
-LeetCode:
-https://leetcode.com/problems/self-crossing/
-
-Difficulty:
-Hard
-
-Pattern:
-Line and Slope
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying line and slope.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Perfect Rectangle
-
-LeetCode:
-https://leetcode.com/problems/perfect-rectangle/
-
-Difficulty:
-Hard
-
-Pattern:
-Geometry Simulation
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying geometry simulation.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Random Pick with Blacklist
-
-LeetCode:
-https://leetcode.com/problems/random-pick-with-blacklist/
-
-Difficulty:
-Hard
-
-Pattern:
-Modulo Arithmetic
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying modulo arithmetic.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Reaching Points
-
-LeetCode:
-https://leetcode.com/problems/reaching-points/
-
-Difficulty:
-Hard
-
-Pattern:
-GCD and Number Theory
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying gcd and number theory.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Rectangle Area II
-
-LeetCode:
-https://leetcode.com/problems/rectangle-area-ii/
-
-Difficulty:
-Hard
-
-Pattern:
-Matrix Traversal
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying matrix traversal.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Minimum Area Rectangle II
-
-LeetCode:
-https://leetcode.com/problems/minimum-area-rectangle-ii/
-
-Difficulty:
-Hard
-
-Pattern:
-Coordinate Hashing
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying coordinate hashing.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../math-geometry/medium.md) | [Home](../README.md) | [Next](../README.md)
+[Previous](medium.md) | [Home](../README.md) | [Next](../REPO_INDEX.md)

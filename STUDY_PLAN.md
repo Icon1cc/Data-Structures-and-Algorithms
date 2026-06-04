@@ -1,78 +1,86 @@
 # Study Plan
 
-Choose one plan based on your deadline. The plans assume consistent daily practice, written mistake review, and weekly timed sessions.
+Choose a plan based on deadline and background. A problem only counts when you can explain the invariant, edge cases, and complexity one week later.
+
+## Daily Routine
+
+- 10 minutes: review one cheatsheet or one missed invariant.
+- 45 to 90 minutes: solve one to three problems.
+- 10 minutes: write what failed, even when the final solution passed.
+- Twice per week: do one timed 45-minute problem with verbal explanation.
 
 ## 8-Week Interview Sprint
 
-| Week | Topics | Exercises | Problem Targets | Revision Goals |
-|---|---|---|---|---|
-| Week 1 | Arrays & Hashing, Two Pointers | Implement frequency maps, prefix sums, pair search, and palindrome checks from memory. | 35 to 45 problems | Review duplicate, anagram, and pointer movement mistakes. |
-| Week 2 | Stack, Binary Search | Practice monotonic stack and lower-bound templates. | 30 to 40 problems | Redo missed boundary and stack-empty cases. |
-| Week 3 | Sliding Window, Linked List | Implement fixed and variable windows, dummy nodes, reversal, and cycle detection. | 35 to 45 problems | Replay all failed window shrink cases. |
-| Week 4 | Trees | Practice recursive DFS, BFS, BST bounds, and LCA. | 30 to 40 problems | Write recursive return contracts before coding. |
-| Week 5 | Graphs | Practice BFS, DFS, components, topological sort, and Union Find. | 35 to 45 problems | Redo visited-state and edge-direction mistakes. |
-| Week 6 | Heap, Backtracking, Tries | Practice top-k, k-way merge, choose/explore/unchoose, and prefix pruning. | 35 to 45 problems | Review recursion state and heap ordering errors. |
-| Week 7 | 1-D DP, 2-D DP | Define states, transitions, base cases, and fill order for every problem. | 30 to 40 problems | Rewrite recurrences from memory. |
-| Week 8 | Greedy, Intervals, Bits, Math | Practice proof sketches, sweep line, masks, and numeric edge cases. | 30 to 40 problems | Run three mock interviews and retry old misses. |
+| Week | Topics | Problem Targets | Weekly Goal |
+|---|---|---:|---|
+| Week 1 | Arrays & Hashing, Two Pointers | 45 to 55 | Counts, lookup, prefix sums, sorted pair search, compaction. |
+| Week 2 | Stack, Binary Search | 40 to 50 | Monotonic stack, lower bound, answer search, boundary tests. |
+| Week 3 | Sliding Window, Linked List | 45 to 55 | Fixed/variable windows, dummy nodes, reversal, cycles. |
+| Week 4 | Trees | 35 to 45 | DFS contracts, BFS levels, BST bounds, LCA. |
+| Week 5 | Graphs | 40 to 50 | BFS, DFS, components, cycles, topological sort, Union Find. |
+| Week 6 | Heap, Backtracking, Tries | 40 to 50 | Top-k, k-way merge, choose/explore/unchoose, prefix pruning. |
+| Week 7 | 1-D DP, 2-D DP | 35 to 45 | State definition, base cases, transitions, fill order. |
+| Week 8 | Greedy, Intervals, Bits, Math | 35 to 45 | Proof sketches, endpoint logic, masks, numeric edge cases. |
 
 ## 12-Week Balanced Plan
 
-| Week | Topics | Exercises | Problem Targets | Revision Goals |
-|---|---|---|---|---|
-| Week 1 | Arrays & Hashing | Counts, sets, prefix sums, grouping. | 25 to 35 problems | Build first mistake log. |
-| Week 2 | Two Pointers, Sliding Window | Pointer invariants and window state. | 30 to 40 problems | Redo all off-by-one failures. |
-| Week 3 | Stack, Binary Search | Monotonic stacks and answer search. | 30 to 40 problems | Memorize lower-bound template. |
-| Week 4 | Linked List | Dummy nodes, reversal, cycles, merge. | 25 to 35 problems | Test empty, one-node, and head-change cases. |
-| Week 5 | Trees | DFS, BFS, BST, LCA. | 35 to 45 problems | Practice verbal recursive contracts. |
-| Week 6 | Tries, Heap | Prefix tree, top-k, two heaps. | 30 to 40 problems | Review memory and comparator choices. |
-| Week 7 | Backtracking | Subsets, permutations, constraints, board DFS. | 25 to 35 problems | Check choose and undo discipline. |
-| Week 8 | Graphs | BFS, DFS, components, grid graphs, topological sort. | 35 to 45 problems | Rebuild graph representations from raw input. |
-| Week 9 | Advanced Graphs | Dijkstra, MST, bridges, DAG DP. | 20 to 30 problems | Write algorithm selection rules. |
-| Week 10 | 1-D DP | Memoization, tabulation, LIS, knapsack basics. | 30 to 40 problems | Redo state definitions without code. |
-| Week 11 | 2-D DP | String DP, grid DP, interval DP. | 25 to 35 problems | Review table initialization. |
-| Week 12 | Greedy, Intervals, Bits, Math | Proofs, sweep lines, masks, formulas. | 35 to 45 problems | Complete two full mock interviews. |
+| Week | Topics | Problem Targets | Weekly Goal |
+|---|---|---:|---|
+| Week 1 | Arrays & Hashing | 25 to 35 | Frequency maps, prefix sums, grouping. |
+| Week 2 | Two Pointers, Sliding Window | 30 to 40 | Pointer movement, shrink rules, at-most-k windows. |
+| Week 3 | Stack, Binary Search | 30 to 40 | Monotonic stacks and lower-bound templates. |
+| Week 4 | Linked List | 25 to 35 | Dummy nodes, reversal, nth from end, random pointers. |
+| Week 5 | Trees | 35 to 45 | Recursive returns, BFS, BST, path problems. |
+| Week 6 | Tries, Heap | 30 to 40 | Prefix storage, top-k, median, merge. |
+| Week 7 | Backtracking | 25 to 35 | Subsets, combinations, permutations, board DFS. |
+| Week 8 | Graphs | 35 to 45 | Traversal, components, cycle detection, topo sort. |
+| Week 9 | Advanced Graphs | 20 to 30 | Dijkstra, Bellman-Ford, MST, low-link. |
+| Week 10 | 1-D DP | 30 to 40 | Memoization, tabulation, knapsack, LIS. |
+| Week 11 | 2-D DP | 25 to 35 | Grid, string, interval, compression. |
+| Week 12 | Greedy, Intervals, Bits, Math | 35 to 45 | Proofs, sweeps, bit masks, formulas. |
 
 ## 24-Week Deep Mastery Plan
 
-| Week | Topics | Exercises | Problem Targets | Revision Goals |
-|---|---|---|---|---|
-| Week 1 | Arrays & Hashing | Deep read Arrays and Hashing, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Arrays & Hashing mistakes and add one mock segment. |
-| Week 2 | Two Pointers | Deep read Two Pointers, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Two Pointers mistakes and add one mock segment. |
-| Week 3 | Stack | Deep read Stack, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Stack mistakes and add one mock segment. |
-| Week 4 | Binary Search | Deep read Binary Search, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Binary Search mistakes and add one mock segment. |
-| Week 5 | Sliding Window | Deep read Sliding Window, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Sliding Window mistakes and add one mock segment. |
-| Week 6 | Linked List | Deep read Linked List, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Linked List mistakes and add one mock segment. |
-| Week 7 | Trees | Deep read Trees, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Trees mistakes and add one mock segment. |
-| Week 8 | Tries | Deep read Tries, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Tries mistakes and add one mock segment. |
-| Week 9 | Heap / Priority Queue | Deep read Heap and Priority Queue, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Heap / Priority Queue mistakes and add one mock segment. |
-| Week 10 | Backtracking | Deep read Backtracking, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Backtracking mistakes and add one mock segment. |
-| Week 11 | Graphs | Deep read Graphs, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Graphs mistakes and add one mock segment. |
-| Week 12 | Advanced Graphs | Deep read Advanced Graphs, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Advanced Graphs mistakes and add one mock segment. |
-| Week 13 | 1-D Dynamic Programming | Deep read 1-D Dynamic Programming, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older 1-D Dynamic Programming mistakes and add one mock segment. |
-| Week 14 | 2-D Dynamic Programming | Deep read 2-D Dynamic Programming, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older 2-D Dynamic Programming mistakes and add one mock segment. |
-| Week 15 | Greedy | Deep read Greedy, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Greedy mistakes and add one mock segment. |
-| Week 16 | Intervals | Deep read Intervals, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Intervals mistakes and add one mock segment. |
-| Week 17 | Bit Manipulation | Deep read Bit Manipulation, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Bit Manipulation mistakes and add one mock segment. |
-| Week 18 | Math & Geometry | Deep read Math and Geometry, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Math & Geometry mistakes and add one mock segment. |
-| Week 19 | Arrays & Hashing | Deep read Arrays and Hashing, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Arrays & Hashing mistakes and add one mock segment. |
-| Week 20 | Two Pointers | Deep read Two Pointers, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Two Pointers mistakes and add one mock segment. |
-| Week 21 | Stack | Deep read Stack, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Stack mistakes and add one mock segment. |
-| Week 22 | Binary Search | Deep read Binary Search, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Binary Search mistakes and add one mock segment. |
-| Week 23 | Sliding Window | Deep read Sliding Window, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Sliding Window mistakes and add one mock segment. |
-| Week 24 | Linked List | Deep read Linked List, implement core templates, and explain each invariant. | 15 to 25 problems | Retry older Linked List mistakes and add one mock segment. |
+| Week | Topic | Problem Targets | Weekly Goal |
+|---|---|---:|---|
+| Week 1 | Arrays & Hashing | 12 to 20 | Deep read Arrays & Hashing, solve deliberately, then retry misses one week later. |
+| Week 2 | Two Pointers | 12 to 20 | Deep read Two Pointers, solve deliberately, then retry misses one week later. |
+| Week 3 | Stack | 12 to 20 | Deep read Stack, solve deliberately, then retry misses one week later. |
+| Week 4 | Binary Search | 12 to 20 | Deep read Binary Search, solve deliberately, then retry misses one week later. |
+| Week 5 | Sliding Window | 12 to 20 | Deep read Sliding Window, solve deliberately, then retry misses one week later. |
+| Week 6 | Linked List | 12 to 20 | Deep read Linked List, solve deliberately, then retry misses one week later. |
+| Week 7 | Trees | 12 to 20 | Deep read Trees, solve deliberately, then retry misses one week later. |
+| Week 8 | Tries | 12 to 20 | Deep read Tries, solve deliberately, then retry misses one week later. |
+| Week 9 | Heap / Priority Queue | 12 to 20 | Deep read Heap / Priority Queue, solve deliberately, then retry misses one week later. |
+| Week 10 | Backtracking | 12 to 20 | Deep read Backtracking, solve deliberately, then retry misses one week later. |
+| Week 11 | Graphs | 12 to 20 | Deep read Graphs, solve deliberately, then retry misses one week later. |
+| Week 12 | Advanced Graphs | 12 to 20 | Deep read Advanced Graphs, solve deliberately, then retry misses one week later. |
+| Week 13 | 1-D Dynamic Programming | 12 to 20 | Deep read 1-D Dynamic Programming, solve deliberately, then retry misses one week later. |
+| Week 14 | 2-D Dynamic Programming | 12 to 20 | Deep read 2-D Dynamic Programming, solve deliberately, then retry misses one week later. |
+| Week 15 | Greedy | 12 to 20 | Deep read Greedy, solve deliberately, then retry misses one week later. |
+| Week 16 | Intervals | 12 to 20 | Deep read Intervals, solve deliberately, then retry misses one week later. |
+| Week 17 | Bit Manipulation | 12 to 20 | Deep read Bit Manipulation, solve deliberately, then retry misses one week later. |
+| Week 18 | Math & Geometry | 12 to 20 | Deep read Math & Geometry, solve deliberately, then retry misses one week later. |
+| Week 19 | Arrays & Hashing | 12 to 20 | Deep read Arrays & Hashing, solve deliberately, then retry misses one week later. |
+| Week 20 | Two Pointers | 12 to 20 | Deep read Two Pointers, solve deliberately, then retry misses one week later. |
+| Week 21 | Stack | 12 to 20 | Deep read Stack, solve deliberately, then retry misses one week later. |
+| Week 22 | Binary Search | 12 to 20 | Deep read Binary Search, solve deliberately, then retry misses one week later. |
+| Week 23 | Sliding Window | 12 to 20 | Deep read Sliding Window, solve deliberately, then retry misses one week later. |
+| Week 24 | Linked List | 12 to 20 | Deep read Linked List, solve deliberately, then retry misses one week later. |
 
-## Weekly Review Routine
+## Revision Strategy
 
-- Re-solve three missed problems without looking at notes.
-- Rewrite one pattern template from memory.
-- Explain one topic aloud in five minutes.
-- Do one timed 45-minute problem once you can solve Medium problems untimed.
-- Record the bug type for every failed attempt: misunderstanding, pattern miss, invariant bug, implementation bug, or complexity miss.
+- Redo missed problems after 2 days, 7 days, and 21 days.
+- Keep a mistake log with: topic, pattern, missed signal, bug type, edge case, and corrected invariant.
+- Once per week, explain one topic README aloud without looking.
+- Once per week, write three pattern templates from memory.
+- In the final two weeks before interviews, favor mixed-topic timed sets over learning new hard topics.
 
-## Problem Target Guidance
+## Mock Interview Strategy
 
-Quality matters more than raw count. A problem is complete only when you can solve it again one week later, explain why the pattern fits, and test meaningful edge cases.
-
+- Start mock interviews after you can solve Medium problems untimed in at least five core topics.
+- Use one mock for communication and one mock for speed each week.
+- Review recordings or notes for silence, unclear invariants, rushed edge cases, and inaccurate complexity.
 
 ---
 

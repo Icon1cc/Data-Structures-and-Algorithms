@@ -1,77 +1,138 @@
 # Two Pointers Patterns
 
-Patterns are the bridge between theory and interview execution. Read these before solving the curated problems.
-## Pattern: Opposite Ends
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
-### Intuition
+## Pattern: Opposite Direction Pointers
 
-Use left and right boundaries that move inward.
+### Beginner Intuition
+
+Start at both ends and discard one side based on a monotonic comparison.
 
 ### When To Use It
 
-Use for palindromes, sorted pair sums, and area problems.
+Use for sorted pair search, palindromes, and container-style bounds.
 
 ### When Not To Use It
 
-Do not use when valid candidates are not ordered by either end.
+Do not use if moving one side cannot be justified by an ordering rule.
 
 ### Recognition Signals
 
+- sorted
+- pair
 - palindrome
-- both ends
-- sorted pair
-- container
+- ends
 
-### Problem Examples
+### Example Problems
 
 - Valid Palindrome
+- Two Sum II
 - Container With Most Water
 
 ### Common Mistakes
 
-- Moving the wrong limiting side
-- Skipping duplicate handling
+- Moving the pointer with the larger value in container problems.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-left, right = 0, len(a) - 1
+left, right = 0, len(nums) - 1
 while left < right:
-    # inspect a[left], a[right]
-    left += 1 or right -= 1
+    decide using nums[left], nums[right]
 ```
 
-## Pattern: Fast and Slow
+### Complexity Notes
 
-### Intuition
+O(n) time and O(1) space.
 
-Move two pointers at different speeds to reveal structure.
+### Interview Explanation
+
+I can discard one endpoint because no candidate using it can beat the remaining search space.
+
+## Pattern: Same Direction Pointers
+
+### Beginner Intuition
+
+Use a read pointer to scan and a write pointer to compact or build a valid prefix.
 
 ### When To Use It
 
-Use for cycles, middle nodes, and nth-from-end gaps.
+Use for remove duplicates, move zeroes, and stable filtering.
 
 ### When Not To Use It
 
-Do not use when random access indices are simpler and available.
+Do not use when relative order does not matter and partitioning is simpler.
+
+### Recognition Signals
+
+- read write
+- compact
+- remove in place
+
+### Example Problems
+
+- Remove Duplicates from Sorted Array
+- Move Zeroes
+
+### Common Mistakes
+
+- Incrementing write before the assignment is complete.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+write = 0
+for read, value in enumerate(nums):
+    if keep(value):
+        nums[write] = value
+        write += 1
+```
+
+### Complexity Notes
+
+O(n) time and O(1) extra space.
+
+### Interview Explanation
+
+I maintain that everything before write is already valid.
+
+## Pattern: Fast And Slow Pointers
+
+### Beginner Intuition
+
+Move pointers at different speeds to encode distance or detect cycles.
+
+### When To Use It
+
+Use for middle node, cycle detection, nth from end, and duplicate-as-cycle tricks.
+
+### When Not To Use It
+
+Do not use if the structure has no linked movement or next relation.
 
 ### Recognition Signals
 
 - cycle
 - middle
 - nth from end
+- tortoise hare
 
-### Problem Examples
+### Example Problems
 
 - Linked List Cycle
-- Middle of the Linked List
+- Find the Duplicate Number
 
 ### Common Mistakes
 
-- Dereferencing null fast.next
-- Starting phase two incorrectly
+- Failing to separate cycle detection from locating the cycle entrance.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 slow = fast = head
@@ -80,160 +141,112 @@ while fast and fast.next:
     fast = fast.next.next
 ```
 
-## Pattern: Sorted Pair Search
+### Complexity Notes
 
-### Intuition
+O(n) time and O(1) space.
 
-Sort, then move pointers based on whether the current sum is too small or large.
+### Interview Explanation
+
+The faster pointer creates a provable distance relationship without extra storage.
+
+## Pattern: Partitioning
+
+### Beginner Intuition
+
+Maintain regions such as less than, equal to, and greater than while scanning.
 
 ### When To Use It
 
-Use for 2Sum variants, 3Sum, 4Sum, and triangle checks.
+Use for sort colors, quickselect partitions, and Dutch national flag problems.
 
 ### When Not To Use It
 
-Do not use when original indices must be preserved unless you store them.
+Do not use if stable ordering is required and the swaps would break it.
 
 ### Recognition Signals
 
-- pair sum
-- triplets
-- sorted array
+- three regions
+- colors
+- pivot
+- in place
 
-### Problem Examples
+### Example Problems
 
-- 3Sum
-- Two Sum II
+- Sort Colors
+- Partition List
 
 ### Common Mistakes
 
-- Not skipping duplicates
-- Returning sorted positions instead of original indices
+- Advancing the current pointer after swapping with an unknown region.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-nums.sort()
-left, right = i + 1, len(nums) - 1
-while left < right:
-    s = nums[i] + nums[left] + nums[right]
+low = mid = 0
+high = len(nums) - 1
+while mid <= high:
+    partition nums[mid]
 ```
 
-## Pattern: Merge Pointers
+### Complexity Notes
 
-### Intuition
+O(n) time and O(1) space.
 
-Advance through multiple sorted sources in order.
+### Interview Explanation
+
+I define the meaning of each region before coding so pointer moves are mechanical.
+
+## Pattern: Merge From End
+
+### Beginner Intuition
+
+Fill the output from the back to avoid overwriting unread values.
 
 ### When To Use It
 
-Use for merging arrays, intervals, lists, or streams.
+Use when one array has extra capacity at the end.
 
 ### When Not To Use It
 
-Do not use when data is unsorted and no ordering invariant exists.
+Do not use when output order or memory layout does not protect unread values.
 
 ### Recognition Signals
 
 - merge sorted
-- two sorted lists
-- intersection
+- extra space at end
+- overwrite risk
 
-### Problem Examples
+### Example Problems
 
 - Merge Sorted Array
-- Interval List Intersections
+- Squares of a Sorted Array
 
 ### Common Mistakes
 
-- Dropping tail elements
-- Incorrect tie handling
+- Writing from the front and destroying needed values.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
-
-```text
-while i < len(a) and j < len(b):
-    take smaller next item
-```
-
-## Pattern: Partition Pointers
-
-### Intuition
-
-Maintain regions for values already classified.
-
-### When To Use It
-
-Use for Dutch national flag, remove element, and compaction.
-
-### When Not To Use It
-
-Do not use when stable ordering is required and swaps break it.
-
-### Recognition Signals
-
-- partition
-- sort colors
-- remove in place
-
-### Problem Examples
-
-- Sort Colors
-- Remove Element
-
-### Common Mistakes
-
-- Advancing after swap before inspecting new value
-- Breaking stable order requirements
-
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-low = mid = 0; high = len(nums) - 1
-while mid <= high:
-    classify nums[mid]
+i, j, w = m - 1, n - 1, m + n - 1
+while j >= 0:
+    place larger value at w
 ```
 
-## Pattern: Cycle Detection
+### Complexity Notes
 
-### Intuition
+O(n + m) time and O(1) extra space.
 
-Detect loops by comparing a fast pointer and a slow pointer.
+### Interview Explanation
 
-### When To Use It
-
-Use for linked-list cycles and functional graphs.
-
-### When Not To Use It
-
-Do not use when graph nodes have many outgoing edges without adaptation.
-
-### Recognition Signals
-
-- cycle
-- repeated state
-- functional graph
-
-### Problem Examples
-
-- Linked List Cycle II
-- Find the Duplicate Number
-
-### Common Mistakes
-
-- Stopping too early
-- Not resetting one pointer to head for entry detection
-
-### Reusable Template Or Pseudocode
-
-```text
-slow = f(x); fast = f(f(x))
-while slow != fast:
-    slow = f(slow); fast = f(f(fast))
-```
+I fill from the back because the largest remaining value belongs at the last open slot.
 
 ---
 
 ## Navigation
 
-[Previous](../two-pointers/CHEATSHEET.md) | [Home](../README.md) | [Next](../two-pointers/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

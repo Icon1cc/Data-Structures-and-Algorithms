@@ -1,120 +1,144 @@
 # Bit Manipulation
 
-## What You Will Learn
+## What This Topic Is
 
-You will learn the core model behind bit manipulation, the operations it supports, the patterns that interviewers commonly test, and the recognition signals that tell you this topic is being tested.
+Use binary representation directly for sets, parity, masks, and low-level arithmetic.
 
-## Why This Topic Matters
+This topic is a reusable mental model, not a bag of isolated tricks. You should finish it able to identify the problem shape, state the invariant, choose the right pattern, and explain the complexity without guessing.
 
-Bit Manipulation problems test whether you can turn a prompt into a precise state model. The best solutions are usually short once the invariant is clear.
+## Why It Matters
 
-## Real World Usage
+Bit problems test fundamentals: XOR cancellation, shifts, masks, two's complement, and whether you can reason without decimal intuition.
 
-Used in permissions, compression, networking, graphics, embedded systems, bloom filters, and compact feature flags.
+In interviews, the story usually hides the structure. Translate the story into operations: lookup, move a boundary, traverse, choose, relax, split, merge, or remember a state.
 
-## Intuition
+## Real-World Use
 
-Ask what information must be remembered after each step. If you can name that state and explain why it is enough, the implementation becomes much safer.
+Used in permissions, compression, cryptography primitives, networking flags, embedded systems, bitmap indexes, and performance-sensitive state sets.
 
-## Formal Definition
+The same ideas show up in production systems when constraints demand predictable lookup, bounded memory, fast traversal, or correct ordering.
+
+## Beginner Intuition
+
+A bit is a yes/no slot. A mask lets one integer store many yes/no facts, and bitwise operations update many slots at once.
+
+Beginner rule: before coding, write one sentence that says what information your algorithm keeps and why that information is enough for the next decision.
+
+## Formal Explanation
 
 Bit manipulation operates on the binary representation of integers using AND, OR, XOR, NOT, shifts, and masks.
 
-## Core Data Structure Or Algorithm
+The formal model matters because it tells you which operations are cheap, which are expensive, and which assumptions are required for correctness.
 
-Use masks to represent sets, XOR to cancel pairs, shifts to inspect positions, and bit DP when the chosen set is part of state.
+## Core Operations
+
+| Operation | Meaning |
+|---|---|
+| Set bit | OR with a mask. |
+| Clear bit | AND with inverse mask. |
+| Toggle bit | XOR with a mask. |
+| Test bit | AND and compare with zero. |
+| Extract low bit | x & -x. |
+| Count bits | Repeatedly clear low set bit or use DP. |
 
 ## Time Complexity
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Single bit op | O(1) |
-| Scan word bits | O(word size) |
-| Enumerate subsets | O(2^n) |
-| Bitmask DP | O(2^n times n) common |
+| Single bit operation | O(1) |
+| Scan word bits | O(word_size) |
+| Submask enumeration | O(3^n) across all masks |
+| Bitmask DP | O(n * 2^n) common |
 
 ## Space Complexity
 
 | Case | Complexity |
 |---|---:|
 | Single mask | O(1) |
-| Mask DP | O(2^n) |
-| Count array | O(n) |
-
-## Common Operations
-
-| Operation | What It Means |
-|---|---|
-| Check bit | Use mask & (1 << i). |
-| Set bit | Use mask | (1 << i). |
-| Clear bit | Use mask & ~(1 << i). |
-| Toggle bit | Use mask ^ (1 << i). |
+| Mask DP table | O(2^n) |
+| Bit count table | O(n) |
 
 ## Visual Explanation
 
 ```mermaid
 flowchart LR
-    A[10110] --> B[mask 00100]
-    B --> C[AND]
-    C --> D[bit is set]
+    A[x = 101100] --> B[mask = 001000]
+    B --> C{x & mask != 0?}
+    C -->|yes| D[bit is set]
+    A --> E[x & -x]
+    E --> F[lowest set bit]
 ```
 
-## Mathematical Foundations
+## Foundations And Invariants
 
-XOR cancellation, binary place value, and set masks are the central mathematical tools.
+XOR cancels equal values because a xor a is 0 and a xor 0 is a. Two's complement makes x & -x isolate the lowest set bit.
 
-## Common Interview Patterns
-
-- **XOR Cancellation**: Equal values cancel under XOR, leaving the value that appears odd or differs.
-- **Bit Counting**: Count set bits directly or use recurrence over smaller numbers.
-- **Masks for Sets**: Represent a small set as bits in an integer.
-- **Subset Enumeration**: Iterate masks or submasks to cover all subsets.
-- **Bitwise Trie**: Store numbers by bits and greedily follow opposite bits to maximize XOR.
-- **Bitmask DP**: Use mask plus optional position as a state that records chosen or visited elements.
+When explaining a solution, name the invariant before writing code. A good invariant is short enough to repeat while coding and precise enough to catch edge cases.
 
 ## Pattern Recognition
 
-Look for the operation the prompt asks you to optimize. If brute force repeats the same lookup, traversal, choice, or state calculation, one of the patterns in this folder is probably intended.
+Look for single number, parity, powers of two, subset masks, permissions, turn bits on or off, XOR ranges, or constraints with n <= 20.
+
+Ask these questions:
+
+- What is the smallest state that makes the next decision easy?
+- Does the problem require order, membership, connectivity, optimal choice, or all possibilities?
+- Does any boundary move monotonically?
+- Are constraints small enough for exponential search or DP state?
+
+## Common Interview Patterns
+
+- **XOR Cancellation**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Bit Counting**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Masks For Sets**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Single Bit Checks**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Submask Enumeration**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
+- **Arithmetic Bit Tricks**: recognition signals, mistakes, and templates in [PATTERNS.md](PATTERNS.md).
 
 ## Common Mistakes
 
-- Coding before defining what the state means.
-- Forgetting edge cases such as empty input, one item, duplicates, and boundary endpoints.
-- Choosing a familiar pattern even when the constraints do not support its invariant.
-- Reporting time complexity without auxiliary memory.
+- Confusing bit index with bit value.
+- Forgetting signed integer behavior in fixed-width languages.
+- Using addition where XOR without carry is intended.
+- Missing parentheses around shifts and masks.
 
 ## Interview Tips
 
-- Start with brute force and name the repeated work.
-- State the invariant before coding.
-- Keep the implementation small and testable.
-- Explain why the pattern is correct, not only why it is fast.
-- Test one normal case, one edge case, and one adversarial case.
+- Start with brute force and name the repeated work or missing invariant.
+- State why the chosen pattern removes that waste.
+- Keep edge cases visible while coding.
+- Give both time and auxiliary space complexity.
+- If the interviewer changes constraints, re-check the pattern assumptions before modifying code.
 
 ## Mini Exercises
 
-- Write the template for each pattern from memory.
-- Solve two Easy problems and explain the invariant aloud.
-- Solve one Medium problem with pseudocode before coding.
-- Re-solve one missed problem after 24 hours.
+- Explain `XOR Cancellation` aloud, then write its invariant and template from memory.
+- Explain `Bit Counting` aloud, then write its invariant and template from memory.
+- Explain `Masks For Sets` aloud, then write its invariant and template from memory.
+- Explain `Single Bit Checks` aloud, then write its invariant and template from memory.
+- Pick two Easy problems from [easy.md](easy.md) and identify the pattern before coding.
+- Pick one Medium problem from [medium.md](medium.md) and write pseudocode before implementation.
+- For one missed problem, write the failed invariant and the corrected invariant.
 
 ## Recommended Learning Order
 
-1. Study XOR Cancellation in [PATTERNS.md](PATTERNS.md).
-2. Study Bit Counting in [PATTERNS.md](PATTERNS.md).
-3. Study Masks for Sets in [PATTERNS.md](PATTERNS.md).
-4. Study Subset Enumeration in [PATTERNS.md](PATTERNS.md).
-5. Study Bitwise Trie in [PATTERNS.md](PATTERNS.md).
-6. Study Bitmask DP in [PATTERNS.md](PATTERNS.md).
-7. Review [CHEATSHEET.md](CHEATSHEET.md).
+1. Read `XOR Cancellation` in [PATTERNS.md](PATTERNS.md).
+2. Read `Bit Counting` in [PATTERNS.md](PATTERNS.md).
+3. Read `Masks For Sets` in [PATTERNS.md](PATTERNS.md).
+4. Read `Single Bit Checks` in [PATTERNS.md](PATTERNS.md).
+5. Read `Submask Enumeration` in [PATTERNS.md](PATTERNS.md).
+6. Read `Arithmetic Bit Tricks` in [PATTERNS.md](PATTERNS.md).
+7. Review [CHEATSHEET.md](CHEATSHEET.md) before timed practice.
 8. Solve [easy.md](easy.md), then [medium.md](medium.md), then selected [hard.md](hard.md).
 
-## Practice Sets
+## Practice Navigation
 
-[Cheatsheet](CHEATSHEET.md) | [Patterns](PATTERNS.md) | [Easy](easy.md) | [Medium](medium.md) | [Hard](hard.md)
+- [Easy problems](easy.md): build fundamentals.
+- [Medium problems](medium.md): build interview fluency.
+- [Hard problems](hard.md): build advanced pattern recognition.
 
 ---
 
 ## Navigation
 
-[Previous](../intervals/README.md) | [Home](../README.md) | [Next](../bit-manipulation/CHEATSHEET.md)
+[Previous](../intervals/README.md) | [Home](../README.md) | [Next](CHEATSHEET.md)

@@ -1,91 +1,104 @@
 # Tries Cheatsheet
 
-Fast revision before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
 
-## Complexity Tables
+## Core Definitions
 
-| Situation | Complexity |
+A trie is a rooted tree where each edge represents a character or token and terminal markers indicate complete keys.
+
+## Complexity Table
+
+| Operation or Pattern | Complexity |
 |---|---:|
-| One pass over input | O(n) |
-| Sort before processing | O(n log n) |
-| Recursive or iterative traversal | O(nodes + edges or states) |
-| Exponential generation | O(number of generated candidates) |
+| Insert word length L | O(L) |
+| Search word length L | O(L) |
+| Wildcard search | O(branches explored) |
+| Board search with trie | O(cells * branching) with pruning |
 
-## Formulas
+## Space Table
 
-- DP runtime = number of states times transition cost.
-- Graph traversal runtime = vertices plus edges.
-- Heap update runtime = logarithm of heap size.
-- Recursive space includes the call stack.
+| Case | Complexity |
+|---|---:|
+| Trie nodes | O(total characters) |
+| DFS stack | O(max word length) |
+| Compressed trie | Less space when long single-child paths exist |
 
-## Common Templates
+## Pattern Summary
 
-### Prefix Tree
+| Pattern | Use When |
+|---|---|
+| Prefix Insert And Search | Use for dictionary insert, search, and startsWith. |
+| Wildcard Trie DFS | Use for dot or unknown-character dictionary queries. |
+| Board Search Trie Pruning | Use for word search with many target words. |
+| Autocomplete Suggestions | Use for search suggestions and top-k prefix queries. |
+| Bit Trie | Use for maximum XOR and constrained XOR queries. |
+
+## Recognition Hints
+
+Look for prefix, dictionary, wildcard, autocomplete, word board, starts with, maximum XOR bit trie, or repeated string membership queries.
+
+## Templates
+
+### Prefix Insert And Search
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+node = root
+for ch in word:
+    node = node.children.setdefault(ch, TrieNode())
+node.is_word = True
 ```
 
 ### Wildcard Trie DFS
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+def search(node, i):
+    if i == len(word): return node.is_word
+    if word[i] == '.': try all children
+    else: follow one child
+```
+
+### Board Search Trie Pruning
+
+```text
+dfs(cell, trie_node):
+    if char not in trie_node.children: return
+    mark cell
+    explore neighbors
+    unmark cell
 ```
 
 ### Autocomplete Suggestions
 
 ```text
-state = initial_state
-for candidate in input:
-    if candidate can improve state:
-        update state
-    if state is valid:
-        update answer
+node = follow(prefix)
+collect up to k words below node in sorted order
 ```
-
-## Pattern Summary
-
-| Pattern | Recognition Hint |
-|---|---|
-| Prefix Tree | Use when the prompt matches prefix tree signals. |
-| Wildcard Trie DFS | Use when the prompt matches wildcard trie dfs signals. |
-| Autocomplete Suggestions | Use when the prompt matches autocomplete suggestions signals. |
-| Word Search Trie Pruning | Use when the prompt matches word search trie pruning signals. |
-| Bitwise Trie | Use when the prompt matches bitwise trie signals. |
-| Compressed Trie Awareness | Use when the prompt matches compressed trie awareness signals. |
-
-## Recognition Hints
-
-- Read constraints before choosing the algorithm.
-- Ask whether order, membership, reachability, optimality, or all possibilities is central.
-- Search for words that imply a known invariant.
 
 ## Common Traps
 
-- Missing boundary cases.
-- Mutating state without rollback when recursion needs it.
-- Using a faster-looking approach without a correctness proof.
-- Forgetting external memory such as queues, stacks, maps, and memo tables.
+- Treating every prefix as a complete word.
+- Building a trie when a single hash set lookup is enough.
+- Forgetting to prune found words on boards.
+- Ignoring memory cost for large alphabets.
 
 ## Interview Reminders
 
-- Say brute force first.
-- Name the pattern and invariant.
-- Code the simplest correct version.
-- Test edge cases before final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
+
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../tries/README.md) | [Home](../README.md) | [Next](../tries/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

@@ -1,370 +1,114 @@
 # Bit Manipulation Easy Problems
 
-Curated LeetCode practice. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Single Number
 
-LeetCode:
-https://leetcode.com/problems/single-number/
+LeetCode: [Single Number](https://leetcode.com/problems/single-number/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-XOR Cancellation
+Pattern: XOR Cancellation
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying xor cancellation.
+Why It Matters: The baseline XOR cancellation problem.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 2. Number of 1 Bits
 
-LeetCode:
-https://leetcode.com/problems/number-of-1-bits/
+LeetCode: [Number of 1 Bits](https://leetcode.com/problems/number-of-1-bits/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Bit Counting
+Pattern: Bit Counting
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bit counting.
+Why It Matters: Tests low-bit clearing and binary representation.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 3. Counting Bits
 
-LeetCode:
-https://leetcode.com/problems/counting-bits/
+LeetCode: [Counting Bits](https://leetcode.com/problems/counting-bits/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Masks for Sets
+Pattern: DP Over Bits
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying masks for sets.
+Why It Matters: Builds counts using smaller states.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 4. Reverse Bits
 
-LeetCode:
-https://leetcode.com/problems/reverse-bits/
+LeetCode: [Reverse Bits](https://leetcode.com/problems/reverse-bits/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Subset Enumeration
+Pattern: Bit Shifts
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying subset enumeration.
+Why It Matters: Practices fixed-width bit movement.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 5. Missing Number
 
-LeetCode:
-https://leetcode.com/problems/missing-number/
+LeetCode: [Missing Number](https://leetcode.com/problems/missing-number/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Bitwise Trie
+Pattern: XOR Or Sum
 
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bitwise trie.
+Why It Matters: Uses cancellation over a known range.
 
 Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 6. Power of Two
-
-LeetCode:
-https://leetcode.com/problems/power-of-two/
-
-Difficulty:
-Easy
-
-Pattern:
-Bitmask DP
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bitmask dp.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 7. Hamming Distance
-
-LeetCode:
-https://leetcode.com/problems/hamming-distance/
-
-Difficulty:
-Easy
-
-Pattern:
-XOR Cancellation
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying xor cancellation.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 8. Complement of Base 10 Integer
-
-LeetCode:
-https://leetcode.com/problems/complement-of-base-10-integer/
-
-Difficulty:
-Easy
-
-Pattern:
-Bit Counting
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bit counting.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 9. Binary Number with Alternating Bits
-
-LeetCode:
-https://leetcode.com/problems/binary-number-with-alternating-bits/
-
-Difficulty:
-Easy
-
-Pattern:
-Masks for Sets
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying masks for sets.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 10. Add Binary
-
-LeetCode:
-https://leetcode.com/problems/add-binary/
-
-Difficulty:
-Easy
-
-Pattern:
-Subset Enumeration
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying subset enumeration.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 11. Convert Binary Number in a Linked List to Integer
-
-LeetCode:
-https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/
-
-Difficulty:
-Easy
-
-Pattern:
-Bitwise Trie
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bitwise trie.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 12. Find the Difference
-
-LeetCode:
-https://leetcode.com/problems/find-the-difference/
-
-Difficulty:
-Easy
-
-Pattern:
-Bitmask DP
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bitmask dp.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 13. XOR Operation in an Array
-
-LeetCode:
-https://leetcode.com/problems/xor-operation-in-an-array/
-
-Difficulty:
-Easy
-
-Pattern:
-XOR Cancellation
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying xor cancellation.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 14. Number Complement
-
-LeetCode:
-https://leetcode.com/problems/number-complement/
-
-Difficulty:
-Easy
-
-Pattern:
-Bit Counting
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying bit counting.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
-## 15. Sort Integers by The Number of 1 Bits
-
-LeetCode:
-https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/
-
-Difficulty:
-Easy
-
-Pattern:
-Masks for Sets
-
-Why It Matters:
-This problem is a high-signal exercise for recognizing and applying masks for sets.
-
-Skills Tested:
-- Identify the pattern from constraints.
-- Maintain the invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain brute force and the optimized approach.
-- Discuss edge cases and duplicates.
-- Consider whether the solution can reduce memory or support streaming input.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../bit-manipulation/PATTERNS.md) | [Home](../README.md) | [Next](../bit-manipulation/medium.md)
+[Previous](PATTERNS.md) | [Home](../README.md) | [Next](medium.md)

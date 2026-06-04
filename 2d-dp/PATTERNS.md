@@ -1,49 +1,60 @@
 # 2-D Dynamic Programming Patterns
 
-This file is the main pattern-recognition reference for 2-d dynamic programming. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
-## Pattern: Grid Paths
+## Pattern: Grid DP
 
-### Intuition
+### Beginner Intuition
 
-Compute each cell from previously reachable neighbor cells.
+Each cell combines answers from cells that can move into it.
 
 ### When To Use It
 
-Use for unique paths, obstacles, and minimum path sum.
+Use for unique paths, minimum path sum, and obstacle grids.
 
 ### When Not To Use It
 
-Do not use simple grid DP if moves can create cycles.
+Do not use if movement has cycles without a topological order.
 
 ### Recognition Signals
 
-- grid paths
-- constraints match the invariant
-- brute force repeats the same decision
+- grid
+- paths
+- top left
+- obstacles
 
-### Problem Examples
+### Example Problems
 
 - Unique Paths
-- Longest Common Subsequence
+- Minimum Path Sum
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Not initializing first row and first column correctly.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-dp[r][c] = combine(dp[r-1][c], dp[r][c-1])
+for r in range(rows):
+    for c in range(cols):
+        dp[r][c] = combine(dp[r-1][c], dp[r][c-1])
 ```
+
+### Complexity Notes
+
+O(rows * cols) time.
+
+### Interview Explanation
+
+The state dp[r][c] answers the subproblem ending at that cell.
 
 ## Pattern: Two String DP
 
-### Intuition
+### Beginner Intuition
 
-Use prefixes of two strings as the two state dimensions.
+Use prefixes of two strings as the state axes.
 
 ### When To Use It
 
@@ -51,189 +62,277 @@ Use for LCS, edit distance, interleaving, and distinct subsequences.
 
 ### When Not To Use It
 
-Do not use greedy matching when edits or skips interact.
+Do not use substring logic when order can skip characters.
 
 ### Recognition Signals
 
-- two string dp
-- constraints match the invariant
-- brute force repeats the same decision
+- two strings
+- prefixes
+- edit
+- subsequence
 
-### Problem Examples
+### Example Problems
 
 - Longest Common Subsequence
 - Edit Distance
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Off-by-one errors between string indices and dp dimensions.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for i in range(n + 1):
-    for j in range(m + 1):
-        dp[i][j] = transition
+for i in range(1, m + 1):
+    for j in range(1, n + 1):
+        compare text1[i-1], text2[j-1]
 ```
+
+### Complexity Notes
+
+O(mn) time and space, often compressible to O(n).
+
+### Interview Explanation
+
+Rows and columns represent prefix lengths, not raw indices.
 
 ## Pattern: Knapsack Table
 
-### Intuition
+### Beginner Intuition
 
-Track item progress and remaining capacity or target.
+Use item index and capacity or target as the two dimensions.
 
 ### When To Use It
 
-Use for subset sum, capacity, target sum, and 0-1 choices.
+Use when item choices interact with a numeric limit.
 
 ### When Not To Use It
 
-Do not iterate capacity forward for 0-1 choices unless using a separate row.
+Do not reuse the same item unless the problem is unbounded.
 
 ### Recognition Signals
 
-- knapsack table
-- constraints match the invariant
-- brute force repeats the same decision
+- items
+- capacity
+- target
 
-### Problem Examples
+### Example Problems
 
-- Edit Distance
-- Unique Paths
+- Target Sum
+- Coin Change II
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Using the wrong direction when compressing to one row.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-for item in items:
-    for cap in reversed(range(weight, target + 1)):
-        update dp[cap]
+dp[i][cap] = dp[i-1][cap]
+if cap >= weight: dp[i][cap] = best(dp[i][cap], dp[i-1][cap-weight])
 ```
+
+### Complexity Notes
+
+O(n * capacity) time.
+
+### Interview Explanation
+
+The row means how many items have been considered.
 
 ## Pattern: Interval DP
 
-### Intuition
+### Beginner Intuition
 
-Solve ranges by splitting each interval into smaller intervals.
+Solve smaller intervals before larger intervals and try split points.
 
 ### When To Use It
 
-Use for burst balloons, merge stones, and range optimization.
+Use for burst balloons, matrix-chain style costs, and palindrome intervals.
 
 ### When Not To Use It
 
-Do not use interval DP when a one-dimensional recurrence captures the same state.
+Do not fill by start index alone if inner intervals are not ready.
 
 ### Recognition Signals
 
-- interval dp
-- constraints match the invariant
-- brute force repeats the same decision
+- interval
+- split
+- length order
 
-### Problem Examples
+### Example Problems
 
-- Unique Paths
-- Longest Common Subsequence
+- Burst Balloons
+- Longest Palindromic Subsequence
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Filling longer intervals before shorter dependencies.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 for length in range(1, n + 1):
-    for left in range(...):
+    for left in range(n - length + 1):
         right = left + length - 1
         try split points
 ```
 
-## Pattern: Palindrome DP
+### Complexity Notes
 
-### Intuition
+Often O(n^3) time and O(n^2) space.
 
-Use inner substrings to decide whether larger substrings are palindromes or how costly they are.
+### Interview Explanation
+
+Increasing length order guarantees subinterval answers are ready.
+
+## Pattern: Path Counting With Obstacles
+
+### Beginner Intuition
+
+Treat blocked states as zero ways and propagate only through valid cells.
 
 ### When To Use It
 
-Use for palindrome subsequence, substring, cuts, and insertions.
+Use for grids with barriers or forbidden transitions.
 
 ### When Not To Use It
 
-Do not build a table for a single palindrome check that two pointers can solve.
+Do not add paths through invalid cells.
 
 ### Recognition Signals
 
-- palindrome dp
-- constraints match the invariant
-- brute force repeats the same decision
+- obstacle
+- blocked
+- count paths
 
-### Problem Examples
+### Example Problems
 
-- Longest Common Subsequence
-- Edit Distance
+- Unique Paths II
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Initializing through an obstacle in the first row or column.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-dp[l][r] = s[l] == s[r] and dp[l+1][r-1]
+if blocked[r][c]: dp[r][c] = 0
+else: dp[r][c] = top + left
 ```
+
+### Complexity Notes
+
+O(rows * cols) time.
+
+### Interview Explanation
+
+A blocked cell contributes zero ways to every later path.
 
 ## Pattern: State Compression
 
-### Intuition
+### Beginner Intuition
 
-Reduce table dimensions when only recent rows, columns, or masks are needed.
+Keep one row or two rows when a cell only needs nearby previous-row data.
 
 ### When To Use It
 
-Use after the full recurrence is correct.
+Use for grid and string DP after full table is understood.
 
 ### When Not To Use It
 
-Do not overwrite values that future transitions still need.
+Do not compress if reconstruction of the answer path is required.
 
 ### Recognition Signals
 
-- state compression
-- constraints match the invariant
-- brute force repeats the same decision
+- rolling row
+- previous row
+- space
 
-### Problem Examples
+### Example Problems
 
-- Edit Distance
+- Longest Common Subsequence
 - Unique Paths
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Overwriting dp[j-1] or diagonal values before saving them.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-prev = old_row
-curr = new_row
-keep diagonal value if transition needs it
+prev_diag = 0
+for j in range(1, n + 1):
+    saved = dp[j]
+    update dp[j]
+    prev_diag = saved
 ```
+
+### Complexity Notes
+
+Same time, O(n) space.
+
+### Interview Explanation
+
+Compression is an optimization after the recurrence is correct.
+
+## Pattern: Game DP
+
+### Beginner Intuition
+
+Store best score difference or win state for a subarray game.
+
+### When To Use It
+
+Use for take-from-ends games and optimal play.
+
+### When Not To Use It
+
+Do not greedily take the larger end without proof.
+
+### Recognition Signals
+
+- two players
+- optimal play
+- ends
+
+### Example Problems
+
+- Stone Game
+- Predict the Winner
+
+### Common Mistakes
+
+- Modeling only current player score and losing opponent effect.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
+
+```text
+dp[l][r] = max(nums[l] - dp[l+1][r], nums[r] - dp[l][r-1])
+```
+
+### Complexity Notes
+
+O(n^2) time and space.
+
+### Interview Explanation
+
+Score difference naturally captures both players under optimal play.
+
 ---
 
 ## Navigation
 
-[Previous](../2d-dp/CHEATSHEET.md) | [Home](../README.md) | [Next](../2d-dp/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

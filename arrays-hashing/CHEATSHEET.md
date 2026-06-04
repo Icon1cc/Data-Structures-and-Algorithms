@@ -1,50 +1,62 @@
 # Arrays & Hashing Cheatsheet
 
-Fast revision notes for arrays and hashing before interviews.
+Fast revision for the last 10 minutes before practice or an interview.
+
+## Core Definitions
+
+An array is an indexed sequence with O(1) random access. A hash table maps keys to values with expected O(1) insert, lookup, and delete through hashing and collision handling.
 
 ## Complexity Table
 
 | Operation or Pattern | Complexity |
 |---|---:|
-| Array index access | O(1) |
-| Array scan | O(n) |
+| Index access | O(1) |
+| Full scan | O(n) |
 | Hash lookup average | O(1) |
 | Hash lookup worst case | O(n) |
-| Sorting before scan | O(n log n) |
+| Sort then scan | O(n log n) |
 
-## Formulas And Invariants
+## Space Table
 
-- Define the invariant before writing loops or recursion.
-- Track exactly what state means at each step.
-- Prefer deterministic boundary rules over intuition.
-- Re-check empty input, one item, duplicate values, and maximum-size constraints.
+| Case | Complexity |
+|---|---:|
+| In-place scan | O(1) |
+| Hash set or map | O(k) distinct keys |
+| Prefix array | O(n) |
+| Bucket array | O(n) when indexed by frequency |
 
 ## Pattern Summary
 
 | Pattern | Use When |
 |---|---|
-| Frequency Counting | Use when the question asks about duplicates, anagrams, majority, or exact occurrence counts. |
-| Hash Lookup | Use for pair sums, seen states, membership, and first occurrence lookup. |
-| Prefix Sum | Use for subarray sum, range query, and balance problems. |
-| Grouping by Canonical Key | Use for anagrams, equivalent strings, signatures, and normalized coordinates. |
-| Bucket Counting | Use when counts are bounded or top-k can avoid full sorting. |
-| In-place Marking | Use when values are in the range 1..n and extra space is restricted. |
+| Frequency Counting | Use when multiplicity matters, not only existence. |
+| Hash Lookup | Use for pair sums, membership, first occurrence, and deduplication. |
+| Prefix Sum | Use for subarray sums, ranges, balance counts, and exactly-k totals. |
+| Bucket Counting | Use when counts are bounded by n or the value domain is small. |
+| Sorting Plus Hashing | Use when both canonical ordering and lookup are helpful. |
+| Grouping by Canonical Key | Use for anagrams, isomorphism, normalized coordinates, and pattern strings. |
+| In-place Index Marking | Use for missing positive or disappeared number questions with strict space limits. |
 
-## Common Templates
+## Recognition Hints
+
+Look for duplicates, pairs, anagrams, grouping, subarray sums, longest consecutive runs, first occurrence, or a brute force loop that repeatedly asks whether a previous value exists.
+
+## Templates
 
 ### Frequency Counting
 
 ```text
-for value in values:
-    count[value] += 1
+for x in values:
+    freq[x] = freq.get(x, 0) + 1
 ```
 
 ### Hash Lookup
 
 ```text
+seen = {}
 for i, x in enumerate(nums):
-    need = target - x
-    if need in seen: return [seen[need], i]
+    if target - x in seen:
+        return [seen[target - x], i]
     seen[x] = i
 ```
 
@@ -52,33 +64,46 @@ for i, x in enumerate(nums):
 
 ```text
 prefix = 0
-seen = {0: 1}
+count = {0: 1}
 for x in nums:
     prefix += x
-    answer += seen[prefix - target]
-    seen[prefix] += 1
+    answer += count.get(prefix - k, 0)
+    count[prefix] = count.get(prefix, 0) + 1
 ```
 
-## Recognition Hints
+### Bucket Counting
 
-Look for duplicates, pairs with a target, anagrams, subarray sums, longest consecutive ranges, or repeated work caused by nested loops.
+```text
+buckets = [[] for _ in range(len(nums) + 1)]
+for value, freq in counts.items():
+    buckets[freq].append(value)
+```
 
 ## Common Traps
 
-- Forgetting that hash-table worst cases exist.
-- Using a list membership scan where a set is intended.
-- Losing first-index information by overwriting too early.
+- Using a list membership scan when a set is required.
+- Overwriting first-index information too early.
+- Forgetting prefix zero for subarray counts.
+- Ignoring negative values when choosing sliding window instead of prefix sums.
 
 ## Interview Reminders
 
-- Say the brute force solution first.
-- Explain why the optimized pattern removes repeated work.
-- Test at least one normal case, one edge case, and one failure case.
-- Include auxiliary space in the final complexity.
+- Say the brute force approach first in one or two sentences.
+- State the invariant before coding.
+- Test one normal case, one smallest case, and one adversarial case.
+- Include auxiliary space, not only input and output size.
+- Mention when the pattern assumptions would fail.
 
+## Final Checklist
+
+- [ ] I can define the topic in plain language.
+- [ ] I can identify at least three recognition signals.
+- [ ] I can write the main template from memory.
+- [ ] I can explain time and space complexity.
+- [ ] I can name two common mistakes and how to avoid them.
 
 ---
 
 ## Navigation
 
-[Previous](../arrays-hashing/README.md) | [Home](../README.md) | [Next](../arrays-hashing/PATTERNS.md)
+[Previous](README.md) | [Home](../README.md) | [Next](PATTERNS.md)

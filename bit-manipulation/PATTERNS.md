@@ -1,39 +1,39 @@
 # Bit Manipulation Patterns
 
-This file is the main pattern-recognition reference for bit manipulation. Each pattern explains why it works, when it fits, when to avoid it, and how to start coding it.
+PATTERNS.md is the most important file in this topic. Use it before practice to learn recognition signals, invariants, and interview explanations.
 
 ## Pattern: XOR Cancellation
 
-### Intuition
+### Beginner Intuition
 
-Equal values cancel under XOR, leaving the value that appears odd or differs.
+Equal values cancel, leaving the unmatched value or parity signal.
 
 ### When To Use It
 
-Use for single number, missing number, and parity differences.
+Use for single-number and missing-number style problems.
 
 ### When Not To Use It
 
-Do not use when values appear arbitrary counts without bit counting.
+Do not use when duplicates appear more than twice unless adjusted.
 
 ### Recognition Signals
 
-- xor cancellation
-- constraints match the invariant
-- brute force repeats the same decision
+- single number
+- cancel
+- parity
 
-### Problem Examples
+### Example Problems
 
 - Single Number
-- Counting Bits
+- Missing Number
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Forgetting that XOR ignores order but not multiplicity.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 ans = 0
@@ -41,38 +41,46 @@ for x in nums:
     ans ^= x
 ```
 
+### Complexity Notes
+
+O(n) time, O(1) space.
+
+### Interview Explanation
+
+Pairs cancel to zero, so only unmatched bits remain.
+
 ## Pattern: Bit Counting
 
-### Intuition
+### Beginner Intuition
 
-Count set bits directly or use recurrence over smaller numbers.
+Count set bits directly or reuse smaller counts.
 
 ### When To Use It
 
-Use for hamming weight, counting bits, and parity.
+Use for Hamming weight and counting bits ranges.
 
 ### When Not To Use It
 
-Do not loop on signed negative numbers without fixed-width handling.
+Do not loop forever on negative values in fixed-width languages.
 
 ### Recognition Signals
 
-- bit counting
-- constraints match the invariant
-- brute force repeats the same decision
+- number of 1 bits
+- hamming weight
+- popcount
 
-### Problem Examples
+### Example Problems
 
+- Number of 1 Bits
 - Counting Bits
-- Shortest Path Visiting All Nodes
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Using n >>= 1 on signed negative values without width control.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
 while x:
@@ -80,76 +88,138 @@ while x:
     count += 1
 ```
 
-## Pattern: Masks for Sets
+### Complexity Notes
 
-### Intuition
+O(number of set bits) for one value, O(n) for DP table.
 
-Represent a small set as bits in an integer.
+### Interview Explanation
+
+Clearing the lowest set bit makes progress one bit at a time.
+
+## Pattern: Masks For Sets
+
+### Beginner Intuition
+
+Represent membership of small sets as bits in an integer.
 
 ### When To Use It
 
-Use for visited sets, skills, subsets, and compact state keys.
+Use when n is small enough for 2^n states.
 
 ### When Not To Use It
 
-Do not use when n is too large for exponential masks.
+Do not use masks when n is too large for exponential states.
 
 ### Recognition Signals
 
-- masks for sets
-- constraints match the invariant
-- brute force repeats the same decision
+- subset
+- mask
+- permissions
+- n <= 20
 
-### Problem Examples
+### Example Problems
 
-- Shortest Path Visiting All Nodes
-- Single Number
+- Subsets
+- Smallest Sufficient Team
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Confusing mask value with item index.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-mask | (1 << i)  # add item i
-mask & ~(1 << i)  # remove item i
+mask |= 1 << i
+if mask & (1 << i): present
 ```
 
-## Pattern: Subset Enumeration
+### Complexity Notes
 
-### Intuition
+O(1) operations, O(2^n) for full mask DP.
 
-Iterate masks or submasks to cover all subsets.
+### Interview Explanation
+
+Each bit answers whether an item is included.
+
+## Pattern: Single Bit Checks
+
+### Beginner Intuition
+
+Test powers of two, low bits, and flags with masks.
 
 ### When To Use It
 
-Use for small-n exhaustive search and subset DP.
+Use for power-of-two and permission checks.
 
 ### When Not To Use It
 
-Do not use beyond feasible n without pruning.
+Do not use modulo when bit logic is clearer for powers of two.
 
 ### Recognition Signals
 
-- subset enumeration
-- constraints match the invariant
-- brute force repeats the same decision
+- power of two
+- flag
+- low bit
 
-### Problem Examples
+### Example Problems
 
-- Single Number
-- Counting Bits
+- Power of Two
+- Reverse Bits
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Not excluding zero for power-of-two tests.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
+
+```text
+is_power_two = x > 0 and (x & (x - 1)) == 0
+```
+
+### Complexity Notes
+
+O(1) time.
+
+### Interview Explanation
+
+A power of two has exactly one set bit.
+
+## Pattern: Submask Enumeration
+
+### Beginner Intuition
+
+Iterate every submask of a mask efficiently.
+
+### When To Use It
+
+Use for subset DP and combinatorial optimization.
+
+### When Not To Use It
+
+Do not use when all 2^n masks are already too many.
+
+### Recognition Signals
+
+- submask
+- subset dp
+- mask loop
+
+### Example Problems
+
+- Partition to K Equal Sum Subsets
+- Smallest Sufficient Team
+
+### Common Mistakes
+
+- Forgetting that submask 0 needs separate handling if required.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
+
+### Pseudocode Or Template
 
 ```text
 sub = mask
@@ -158,84 +228,65 @@ while sub:
     sub = (sub - 1) & mask
 ```
 
-## Pattern: Bitwise Trie
+### Complexity Notes
 
-### Intuition
+O(3^n) over all masks, O(2^k) for one mask with k bits.
 
-Store numbers by bits and greedily follow opposite bits to maximize XOR.
+### Interview Explanation
 
-### When To Use It
+The bit trick walks only subsets of the current mask.
 
-Use for maximum XOR and constrained XOR queries.
+## Pattern: Arithmetic Bit Tricks
 
-### When Not To Use It
+### Beginner Intuition
 
-Do not forget fixed bit width and query constraints.
-
-### Recognition Signals
-
-- bitwise trie
-- constraints match the invariant
-- brute force repeats the same decision
-
-### Problem Examples
-
-- Counting Bits
-- Shortest Path Visiting All Nodes
-
-### Common Mistakes
-
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
-
-### Reusable Template Or Pseudocode
-
-```text
-for bit in reversed(range(max_bit)):
-    preferred = 1 - current_bit
-    take preferred child if present
-```
-
-## Pattern: Bitmask DP
-
-### Intuition
-
-Use mask plus optional position as a state that records chosen or visited elements.
+Use shifts and masks for low-level arithmetic under constraints.
 
 ### When To Use It
 
-Use for shortest path over subsets, teams, and games.
+Use for sum without plus, divide integers, and range bitwise AND.
 
 ### When Not To Use It
 
-Do not forget that state count grows exponentially.
+Do not ignore overflow and sign limits in fixed-width languages.
 
 ### Recognition Signals
 
-- bitmask dp
-- constraints match the invariant
-- brute force repeats the same decision
+- shift
+- carry
+- divide
+- range and
 
-### Problem Examples
+### Example Problems
 
-- Shortest Path Visiting All Nodes
-- Single Number
+- Sum of Two Integers
+- Bitwise AND of Numbers Range
 
 ### Common Mistakes
 
-- Starting to code before defining state.
-- Updating the answer before the invariant is valid.
-- Forgetting edge cases that break the pattern.
+- Forgetting language-specific integer width.
+- Applying the pattern after one keyword match without checking the invariant.
+- Ignoring empty input, duplicate values, and boundary cases.
 
-### Reusable Template Or Pseudocode
+### Pseudocode Or Template
 
 ```text
-dp[mask][last] = best value
-transition by adding one unset bit
+while carry:
+    carry = (a & b) << 1
+    a = a ^ b
+    b = carry
 ```
+
+### Complexity Notes
+
+O(word_size) time.
+
+### Interview Explanation
+
+XOR adds without carry and AND shifted left carries.
+
 ---
 
 ## Navigation
 
-[Previous](../bit-manipulation/CHEATSHEET.md) | [Home](../README.md) | [Next](../bit-manipulation/easy.md)
+[Previous](CHEATSHEET.md) | [Home](../README.md) | [Next](easy.md)

@@ -1,370 +1,114 @@
 # Two Pointers Easy Problems
 
-Curated LeetCode practice for this topic. Solutions are intentionally not included.
+Curated LeetCode practice for this topic. Solutions are intentionally not included. Solve for pattern recognition, invariant clarity, and interview communication.
 
 ## 1. Valid Palindrome
 
-LeetCode:
-https://leetcode.com/problems/valid-palindrome/
+LeetCode: [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Opposite Ends
+Pattern: Opposite Direction Pointers
 
-Why It Matters:
-This problem is a high-signal way to practice opposite ends inside two pointers questions.
+Why It Matters: Builds pointer movement and character skipping without extra memory.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 2. Merge Sorted Array
 
-LeetCode:
-https://leetcode.com/problems/merge-sorted-array/
+LeetCode: [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Fast and Slow
+Pattern: Merge From End
 
-Why It Matters:
-This problem is a high-signal way to practice fast and slow inside two pointers questions.
+Why It Matters: Tests in-place merging while protecting unread values.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 3. Remove Duplicates from Sorted Array
 
-LeetCode:
-https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+LeetCode: [Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Sorted Pair Search
+Pattern: Same Direction Pointers
 
-Why It Matters:
-This problem is a high-signal way to practice sorted pair search inside two pointers questions.
+Why It Matters: Introduces read/write invariants on sorted data.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
-## 4. Remove Element
+## 4. Move Zeroes
 
-LeetCode:
-https://leetcode.com/problems/remove-element/
+LeetCode: [Move Zeroes](https://leetcode.com/problems/move-zeroes/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Merge Pointers
+Pattern: Stable Compaction
 
-Why It Matters:
-This problem is a high-signal way to practice merge pointers inside two pointers questions.
+Why It Matters: Practices separating kept values from filler values.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ## 5. Squares of a Sorted Array
 
-LeetCode:
-https://leetcode.com/problems/squares-of-a-sorted-array/
+LeetCode: [Squares of a Sorted Array](https://leetcode.com/problems/squares-of-a-sorted-array/)
 
-Difficulty:
-Easy
+Difficulty: Easy
 
-Pattern:
-Partition Pointers
+Pattern: Opposite Ends Merge
 
-Why It Matters:
-This problem is a high-signal way to practice partition pointers inside two pointers questions.
+Why It Matters: Uses sorted absolute values to fill output from the back.
 
 Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
+- Recognize the pattern from constraints and examples.
+- State the invariant before coding.
+- Handle edge cases before submitting.
+- Analyze time and auxiliary space complexity.
 
 Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 6. Reverse String
-
-LeetCode:
-https://leetcode.com/problems/reverse-string/
-
-Difficulty:
-Easy
-
-Pattern:
-Cycle Detection
-
-Why It Matters:
-This problem is a high-signal way to practice cycle detection inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 7. Move Zeroes
-
-LeetCode:
-https://leetcode.com/problems/move-zeroes/
-
-Difficulty:
-Easy
-
-Pattern:
-Opposite Ends
-
-Why It Matters:
-This problem is a high-signal way to practice opposite ends inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 8. Two Sum II Input Array Is Sorted
-
-LeetCode:
-https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
-
-Difficulty:
-Easy
-
-Pattern:
-Fast and Slow
-
-Why It Matters:
-This problem is a high-signal way to practice fast and slow inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 9. Backspace String Compare
-
-LeetCode:
-https://leetcode.com/problems/backspace-string-compare/
-
-Difficulty:
-Easy
-
-Pattern:
-Sorted Pair Search
-
-Why It Matters:
-This problem is a high-signal way to practice sorted pair search inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 10. Valid Palindrome II
-
-LeetCode:
-https://leetcode.com/problems/valid-palindrome-ii/
-
-Difficulty:
-Easy
-
-Pattern:
-Merge Pointers
-
-Why It Matters:
-This problem is a high-signal way to practice merge pointers inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 11. Intersection of Two Arrays II
-
-LeetCode:
-https://leetcode.com/problems/intersection-of-two-arrays-ii/
-
-Difficulty:
-Easy
-
-Pattern:
-Partition Pointers
-
-Why It Matters:
-This problem is a high-signal way to practice partition pointers inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 12. Palindrome Linked List
-
-LeetCode:
-https://leetcode.com/problems/palindrome-linked-list/
-
-Difficulty:
-Easy
-
-Pattern:
-Cycle Detection
-
-Why It Matters:
-This problem is a high-signal way to practice cycle detection inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 13. Linked List Cycle
-
-LeetCode:
-https://leetcode.com/problems/linked-list-cycle/
-
-Difficulty:
-Easy
-
-Pattern:
-Opposite Ends
-
-Why It Matters:
-This problem is a high-signal way to practice opposite ends inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 14. Middle of the Linked List
-
-LeetCode:
-https://leetcode.com/problems/middle-of-the-linked-list/
-
-Difficulty:
-Easy
-
-Pattern:
-Fast and Slow
-
-Why It Matters:
-This problem is a high-signal way to practice fast and slow inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
-## 15. Reverse Vowels of a String
-
-LeetCode:
-https://leetcode.com/problems/reverse-vowels-of-a-string/
-
-Difficulty:
-Easy
-
-Pattern:
-Sorted Pair Search
-
-Why It Matters:
-This problem is a high-signal way to practice sorted pair search inside two pointers questions.
-
-Skills Tested:
-- Recognize the intended pattern from constraints.
-- Maintain the core invariant while coding.
-- Analyze time and space complexity.
-
-Common Follow-Ups:
-- Explain the brute force approach and why it is too slow.
-- Handle duplicates, empty input, and boundary cases.
-- Discuss whether the solution can be made iterative, in-place, or more memory efficient.
-
+- Explain the brute force approach and the repeated work it performs.
+- Describe how duplicates, empty input, one-item input, or boundary values change the implementation.
+- Discuss whether the solution can be made in-place, iterative, or more memory efficient.
 
 ---
 
 ## Navigation
 
-[Previous](../two-pointers/PATTERNS.md) | [Home](../README.md) | [Next](../two-pointers/medium.md)
+[Previous](PATTERNS.md) | [Home](../README.md) | [Next](medium.md)
